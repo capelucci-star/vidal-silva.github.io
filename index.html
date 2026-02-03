@@ -19,7 +19,7 @@
         .hero-text p { font-size: 1.2rem; color: var(--gray); margin-bottom: 30px; }
         
         .hero-img { flex: 1; text-align: center; min-width: 300px; }
-        .hero-img img { width: 100%; max-width: 400px; border-radius: 30px; box-shadow: 20px 20px 0px var(--primary); }
+        .hero-img img { width: 100%; max-width: 400px; border-radius: 30px; box-shadow: 20px 20px 0px var(--primary); object-fit: cover; }
 
         .btn { padding: 12px 30px; border-radius: 5px; text-decoration: none; font-weight: bold; display: inline-block; transition: 0.3s; }
         .btn-primary { background: var(--primary); color: white !important; }
@@ -43,7 +43,7 @@
     <div class="nav-links">
         <a href="index.html">Home</a>
         <a href="sobre.html">Sobre</a>
-        <a href="mailto:vidal.silva@exemplo.com" class="btn btn-primary">Contato</a>
+        <a href="mailto:seu-email@gmail.com" class="btn btn-primary">Contato</a>
     </div>
 </nav>
 
@@ -55,7 +55,7 @@
         <a href="sobre.html" class="btn btn-primary">Conheça minha trajetória</a>
     </div>
     <div class="hero-img">
-        <img src="vidal_perfil.jpg" alt="Vidal Silva">
+        <img src="vidal_perfil.jpg.jpge" alt="Vidal Silva">
     </div>
 </section>
 
@@ -67,12 +67,6 @@
             <h3>Gestão de Parcerias</h3>
             <p>Estratégia de canais e revendedores diretos para escala regional na América Latina.</p>
         </div>
-       <div class="card">
-            <i class="fas fa-pen-nib"></i>
-            <h3>Insights & Artigos</h3>
-            <p>Reflexões sobre liderança, fluxo humano e o futuro da educação digital.</p>
-            <a href="textos.html" style="color: var(--primary); text-decoration: none; font-weight: bold; margin-top:10px;">Ler artigos →</a>
-        </div>
         <div class="card">
             <i class="fas fa-chart-line"></i>
             <h3>Data Analytics</h3>
@@ -82,12 +76,17 @@
             <i class="fas fa-graduation-cap"></i>
             <h3>EdTech Expert</h3>
             <p>Implementação de ecossistemas digitais (Gemini AI, Workspace) em larga escala.</p>
-       
+        </div>
+        <div class="card">
+            <i class="fas fa-pen-nib"></i>
+            <h3>Insights & Artigos</h3>
+            <p>Reflexões sobre liderança, fluxo humano e o futuro da educação digital.</p>
+            <a href="textos.html" style="color: var(--primary); text-decoration: none; font-weight: bold; margin-top:10px;">Ler artigos →</a>
         </div>
     </div>
 </section>
 
-<footer>
+<footer style="background: white; padding: 60px 10% 40px; text-align: center; border-top: 1px solid #eee;">
     <p style="font-style: italic; color: var(--gray); font-size: 1.1rem; max-width: 600px; margin: 0 auto 30px;">
         "Acreditando na liderança que respeita o fluxo humano e utiliza a precisão dos dados para guiar o caminho."
     </p>
