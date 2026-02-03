@@ -7,30 +7,33 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <style>
         :root { --primary: #4285F4; --dark: #202124; --gray: #5f6368; --light: #ffffff; }
-        body { font-family: 'Google Sans', Arial, sans-serif; margin: 0; background: #f8f9fa; color: var(--dark); }
+        body { font-family: 'Segoe UI', Arial, sans-serif; margin: 0; background: #f8f9fa; color: var(--dark); }
         
-        nav { display: flex; justify-content: space-between; padding: 20px 10%; background: white; align-items: center; }
+        nav { display: flex; justify-content: space-between; padding: 20px 10%; background: white; align-items: center; box-shadow: 0 2px 4px rgba(0,0,0,0.05); }
         .logo { font-weight: bold; font-size: 1.5rem; color: var(--primary); }
         .nav-links a { margin-left: 25px; text-decoration: none; color: var(--gray); font-weight: 500; }
 
         .hero { display: flex; align-items: center; padding: 80px 10%; background: white; gap: 50px; flex-wrap: wrap; }
         .hero-text { flex: 1; min-width: 300px; }
-        .hero-text h1 { font-size: 3.5rem; margin-bottom: 10px; }
+        .hero-text h1 { font-size: 3.5rem; margin: 0 0 10px 0; }
         .hero-text p { font-size: 1.2rem; color: var(--gray); margin-bottom: 30px; }
+        
         .hero-img { flex: 1; text-align: center; min-width: 300px; }
         .hero-img img { width: 100%; max-width: 400px; border-radius: 30px; box-shadow: 20px 20px 0px var(--primary); }
 
         .btn { padding: 12px 30px; border-radius: 5px; text-decoration: none; font-weight: bold; display: inline-block; transition: 0.3s; }
-        .btn-primary { background: var(--primary); color: white; }
+        .btn-primary { background: var(--primary); color: white !important; }
         .btn-primary:hover { opacity: 0.9; }
 
         .services { padding: 80px 10%; text-align: center; }
-        .services-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 30px; margin-top: 50px; }
-        .card { background: white; padding: 40px; border-radius: 15px; box-shadow: 0 4px 6px rgba(0,0,0,0.05); transition: 0.3s; }
+        .services-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 20px; margin-top: 50px; }
+        .card { background: white; padding: 30px; border-radius: 15px; box-shadow: 0 4px 6px rgba(0,0,0,0.05); transition: 0.3s; display: flex; flex-direction: column; align-items: center; justify-content: center; }
         .card:hover { transform: translateY(-10px); }
-        .card i { font-size: 2.5rem; color: var(--primary); margin-bottom: 20px; }
+        .card i { font-size: 2rem; color: var(--primary); margin-bottom: 15px; }
+        .card h3 { margin: 10px 0; font-size: 1.2rem; }
+        .card p { font-size: 0.9rem; color: var(--gray); }
         
-        footer { background: white; padding: 40px; text-align: center; border-top: 1px solid #eee; }
+        footer { background: white; padding: 60px 10% 40px; text-align: center; border-top: 1px solid #eee; margin-top: 40px; }
     </style>
 </head>
 <body>
@@ -40,8 +43,7 @@
     <div class="nav-links">
         <a href="index.html">Home</a>
         <a href="sobre.html">Sobre</a>
-        <a href="#portfolio">Portfólio</a>
-        <a href="mailto:vidal.silva@exemplo.com" class="btn btn-primary" style="color: white; padding: 8px 20px;">Contato</a>
+        <a href="mailto:vidal.silva@exemplo.com" class="btn btn-primary">Contato</a>
     </div>
 </nav>
 
@@ -53,7 +55,7 @@
         <a href="sobre.html" class="btn btn-primary">Conheça minha trajetória</a>
     </div>
     <div class="hero-img">
-        <img src="https://raw.githubusercontent.com/capelucci-star/vidal-silva.github.io/main/vidal_perfil.jpg.jpeg" alt="Vidal Silva">
+        <img src="vidal_perfil.jpg" alt="Vidal Silva">
     </div>
 </section>
 
@@ -70,33 +72,3 @@
             <h3>Data Analytics</h3>
             <p>Uso de Python e Looker para transformar dados em decisões comerciais preditivas.</p>
         </div>
-        <div class="card">
-            <i class="fas fa-graduation-cap"></i>
-            <h3>EdTech Expert</h3>
-            <p>Implementação de ecossistemas digitais (Gemini AI, Workspace) em larga escala.</p>
-            <div class="card">
-    <i class="fas fa-pen-nib"></i>
-    <h3>Insights & Artigos</h3>
-    <p>Reflexões sobre liderança, fluxo humano e o futuro da educação digital.</p>
-    <a href="textos.html" style="color: var(--primary); text-decoration: none; font-weight: bold;">Ler artigos →</a>
-        </div>
-    </div>
-</section>
-
-<footer style="background: white; padding: 60px 10% 40px; text-align: center; border-top: 1px solid #eee;">
-    <p style="font-style: italic; color: var(--gray); font-size: 1.1rem; max-width: 600px; margin: 0 auto 30px;">
-        "Acreditando na liderança que respeita o fluxo humano e utiliza a precisão dos dados para guiar o caminho."
-    </p>
-    
-    <div class="social-links" style="margin-bottom: 20px;">
-        <a href="https://www.linkedin.com/in/vidalsilva" target="_blank" style="font-size: 1.8rem; color: var(--primary);"><i class="fab fa-linkedin"></i></a>
-        <a href="https://github.com/capelucci-star" target="_blank" style="font-size: 1.8rem; color: var(--dark); margin-left: 20px;"><i class="fab fa-github"></i></a>
-    </div>
-    
-    <p style="color: #9aa0a6; font-size: 0.85rem; margin-top: 20px;">
-        &copy; 2026 Vidal Silva | Partner Sales Manager @ Google Education | LSE MBA Candidate
-    </p>
-</footer>
-
-</body>
-</html>
