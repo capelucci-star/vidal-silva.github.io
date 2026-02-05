@@ -1,1 +1,119 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Projetos & Prompts | Vidal Silva</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        :root { --primary: #4285F4; --dark: #202124; --gray: #5f6368; --light: #f8f9fa; --code-bg: #282c34; }
+        body { font-family: 'Segoe UI', Arial, sans-serif; margin: 0; background: var(--light); color: var(--dark); line-height: 1.6; }
+        nav { display: flex; justify-content: space-between; padding: 20px 10%; background: white; align-items: center; box-shadow: 0 2px 4px rgba(0,0,0,0.05); }
+        .logo { font-weight: bold; font-size: 1.2rem; color: var(--primary); text-decoration: none; }
+        .container { max-width: 900px; margin: 50px auto; padding: 0 20px; }
+        h1 { border-left: 5px solid var(--primary); padding-left: 15px; margin-bottom: 10px; }
+        .subtitle { color: var(--gray); margin-bottom: 40px; }
+        
+        .recipe-card { background: white; border-radius: 15px; padding: 30px; margin-bottom: 40px; box-shadow: 0 4px 15px rgba(0,0,0,0.05); border: 1px solid #eee; }
+        .recipe-header { display: flex; align-items: center; gap: 15px; margin-bottom: 20px; }
+        .recipe-header i { font-size: 2rem; color: var(--primary); }
+        .recipe-header h2 { margin: 0; font-size: 1.6rem; color: var(--dark); }
+        
+        .tag { background: #e8f0fe; color: var(--primary); padding: 4px 12px; border-radius: 20px; font-size: 0.8rem; font-weight: bold; }
+        
+        .ingredients { background: #fffbeb; border-left: 4px solid #fbbc04; padding: 15px; margin: 20px 0; border-radius: 4px; }
+        .prompt-box { background: var(--code-bg); color: #abb2bf; padding: 25px; border-radius: 10px; position: relative; font-family: 'Courier New', Courier, monospace; margin: 20px 0; }
+        .prompt-box header { position: absolute; top: 0; left: 0; width: 100%; background: #333; padding: 5px 15px; font-size: 0.7rem; color: #999; border-radius: 10px 10px 0 0; border-bottom: none; display: flex; justify-content: space-between; box-sizing: border-box; }
+        
+        .tempero { border-top: 1px dashed #ccc; margin-top: 20px; padding-top: 20px; }
+        .tempero h4 { margin: 0 0 10px 0; color: #34a853; }
+        
+        .btn-back { display: inline-block; margin-top: 20px; text-decoration: none; color: var(--primary); font-weight: bold; }
+        footer { text-align: center; padding: 40px; color: var(--gray); font-style: italic; }
+    </style>
+</head>
+<body>
+    <nav>
+        <a href="index.html" class="logo">Vidal Silva</a>
+        <a href="index.html" style="text-decoration: none; color: var(--gray);">Voltar para Home</a>
+    </nav>
+
+    <div class="container">
+        <h1>Receitas de Prompts para Vendas</h1>
+        <p class="subtitle">Como utilizar IA Generativa para potencializar o ciclo de vendas consultivas.</p>
+
+        <article class="recipe-card">
+            <div class="recipe-header">
+                <i class="fas fa-bullseye"></i>
+                <div>
+                    <span class="tag">PROSPECÇÃO</span>
+                    <h2>Receita 1: O "Prospector Cirúrgico"</h2>
+                </div>
+            </div>
+            <p><strong>Objetivo:</strong> Sair do e-mail genérico e criar uma abordagem que toque na "dor" específica do Reitor ou Diretor.</p>
+            
+            <div class="ingredients">
+                <strong><i class="fas fa-utensils"></i> Ingredientes:</strong>
+                <ul>
+                    <li>Nome da Instituição.</li>
+                    <li>Fato recente (expansão, nota MEC ou post do LinkedIn).</li>
+                    <li>Diferencial Google (IA integrada ao Workspace).</li>
+                </ul>
+            </div>
+
+            <div class="prompt-box">
+                <header><span>PROMPT DO GEMINI</span> <i class="far fa-copy"></i></header>
+                <p style="margin-top: 20px; color: #e06c75;">"Gemini, atue como um Especialista em Vendas Consultivas B2B. Vou prospectar a [NOME DA INSTITUIÇÃO] que recentemente [FATO RECENTE]. Com base no framework SPIN Selling, crie um e-mail de abordagem curto e magnético. O foco deve ser na Situação de transformação digital e no Implicação de não adotar IA no currículo agora. Termine com uma chamada para ação (CTA) convidando para uma troca de 15 minutos sobre como outras universidades similares aumentaram a retenção de alunos."</p>
+            </div>
+
+            <div class="tempero">
+                <h4><i class="fas fa-pepper-hot"></i> Substituições (O Tempero):</h4>
+                <ul>
+                    <li><strong>Setor Público:</strong> "Enfatize a eficiência operacional e conformidade com dados."</li>
+                    <li><strong>Setor Privado:</strong> "Enfatize a competitividade de mercado e ROI."</li>
+                </ul>
+            </div>
+        </article>
+
+        <article class="recipe-card">
+            <div class="recipe-header">
+                <i class="fas fa-comments-dollar"></i>
+                <div>
+                    <span class="tag">NEGOCIAÇÃO</span>
+                    <h2>Receita 2: O "Mestre das Objeções"</h2>
+                </div>
+            </div>
+            <p><strong>Objetivo:</strong> Não travar quando o cliente diz "está caro" ou "já usamos a solução X".</p>
+            
+            <div class="ingredients">
+                <strong><i class="fas fa-utensils"></i> Ingredientes:</strong>
+                <ul>
+                    <li>A objeção principal do cliente.</li>
+                    <li>O concorrente mencionado (se houver).</li>
+                    <li>O valor do deal.</li>
+                </ul>
+            </div>
+
+            <div class="prompt-box">
+                <header><span>PROMPT DO GEMINI</span> <i class="far fa-copy"></i></header>
+                <p style="margin-top: 20px; color: #e06c75;">"Gemini, estou em uma negociação avançada com um cliente de grande porte. Ele apresentou a seguinte objeção: '[CITAR OBJEÇÃO]'. Atue como meu mentor de vendas e me dê 3 opções de resposta: 1. Empatia + Fatos; 2. Diferenciação Técnica; 3. Pergunta estratégica (reframing). Ajude-me a converter essa objeção em um passo seguinte para o fechamento."</p>
+            </div>
+
+            <div class="tempero">
+                <h4><i class="fas fa-pepper-hot"></i> Substituições (O Tempero):</h4>
+                <ul>
+                    <li><strong>Foco em TI:</strong> "Peça argumentos focados em integração e latência."</li>
+                    <li><strong>Foco em CFO:</strong> "Peça argumentos focados em TCO e escalabilidade."</li>
+                </ul>
+            </div>
+        </article>
+
+        <a href="index.html" class="btn-back"><i class="fas fa-arrow-left"></i> Voltar</a>
+    </div>
+
+    <footer>
+        <p>"Acreditando na liderança que respeita o fluxo humano e utiliza a precisão dos dados para guiar o caminho."</p>
+    </footer>
+</body>
+</html>
 
