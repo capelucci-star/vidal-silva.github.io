@@ -1,46 +1,93 @@
-<div class="container">
-    <h1>📖 Banco de Prompts</h1>
-    <p class="subtitle">Arquitetura de prompts para otimização de processos e inteligência de mercado.</p>
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Banco de Prompts | Vidal Silva</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        :root { --primary: #4285F4; --dark: #202124; --gray: #5f6368; --light: #f8f9fa; --code-bg: #282c34; }
+        body { font-family: 'Segoe UI', Arial, sans-serif; margin: 0; background: var(--light); color: var(--dark); line-height: 1.6; }
+        nav { display: flex; justify-content: space-between; padding: 20px 10%; background: white; align-items: center; box-shadow: 0 2px 4px rgba(0,0,0,0.05); }
+        .logo { font-weight: bold; font-size: 1.2rem; color: var(--primary); text-decoration: none; }
+        .container { max-width: 900px; margin: 50px auto; padding: 0 20px; }
+        
+        h1 { border-left: 5px solid var(--primary); padding-left: 15px; margin-bottom: 10px; }
+        .subtitle { color: var(--gray); margin-bottom: 40px; }
+        .section-title { margin: 50px 0 20px; color: var(--dark); border-bottom: 2px solid #eee; padding-bottom: 10px; display: flex; align-items: center; gap: 10px; }
 
-    <h2 class="section-title"><i class="fas fa-database"></i> 01. Sales Ops & Data Cleaning</h2>
-    <p>Prompts focados em organizar a casa e padronizar a entrada de dados dos 40 canais.</p>
-    
-    <article class="recipe-card">
-        <div class="recipe-header">
-            <span class="tag">GOOGLE SHEETS</span>
-            <h2>O Faxineiro de Dados</h2>
-        </div>
-        <div class="prompt-box">
-            <header><span>PROMPT</span></header>
-            <p>"Analise as colunas de Instituições e Status. Padronize os nomes (Ex: UFSC, Senai) para o formato oficial, identifique duplicatas e categorize entre Setor Público ou Privado."</p>
-        </div>
-    </article>
+        .recipe-card { background: white; border-radius: 15px; padding: 30px; margin-bottom: 30px; box-shadow: 0 4px 15px rgba(0,0,0,0.05); border: 1px solid #eee; }
+        .recipe-header { display: flex; align-items: center; justify-content: space-between; margin-bottom: 15px; }
+        .recipe-header h3 { margin: 0; font-size: 1.3rem; }
+        
+        .tag { background: #e8f0fe; color: var(--primary); padding: 4px 12px; border-radius: 20px; font-size: 0.75rem; font-weight: bold; text-transform: uppercase; }
+        .prompt-box { background: var(--code-bg); color: #abb2bf; padding: 25px; border-radius: 10px; position: relative; font-family: 'Courier New', monospace; margin-top: 15px; font-size: 0.95rem; }
+        .prompt-box header { position: absolute; top: 0; left: 0; width: 100%; background: #333; padding: 5px 15px; font-size: 0.7rem; color: #999; border-radius: 10px 10px 0 0; box-sizing: border-box; }
 
-    <h2 class="section-title"><i class="fas fa-chart-pie"></i> 02. Estratégia & Analytics (Python)</h2>
-    <p>Prompts que utilizam lógica de Data Science para previsão de metas e sazonalidade.</p>
+        footer { text-align: center; padding: 40px; color: var(--gray); font-style: italic; }
+        .btn-back { text-decoration: none; color: var(--primary); font-weight: bold; display: flex; align-items: center; gap: 5px; }
+    </style>
+</head>
+<body>
 
-    <article class="recipe-card">
-        <div class="recipe-header">
-            <span class="tag" style="background:#34a853; color:white;">DATA SCIENCE</span>
-            <h2>O Analista Preditivo</h2>
-        </div>
-        <div class="prompt-box">
-            <header><span>PROMPT</span></header>
-            <p>"Atue como Analista de Dados. Com base no histórico de 2 anos, gere um scatter plot relacionando Tempo de Fechamento e Valor. Identifique o impacto de um aumento de 10% na conversão de IA Workspace."</p>
-        </div>
-    </article>
+    <nav>
+        <a href="index.html" class="logo">Vidal Silva</a>
+        <a href="projetos.html" style="text-decoration: none; color: var(--gray);">Voltar para Projetos</a>
+    </nav>
 
-    <h2 class="section-title"><i class="fas fa-comments-dollar"></i> 03. Vendas Consultivas (SPIN Selling)</h2>
-    <p>Abordagens de alta conversão para o setor de Educação.</p>
+    <div class="container">
+        <a href="projetos.html" class="btn-back"><i class="fas fa-arrow-left"></i> Meus Projetos</a>
+        
+        <h1>📖 Banco de Prompts</h1>
+        <p class="subtitle">Arquitetura de prompts para otimização de processos e inteligência de mercado.</p>
 
-    <article class="recipe-card">
-        <div class="recipe-header">
-            <span class="tag">PROSPECÇÃO</span>
-            <h2>O Prospector Cirúrgico</h2>
-        </div>
-        <div class="prompt-box">
-            <header><span>PROMPT</span></header>
-            <p>"Crie um e-mail de abordagem baseado em SPIN Selling para uma universidade que [FATO RECENTE]. Foque na Implicação de não adotar IA no currículo agora."</p>
-        </div>
-    </article>
-</div>
+        <h2 class="section-title"><i class="fas fa-database"></i> 01. Sales Ops & Data Cleaning</h2>
+        
+        <article class="recipe-card">
+            <div class="recipe-header">
+                <h3>O Faxineiro de Dados</h3>
+                <span class="tag">Google Sheets</span>
+            </div>
+            <p><strong>Cenário:</strong> Padronizar entrada de dados dos 40 canais (ex: UFSC, Senai).</p>
+            <div class="prompt-box">
+                <header>PROMPT</header>
+                <p style="margin-top: 15px;">"Analise as colunas de Instituições e Status. Padronize os nomes para o formato oficial, identifique duplicatas e categorize cada deal como 'Setor Público' ou 'Setor Privado'."</p>
+            </div>
+        </article>
+
+        <h2 class="section-title"><i class="fas fa-chart-pie"></i> 02. Estratégia & Analytics (Python)</h2>
+        
+        <article class="recipe-card">
+            <div class="recipe-header">
+                <h3>O Analista Preditivo</h3>
+                <span class="tag" style="background: #34a853; color: white;">Data Science</span>
+            </div>
+            <p><strong>Cenário:</strong> Previsão de metas e sazonalidade para o próximo trimestre.</p>
+            <div class="prompt-box">
+                <header>PROMPT</header>
+                <p style="margin-top: 15px;">"Atue como Analista de Dados. Com base no histórico de 2 anos, gere um scatter plot relacionando Tempo de Fechamento e Valor. Identifique o impacto de um aumento de 10% na conversão de IA Workspace."</p>
+            </div>
+        </article>
+
+        <h2 class="section-title"><i class="fas fa-bullseye"></i> 03. Vendas Consultivas (SPIN Selling)</h2>
+        
+        <article class="recipe-card">
+            <div class="recipe-header">
+                <h3>O Prospector Cirúrgico</h3>
+                <span class="tag">Prospecção</span>
+            </div>
+            <p><strong>Cenário:</strong> Abordagem de alta conversão para o setor de Educação.</p>
+            <div class="prompt-box">
+                <header>PROMPT</header>
+                <p style="margin-top: 15px;">"Crie um e-mail de abordagem baseado em SPIN Selling para uma universidade que [FATO RECENTE]. Foque na Implicação de não adotar IA no currículo agora."</p>
+            </div>
+        </article>
+
+    </div>
+
+    <footer>
+        <p>"Utilizando a precisão dos dados para guiar o caminho."</p>
+    </footer>
+
+</body>
+</html>
