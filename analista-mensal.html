@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Prompt: Analista Estratégico Mensal | Vidal Silva</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        :root { --primary: #4285F4; --dark: #202124; --gray: #5f6368; --light: #f8f9fa; --code-bg: #282c34; }
+        body { font-family: 'Segoe UI', Arial, sans-serif; margin: 0; background: var(--light); color: var(--dark); line-height: 1.6; }
+        nav { display: flex; justify-content: space-between; padding: 20px 10%; background: white; align-items: center; box-shadow: 0 2px 4px rgba(0,0,0,0.05); }
+        .container { max-width: 800px; margin: 50px auto; padding: 0 20px; background: white; padding: 40px; border-radius: 15px; box-shadow: 0 4px 20px rgba(0,0,0,0.05); }
+        h1 { color: var(--primary); margin-bottom: 20px; }
+        .intro { color: var(--gray); font-size: 1.1rem; margin-bottom: 30px; border-bottom: 1px solid #eee; padding-bottom: 20px; }
+        
+        .copy-box { background: var(--code-bg); color: #abb2bf; padding: 30px; border-radius: 10px; font-family: 'Courier New', Courier, monospace; position: relative; white-space: pre-wrap; font-size: 0.9rem; }
+        .btn-copy { position: absolute; top: 10px; right: 10px; background: #444; color: white; border: none; padding: 5px 10px; border-radius: 5px; cursor: pointer; font-size: 0.7rem; }
+        
+        .back-link { text-decoration: none; color: var(--gray); font-weight: bold; display: flex; align-items: center; gap: 5px; margin-bottom: 20px; }
+    </style>
+</head>
+<body>
+    <nav>
+        <a href="index.html" style="text-decoration: none; font-weight: bold; color: var(--primary);">Vidal Silva</a>
+    </nav>
+
+    <div class="container">
+        <a href="banco-prompts.html" class="back-link"><i class="fas fa-arrow-left"></i> Voltar ao Banco</a>
+        
+        <h1>O Analista Estratégico Mensal</h1>
+        <p class="intro">Este framework transforma o Gemini em um consultor de produtividade e gestão de tempo, ideal para líderes que gerenciam múltiplas metas e equipes.</p>
+
+        <div class="copy-box">
+            <button class="btn-copy" onclick="copyPrompt()">Copiar Prompt</button>
+Gemini, a partir deste momento você será meu Analista Estratégico de Planejamento Mensal, responsável por me ajudar a estruturar, organizar, priorizar e executar meu mês de forma inteligente, realista e orientada a resultados. Seu papel é atuar como um consultor profissional, combinando estratégia, produtividade, gestão de tempo, energia e metas.
+
+Aqui estão as informações sobre meu contexto atual:
+Área da vida ou trabalho a ser planejada: [inserir]
+Objetivos principais para este mês: [inserir]
+Metas quantitativas e qualitativas: [inserir]
+Projetos em andamento: [inserir]
+Compromissos fixos e restrições de agenda: [inserir]
+Tempo médio disponível por semana: [inserir]
+Desafios recorrentes: [inserir]
+Prioridades inegociáveis do mês: [inserir]
+
+Com base nesses dados, construa um Planejamento Mensal Estratégico de Alto Nível seguindo as 10 etapas de diagnóstico, definição SMART, macroestruturas, detalhamento semanal, organização de projetos, gestão de energia, métricas (KPIs), protocolos de imprevistos, revisão final e entrega organizada.
+        </div>
+
+        <h3 style="margin-top: 40px;">Como utilizar este prompt:</h3>
+        <p>Preencha os campos entre colchetes <strong>[...]</strong> com os dados do seu mês atual. O Gemini irá gerar um plano detalhado dividido por semanas, com foco em gestão de energia e prioridades inegociáveis.</p>
+    </div>
+
+    <script>
+        function copyPrompt() {
+            const text = document.querySelector('.copy-box').innerText.replace('Copiar Prompt', '');
+            navigator.clipboard.writeText(text);
+            alert('Prompt copiado com sucesso!');
+        }
+    </script>
+</body>
+</html>
