@@ -11,11 +11,41 @@
         nav { display: flex; justify-content: space-between; padding: 20px 10%; background: white; align-items: center; box-shadow: 0 2px 4px rgba(0,0,0,0.05); }
         .logo { font-weight: bold; font-size: 1.2rem; color: var(--primary); text-decoration: none; }
         .container { max-width: 800px; margin: 50px auto; padding: 0 20px; }
+        
         h1 { border-left: 5px solid var(--primary); padding-left: 15px; margin-bottom: 40px; }
-        .article-link { background: white; padding: 25px; border-radius: 12px; display: block; text-decoration: none; color: inherit; box-shadow: 0 2px 5px rgba(0,0,0,0.05); transition: 0.3s; margin-bottom: 20px; }
-        .article-link:hover { transform: translateX(10px); border-left: 5px solid var(--primary); }
-        .article-link h3 { margin: 0 0 10px 0; color: var(--primary); }
-        .article-link p { margin: 0; color: var(--gray); font-size: 0.95rem; }
+
+        /* Estilo padronizado dos cards */
+        .recipe-card { 
+            background: white; 
+            padding: 30px; 
+            border-radius: 15px; 
+            box-shadow: 0 4px 15px rgba(0,0,0,0.05); 
+            border: 1px solid #eee; 
+            margin-bottom: 30px;
+            display: flex;
+            align-items: flex-start;
+            gap: 25px;
+            transition: 0.3s;
+        }
+        .recipe-card:hover { transform: translateX(10px); }
+
+        /* Estilo do ícone circular */
+        .icon-circle {
+            background: #e8f0fe;
+            width: 70px;
+            height: 70px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+        }
+        .icon-circle i { font-size: 1.8rem; color: var(--primary); }
+
+        .tag { background: #e8f0fe; color: var(--primary); padding: 4px 12px; border-radius: 20px; font-size: 0.75rem; font-weight: bold; text-transform: uppercase; }
+        .recipe-content h2 { margin: 10px 0 5px 0; font-size: 1.4rem; color: var(--dark); }
+        .recipe-content p { color: var(--gray); margin-bottom: 15px; font-size: 0.95rem; }
+
         .btn-back { display: inline-block; margin-top: 20px; text-decoration: none; color: var(--primary); font-weight: bold; }
     </style>
 </head>
@@ -24,27 +54,35 @@
         <a href="index.html" class="logo">Vidal Silva</a>
         <a href="index.html" style="text-decoration: none; color: var(--gray);">Voltar para Home</a>
     </nav>
+
     <div class="container">
         <h1>Insights & Artigos</h1>
         
-        <a href="artigo-entrevistas.html" class="article-link">
-            <h3>RH: O código oculto das entrevistas</h3>
-            <p>O que as empresas realmente testam além do currículo? Uma análise sobre conexão e resolução de problemas.</p>
-        </a>
+        <article class="recipe-card">
+            <div class="icon-circle">
+                <i class="fas fa-user-tie"></i>
+            </div>
+            <div class="recipe-content">
+                <span class="tag">Carreira & Liderança</span>
+                <h2>RH: O código oculto das entrevistas</h2>
+                <p>O que as empresas realmente testam além do currículo? Uma análise sobre conexão e resolução de problemas.</p>
+                <a href="artigo-entrevistas.html" style="color: var(--primary); text-decoration: none; font-weight: bold;">Ler artigo completo →</a>
+            </div>
+        </article>
 
         <article class="recipe-card">
-    <div class="recipe-header">
-        <i class="fas fa-feather-alt" style="font-size: 2rem; color: var(--primary);"></i>
-        <div>
-            <span class="tag">Liderança & Marketing</span>
-            <h2>Storytelling B2B: Conexão Real</h2>
-        </div>
-    </div>
-    <p>A verdadeira diferenciação em 2026 não vem de dados isolados, mas da capacidade de humanizar a marca e construir confiança.</p>
-    <a href="artigo-storytelling.html" style="color: var(--primary); text-decoration: none; font-weight: bold; margin-top:10px; display:inline-block;">Ler artigo completo →</a>
-</article>
+            <div class="icon-circle">
+                <i class="fas fa-feather-alt"></i>
+            </div>
+            <div class="recipe-content">
+                <span class="tag">Liderança & Marketing</span>
+                <h2>Storytelling B2B: Conexão Real</h2>
+                <p>A verdadeira diferenciação em 2026 não vem de dados isolados, mas da capacidade de humanizar a marca e construir confiança.</p>
+                <a href="artigo-storytelling.html" style="color: var(--primary); text-decoration: none; font-weight: bold;">Ler artigo completo →</a>
+            </div>
+        </article>
 
-        <a href="index.html" class="btn-back"><i class="fas fa-arrow-left"></i> Voltar</a>
+        <a href="index.html" class="btn-back"><i class="fas fa-arrow-left"></i> Voltar para Home</a>
     </div>
 </body>
 </html>
