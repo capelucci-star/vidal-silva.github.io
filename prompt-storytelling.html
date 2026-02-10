@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Prompt Storytelling Estratégico | Vidal Silva</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        :root { --primary: #4285F4; --dark: #202124; --gray: #5f6368; }
+        body { font-family: 'Segoe UI', Arial, sans-serif; margin: 0; color: var(--dark); line-height: 1.8; background: #fff; }
+        nav { padding: 20px 10%; border-bottom: 1px solid #eee; }
+        .container { max-width: 750px; margin: 60px auto; padding: 0 20px; }
+        h1 { font-size: 2.2rem; color: var(--dark); margin-bottom: 10px; }
+        .intro-text { color: var(--gray); margin-bottom: 40px; border-bottom: 1px solid #eee; padding-bottom: 20px; }
+        .prompt-box { background: #f1f3f4; padding: 30px; border-radius: 12px; border: 1px solid #dadce0; position: relative; font-family: 'Courier New', Courier, monospace; font-size: 0.95rem; white-space: pre-wrap; }
+        .copy-btn { background: var(--primary); color: white; border: none; padding: 10px 20px; border-radius: 5px; cursor: pointer; font-weight: bold; margin-bottom: 15px; transition: 0.3s; }
+        .copy-btn:hover { background: #3367d6; }
+        footer { margin-top: 80px; padding: 40px; text-align: center; background: #f8f9fa; }
+    </style>
+</head>
+<body>
+    <nav><a href="textos.html" style="text-decoration: none; color: var(--primary); font-weight: bold;">← Voltar para Insights</a></nav>
+    
+    <div class="container">
+        <h1>Prompt: Storytelling de Alto Impacto</h1>
+        <p class="intro-text">Este é um framework avançado de 7 etapas para criar narrativas densas e magnéticas com IA. Ideal para vídeos, manifestos e artigos de opinião.</p>
+
+        <button class="copy-btn" onclick="copyPrompt()">Copiar Prompt Completo</button>
+
+        <div id="promptContent" class="prompt-box">
+[O CONTEÚDO DO PROMPT QUE ANALISAMOS VAI AQUI DENTRO]
+        </div>
+    </div>
+
+    <footer>
+        <p><em>"Dominar a ferramenta é o primeiro passo para libertar a criatividade humana."</em></p>
+    </footer>
+
+    <script>
+        function copyPrompt() {
+            const text = document.getElementById('promptContent').innerText;
+            navigator.clipboard.writeText(text).then(() => {
+                alert('Prompt copiado com sucesso!');
+            });
+        }
+    </script>
+</body>
+</html>
