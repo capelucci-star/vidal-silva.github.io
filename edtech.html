@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>EdTech Expert | Vidal Silva</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        :root { --primary: #4285F4; --dark: #202124; --gray: #5f6368; --light: #f8f9fa; }
+        body { font-family: 'Segoe UI', Arial, sans-serif; margin: 0; background: var(--light); color: var(--dark); line-height: 1.6; }
+        
+        nav { display: flex; justify-content: space-between; padding: 20px 10%; background: white; align-items: center; box-shadow: 0 2px 4px rgba(0,0,0,0.05); }
+        .logo { font-weight: bold; font-size: 1.2rem; color: var(--primary); text-decoration: none; }
+        
+        .container { max-width: 800px; margin: 50px auto; padding: 0 20px; }
+        h1 { border-left: 5px solid var(--primary); padding-left: 15px; margin-bottom: 40px; }
+
+        /* Estilo dos cards (Copiado da sua estrutura de artigos) */
+        .recipe-card { 
+            background: white; 
+            padding: 30px; 
+            border-radius: 15px; 
+            box-shadow: 0 4px 15px rgba(0,0,0,0.05); 
+            border: 1px solid #eee; 
+            margin-bottom: 30px;
+            display: flex;
+            align-items: flex-start;
+            gap: 25px;
+            transition: 0.3s;
+        }
+        .recipe-card:hover { transform: translateX(10px); }
+
+        .icon-circle {
+            background: #e8f0fe;
+            width: 70px;
+            height: 70px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+        }
+        .icon-circle i { font-size: 1.8rem; color: var(--primary); }
+
+        .tag { background: #e8f0fe; color: var(--primary); padding: 4px 12px; border-radius: 20px; font-size: 0.75rem; font-weight: bold; text-transform: uppercase; }
+        .recipe-content h2 { margin: 10px 0 5px 0; font-size: 1.4rem; color: var(--dark); }
+        .recipe-content p { color: var(--gray); margin-bottom: 15px; font-size: 0.95rem; }
+
+        .btn-back { display: inline-block; margin-top: 20px; text-decoration: none; color: var(--primary); font-weight: bold; }
+    </style>
+</head>
+<body>
+
+    <nav>
+        <a href="index.html" class="logo">Vidal Silva</a>
+        <a href="index.html" style="text-decoration: none; color: var(--gray);">Voltar para Home</a>
+    </nav>
+
+    <div class="container">
+        <h1>EdTech Expert</h1>
+        <p style="color: var(--gray); margin-bottom: 40px;">Implementação de ecossistemas digitais e inteligência artificial em larga escala para o setor educacional.</p>
+        
+        <article class="recipe-card">
+            <div class="icon-circle">
+                <i class="fas fa-robot"></i>
+            </div>
+            <div class="recipe-content">
+                <span class="tag">IA na Educação</span>
+                <h2>O Pivot do Gemini nas Escolas</h2>
+                <p>Como transformar a IA de uma ferramenta de "copia e cola" em um laboratório de pensamento crítico e curadoria para professores.</p>
+                <a href="artigo-gemini-escolas.html" style="color: var(--primary); text-decoration: none; font-weight: bold;">Ler análise completa →</a>
+            </div>
+        </article>
+
+        <article class="recipe-card">
+            <div class="icon-circle">
+                <i class="fas fa-project-diagram"></i>
+            </div>
+            <div class="recipe-content">
+                <span class="tag">Google Workspace</span>
+                <h2>Ecossistemas em Larga Escala</h2>
+                <p>Estratégias de implementação para redes de ensino: transformando a cultura digital de 40+ canais na América Latina.</p>
+                <a href="#" style="color: var(--primary); text-decoration: none; font-weight: bold;">Ver cases de sucesso →</a>
+            </div>
+        </article>
+
+        <a href="index.html" class="btn-back"><i class="fas fa-arrow-left"></i> Voltar para Home</a>
+    </div>
+
+    <footer style="text-align: center; padding: 40px; color: var(--gray); font-style: italic;">
+        <p>"Utilizando a precisão dos dados para guiar o caminho."</p>
+    </footer>
+
+</body>
+</html>
