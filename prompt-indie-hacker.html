@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Validador Indie Hacker | Vidal Silva</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        :root { --accent: #ff5722; --dark: #202124; --gray: #5f6368; }
+        body { font-family: 'Segoe UI', Arial, sans-serif; margin: 0; color: var(--dark); line-height: 1.8; background: #fff; }
+        nav { padding: 20px 10%; border-bottom: 1px solid #eee; }
+        .container { max-width: 750px; margin: 60px auto; padding: 0 20px; }
+        h1 { font-size: 2.2rem; color: var(--dark); margin-bottom: 10px; }
+        .intro-text { color: var(--gray); margin-bottom: 40px; border-bottom: 1px solid #eee; padding-bottom: 20px; }
+        .prompt-box { background: #fdf2f0; padding: 30px; border-radius: 12px; border: 1px solid #ffccbc; position: relative; font-family: 'Courier New', Courier, monospace; font-size: 0.95rem; white-space: pre-wrap; }
+        .copy-btn { background: var(--accent); color: white; border: none; padding: 10px 20px; border-radius: 5px; cursor: pointer; font-weight: bold; margin-bottom: 15px; transition: 0.3s; }
+        .copy-btn:hover { background: #e64a19; }
+        .quote-box { background: #fff3e0; padding: 20px; border-radius: 8px; margin-top: 30px; border-left: 5px solid var(--accent); }
+    </style>
+</head>
+<body>
+<nav>
+    <a href="banco-prompts.html" style="text-decoration: none; color: var(--accent); font-weight: bold; display: flex; align-items: center; gap: 8px;">
+        <i class="fas fa-arrow-left"></i> Voltar para Banco de Prompts
+    </a>
+</nav>
+
+<div class="container">
+    <h1>Validador Indie Hacker</h1>
+    <p class="intro-text">Baseado no livro "Make" de Pieter Levels. Focado em MVPs funcionais, automação e lucratividade desde o dia 1.</p>
+
+    <button class="copy-btn" onclick="copyPrompt()">Copiar Prompt de Execução</button>
+
+    <div id="promptContent" class="prompt-box">
+Atua como um consultor de negócios baseado na filosofia Indie Hacker de Pieter Levels. O teu foco é a execução rápida e a solução de problemas reais com o mínimo de recursos.
+
+Siga estas etapas:
+1. Filtro do Problema Real: Pergunta qual dor da minha vida ou trabalho estou resolvendo.
+2. Desconstrução para MVP: Desafia-me a simplificar a ideia para testar hoje com ferramentas que já conheço.
+3. Velocidade Competitiva: Sugere 3 automações simples (Python ou no-code) para o projeto.
+4. Lançamento Amigável: Ajuda a redigir uma mensagem de lançamento honesta e humana.
+5. Regra do Lucro: Questiona como vou cobrar pelo valor entregue desde o início.
+    </div>
+
+    <div class="quote-box">
+        <p><em>"A ideia é apenas um multiplicador. A execução vale milhões."</em> — <strong>Pieter Levels</strong></p>
+    </div>
+</div>
+
+<script>
+    function copyPrompt() {
+        const text = document.getElementById('promptContent').innerText;
+        navigator.clipboard.writeText(text).then(() => {
+            alert('Prompt copiado! Hora de executar.');
+        });
+    }
+</script>
+</body>
+</html>
