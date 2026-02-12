@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Prompt: Mentor de Estudos | Vidal Silva</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        :root { --primary: #4285F4; --dark: #202124; --gray: #5f6368; --light: #f8f9fa; --code-bg: #282c34; }
+        body { font-family: 'Segoe UI', Arial, sans-serif; margin: 0; background: var(--light); color: var(--dark); line-height: 1.6; }
+        nav { display: flex; justify-content: space-between; padding: 20px 10%; background: white; align-items: center; box-shadow: 0 2px 4px rgba(0,0,0,0.05); }
+        .container { max-width: 800px; margin: 50px auto; padding: 0 20px; background: white; padding: 40px; border-radius: 15px; box-shadow: 0 4px 20px rgba(0,0,0,0.05); }
+        h1 { color: #34a853; margin-bottom: 20px; }
+        .intro { color: var(--gray); font-size: 1.1rem; margin-bottom: 30px; border-bottom: 1px solid #eee; padding-bottom: 20px; }
+        .copy-box { background: var(--code-bg); color: #abb2bf; padding: 30px; border-radius: 10px; font-family: 'Courier New', monospace; position: relative; white-space: pre-wrap; font-size: 0.9rem; max-height: 550px; overflow-y: auto; }
+        .btn-copy { position: absolute; top: 10px; right: 25px; background: #444; color: white; border: none; padding: 8px 15px; border-radius: 5px; cursor: pointer; z-index: 10; }
+        .back-link { text-decoration: none; color: var(--gray); font-weight: bold; display: flex; align-items: center; gap: 5px; margin-bottom: 20px; }
+    </style>
+</head>
+<body>
+    <nav><a href="index.html" style="text-decoration: none; font-weight: bold; color: var(--primary);">Vidal Silva</a></nav>
+    <div class="container">
+        <a href="banco-prompts.html" class="back-link"><i class="fas fa-arrow-left"></i> Voltar ao Banco</a>
+        <h1>Mentor de Aprendizagem de Alto Desempenho</h1>
+        <p class="intro">Framework científico para acelerar a curva de aprendizado em temas complexos (Data Science, Finanças, Liderança).</p>
+
+        <div class="copy-box">
+            <button class="btn-copy" onclick="copyPrompt()"><i class="far fa-copy"></i> Copiar</button>
+Gemini, preciso que você atue como meu Analista Estratégico de Estudos e Mentor de Aprendizagem de Alto Desempenho, responsável por construir um plano de estudos completo, estruturado, eficiente e adaptado à minha realidade.
+Meu objetivo é estudar com clareza, consistência e retenção real, sem desperdício de tempo e sem estudar de forma desorganizada.
+
+Aqui estão as informações sobre meu contexto:
+Área ou tema principal de estudo: [inserir]
+Subáreas ou tópicos que preciso dominar: [inserir]
+Meu nível atual: [inserir]
+Meu objetivo final: [inserir]
+Tempo disponível por dia/semana: [inserir]
+Data limite ou prazo importante: [inserir]
+Principais dificuldades: [inserir]
+Formatos que funcionam melhor para mim: [inserir]
+
+Com base nesses dados, construa um Planejamento Mensal Estratégico de Alto Nível seguindo rigorosamente estas 10 etapas:
+1. Diagnóstico Inicial Profundo (conhecimentos fundamentais e efeito dominó).
+2. Estruturação do Mapa Completo (Base, Intermediário, Avançado).
+3. Divisão em Fases Estratégicas (Base, Consolidação, Prática, Simulação, Refinamento).
+4. Plano Semanal e Diário Otimizado (Distribuição por energia mental).
+5. Técnicas de Alta Performance (Active Recall, Spaced Repetition, Interleaving).
+6. Sistema de Revisão e Retenção de Longo Prazo (Protocolos de 24h, semanal, mensal).
+7. Métricas e Acompanhamento (KPIs de estudo e check-in semanal).
+8. Estratégias Anti-Procrastinação e Consistência (microestratégias de execução).
+9. Personalização Final para Minha Realidade.
+10. Entrega Final Obrigatória (checklist, rotina replicável e sistema de revisão).
+
+Tudo em formato extremamente claro, escaneável e organizado.
+        </div>
+
+        <h3 style="margin-top: 40px;">Por que este método funciona?</h3>
+        <p>Este prompt utiliza conceitos de <strong>neurociência cognitiva</strong> para evitar a ilusão de competência (quando você acha que aprendeu só porque leu). Ele foca no <em>Active Recall</em>, forçando o cérebro a recuperar a informação, o que solidifica as conexões neurais necessárias para dominar temas como os que você estuda no seu MBA.</p>
+    </div>
+    <script>
+        function copyPrompt() {
+            const text = document.querySelector('.copy-box').innerText.replace('Copiar', '');
+            navigator.clipboard.writeText(text);
+            alert('Prompt de Estudos copiado com sucesso!');
+        }
+    </script>
+</body>
+</html>
