@@ -59,6 +59,43 @@
     </div>
 </section>
 
+
+<div style="padding: 20px; font-family: sans-serif;">
+    <h3>Meu Chatbot IA</h3>
+    <input type="text" id="pergunta" placeholder="Digite sua pergunta..." style="width: 80%;">
+    <button onclick="enviarPergunta()" id="btn-enviar">Enviar</button>
+    
+    <div id="resposta" style="margin-top: 20px; color: #333; font-style: italic;">
+        A resposta aparecerá aqui...
+    </div>
+</div>
+
+<script>
+async function enviarPergunta() {
+    const campo = document.getElementById('pergunta');
+    const display = document.getElementById('resposta');
+    const btn = document.getElementById('btn-enviar');
+
+    display.innerText = "Pensando...";
+    btn.disabled = true;
+
+    try {
+        // Chamar a nossa função que criamos na Vercel
+        const res = await fetch('/api/chat', {
+            method: 'POST',
+            body: JSON.stringify({ prompt: campo.value })
+        });
+
+        const data = await res.json();
+        display.innerText = data.text;
+    } catch (erro) {
+        display.innerText = "Ops! Algo deu errado.";
+    } finally {
+        btn.disabled = false;
+    }
+}
+</script>
+    
 <section class="services">
     <h2>Como eu gero impacto</h2>
     <div class="services-grid">
