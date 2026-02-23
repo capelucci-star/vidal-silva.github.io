@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Humanização de Escrita | Vidal Silva</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        :root { --primary: #4285F4; --dark: #202124; --gray: #5f6368; --light: #f8f9fa; --code-bg: #282c34; }
+        body { font-family: 'Segoe UI', Arial, sans-serif; margin: 0; background: var(--light); color: var(--dark); line-height: 1.6; }
+        nav { display: flex; justify-content: space-between; padding: 20px 10%; background: white; align-items: center; box-shadow: 0 2px 4px rgba(0,0,0,0.05); }
+        .logo { font-weight: bold; font-size: 1.2rem; color: var(--primary); text-decoration: none; }
+        .container { max-width: 900px; margin: 50px auto; padding: 0 20px; }
+        
+        h1 { border-left: 5px solid var(--primary); padding-left: 15px; margin-bottom: 10px; }
+        .subtitle { color: var(--gray); margin-bottom: 40px; }
+        .recipe-card { background: white; border-radius: 15px; padding: 30px; margin-bottom: 30px; box-shadow: 0 4px 15px rgba(0,0,0,0.05); border: 1px solid #eee; }
+        
+        /* Tabela Estilizada */
+        table { width: 100%; border-collapse: collapse; margin: 20px 0; font-size: 0.9rem; }
+        th { background: #e8f0fe; color: var(--primary); text-align: left; padding: 12px; text-transform: uppercase; font-size: 0.75rem; }
+        td { padding: 12px; border-bottom: 1px solid #eee; vertical-align: top; }
+        tr:last-child td { border-bottom: none; }
+        .tag-step { font-weight: bold; color: var(--gray); font-size: 0.8rem; display: block; margin-bottom: 5px; }
+
+        .prompt-box { background: var(--code-bg); color: #abb2bf; padding: 25px; border-radius: 10px; position: relative; font-family: 'Courier New', monospace; margin-top: 25px; font-size: 0.95rem; }
+        .prompt-box header { position: absolute; top: 0; left: 0; width: 100%; background: #333; padding: 5px 15px; font-size: 0.7rem; color: #999; border-radius: 10px 10px 0 0; box-sizing: border-box; }
+        .btn-back { text-decoration: none; color: var(--primary); font-weight: bold; display: flex; align-items: center; gap: 5px; margin-bottom: 20px; }
+        footer { text-align: center; padding: 40px; color: var(--gray); font-style: italic; }
+    </style>
+</head>
+<body>
+
+    <nav>
+        <a href="index.html" class="logo">Vidal Silva</a>
+        <a href="prompts.html" style="text-decoration: none; color: var(--gray);">Voltar ao Banco</a>
+    </nav>
+
+    <div class="container">
+        <a href="prompts.html" class="btn-back"><i class="fas fa-arrow-left"></i> Voltar para Banco de Prompts</a>
+        
+        <h1>✨ Framework de Humanização</h1>
+        <p class="subtitle">Guia prático baseado nos princípios de Alberto Romero para converter escrita de IA em narrativa autêntica.</p>
+
+        <section class="recipe-card">
+            <h3>Checklist de Refinamento (Bloco I: 85%)</h3>
+            <p>Foque no que a IA faz que não deveria fazer.</p>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Técnica</th>
+                        <th>O que evitar</th>
+                        <th>O que aplicar</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><strong>Substância Concreta</strong></td>
+                        <td>Abstrações: "tranquilidade", "serenidade".</td>
+                        <td>Objetos: "pombos brigando", "banco de ripas".</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Traição Sensorial</strong></td>
+                        <td>Clichês estatísticos: "seda macia".</td>
+                        <td>Realidade: "teia de aranha grudenta".</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Subtexto Ativo</strong></td>
+                        <td>Explicar o sentimento ("Ele estava triste").</td>
+                        <td><strong>Show, Don't Tell:</strong> "Ele desviou o olhar".</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Ritmo Humano</strong></td>
+                        <td>Triads e travessões de impacto ("—").</td>
+                        <td>Varie o tamanho das frases e use vírgulas.</td>
+                    </tr>
+                </tbody>
+            </table>
+        </section>
+
+        <section class="recipe-card">
+            <h3>🚀 Mega-Prompt de Execução</h3>
+            <p>Use este prompt para processar seus drafts de IA em uma única passada.</p>
+            <div class="prompt-box">
+                <header>PROMPT DE REVISÃO</header>
+                <p style="margin-top: 15px;">
+                    "Atue como um Editor Sênior. Sua tarefa é humanizar o texto abaixo seguindo estas regras: 
+                    1. Troque 40% dos substantivos abstratos por imagens concretas que o leitor possa visualizar.
+                    2. Elimine tiques de IA como 'not only... but also' e listas fixas em três itens.
+                    3. Aplique traição sensorial: substitua descrições óbvias por sensações táteis reais e imperfeitas.
+                    4. Não explique emoções; descreva comportamentos físicos que as sugiram.
+                    
+                    Texto para processar: {{INSIRA O TEXTO AQUI}}"
+                </p>
+            </div>
+            <div style="margin-top: 20px; font-size: 0.85rem; color: var(--gray);">
+                <i class="fas fa-info-circle"></i> <strong>Nota:</strong> Esta técnica foca em autenticidade, não apenas em burlar detectores.
+            </div>
+        </section>
+
+        <footer>
+            <p>"A tecnologia escreve, mas o humano dá o sentido."</p>
+        </footer>
+    </div>
+
+</body>
+</html>
