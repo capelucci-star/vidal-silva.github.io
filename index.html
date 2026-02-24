@@ -38,6 +38,20 @@
 </head>
 <body>
 
+    <div id="chat-container" style="position: fixed; bottom: 20px; right: 20px; width: 300px; border: 1px solid #ccc; border-radius: 10px; background: white; font-family: Arial, sans-serif; box-shadow: 0 4px 8px rgba(0,0,0,0.1);">
+    <div style="background: #4285f4; color: white; padding: 10px; border-radius: 10px 10px 0 0; font-weight: bold;">
+        Assistente do Vidal
+    </div>
+    <div id="chat-window" style="height: 200px; overflow-y: auto; padding: 10px; font-size: 14px;">
+        <p>Olá! Sou o assistente de IA do Vidal. Como posso ajudar?</p>
+    </div>
+    <div style="display: flex; border-top: 1px solid #eee;">
+        <input type="text" id="user-input" placeholder="Pergunte algo..." style="flex: 1; border: none; padding: 10px; border-radius: 0 0 0 10px; outline: none;">
+        <button onclick="askGemini()" style="background: #4285f4; color: white; border: none; padding: 10px; border-radius: 0 0 10px 0; cursor: pointer;">Enviar</button>
+    </div>
+</div>
+
+    
 <nav>
     <div class="logo">Vidal Silva</div>
     <div class="nav-links">
@@ -60,42 +74,7 @@
 </section>
 
 
-#<div style="padding: 20px; font-family: sans-serif;">
-    #<h3>Meu Chatbot IA</h3>
- #   <input type="text" id="pergunta" placeholder="Digite sua pergunta..." style="width: 80%;">
-  #  <button onclick="enviarPergunta()" id="btn-enviar">Enviar</button>
-    
-   # <div id="resposta" style="margin-top: 20px; color: #333; font-style: italic;">
-    #    A resposta aparecerá aqui...
-   # </div>
-#</div>
 
-<script>
-async function enviarPergunta() {
-    const campo = document.getElementById('pergunta');
-    const display = document.getElementById('resposta');
-    const btn = document.getElementById('btn-enviar');
-
-    display.innerText = "Pensando...";
-    btn.disabled = true;
-
-    try {
-        // Chamar a nossa função que criamos na Vercel
-        const res = await fetch('/api/chat', {
-            method: 'POST',
-            body: JSON.stringify({ prompt: campo.value })
-        });
-
-        const data = await res.json();
-        display.innerText = data.text;
-    } catch (erro) {
-        display.innerText = "Ops! Algo deu errado.";
-    } finally {
-        btn.disabled = false;
-    }
-}
-</script>
-    
 <section class="services">
     <h2>Como eu gero impacto</h2>
     <div class="services-grid">
