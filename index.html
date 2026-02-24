@@ -51,6 +51,42 @@
     </div>
 </div>
 
+    <script>
+async function askGemini() {
+    const input = document.getElementById('user-input');
+    const window = document.getElementById('chat-window');
+    const message = input.value;
+    
+    if (!message) return;
+
+    // Exibe a mensagem do usuário na tela
+    window.innerHTML += `<p><b>Você:</b> ${message}</p>`;
+    input.value = '';
+    window.scrollTop = window.scrollHeight;
+
+    const apiKey = "SAIzaSyCJRu0SBMCgw5BmIpFJIgMMsxLPW-jmdJU"; // Coloque sua chave do AI Studio aqui
+    const url = `https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent?key=${apiKey}`;
+
+    try {
+        const response = await fetch(url, {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({
+                contents: [{ parts: [{ text: `Responda como assistente do Vidal: ${message}` }] }]
+            })
+        });
+
+        const data = await response.json();
+        const botReply = data.candidates[0].content.parts[0].text;
+
+        // Exibe a resposta do Gemini
+        window.innerHTML += `<p><b>Bot:</b> ${botReply}</p>`;
+        window.scrollTop = window.scrollHeight;
+    } catch (error) {
+        window.innerHTML += `<p style="color:red;">Erro ao conectar. Verifique sua chave API.</p>`;
+    }
+}
+</script>
     
 <nav>
     <div class="logo">Vidal Silva</div>
