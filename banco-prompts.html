@@ -1,462 +1,142 @@
 <!DOCTYPE html>
-
 <html lang="pt-br">
-
 <head>
-
     <meta charset="UTF-8">
-
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
     <title>Banco de Prompts | Vidal Silva</title>
-
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
-
     <style>
-
         :root { --primary: #4285F4; --dark: #202124; --gray: #5f6368; --light: #f8f9fa; --code-bg: #282c34; }
-
         body { font-family: 'Segoe UI', Arial, sans-serif; margin: 0; background: var(--light); color: var(--dark); line-height: 1.6; }
-
         nav { display: flex; justify-content: space-between; padding: 20px 10%; background: white; align-items: center; box-shadow: 0 2px 4px rgba(0,0,0,0.05); }
-
         .logo { font-weight: bold; font-size: 1.2rem; color: var(--primary); text-decoration: none; }
-
         .container { max-width: 900px; margin: 50px auto; padding: 0 20px; }
-
-        
-
         h1 { border-left: 5px solid var(--primary); padding-left: 15px; margin-bottom: 10px; }
-
         .subtitle { color: var(--gray); margin-bottom: 40px; }
-
         .section-title { margin: 50px 0 20px; color: var(--dark); border-bottom: 2px solid #eee; padding-bottom: 10px; display: flex; align-items: center; gap: 10px; }
-
-
-
         .recipe-card { background: white; border-radius: 15px; padding: 30px; margin-bottom: 30px; box-shadow: 0 4px 15px rgba(0,0,0,0.05); border: 1px solid #eee; }
-
         .recipe-header { display: flex; align-items: center; justify-content: space-between; margin-bottom: 15px; }
-
         .recipe-header h3 { margin: 0; font-size: 1.3rem; }
-
-        
-
         .tag { background: #e8f0fe; color: var(--primary); padding: 4px 12px; border-radius: 20px; font-size: 0.75rem; font-weight: bold; text-transform: uppercase; }
-
         .prompt-box { background: var(--code-bg); color: #abb2bf; padding: 25px; border-radius: 10px; position: relative; font-family: 'Courier New', monospace; margin-top: 15px; font-size: 0.95rem; }
-
         .prompt-box header { position: absolute; top: 0; left: 0; width: 100%; background: #333; padding: 5px 15px; font-size: 0.7rem; color: #999; border-radius: 10px 10px 0 0; box-sizing: border-box; }
-
-
-
         footer { text-align: center; padding: 40px; color: var(--gray); font-style: italic; }
-
         .btn-back { text-decoration: none; color: var(--primary); font-weight: bold; display: flex; align-items: center; gap: 5px; }
-
     </style>
-
 </head>
-
 <body>
-
-
-
     <nav>
-
         <a href="index.html" class="logo">Vidal Silva</a>
-
         <a href="projetos.html" style="text-decoration: none; color: var(--gray);">Voltar para Projetos</a>
-
     </nav>
 
-
-
     <div class="container">
-
         <a href="projetos.html" class="btn-back"><i class="fas fa-arrow-left"></i> Meus Projetos</a>
-
-        
-
         <h1>📖 Banco de Prompts</h1>
-
         <p class="subtitle">Arquitetura de prompts para otimização de processos e inteligência de mercado.</p>
 
-
-
         <h2 class="section-title"><i class="fas fa-database"></i> 01. Sales Ops & Data Cleaning</h2>
-
-        
-
         <article class="recipe-card">
-
             <div class="recipe-header">
-
                 <h3>O Faxineiro de Dados</h3>
-
                 <span class="tag">Google Sheets</span>
-
             </div>
-
             <p><strong>Cenário:</strong> Padronizar entrada de dados dos 40 canais (ex: UFSC, Senai).</p>
-
             <div class="prompt-box">
-
                 <header>PROMPT</header>
-
                 <p style="margin-top: 15px;">"Analise as colunas de Instituições e Status. Padronize os nomes para o formato oficial, identifique duplicatas e categorize cada deal como 'Setor Público' ou 'Setor Privado'."</p>
-
             </div>
-
         </article>
-
-
 
         <h2 class="section-title"><i class="fas fa-chart-pie"></i> 02. Estratégia & Analytics (Python)</h2>
-
-        
-
         <article class="recipe-card">
-
             <div class="recipe-header">
-
                 <h3>O Analista Preditivo</h3>
-
                 <span class="tag" style="background: #34a853; color: white;">Data Science</span>
-
             </div>
-
             <p><strong>Cenário:</strong> Previsão de metas e sazonalidade para o próximo trimestre.</p>
-
             <div class="prompt-box">
-
                 <header>PROMPT</header>
-
                 <p style="margin-top: 15px;">"Atue como Analista de Dados. Com base no histórico de 2 anos, gere um scatter plot relacionando Tempo de Fechamento e Valor. Identifique o impacto de um aumento de 10% na conversão de IA Workspace."</p>
-
             </div>
-
         </article>
-
-
 
         <h2 class="section-title"><i class="fas fa-bullseye"></i> 03. Vendas Consultivas (SPIN Selling)</h2>
-
-        
-
         <article class="recipe-card">
-
             <div class="recipe-header">
-
                 <h3>O Prospector Cirúrgico</h3>
-
                 <span class="tag">Prospecção</span>
-
             </div>
-
             <p><strong>Cenário:</strong> Abordagem de alta conversão para o setor de Educação.</p>
-
             <div class="prompt-box">
-
                 <header>PROMPT</header>
-
                 <p style="margin-top: 15px;">"Crie um e-mail de abordagem baseado em SPIN Selling para uma universidade que [FATO RECENTE]. Foque na Implicação de não adotar IA no currículo agora."</p>
-
             </div>
-
         </article>
 
-<h2 class="section-title"><i class="fas fa-calendar-check"></i> 04. Planejamento & Gestão Estratégica</h2>
-
-        <p>Prompts de alto nível para organização mensal, priorização de metas e gestão de energia.</p>
-
-        
-
-       <article class="recipe-card">
-
-    <div class="recipe-header">
-
-        <h3>O Analista Estratégico Mensal</h3>
-
-        <span class="tag" style="background: #fbbc04; color: white;">Produtividade</span>
-
-    </div>
-
-    <p><strong>Cenário:</strong> Framework completo para transformar metas mensais em um plano de execução de alto nível.</p>
-
-    <div class="prompt-box" style="height: 100px; overflow: hidden; opacity: 0.7;">
-
-        <header>PRE-VISUALIZAÇÃO</header>
-
-        <p style="margin-top: 15px;">"Gemini, a partir deste momento você será meu Analista Estratégico de Planejamento Mensal, responsável por me ajudar a estruturar, organizar..."</p>
-
-    </div>
-
-    <a href="analista-mensal.html" style="display: inline-block; margin-top: 15px; color: var(--primary); text-decoration: none; font-weight: bold;">
-
-        Ver Prompt Completo & Framework →
-
-    </a>
-
-</article>
-
-   <article class="recipe-card">
-
-    <div class="recipe-header">
-
-        <h3>Comunicação em Situações Sensíveis</h3>
-
-        <span class="tag" style="background: #ea4335; color: white;">Soft Skills</span>
-
-    </div>
-
-    <p><strong>Cenário:</strong> Responder e-mails ou mensagens difíceis para clientes, equipe ou parceiros com inteligência emocional.</p>
-
-    <div class="prompt-box" style="height: 100px; overflow: hidden; opacity: 0.7;">
-
-        <header>PRE-VISUALIZAÇÃO</header>
-
-        <p style="margin-top: 15px;">"Gemini, a partir de agora você será meu Especialista em Comunicação Estratégica e Gestão de Situações Sensíveis..."</p>
-
-    </div>
-
-    <a href="comunicacao-sensivel.html" style="display: inline-block; margin-top: 15px; color: var(--primary); text-decoration: none; font-weight: bold;">
-
-        Ver Prompt & Estrutura →
-
-    </a>
-
-</article>   
-
-
+        <h2 class="section-title"><i class="fas fa-calendar-check"></i> 04. Planejamento & Gestão Estratégica</h2>
+        <article class="recipe-card">
+            <div class="recipe-header">
+                <h3>O Analista Estratégico Mensal</h3>
+                <span class="tag" style="background: #fbbc04; color: white;">Produtividade</span>
+            </div>
+            <p><strong>Cenário:</strong> Framework completo para transformar metas mensais em um plano de execução de alto nível.</p>
+            <div class="prompt-box" style="height: 100px; overflow: hidden; opacity: 0.7;">
+                <header>PRE-VISUALIZAÇÃO</header>
+                <p style="margin-top: 15px;">"Gemini, a partir deste momento você será meu Analista Estratégico de Planejamento Mensal..."</p>
+            </div>
+            <a href="analista-mensal.html" style="display: inline-block; margin-top: 15px; color: var(--primary); text-decoration: none; font-weight: bold;">Ver Prompt Completo & Framework →</a>
+        </article>
 
         <h2 class="section-title"><i class="fas fa-pen-nib"></i> 05. Branding & Storytelling de Alto Impacto</h2>
-
-        <p>Framework avançado focado em neuromarketing para criação de narrativas que conectam com o inconsciente da audiência.</p>
-
-        
-
         <article class="recipe-card">
-
             <div class="recipe-header">
-
                 <h3>O Roteirista de Elite (7 Etapas)</h3>
-
                 <span class="tag" style="background: #9c27b0; color: white;">Storytelling</span>
-
             </div>
-
             <p><strong>Cenário:</strong> Criar vídeos, manifestos ou artigos que rompem o padrão de conteúdo "commodity".</p>
-
-            <div class="prompt-box" style="height: 120px; overflow: hidden; opacity: 0.7;">
-
-                <header>PRE-VISUALIZAÇÃO</header>
-
-                <p style="margin-top: 15px;">
-
-                    "Este é um prompt estratégico para desenvolver conceitos inovadores. 
-
-                    Etapa 1 – Mergulho Estratégico no Inconsciente: realize uma análise psicológica profunda... 
-
-                    Etapa 2 – Tese Narrativa com Contradição Intrínseca..."
-
-                </p>
-
-            </div>
-
-            <a href="prompt-storytelling.html" style="display: inline-block; margin-top: 15px; color: var(--primary); text-decoration: none; font-weight: bold;">
-
-                Ver Prompt Completo & Framework →
-
-            </a>
-
+            <a href="prompt-storytelling.html" style="display: inline-block; margin-top: 15px; color: var(--primary); text-decoration: none; font-weight: bold;">Ver Prompt Completo & Framework →</a>
         </article>
 
-<article class="recipe-card">
-    <div class="recipe-header">
-        <h3>Estrategista de Apresentações</h3>
-        <span class="tag" style="background: #9c27b0; color: white;">Impacto Executivo</span>
-    </div>
-    <p><strong>Cenário:</strong> Transformar ideias soltas em apresentações corporativas persuasivas, estruturadas e memoráveis.</p>
-    
-    <div class="prompt-box" style="height: 100px; overflow: hidden; opacity: 0.7;">
-        <header>PRE-VISUALIZAÇÃO</header>
-        <p style="margin-top: 15px;">"Você será meu Estrategista de Comunicação e Estruturação de Apresentações de Alto Impacto, responsável por organizar minhas ideias..."</p>
-    </div>
-    
-    <a href="estrategista-apresentacao.html" style="display: inline-block; margin-top: 15px; color: var(--primary); text-decoration: none; font-weight: bold;">
-        Ver Prompt Completo & Framework →
-    </a>
-    
-    <div class="tempero" style="margin-top: 15px; font-size: 0.85rem; border-top:
-
         <article class="recipe-card">
-
-    <div class="recipe-header">
-
-        <h3>O Mentor de Criatividade (Bilder Framework)</h3>
-
-        <span class="tag" style="background: #673ab7; color: white;">Neurociência</span>
-
-    </div>
-
-    <p><strong>Cenário:</strong> Desbloquear soluções inovadoras para problemas técnicos ou de liderança usando técnicas de neuropsicologia.</p>
-
-    <div class="prompt-box" style="height: 100px; overflow: hidden; opacity: 0.7;">
-
-        <header>PRE-VISUALIZAÇÃO</header>
-
-        <p style="margin-top: 15px;">"Atue como um Mentor de Criatividade baseado nas lições do Dr. Robert Bilder (UCLA). O teu objetivo é me ajudar a resolver..."</p>
-
-    </div>
-
-    <a href="prompt-criatividade.html" style="display: inline-block; margin-top: 15px; color: var(--primary); text-decoration: none; font-weight: bold;">
-
-        Ver Prompt & Framework Científico →
-
-    </a>
-
-</article>
-
-<article class="recipe-card">
-
-    <div class="recipe-header">
-
-        <h3>O Validador Indie Hacker (Método Pieter Levels)</h3>
-
-        <span class="tag" style="background: #ff5722; color: white;">Execução Brutal</span>
-
-    </div>
-
-    <p><strong>Cenário:</strong> Validar ideias de projetos ou automações com foco em lucro imediato, simplicidade técnica e lançamento rápido.</p>
-
-    <div class="prompt-box" style="height: 100px; overflow: hidden; opacity: 0.7;">
-
-        <header>PRE-VISUALIZAÇÃO</header>
-
-        <p style="margin-top: 15px;">"Atua como um consultor de negócios baseado na filosofia Indie Hacker... O teu foco é a execução rápida e a solução de problemas reais..."</p>
-
-    </div>
-
-    <a href="prompt-indie-hacker.html" style="display: inline-block; margin-top: 15px; color: #ff5722; text-decoration: none; font-weight: bold;">
-
-        Ver Framework de Execução →
-
-    </a>
-
-</article>
-
-        <article class="recipe-card">
-
-    <div class="recipe-header">
-
-        <h3>Mentor de Aprendizagem de Alto Desempenho</h3>
-
-        <span class="tag" style="background: #34a853; color: white;">Execução Brutal</span>
-
-    </div>
-
-    <p><strong>Cenário:</strong> Construir um plano de estudos científico (Active Recall/Spaced Repetition) para temas complexos como Python ou o MBA.</p>
-
-    <div class="prompt-box" style="height: 100px; overflow: hidden; opacity: 0.7;">
-
-        <header>PRE-VISUALIZAÇÃO</header>
-
-        <p style="margin-top: 15px;">"Gemini, preciso que você atue como meu Analista Estratégico de Estudos e Mentor de Aprendizagem de Alto Desempenho, responsável por construir um plano de estudos completo..."</p>
-
-    </div>
-
-    <a href="prompt-nome-do-arquivo.html" style="display: inline-block; margin-top: 15px; color: #34a853; text-decoration: none; font-weight: bold;">
-
-        Ver Plano de Estudos →
-
-    </a>
-
-</article>
-
-
-
-<h2 class="section-title"><i class="fas fa-shopping-cart"></i> 06. Personal Ops & Consumo Inteligente</h2>
-
-        <p>Prompts para otimização de compras, comparação estratégica de preços e segurança digital.</p>
-
-
-
-        <article class="recipe-card">
-
             <div class="recipe-header">
+                <h3>Estrategista de Apresentações</h3>
+                <span class="tag" style="background: #9c27b0; color: white;">Impacto Executivo</span>
+            </div>
+            <p><strong>Cenário:</strong> Transformar ideias soltas em apresentações corporativas persuasivas, estruturadas e memoráveis.</p>
+            <div class="prompt-box" style="height: 100px; overflow: hidden; opacity: 0.7;">
+                <header>PRE-VISUALIZAÇÃO</header>
+                <p style="margin-top: 15px;">"Você será meu Estrategista de Comunicação e Estruturação de Apresentações de Alto Impacto..."</p>
+            </div>
+            <a href="estrategista-apresentacao.html" style="display: inline-block; margin-top: 15px; color: var(--primary); text-decoration: none; font-weight: bold;">Ver Prompt Completo & Framework →</a>
+        </article>
 
-                <h3>O Sniper de Preços (Compras Inteligentes)</h3>
-
+        <h2 class="section-title"><i class="fas fa-shopping-cart"></i> 06. Personal Ops & Consumo Inteligente</h2>
+        <article class="recipe-card">
+            <div class="recipe-header">
+                <h3>O Sniper de Preços</h3>
                 <span class="tag" style="background: #fbbc04; color: #202124;">Shopping</span>
-
             </div>
-
-            <p><strong>Cenário:</strong> Comparar preços nos grandes varejistas (Amazon, ML, Magalu) e garantir a melhor condição de pagamento e segurança.</p>
-
+            <p><strong>Cenário:</strong> Comparar preços nos grandes varejistas (Amazon, ML, Magalu).</p>
             <div class="prompt-box">
-
                 <header>PROMPT DE COMPRA</header>
-
-                <p style="margin-top: 15px;">
-
-                    "Quero comprar [produto]. Compare preços nos maiores varejistas (ex.: Amazon, Mercado Livre, Magalu, Casas Bahia, etc.), e sugira a melhor estratégia para pagar menos. Condições: entrega até [data], parcelamento em até [x] vezes, preferência por vendedor oficial. Traga: (1) tabela com preços e prazos, (2) onde faz mais sentido esperar promoção, (3) como usar cupons, cashback e frete grátis sem cair em golpe, (4) o que checar antes de fechar.”
-
-                </p>
-
+                <p style="margin-top: 15px;">"Quero comprar [produto]. Compare preços nos maiores varejistas..."</p>
             </div>
-
-            <div class="tempero" style="margin-top: 15px; font-size: 0.85rem; border-top: 1px dashed #ccc; padding-top: 10px;">
-
-                <p><strong>💡 Dica do Vidal:</strong> Perfeito para eletrônicos e investimentos de alto valor onde o cashback e a procedência do vendedor são críticos.</p>
-
-            </div>
-
         </article>
 
         <h2 class="section-title"><i class="fas fa-magic"></i> 07. Content Writing & AI Refinement</h2>
-<p>Técnicas avançadas para transformar textos robóticos em narrativas autênticas e persuasivas.</p>
-
-<article class="recipe-card">
-    <div class="recipe-header">
-        <h3>O Humanizador de Texto (10 Etapas)</h3>
-        <span class="tag" style="background: #00bcd4; color: white;">Copywriting</span>
+        <article class="recipe-card">
+            <div class="recipe-header">
+                <h3>O Humanizador de Texto</h3>
+                <span class="tag" style="background: #00bcd4; color: white;">Copywriting</span>
+            </div>
+            <p><strong>Cenário:</strong> Refinar drafts da IA para que soem naturais, eliminando "vícios de robô".</p>
+            <a href="humanizacao-escrita.html" style="display: inline-block; margin-top: 15px; color: var(--primary); text-decoration: none; font-weight: bold;">Ver Tabela de Diretrizes →</a>
+        </article>
     </div>
-    <p><strong>Cenário:</strong> Refinar drafts da IA para que soem naturais, eliminando "vícios de robô" e adicionando substância humana.</p>
-    
-    <div class="prompt-box" style="height: 120px; overflow: hidden; opacity: 0.7;">
-        <header>FRAMEWORK DE REVISÃO</header>
-        <p style="margin-top: 15px;">
-            "Atue como um Editor Sênior. Aplique o framework de humanização em {{TEXT}}: 
-            1. Elimine abstrações e use substantivos concretos. 
-            2. Remova tiques de IA (triads, 'not only... but also'). 
-            3. Aplique 'Show, Don't Tell' em estados internos. 
-            4. Introduza traição sensorial (detalhes táteis reais)..."
-        </p>
-    </div>
-    
-    <a href="humanizacao-escrita.html" style="display: inline-block; margin-top: 15px; color: var(--primary); text-decoration: none; font-weight: bold;">
-        Ver Tabela de Diretrizes & Mega-Prompt →
-    </a>
-    
-    <div class="tempero" style="margin-top: 15px; font-size: 0.85rem; border-top: 1px dashed #ccc; padding-top: 10px;">
-        <p><strong>💡 Dica do Vidal:</strong> Essencial para o blog e posts do LinkedIn. Baseado no guia de Alberto Romero, resolve 85% do aspecto 'artificial' da IA em uma única passada.</p>
-    </div>
-</article>
-        
-
-    </div>
-
-
 
     <footer>
-
         <p>"Utilizando a precisão dos dados para guiar o caminho."</p>
-
     </footer>
-
-
-
 </body>
-
 </html>
