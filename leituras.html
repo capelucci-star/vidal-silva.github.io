@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Leituras | Vidal Silva</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        :root { --primary: #4285F4; --dark: #202124; --gray: #5f6368; --light: #ffffff; --bg: #f8f9fa; }
+        body { font-family: 'Segoe UI', Arial, sans-serif; margin: 0; background: var(--bg); color: var(--dark); }
+        
+        nav { display: flex; justify-content: space-between; padding: 20px 10%; background: white; align-items: center; box-shadow: 0 2px 4px rgba(0,0,0,0.05); }
+        .logo { font-weight: bold; font-size: 1.5rem; color: var(--primary); text-decoration: none; }
+        .nav-links a { margin-left: 25px; text-decoration: none; color: var(--gray); font-weight: 500; }
+
+        .header-secao { padding: 60px 10% 20px; text-align: center; }
+        .header-secao h1 { font-size: 2.5rem; margin-bottom: 10px; }
+        .header-secao p { color: var(--gray); max-width: 600px; margin: 0 auto; }
+
+        .filtros { display: flex; justify-content: center; gap: 15px; margin: 30px 0; flex-wrap: wrap; }
+        .filter-btn { padding: 8px 20px; border-radius: 20px; border: 1px solid #ddd; background: white; cursor: pointer; transition: 0.3s; }
+        .filter-btn.active { background: var(--primary); color: white; border-color: var(--primary); }
+
+        .livros-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 30px; padding: 0 10% 80px; }
+        
+        .livro-card { background: white; border-radius: 15px; overflow: hidden; display: flex; box-shadow: 0 4px 15px rgba(0,0,0,0.05); transition: 0.3s; }
+        .livro-card:hover { transform: translateY(-5px); }
+        .livro-capa { width: 120px; background: #eee; display: flex; align-items: center; justify-content: center; font-size: 0.8rem; color: #999; }
+        .livro-info { padding: 20px; flex: 1; }
+        .livro-info h3 { margin: 0 0 5px 0; font-size: 1.1rem; }
+        .livro-info .autor { color: var(--gray); font-size: 0.9rem; margin-bottom: 15px; display: block; }
+        .livro-info .tag { background: #e8f0fe; color: var(--primary); padding: 3px 10px; border-radius: 5px; font-size: 0.75rem; font-weight: bold; }
+        .livro-info p { font-size: 0.85rem; color: #444; margin-top: 15px; font-style: italic; border-left: 3px solid var(--primary); padding-left: 10px; }
+
+        footer { background: white; padding: 40px 10%; text-align: center; border-top: 1px solid #eee; }
+    </style>
+</head>
+<body>
+
+<nav>
+    <a href="index.html" class="logo">Vidal Silva</a>
+    <div class="nav-links">
+        <a href="index.html">Home</a>
+        <a href="sobre.html">Sobre</a>
+        <a href="projetos.html">Projetos</a>
+    </div>
+</nav>
+
+<header class="header-secao">
+    <h1>Minhas Leituras</h1>
+    <p>Uma curadoria de livros que influenciam minha forma de liderar, programar e entender o ecossistema educacional.</p>
+</header>
+
+<div class="filtros">
+    <button class="filter-btn active">Todos</button>
+    <button class="filter-btn">Liderança</button>
+    <button class="filter-btn">Tecnologia/IA</button>
+    <button class="filter-btn">Educação</button>
+</div>
+
+<section class="livros-grid">
+    <div class="livro-card">
+        <div class="livro-capa">
+             <i class="fas fa-book-open fa-3x"></i> </div>
+        <div class="livro-info">
+            <span class="tag">Liderança</span>
+            <h3>O Poder do Hábito</h3>
+            <span class="autor">Charles Duhigg</span>
+            <p>"Essencial para entender como as rotinas corporativas e individuais moldam o sucesso a longo prazo."</p>
+        </div>
+    </div>
+
+    <div class="livro-card">
+        <div class="livro-capa">
+             <i class="fas fa-book-open fa-3x"></i>
+        </div>
+        <div class="livro-info">
+            <span class="tag">Tecnologia/IA</span>
+            <h3>Deep Learning</h3>
+            <span class="autor
