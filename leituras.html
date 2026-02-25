@@ -26,7 +26,6 @@
         .livro-card { background: white; border-radius: 15px; overflow: hidden; display: flex; box-shadow: 0 4px 15px rgba(0,0,0,0.05); transition: 0.3s; height: 100%; }
         .livro-card:hover { transform: translateY(-5px); }
         
-        /* Ajuste da Capa */
         .livro-capa { 
             width: 120px; 
             min-width: 120px; 
@@ -38,7 +37,6 @@
             overflow: hidden; 
         }
         
-        /* GARANTE QUE A IMAGEM CAIBA NO CARD */
         .livro-capa img { 
             width: 100%; 
             height: 100%; 
@@ -46,4 +44,29 @@
         }
 
         .livro-info { padding: 20px; flex: 1; display: flex; flex-direction: column; }
-        .livro-info h3 {
+        .livro-info h3 { margin: 0 0 5px 0; font-size: 1.1rem; }
+        .livro-info .autor { color: var(--gray); font-size: 0.9rem; margin-bottom: 10px; display: block; }
+        .livro-info .tag { background: #e8f0fe; color: var(--primary); padding: 3px 10px; border-radius: 5px; font-size: 0.75rem; font-weight: bold; align-self: flex-start; }
+        .livro-info p { font-size: 0.85rem; color: #444; margin-top: 15px; font-style: italic; border-left: 3px solid var(--primary); padding-left: 10px; flex-grow: 1; }
+
+        footer { background: white; padding: 40px 10%; text-align: center; border-top: 1px solid #eee; }
+    </style>
+</head>
+<body>
+
+<nav>
+    <a href="index.html" class="logo">Vidal Silva</a>
+    <div class="nav-links">
+        <a href="index.html">Home</a>
+        <a href="sobre.html">Sobre</a>
+        <a href="projetos.html">Projetos</a>
+    </div>
+</nav>
+
+<header class="header-secao">
+    <h1>Minhas Leituras</h1>
+    <p>Uma curadoria de livros que influenciam minha forma de liderar, programar e entender o ecossistema educacional.</p>
+</header>
+
+<div class="filtros">
+    <button class="filter-btn active">Todos</button>
