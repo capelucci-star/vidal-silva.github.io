@@ -25,13 +25,16 @@
         
         .livro-card { background: white; border-radius: 15px; overflow: hidden; display: flex; box-shadow: 0 4px 15px rgba(0,0,0,0.05); transition: 0.3s; }
         .livro-card:hover { transform: translateY(-5px); }
-        .livro-capa { width: 120px; background: #eee; display: flex; align-items: center; justify-content: center; font-size: 0.8rem; color: #999; }
-        .livro-info { padding: 20px; flex: 1; }
-        .livro-info h3 { margin: 0 0 5px 0; font-size: 1.1rem; }
-        .livro-info .autor { color: var(--gray); font-size: 0.9rem; margin-bottom: 15px; display: block; }
-        .livro-info .tag { background: #e8f0fe; color: var(--primary); padding: 3px 10px; border-radius: 5px; font-size: 0.75rem; font-weight: bold; }
-        .livro-info p { font-size: 0.85rem; color: #444; margin-top: 15px; font-style: italic; border-left: 3px solid var(--primary); padding-left: 10px; }
-
+        .llivro-capa {
+    width: 120px;
+    min-width: 120px; /* Garante que ela não encolha */
+    height: 180px;    /* Define uma altura padrão para os livros */
+    background: #eee;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden; /* Esconde o que sobrar da imagem grande */
+}
         footer { background: white; padding: 40px 10%; text-align: center; border-top: 1px solid #eee; }
     </style>
 </head>
