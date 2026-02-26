@@ -59,6 +59,31 @@
         }
         .prompt-box p { margin-top: 15px; margin-bottom: 0; }
 
+        /* Prompt box expanded — for cards without a separate page */
+        .prompt-box-full {
+            background: var(--code-bg);
+            color: #abb2bf;
+            padding: 25px 25px 20px;
+            border-radius: 10px;
+            position: relative;
+            font-family: 'Courier New', monospace;
+            margin-top: 15px;
+            font-size: 0.95rem;
+            line-height: 1.7;
+        }
+        .prompt-box-full header {
+            position: absolute;
+            top: 0; left: 0;
+            width: 100%;
+            background: #333;
+            padding: 5px 15px;
+            font-size: 0.7rem;
+            color: #999;
+            border-radius: 10px 10px 0 0;
+            box-sizing: border-box;
+        }
+        .prompt-box-full p { margin-top: 15px; margin-bottom: 0; }
+
         /* CTA link */
         .card-link {
             display: inline-block;
@@ -103,11 +128,10 @@
                 <span class="tag tag-blue">Google Sheets</span>
             </div>
             <p><strong>Cenário:</strong> Padronizar entrada de dados dos 40 canais (ex: UFSC, Senai).</p>
-            <div class="prompt-box">
-                <header>RESUMO</header>
-                <p>"Analise as colunas de Instituições e Status. Padronize os nomes para o formato oficial, identifique duplicatas e categorize cada deal..."</p>
+            <div class="prompt-box-full">
+                <header>PROMPT COMPLETO</header>
+                <p>"Analise as colunas de Instituições e Status. Padronize os nomes para o formato oficial, identifique duplicatas e categorize cada deal como 'Setor Público' ou 'Setor Privado'."</p>
             </div>
-            <a href="faxineiro-dados.html" class="card-link">Ver Prompt Completo &amp; Framework →</a>
         </article>
 
         <!-- 02 -->
@@ -118,11 +142,10 @@
                 <span class="tag tag-green">Data Science</span>
             </div>
             <p><strong>Cenário:</strong> Previsão de metas e sazonalidade para o próximo trimestre.</p>
-            <div class="prompt-box">
-                <header>RESUMO</header>
-                <p>"Atue como Analista de Dados. Com base no histórico de 2 anos, gere um scatter plot relacionando Tempo de Fechamento e Valor..."</p>
+            <div class="prompt-box-full">
+                <header>PROMPT COMPLETO</header>
+                <p>"Atue como Analista de Dados. Com base no histórico de 2 anos, gere um scatter plot relacionando Tempo de Fechamento e Valor. Identifique o impacto de um aumento de 10% na conversão de IA Workspace."</p>
             </div>
-            <a href="analista-preditivo.html" class="card-link">Ver Prompt Completo &amp; Framework →</a>
         </article>
 
         <!-- 03 -->
@@ -133,11 +156,10 @@
                 <span class="tag tag-blue">Prospecção</span>
             </div>
             <p><strong>Cenário:</strong> Abordagem de alta conversão para o setor de Educação.</p>
-            <div class="prompt-box">
-                <header>RESUMO</header>
-                <p>"Crie um e-mail de abordagem baseado em SPIN Selling para uma universidade que [FATO RECENTE]. Foque na Implicação de não adotar IA..."</p>
+            <div class="prompt-box-full">
+                <header>PROMPT COMPLETO</header>
+                <p>"Crie um e-mail de abordagem baseado em SPIN Selling para uma universidade que [FATO RECENTE]. Foque na Implicação de não adotar IA no currículo agora."</p>
             </div>
-            <a href="prospector-cirurgico.html" class="card-link">Ver Prompt Completo &amp; Framework →</a>
         </article>
 
         <article class="recipe-card">
@@ -204,9 +226,9 @@
                 <span class="tag tag-yellow">Shopping</span>
             </div>
             <p><strong>Cenário:</strong> Comparar preços nos grandes varejistas (Amazon, ML, Magalu).</p>
-            <div class="prompt-box">
-                <header>Prompt</header>
-                <p>"QuQuero comprar [ ]  . Compare preços nos maiores varejistas (ex.: Amazon, Mercado Livre, Magalu, Casas Bahia, shoope e etc.), e sugira a melhor estratégia para pagar menos. Condições: entrega até [data], parcelamento em até 10 vezes, preferência por vendedor oficial. Traga: (1) tabela com preços e prazos, (2) onde faz mais sentido esperar promoção, (3) como usar cupons, cashback e frete grátis sem cair em golpe, (4) o que checar antes de fechar."</p>
+            <div class="prompt-box-full">
+                <header>PROMPT COMPLETO</header>
+                <p>"Quero comprar [ ]. Compare preços nos maiores varejistas (ex.: Amazon, Mercado Livre, Magalu, Casas Bahia, Shopee e etc.), e sugira a melhor estratégia para pagar menos. Condições: entrega até [data], parcelamento em até 10 vezes, preferência por vendedor oficial. Traga: (1) tabela com preços e prazos, (2) onde faz mais sentido esperar promoção, (3) como usar cupons, cashback e frete grátis sem cair em golpe, (4) o que checar antes de fechar."</p>
             </div>
         </article>
 
