@@ -20,11 +20,14 @@
         .tag { background: #e8f0fe; color: var(--primary); padding: 4px 12px; border-radius: 20px; font-size: 0.75rem; font-weight: bold; text-transform: uppercase; }
         .prompt-box { background: var(--code-bg); color: #abb2bf; padding: 25px; border-radius: 10px; position: relative; font-family: 'Courier New', monospace; margin-top: 15px; font-size: 0.95rem; }
         .prompt-box header { position: absolute; top: 0; left: 0; width: 100%; background: #333; padding: 5px 15px; font-size: 0.7rem; color: #999; border-radius: 10px 10px 0 0; box-sizing: border-box; }
+        .btn-link { display: inline-block; margin-top: 15px; color: var(--primary); text-decoration: none; font-weight: bold; border: 1px solid var(--primary); padding: 8px 15px; border-radius: 5px; transition: 0.3s; }
+        .btn-link:hover { background: var(--primary); color: white; }
         footer { text-align: center; padding: 40px; color: var(--gray); font-style: italic; }
         .btn-back { text-decoration: none; color: var(--primary); font-weight: bold; display: flex; align-items: center; gap: 5px; }
     </style>
 </head>
 <body>
+
     <nav>
         <a href="index.html" class="logo">Vidal Silva</a>
         <a href="projetos.html" style="text-decoration: none; color: var(--gray);">Voltar para Projetos</a>
@@ -32,6 +35,7 @@
 
     <div class="container">
         <a href="projetos.html" class="btn-back"><i class="fas fa-arrow-left"></i> Meus Projetos</a>
+        
         <h1>📖 Banco de Prompts</h1>
         <p class="subtitle">Arquitetura de prompts para otimização de processos e inteligência de mercado.</p>
 
@@ -41,14 +45,14 @@
                 <h3>O Faxineiro de Dados</h3>
                 <span class="tag">Google Sheets</span>
             </div>
-            <p><strong>Cenário:</strong> Padronizar entrada de dados dos 40 canais (ex: UFSC, Senai).</p>
+            <p><strong>Cenário:</strong> Padronizar entrada de dados dos 40 canais.</p>
             <div class="prompt-box">
                 <header>PROMPT</header>
-                <p style="margin-top: 15px;">"Analise as colunas de Instituições e Status. Padronize os nomes para o formato oficial, identifique duplicatas e categorize cada deal como 'Setor Público' ou 'Setor Privado'."</p>
+                <p style="margin-top: 15px;">"Analise as colunas de Instituições e Status. Padronize os nomes..."</p>
             </div>
         </article>
 
-        <h2 class="section-title"><i class="fas fa-chart-pie"></i> 02. Estratégia & Analytics (Python)</h2>
+        <h2 class="section-title"><i class="fas fa-chart-pie"></i> 02. Estratégia & Analytics</h2>
         <article class="recipe-card">
             <div class="recipe-header">
                 <h3>O Analista Preditivo</h3>
@@ -57,11 +61,25 @@
             <p><strong>Cenário:</strong> Previsão de metas e sazonalidade para o próximo trimestre.</p>
             <div class="prompt-box">
                 <header>PROMPT</header>
-                <p style="margin-top: 15px;">"Atue como Analista de Dados. Com base no histórico de 2 anos, gere um scatter plot relacionando Tempo de Fechamento e Valor. Identifique o impacto de um aumento de 10% na conversão de IA Workspace."</p>
+                <p style="margin-top: 15px;">"Atue como Analista de Dados. Com base no histórico..."</p>
             </div>
         </article>
 
-        <h2 class="section-title"><i class="fas fa-bullseye"></i> 03. Vendas Consultivas (SPIN Selling)</h2>
+        <h2 class="section-title"><i class="fas fa-bullseye"></i> 03. Vendas Consultivas & Prospecção</h2>
+        
+        <article class="recipe-card">
+            <div class="recipe-header">
+                <h3>O Estrategista Rainmaker</h3>
+                <span class="tag" style="background: #ff5722; color: white;">Rainmaker</span>
+            </div>
+            <p><strong>Cenário:</strong> Criar conversas de valor e diagnósticos em vez de apenas pedir reuniões.</p>
+            <div class="prompt-box">
+                <header>RESUMO</header>
+                <p style="margin-top: 15px;">"Atue como Especialista Rainmaker focado em entregar um diagnóstico de dor..."</p>
+            </div>
+            <a href="prompt-rainmaker.html" class="btn-link">Ver Prompt Completo & Framework →</a>
+        </article>
+
         <article class="recipe-card">
             <div class="recipe-header">
                 <h3>O Prospector Cirúrgico</h3>
@@ -70,73 +88,55 @@
             <p><strong>Cenário:</strong> Abordagem de alta conversão para o setor de Educação.</p>
             <div class="prompt-box">
                 <header>PROMPT</header>
-                <p style="margin-top: 15px;">"Crie um e-mail de abordagem baseado em SPIN Selling para uma universidade que [FATO RECENTE]. Foque na Implicação de não adotar IA no currículo agora."</p>
+                <p style="margin-top: 15px;">"Crie um e-mail de abordagem baseado em SPIN Selling..."</p>
             </div>
         </article>
 
-        <h2 class="section-title"><i class="fas fa-calendar-check"></i> 04. Planejamento & Gestão Estratégica</h2>
+        <h2 class="section-title"><i class="fas fa-calendar-check"></i> 04. Planejamento & Gestão</h2>
+        
         <article class="recipe-card">
             <div class="recipe-header">
                 <h3>O Analista Estratégico Mensal</h3>
                 <span class="tag" style="background: #fbbc04; color: white;">Produtividade</span>
             </div>
-            <p><strong>Cenário:</strong> Framework completo para transformar metas mensais em um plano de execução de alto nível.</p>
-            <div class="prompt-box" style="height: 100px; overflow: hidden; opacity: 0.7;">
-                <header>PRE-VISUALIZAÇÃO</header>
-                <p style="margin-top: 15px;">"Gemini, a partir deste momento você será meu Analista Estratégico de Planejamento Mensal..."</p>
-            </div>
-            <a href="analista-mensal.html" style="display: inline-block; margin-top: 15px; color: var(--primary); text-decoration: none; font-weight: bold;">Ver Prompt Completo & Framework →</a>
+            <p><strong>Cenário:</strong> Framework completo para transformar metas mensais em execução.</p>
+            <a href="analista-mensal.html" class="btn-link">Ver Prompt Completo & Framework →</a>
         </article>
 
         <h2 class="section-title"><i class="fas fa-pen-nib"></i> 05. Branding & Storytelling de Alto Impacto</h2>
+        
+        <article class="recipe-card">
+            <div class="recipe-header">
+                <h3>Apresentações de Alto Impacto</h3>
+                <span class="tag" style="background: #9c27b0; color: white;">Impacto Executivo</span>
+            </div>
+            <p><strong>Cenário:</strong> Transformar ideias soltas em apresentações corporativas persuasivas.</p>
+            <a href="prompt-apresentacao-impacto.html" class="btn-link">Ver Prompt Completo & Framework →</a>
+        </article>
+
         <article class="recipe-card">
             <div class="recipe-header">
                 <h3>O Roteirista de Elite (7 Etapas)</h3>
                 <span class="tag" style="background: #9c27b0; color: white;">Storytelling</span>
             </div>
-            <p><strong>Cenário:</strong> Criar vídeos, manifestos ou artigos que rompem o padrão de conteúdo "commodity".</p>
-            <a href="prompt-storytelling.html" style="display: inline-block; margin-top: 15px; color: var(--primary); text-decoration: none; font-weight: bold;">Ver Prompt Completo & Framework →</a>
+            <p><strong>Cenário:</strong> Criar vídeos ou artigos que rompem o padrão "commodity".</p>
+            <a href="prompt-storytelling.html" class="btn-link">Ver Prompt Completo →</a>
         </article>
 
-        <article class="recipe-card">
-            <div class="recipe-header">
-                <h3>Estrategista de Apresentações</h3>
-                <span class="tag" style="background: #9c27b0; color: white;">Impacto Executivo</span>
-            </div>
-            <p><strong>Cenário:</strong> Transformar ideias soltas em apresentações corporativas persuasivas, estruturadas e memoráveis.</p>
-            <div class="prompt-box" style="height: 100px; overflow: hidden; opacity: 0.7;">
-                <header>PRE-VISUALIZAÇÃO</header>
-                <p style="margin-top: 15px;">"Você será meu Estrategista de Comunicação e Estruturação de Apresentações de Alto Impacto..."</p>
-            </div>
-            <a href="estrategista-apresentacao.html" style="display: inline-block; margin-top: 15px; color: var(--primary); text-decoration: none; font-weight: bold;">Ver Prompt Completo & Framework →</a>
-        </article>
-
-        <h2 class="section-title"><i class="fas fa-shopping-cart"></i> 06. Personal Ops & Consumo Inteligente</h2>
-        <article class="recipe-card">
-            <div class="recipe-header">
-                <h3>O Sniper de Preços</h3>
-                <span class="tag" style="background: #fbbc04; color: #202124;">Shopping</span>
-            </div>
-            <p><strong>Cenário:</strong> Comparar preços nos grandes varejistas (Amazon, ML, Magalu).</p>
-            <div class="prompt-box">
-                <header>PROMPT DE COMPRA</header>
-                <p style="margin-top: 15px;">"Quero comprar [produto]. Compare preços nos maiores varejistas..."</p>
-            </div>
-        </article>
-
-        <h2 class="section-title"><i class="fas fa-magic"></i> 07. Content Writing & AI Refinement</h2>
+        <h2 class="section-title"><i class="fas fa-magic"></i> 06. Content Writing & AI Refinement</h2>
+        
         <article class="recipe-card">
             <div class="recipe-header">
                 <h3>O Humanizador de Texto</h3>
                 <span class="tag" style="background: #00bcd4; color: white;">Copywriting</span>
             </div>
-            <p><strong>Cenário:</strong> Refinar drafts da IA para que soem naturais, eliminando "vícios de robô".</p>
-            <a href="humanizacao-escrita.html" style="display: inline-block; margin-top: 15px; color: var(--primary); text-decoration: none; font-weight: bold;">Ver Tabela de Diretrizes →</a>
+            <p><strong>Cenário:</strong> Refinar drafts da IA para que soem naturais.</p>
+            <a href="humanizacao-escrita.html" class="btn-link">Ver Tabela de Diretrizes →</a>
         </article>
-    </div>
 
-    <footer>
+    </div> <footer>
         <p>"Utilizando a precisão dos dados para guiar o caminho."</p>
     </footer>
+
 </body>
 </html>
