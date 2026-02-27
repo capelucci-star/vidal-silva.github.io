@@ -64,6 +64,12 @@ message = client.messages.create(
 )
 
 html_block = message.content[0].text
+
+# Remove crases de markdown caso o modelo as inclua
+html_block = re.sub(r"```html\s*", "", html_block)
+html_block = re.sub(r"```\s*", "", html_block)
+html_block = html_block.strip()
+
 print("Resumo gerado com sucesso.")
 
 # ── 3. Atualizar index.html ──────────────────────────────────────────────────
