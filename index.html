@@ -1,3 +1,400 @@
+
+Screenshot 2026-02-26 15.41.46.png
+
+<!DOCTYPE html> <html lang="pt-br"> <head> <meta charset="UTF-8"> <meta name="viewport" content="width=device-width, initial-scale=1.0"> <title>Banco de Prompts | Vidal Silva</title> <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.cs
+
+pasted
+
+Esse codigo da pagina do meu site chamado banco-prompt, quero deixar ela mais padrao 
+
+queria todos os cards com link que tivesse esse perfil os sem link mantendo a visualização assim como esta nesse exemplo é possivel voce gerar um codigo assim?
+
+26 de fev.
+
+Reading the frontend design skill
+Reading the frontend design skill
+Entendi! Você quer padronizar todos os cards para terem o estilo do card "O Estrategista Rainmaker" da screenshot — com preview truncado do prompt e o link "Ver Prompt Completo & Framework →". Os cards que já têm prompt completo visível ficarão com preview, e os que já têm link mantêm o padrão.
+
+
+Criou um arquivo, leu um arquivo
+Criou um arquivo, leu um arquivo
+Pronto! Todos os cards agora seguem o padrão do "Estrategista Rainmaker":
+
+Preview truncado com fade no código (height: 100px + gradiente)
+Label "RESUMO" no header de todos os prompt boxes
+Botão padronizado "Ver Prompt Completo & Framework →" com borda azul e hover interativo
+As cores das tags foram mantidas conforme o original de cada card
+Só lembre de criar as páginas individuais que os links apontam (ex: faxineiro-dados.html, analista-preditivo.html, etc.) — ou ajustar os href para as URLs corretas do seu site.
+
+Banco prompt
+Código · HTML 
+isso mesmo, tem mais um card que quero adicionar na pagina essa pagina, me da ideia de que seçao de cards ele se encaixa?
+
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Prompt Rainmaker | Vidal Silva</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        :root { --primary: 
+#4285F4; --dark: 
+#202124; --gray: 
+#5f6368; --light: 
+#f8f9fa; --code-bg: 
+#282c34; }
+        body { font-family: 'Segoe UI', Arial, sans-serif; margin: 0; background: var(--light); color: var(--dark); line-height: 1.6; }
+        nav { display: flex; justify-content: space-between; padding: 20px 10%; background: white; align-items: center; box-shadow: 0 2px 4px rgba(0,0,0,0.05); }
+        .logo { font-weight: bold; font-size: 1.2rem; color: var(--primary); text-decoration: none; }
+        .container { max-width: 900px; margin: 50px auto; padding: 0 20px; }
+        h1 { border-left: 5px solid 
+#ff5722; padding-left: 15px; margin-bottom: 10px; }
+        .recipe-card { background: white; border-radius: 15px; padding: 30px; box-shadow: 0 4px 15px rgba(0,0,0,0.05); border: 1px solid #eee; }
+        .prompt-box { background: var(--code-bg); color: 
+#abb2bf; padding: 25px; border-radius: 10px; position: relative; font-family: 'Courier New', monospace; margin-top: 25px; font-size: 0.95rem; white-space: pre-wrap; }
+        .prompt-box header { position: absolute; top: 0; left: 0; width: 100%; background: #333; padding: 5px 15px; font-size: 0.7rem; color: #999; border-radius: 10px 10px 0 0; box-sizing: border-box; }
+        .btn-back { text-decoration: none; color: var(--primary); font-weight: bold; display: flex; align-items: center; gap: 5px; margin-bottom: 20px; }
+    </style>
+</head>
+<body>
+    <nav>
+        <a href="index.html" class="logo">Vidal Silva</a>
+        <a href="prompts.html" style="text-decoration: none; color: var(--gray);">Voltar ao Banco</a>
+    </nav>
+    <div class="container">
+        <a href="prompts.html" class="btn-back"><i class="fas fa-arrow-left"></i> Voltar</a>
+        <h1>🌩️ O Estrategista Rainmaker</h1>
+        <article class="recipe-card">
+            <p>Este prompt é focado em **caça ativa** e geração de conversas de valor, eliminando a passividade de esperar por leads.</p>
+            <div class="prompt-box">
+                <header>PROMPT COMPLETO</header>
+Atue como um Especialista em Desenvolvimento de Negócios (Rainmaker), mentorado por Ricardo Jordão. Meu objetivo é abrir uma conversa estratégica com um tomador de decisão [CARGO] de uma instituição de [SETOR].
+Premissas Inegociáveis:
+1. Não peça reunião: O Rainmaker oferece clareza, não pede tempo.
+2. Foco no Diagnóstico: Ofereça um insight ou diagnóstico de dor em vez de um pitch.
+3. Redução de Risco: A abordagem deve servir ao cliente antes de vender.
+Tarefa: Escreva uma mensagem de abordagem (LinkedIn/E-mail) que identifique uma dor latente (ex: custo de não usar IA estruturada), ofereça um valor imediato (ex: benchmark do setor) e termine com: 'Faz sentido eu te enviar esse material primeiro?'
+            </div>
+        </article>
+    </div>
+</body>
+</html>
+
+Mostrar mais
+26 de fev.
+Com base no conteúdo do prompt, ele se encaixa perfeitamente na seção 03. Vendas Consultivas (SPIN Selling) — ambos tratam de estratégias de abordagem e abertura de conversas com prospects, com foco em gerar valor antes de pedir algo. O Rainmaker complementa o Prospector Cirúrgico naturalmente.
+
+Se quiser, posso já adicionar o card nessa seção e gerar o banco-prompt.html atualizado?
+
+eu quero sim atualizado e para te dar informaçao o nome do arquivo onde esta essa pagina do ultimo prompr que te enviei é prompt-rainmaker.html
+
+26 de fev.
+
+Editou um arquivo, leu um arquivo
+Editou um arquivo, leu um arquivo
+Atualizado! O card O Estrategista Rainmaker foi adicionado logo após o Prospector Cirúrgico na seção 03, com a tag laranja "RAINMAKER" e o link apontando para prompt-rainmaker.html.
+
+Banco prompt
+Código · HTML 
+adorei, voce acha que esse repositorio de prompt esta legal no meu site?
+
+26 de fev.
+Que bom que gostou! Acho que está bem estruturado e funcional, mas tenho algumas observações honestas:
+
+O que está funcionando bem:
+
+A organização por seções temáticas é clara e profissional
+O padrão visual dos cards ficou consistente e limpo
+A ideia de separar preview do prompt completo cria uma boa hierarquia de informação
+O que poderia elevar o nível:
+
+O conteúdo em si é o ponto mais forte — você claramente tem domínio prático de prompts aplicados a negócios reais. Mas a página ainda parece um pouco "genérica" visualmente, sem uma identidade própria marcante. Alguns pontos a considerar:
+
+Estrutura: 7 seções com 1-2 cards cada cria muita fragmentação. Algumas seções têm só um card, o que faz o h2 parecer desproporcional ao conteúdo. Poderia condensar seções menores ou adicionar mais cards por seção.
+
+Posicionamento: O subtítulo "Arquitetura de prompts para otimização de processos e inteligência de mercado" é bom, mas não deixa claro quem você é e por que esses prompts foram criados. Uma breve intro pessoal conectaria melhor o visitante.
+
+Profundidade: Os cards com prompt completo visível (como o Rainmaker) mostram muito mais valor do que os que ficaram vagos. Vale caprichar nos resumos para que mesmo o preview já entregue algo útil.
+
+Crescimento: Um banco de prompts com 8-9 itens ainda parece inicial. Conforme crescer, vai precisar de filtros por categoria ou busca.
+
+No geral, está num bom caminho — a base é sólida. Quer que eu sugira alguma melhoria específica ou refine algum aspecto?
+
+Posicionamento: O subtítulo "Arquitetura de prompts para otimização de processos e inteligência de mercado" é bom, mas não deixa claro quem você é e por que esses prompts foram criados. Uma breve intro pessoal conectaria melhor o visitante.
+
+Gostei dessa sugestao
+
+26 de fev.
+Ótimo! Para eu escrever uma intro que realmente represente você, me conta rapidinho:
+
+Pode responder as três perguntas acima que eu escrevo uma intro que vai encaixar perfeitamente no contexto do seu site!
+
+P: Qual é sua área de atuação principal?
+R: Vendas B2B
+
+P: Para quem esses prompts foram criados?
+R: Para todos esses públicos
+
+P: Qual tom você quer passar na intro?
+R: Visionário e inspirador
+
+26 de fev.
+Perfeito! Vou atualizar o banco-prompt.html com uma intro personalizada logo abaixo do subtítulo.
+
+
+Editou um arquivo, leu um arquivo
+Editou um arquivo, leu um arquivo
+Pronto! A intro foi adicionada com um card destacado logo abaixo do título, com borda azul para chamar atenção. Ela:
+
+Posiciona você como profissional de Vendas B2B com visão estratégica
+Explica a origem dos prompts de forma autêntica
+Fala com todos os públicos — time, recrutadores e mercado
+Termina com uma frase de posicionamento forte sobre uso intencional de IA
+Se quiser ajustar alguma frase ou o tom, é só falar!
+
+Banco prompt
+Código · HTML 
+Screenshot 2026-02-26 17.35.08.png
+tem alguns cards que preciso modificar como esse aqui
+
+ <article class="recipe-card">
+            <div class="recipe-header">
+                <h3>O Sniper de Preços</h3>
+                <span class="tag tag-yellow">Shopping</span>
+            </div>
+            <p><strong>Cenário:</strong> Comparar preços nos grandes varejistas (Amazon, ML, Magalu).</p>
+            <div class="prompt-box">
+                <header>Prompt</header>
+                <p>"QuQuero comprar [ ]  . Compare preços nos maiores varejistas (ex.: Amazon, Mercado Livre, Magalu, Casas Bahia, shoope e etc.), e sugira a melhor estratégia para pagar menos. Condições: entrega até [data], parcelamento em até 10 vezes, preferência por vendedor oficial. Traga: (1) tabela com preços e prazos, (2) onde faz mais sentido esperar promoção, (3) como usar cupons, cashback e frete grátis sem cair em golpe, (4) o que checar antes de fechar."</p>
+            </div>
+        </article>
+
+pois nao tem link atrelado a ele o prompt vai ficar na area designada resume, porem preciso de mais espaco para caber o texto do resume, e caber todo o prompt
+
+Seçoes que precisam esse ajuste
+
+Faxineiro de dados
+Prompt completo
+
+"Analise as colunas de Instituições e Status. Padronize os nomes para o formato oficial, identifique duplicatas e categorize cada deal como 'Setor Público' ou 'Setor Privado"
+
+Analista preditivo
+Prompt completo
+
+"Atue como Analista de Dados. Com base no histórico de 2 anos, gere um scatter plot relacionando Tempo de Fechamento e Valor. Identifique o impacto de um aumento de 10% na conversão de IA Workspace."
+
+Prospector cirurgico
+Prompt completo:
+
+"Crie um e-mail de abordagem baseado em SPIN Selling para uma universidade que [FATO RECENTE]. Foque na Implicação de não adotar IA no currículo agora"
+
+Mostrar mais
+26 de fev.
+Entendi! Esses 4 cards não têm página própria, então o prompt completo vai direto no card. Vou ajustar o layout para eles terem a caixa de prompt expandida (sem o truncamento/fade), mostrando o conteúdo completo.
+
+
+Editou 2 arquivos
+Editou 2 arquivos
+Agora atualizo os 4 cards um por um:
+
+
+Editou um arquivo, visualizou um arquivo
+Editou um arquivo, visualizou um arquivo
+Agora faço os 4 ajustes de uma vez — substituo os cards do Faxineiro, Analista Preditivo, Prospector Cirúrgico e Sniper de Preços para usar prompt-box-full sem link:
+
+
+Editou 4 arquivos, leu um arquivo
+Editou 4 arquivos, leu um arquivo
+Pronto! Os 4 cards foram ajustados:
+
+Faxineiro de Dados — prompt completo, sem link
+Analista Preditivo — prompt completo, sem link
+Prospector Cirúrgico — prompt completo, sem link
+Sniper de Preços — prompt completo e detalhado com todos os 4 itens, sem link
+Agora a distinção ficou clara: cards com prompt curto mostram preview + botão de link, cards sem página própria exibem o prompt completo diretamente.
+
+Banco prompt
+Código · HTML 
+Quero fazer uma documentação sobre meu site, com as regras, você tem ideia como faço issio?
+
+15:26
+Boa ideia! Uma documentação do site serve como um "manual" — útil para você mesmo no futuro, para um dev que vier trabalhar no projeto, ou até para onboarding de alguém no seu time.
+
+Para te indicar o melhor formato, me conta um pouco mais:
+
+Responde as três perguntas que eu monto a documentação ideal para o seu caso!
+
+P: Qual o objetivo principal dessa documentação?
+R: Referência pessoal (só pra mim)
+
+P: O que você quer documentar? (Selecione todas que se aplicam)
+R: Estrutura de arquivos e páginas, Padrões visuais (cores, fontes, cards), Regras de conteúdo (tom, escrita), Como adicionar novos cards/prompts
+
+P: Em que formato prefere a documentação?
+R: Documento Word (.docx)
+
+15:57
+Perfeito! Vou ler o skill de Word antes de criar.
+
+
+Reading docx skill
+Reading docx skill
+Ótimo, já tenho tudo que preciso. Vou criar a documentação agora.
+
+
+Executou 3 comandos, criou um arquivo, leu um arquivo
+Executou 3 comandos, criou um arquivo, leu um arquivo
+Pronto! O documento tem 4 seções completas:
+
+1. Estrutura de Arquivos e Páginas — mapa de todos os HTMLs, regras de nomenclatura e hierarquia de navegação
+
+2. Padrões Visuais — paleta de cores com variáveis CSS, tabela de tags por categoria, tipografia e especificações dos cards
+
+3. Regras de Conteúdo e Tom — posicionamento, tom de escrita, regras para títulos e campo Cenário
+
+4. Como Adicionar Novos Cards — decisão de tipo de card, escolha de seção, templates HTML prontos para copiar e checklist de 6 pontos antes de publicar
+
+Sempre que criar algo novo no site, é só consultar a seção 4 e seguir o checklist!
+
+Documentacao site
+Documento · DOCX 
+Voce conseguiu acessar meu site pra fazer a documentação
+
+https://capelucci-star.github.io/vidal-silva.github.io/index.html
+
+16:12
+Não, não acessei seu site! Criei a documentação com base em tudo que você foi me mostrando ao longo da nossa conversa — os códigos HTML, as screenshots e as informações que você foi compartilhando.
+
+Mas agora posso acessar e deixar a documentação muito mais precisa. Deixa eu dar uma olhada no site real.
+
+
+Pesquisou na web
+Pesquisou na web
+
+Consegui acessar a home! Mas as outras páginas estão bloqueadas para acesso direto. O que descobri de novo que a documentação anterior não tinha:
+
+Seu cargo real: Partner Sales Manager no Google Education
+Contexto: Foco em América Latina, implementação de Gemini AI e Workspace em instituições de ensino
+Outras páginas do site: sobre.html, leituras.html, projetos.html, edtech.html, textos.html
+Formação: LSE MBA Candidate
+Quer que eu atualize a documentação com essas informações mais precisas — especialmente o mapa de arquivos completo e o posicionamento real? Ficaria bem mais fiel ao seu site de verdade.
+
+Tenho esse blog
+
+https://avancosvidalcapelucci.blogspot.com/
+
+Quero fazer o seguinte criar no meu index um novo card onde tera a seção novidades! Nela quero automatizar a seguinte tarefa, toda sexta feira, pegar o meu blog e fazer um resumo dos artigos da semana. Isso é possivel?
+
+17:24
+Que ideia interessante! Mas preciso ser transparente com você sobre o que é possível:
+
+O que é viável ✅
+
+Criar o card de "Novidades" no seu index com um resumo dos artigos — isso consigo fazer. Também consigo buscar os artigos do seu blog agora e gerar o resumo.
+
+O que não é possível do jeito que você imagina ❌
+
+Automatizar sozinho toda sexta-feira não rola diretamente, porque:
+
+Seu site é estático (GitHub Pages com HTML puro) — não tem backend nem servidor rodando código
+Eu não tenho acesso agendado ao seu site para executar tarefas autonomamente
+Alternativas reais para automatizar 🔧
+
+P: Qual abordagem prefere para a automação?
+R: GitHub Actions (gratuito, roda automaticamente toda sexta)
+
+17:24
+Ótima escolha! Deixa eu primeiro ver como está seu blog para entender a estrutura dos artigos.
+
+
+Fetched: Avanços Vidal 2026
+Fetched: Avanços Vidal 2026
+
+Perfeito, consegui ler o blog! Conteúdo rico — 6 artigos só essa semana. Agora vou criar tudo: o card no index + o script Python para o GitHub Actions.
+
+
+Criou 2 arquivos, executou um comando
+Criou 2 arquivos, executou um comando
+Agora o card HTML para o seu index:
+
+
+Criou um arquivo, executou um comando, leu um arquivo
+Criou um arquivo, executou um comando, leu um arquivo
+
+HTML snippet for Novidades card on index.html
+card-novidades.html
+
+Copy files to outputs
+
+Script
+
+Presented 3 files
+Concluído
+Aqui estão os 3 arquivos. O passo a passo para ativar tudo:
+
+1. Card no site — cole o conteúdo de card-novidades.html dentro do seu index.html onde quiser a seção.
+
+2. Script Python — crie uma pasta scripts/ no seu repositório e coloque o update_novidades.py dentro dela.
+
+3. GitHub Actions — crie a pasta .github/workflows/ no repositório e coloque o atualizar-novidades.yml lá dentro.
+
+4. Adicionar a API Key — esse é o passo mais importante:
+
+Vá em seu repositório no GitHub → Settings → Secrets and variables → Actions
+Clique em New repository secret
+Nome: ANTHROPIC_API_KEY
+Valor: sua chave da API da Anthropic
+Pronto! Todo sexta-feira às 9h de Brasília o GitHub vai rodar o script automaticamente — ele lê os artigos novos do blog, pede ao Claude para gerar o resumo e faz o commit direto no index.html. Você também pode acionar manualmente a qualquer hora pela aba Actions do repositório.
+
+Card novidades
+Código · HTML 
+Update novidades
+PY 
+Atualizar novidades
+YML 
+me perdi, vamos por parte? o card no index, cade o codigo?
+
+17:34
+Claro! Vamos por partes mesmo.
+
+Você tem o código atual do seu index.html? Cola aqui ou me manda o arquivo que eu já insiro o card no lugar certo pra você.
+
+
+<!DOCTYPE html> <html lang="pt-br"> <head> <meta charset="UTF-8"> <meta name="viewport" content="width=device-width, initial-scale=1.0"> <title>Vidal Silva | Partner Sales Manager</title> <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.m
+
+pasted
+
+17:34
+Perfeito! Vou adicionar o card de Novidades direto na grade, como um 5º card na seção "Como eu gero impacto".
+
+
+Editou um arquivo, executou um comando
+Editou um arquivo, executou um comando
+O index veio no documento da conversa, não como arquivo. Vou criar o index completo já com o card inserido:
+
+
+Criou um arquivo, leu um arquivo
+Criou um arquivo, leu um arquivo
+Pronto! O card de Novidades foi adicionado como o 5º card na grade. Ele já aparece com:
+
+Os 3 artigos mais recentes do blog desta semana linkados
+Data de cada artigo
+Borda azul no topo para destacar que é dinâmico
+Link "Ver todos os artigos →" para o blog
+Próximo passo: substitua o seu index.html no GitHub por esse arquivo. Quando isso estiver funcionando, a gente parte para a automação com o GitHub Actions. Tudo bem?
+
+Index
+Código · HTML 
+
+
+
+
+
+Claude é uma IA e pode cometer erros. Por favor, verifique as respostas.
+Index · HTML
+Copiar
+
 <!DOCTYPE html>
 <html lang="pt-br">
 <head>
@@ -32,6 +429,15 @@
         .card i { font-size: 2.5rem; color: var(--primary); margin-bottom: 20px; }
         .card h3 { margin: 10px 0; font-size: 1.2rem; }
         .card p { font-size: 0.95rem; color: var(--gray); flex-grow: 1; }
+
+        /* Card Novidades */
+        .card-novidades { border-top: 4px solid var(--primary); }
+        .card-novidades .novidades-list { text-align: left; width: 100%; margin-top: 15px; padding: 0; list-style: none; }
+        .card-novidades .novidades-list li { border-bottom: 1px solid #f0f0f0; padding: 8px 0; }
+        .card-novidades .novidades-list li:last-child { border-bottom: none; }
+        .card-novidades .novidades-list a { color: var(--primary); text-decoration: none; font-size: 0.88rem; font-weight: 600; line-height: 1.4; display: block; }
+        .card-novidades .novidades-list a:hover { text-decoration: underline; }
+        .card-novidades .novidades-list span { color: var(--gray); font-size: 0.78rem; }
         
         footer { background: white; padding: 60px 10% 40px; text-align: center; border-top: 1px solid #eee; margin-top: 40px; }
         .social-links a { font-size: 1.8rem; margin: 0 15px; transition: 0.3s; }
@@ -91,6 +497,36 @@
             <p>Reflexões sobre liderança, fluxo humano e o futuro da educação digital.</p>
             <a href="textos.html" style="color: var(--primary); text-decoration: none; font-weight: bold; margin-top:15px;">Ler artigos →</a>
         </div>
+
+        <!-- NOVIDADES_START -->
+        <div class="card card-novidades">
+            <i class="fas fa-newspaper"></i>
+            <h3>Novidades da Semana</h3>
+            <p>Resumo dos artigos publicados esta semana no blog — atualizado toda sexta-feira.</p>
+            <ul class="novidades-list">
+                <li>
+                    <a href="https://avancosvidalcapelucci.blogspot.com/2026/02/de-insights-da-macroeconomia.html" target="_blank">
+                        Sexta-feira de Insights: Da Macroeconomia à Simplificação Estratégica
+                    </a>
+                    <span>27/02/2026</span>
+                </li>
+                <li>
+                    <a href="https://avancosvidalcapelucci.blogspot.com/2026/02/lideranca-cpf-e-navalha-da-ia-o-que.html" target="_blank">
+                        Liderança, CPF e a Navalha da IA: O que 2026 está me ensinando
+                    </a>
+                    <span>26/02/2026</span>
+                </li>
+                <li>
+                    <a href="https://avancosvidalcapelucci.blogspot.com/2026/02/diario-de-2026-lideranca-autoria-e.html" target="_blank">
+                        Diário de 2026: Liderança, Autoria e a Revolução Silenciosa
+                    </a>
+                    <span>25/02/2026</span>
+                </li>
+            </ul>
+            <a href="https://avancosvidalcapelucci.blogspot.com/" target="_blank" style="color: var(--primary); text-decoration: none; font-weight: bold; margin-top:15px;">Ver todos os artigos →</a>
+        </div>
+        <!-- NOVIDADES_END -->
+
     </div>
 </section>
 
@@ -111,3 +547,7 @@
 
 </body>
 </html>
+
+
+
+
