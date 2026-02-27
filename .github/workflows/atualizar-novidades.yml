@@ -1,0 +1,39 @@
+name: Atualizar Novidades do Blog
+
+on:
+  schedule:
+    # Toda sexta-feira às 09:00 horário de Brasília (12:00 UTC)
+    - cron: "0 12 * * 5"
+  workflow_dispatch:  # permite rodar manualmente também
+
+jobs:
+  atualizar-novidades:
+    runs-on: ubuntu-latest
+
+    permissions:
+      contents: write   # necessário para fazer commit no repositório
+
+    steps:
+      - name: Checkout do repositório
+        uses: actions/checkout@v4
+
+      - name: Configurar Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - name: Instalar dependências
+        run: pip install feedparser anthropic
+
+      - name: Rodar script de atualização
+        env:
+          ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
+        run: python scripts/update_novidades.py
+
+      - name: Commit e push das alterações
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add index.html
+          git diff --cached --quiet || git commit -m "🗞️ Novidades: resumo semanal do blog $(date +'%d/%m/%Y')"
+          git push
