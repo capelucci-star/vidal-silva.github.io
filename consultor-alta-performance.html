@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Consultor de Alta Performance | Vidal Silva</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        :root { --primary: #4285F4; --dark: #202124; --gray: #5f6368; --light: #f8f9fa; --code-bg: #282c34; }
+        body { font-family: 'Segoe UI', Arial, sans-serif; margin: 0; background: var(--light); color: var(--dark); line-height: 1.6; }
+        nav { display: flex; justify-content: space-between; padding: 20px 10%; background: white; align-items: center; box-shadow: 0 2px 4px rgba(0,0,0,0.05); }
+        .logo { font-weight: bold; font-size: 1.2rem; color: var(--primary); text-decoration: none; }
+        .container { max-width: 900px; margin: 50px auto; padding: 0 20px; }
+        h1 { border-left: 5px solid var(--primary); padding-left: 15px; margin-bottom: 10px; }
+        .subtitle { color: var(--gray); margin-bottom: 40px; }
+        .recipe-card { background: white; border-radius: 15px; padding: 30px; margin-bottom: 30px; box-shadow: 0 4px 15px rgba(0,0,0,0.05); border: 1px solid #eee; }
+        .prompt-box { background: var(--code-bg); color: #abb2bf; padding: 25px; border-radius: 10px; position: relative; font-family: 'Courier New', monospace; margin-top: 15px; font-size: 0.9rem; white-space: pre-wrap; line-height: 1.7; }
+        .prompt-box header { position: absolute; top: 0; left: 0; width: 100%; background: #333; padding: 5px 15px; font-size: 0.7rem; color: #999; border-radius: 10px 10px 0 0; box-sizing: border-box; }
+        .prompt-box p { margin-top: 20px; margin-bottom: 0; }
+        .btn-back { text-decoration: none; color: var(--primary); font-weight: bold; display: flex; align-items: center; gap: 5px; margin-bottom: 20px; }
+        .etapas { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 12px; margin: 20px 0; }
+        .etapa { background: #e8f0fe; border-radius: 10px; padding: 12px 16px; font-size: 0.88rem; color: var(--primary); font-weight: 600; }
+        .etapa span { display: block; color: var(--dark); font-weight: 400; font-size: 0.82rem; margin-top: 3px; }
+    </style>
+</head>
+<body>
+    <nav>
+        <a href="index.html" class="logo">Vidal Silva</a>
+        <a href="banco-prompt.html" style="text-decoration: none; color: var(--gray);">Voltar ao Banco</a>
+    </nav>
+    <div class="container">
+        <a href="banco-prompt.html" class="btn-back"><i class="fas fa-arrow-left"></i> Voltar para Banco de Prompts</a>
+        <h1>🚀 Consultor de Alta Performance</h1>
+        <p class="subtitle">Plano completo de melhoria individual — diagnóstico, metas, execução e monitoramento.</p>
+
+        <article class="recipe-card">
+            <h3>Como utilizar</h3>
+            <p>Preencha as variáveis entre colchetes <strong>[ ]</strong> com as informações reais da sua situação atual. Quanto mais contexto você fornecer, mais preciso e personalizado será o plano gerado.</p>
+
+            <div class="etapas">
+                <div class="etapa">1. Diagnóstico<span>Lacunas e gargalos</span></div>
+                <div class="etapa">2. Metas SMART<span>KPIs e critérios</span></div>
+                <div class="etapa">3. Plano de Ação<span>Diário / semanal / mensal</span></div>
+                <div class="etapa">4. Monitoramento<span>Check-ins e relatórios</span></div>
+                <div class="etapa">5. Performance Mental<span>Foco e disciplina</span></div>
+                <div class="etapa">6. Competências<span>Hard e soft skills</span></div>
+                <div class="etapa">7. Longo Prazo<span>Evolução contínua</span></div>
+                <div class="etapa">8. Riscos<span>Sabotadores e prevenção</span></div>
+                <div class="etapa">9. Entrega Final<span>Plano executivo completo</span></div>
+            </div>
+        </article>
+
+        <article class="recipe-card">
+            <div class="prompt-box">
+                <header>PROMPT COMPLETO</header>
+                <p>Claude, a partir deste momento você atuará como meu Consultor Sênior em Alta Performance e Desenvolvimento Individual, com foco em diagnóstico estratégico, otimização comportamental e execução orientada por métricas.
+
+Preciso que você estruture um Plano Completo de Melhoria de Performance Individual, altamente personalizado, com base nas informações abaixo:
+
+CONTEXTO ATUAL
+• Área de atuação: [inserir]
+• Função/cargo atual: [inserir]
+• Principais responsabilidades: [inserir]
+• Metas atuais (formais ou informais): [inserir]
+• Principais dificuldades ou gargalos: [inserir]
+• Pontos fortes já identificados: [inserir]
+• Feedbacks recebidos recentemente: [inserir]
+• Indicadores atuais de desempenho (se houver): [inserir]
+• Prazo desejado para evolução significativa: [inserir]
+
+Com base nesses dados, construa um plano estruturado seguindo as etapas abaixo:
+
+1. DIAGNÓSTICO ESTRATÉGICO DE PERFORMANCE
+Realize uma análise detalhada incluindo:
+• Identificação de lacunas técnicas, comportamentais e estratégicas
+• Avaliação de possíveis gargalos de execução
+• Identificação de padrões improdutivos ou sabotadores
+• Mapeamento de competências críticas para alta performance na minha função
+• Análise comparativa entre estado atual vs. estado ideal
+Classifique os pontos identificados por impacto e urgência.
+
+2. DEFINIÇÃO DE OBJETIVOS ESTRATÉGICOS (Modelo SMART Avançado)
+Estruture:
+• 1 meta macro de transformação
+• 3 a 5 metas estratégicas prioritárias
+• Indicadores mensuráveis claros (KPIs)
+• Critérios objetivos de sucesso
+• Prazo realista e dividido em fases
+Inclua metas de: performance técnica, eficiência operacional, gestão emocional, produtividade e comunicação.
+
+3. PLANO DE AÇÃO ESTRUTURADO (Execução Real)
+Para cada meta, detalhe:
+• Ações específicas e práticas
+• Frequência de execução
+• Ferramentas recomendadas
+• Habilidades que precisam ser desenvolvidas
+• Recursos necessários (cursos, mentores, leitura, prática deliberada)
+• Possíveis obstáculos e plano de contingência
+Organize em: Ações diárias / Ações semanais / Ações mensais.
+
+4. SISTEMA DE MONITORAMENTO E ACCOUNTABILITY
+Crie um modelo de acompanhamento contendo:
+• KPIs objetivos e indicadores comportamentais
+• Modelo de check-in semanal
+• Modelo de revisão mensal
+• Perguntas estratégicas de autoavaliação
+• Sistema de pontuação de evolução
+Inclua uma estrutura de relatório simples para acompanhar progresso.
+
+5. ESTRATÉGIAS DE ALTA PERFORMANCE MENTAL
+Inclua protocolos para:
+• Gestão de energia e foco
+• Combate à procrastinação
+• Aumento de disciplina e consistência
+• Controle emocional em momentos de pressão
+• Construção de mentalidade de crescimento
+Sugira práticas baseadas em neurociência da produtividade, psicologia comportamental e técnicas de deep work.
+
+6. DESENVOLVIMENTO DE COMPETÊNCIAS CRÍTICAS
+Identifique hard skills prioritárias, soft skills essenciais e habilidades estratégicas diferenciadoras.
+Para cada uma, proponha: método de desenvolvimento, exercícios práticos e métrica de validação.
+
+7. PLANO DE EVOLUÇÃO DE LONGO PRAZO
+Estruture:
+• Fases de maturidade de performance
+• Marcos de evolução
+• Ajustes estratégicos ao longo do tempo
+• Como evitar estagnação após melhoria inicial
+• Estratégia para evolução contínua e escalável
+
+8. ANÁLISE DE RISCOS E SABOTADORES
+Identifique:
+• Riscos internos (crenças, hábitos, autossabotagem)
+• Riscos externos (ambiente, sobrecarga, distrações)
+• Estratégias preventivas e protocolos de correção rápida
+
+9. ENTREGA FINAL
+Organize o plano em:
+• Visão geral executiva
+• Plano tático detalhado
+• Cronograma estruturado
+• Sistema de acompanhamento
+• Checklist de execução
+
+O resultado deve ser extremamente claro, prático, orientado à execução, baseado em impacto real e personalizado à minha realidade.</p>
+            </div>
+        </article>
+    </div>
+
+    <footer style="text-align: center; padding: 40px; color: var(--gray); font-style: italic;">
+        <p>"Utilizando a precisão dos dados para guiar o caminho."</p>
+    </footer>
+</body>
+</html>
