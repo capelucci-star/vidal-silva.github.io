@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Negociação Estratégica | Vidal Silva</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        :root { --primary: #4285F4; --dark: #202124; --gray: #5f6368; --light: #f8f9fa; --code-bg: #282c34; }
+        body { font-family: 'Segoe UI', Arial, sans-serif; margin: 0; background: var(--light); color: var(--dark); line-height: 1.6; }
+        nav { display: flex; justify-content: space-between; padding: 20px 10%; background: white; align-items: center; box-shadow: 0 2px 4px rgba(0,0,0,0.05); }
+        .logo { font-weight: bold; font-size: 1.2rem; color: var(--primary); text-decoration: none; }
+        .container { max-width: 900px; margin: 50px auto; padding: 0 20px; }
+        h1 { border-left: 5px solid var(--primary); padding-left: 15px; margin-bottom: 10px; }
+        .subtitle { color: var(--gray); margin-bottom: 40px; }
+        .recipe-card { background: white; border-radius: 15px; padding: 30px; margin-bottom: 30px; box-shadow: 0 4px 15px rgba(0,0,0,0.05); border: 1px solid #eee; }
+        .prompt-box { background: var(--code-bg); color: #abb2bf; padding: 25px; border-radius: 10px; position: relative; font-family: 'Courier New', monospace; margin-top: 15px; font-size: 0.9rem; white-space: pre-wrap; line-height: 1.7; }
+        .prompt-box header { position: absolute; top: 0; left: 0; width: 100%; background: #333; padding: 5px 15px; font-size: 0.7rem; color: #999; border-radius: 10px 10px 0 0; box-sizing: border-box; }
+        .prompt-box p { margin-top: 20px; margin-bottom: 0; }
+        .btn-back { text-decoration: none; color: var(--primary); font-weight: bold; display: flex; align-items: center; gap: 5px; margin-bottom: 20px; }
+        .etapas { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 12px; margin: 20px 0; }
+        .etapa { background: #e8f0fe; border-radius: 10px; padding: 12px 16px; font-size: 0.88rem; color: var(--primary); font-weight: 600; }
+        .etapa span { display: block; color: var(--dark); font-weight: 400; font-size: 0.82rem; margin-top: 3px; }
+        footer { text-align: center; padding: 40px; color: var(--gray); font-style: italic; }
+    </style>
+</head>
+<body>
+    <nav>
+        <a href="index.html" class="logo">Vidal Silva</a>
+        <a href="banco-prompt.html" style="text-decoration: none; color: var(--gray);">Voltar ao Banco</a>
+    </nav>
+    <div class="container">
+        <a href="banco-prompt.html" class="btn-back"><i class="fas fa-arrow-left"></i> Voltar para Banco de Prompts</a>
+        <h1>🤝 Consultor de Negociação Estratégica</h1>
+        <p class="subtitle">Roteiro completo de preparação para negociações corporativas, parcerias, contratos e vendas complexas.</p>
+
+        <article class="recipe-card">
+            <h3>Como utilizar</h3>
+            <p>Preencha as variáveis entre colchetes <strong>[ ]</strong> com os dados reais da sua negociação. Quanto mais contexto você fornecer sobre a outra parte e seus objetivos, mais preciso será o roteiro gerado.</p>
+            <div class="etapas">
+                <div class="etapa">1. Diagnóstico<span>Tipo e equilíbrio de poder</span></div>
+                <div class="etapa">2. BATNA & ZOPA<span>Estrutura estratégica</span></div>
+                <div class="etapa">3. Roteiro<span>Abertura ao fechamento</span></div>
+                <div class="etapa">4. Psicologia<span>Comportamento e silêncio</span></div>
+                <div class="etapa">5. Cenários<span>Melhor, provável e pior</span></div>
+                <div class="etapa">6. Concessões<span>O que ceder sem perder valor</span></div>
+                <div class="etapa">7. Checklist<span>Pré-reunião</span></div>
+                <div class="etapa">8. Pós-Negociação<span>Consolidação e follow-up</span></div>
+                <div class="etapa">9. Performance<span>Autoavaliação</span></div>
+                <div class="etapa">10. Entrega Final<span>Plano executável</span></div>
+            </div>
+        </article>
+
+        <article class="recipe-card">
+            <div class="prompt-box">
+                <header>PROMPT COMPLETO</header>
+                <p>ChatGPT, a partir deste momento você atuará como meu Consultor Sênior em Negociação Estratégica, com experiência em negociações corporativas, parcerias, contratos, vendas complexas e acordos de alto impacto.
+
+Preciso que você construa um roteiro completo e profissional de preparação para uma negociação importante, considerando os seguintes dados:
+
+• Tipo de negociação: [ex: parceria, contrato, aumento salarial, venda, prestação de serviço, investimento]
+• Parte envolvida: [perfil da outra parte]
+• Meu objetivo principal: [inserir]
+• Objetivos secundários: [inserir]
+• Margem mínima aceitável: [inserir]
+• Pontos inegociáveis: [inserir]
+• Histórico da relação (se houver): [inserir]
+• Prazo ou urgência: [inserir]
+• Nível de poder percebido de cada lado: [inserir análise]
+• Principais preocupações ou receios: [inserir]
+
+Com base nessas informações, elabore um Plano Estratégico de Preparação dividido nas seguintes camadas:
+
+1. DIAGNÓSTICO ESTRATÉGICO DA NEGOCIAÇÃO
+• Classifique o tipo de negociação (distributiva, integrativa, colaborativa, competitiva).
+• Analise o equilíbrio de poder entre as partes.
+• Identifique riscos, oportunidades e possíveis zonas de tensão.
+• Avalie fatores emocionais e reputacionais envolvidos.
+• Determine qual deve ser minha postura estratégica (assertiva, colaborativa, técnica, firme, flexível).
+
+2. DEFINIÇÃO DE ESTRUTURA ESTRATÉGICA (Antes da Reunião)
+
+2.1. Defina minha BATNA (Best Alternative to a Negotiated Agreement)
+• Qual é minha melhor alternativa caso não haja acordo?
+• Como fortalecer minha posição antes da reunião?
+
+2.2. Defina a ZOPA (Zona Possível de Acordo)
+• Estime a margem provável da outra parte.
+• Identifique possíveis concessões inteligentes.
+
+2.3. Estruture minha proposta inicial
+• Como apresentar valor antes de falar de preço?
+• Como ancorar a negociação estrategicamente?
+• Como justificar cada ponto com lógica e dados?
+
+3. CONSTRUÇÃO DO ROTEIRO DE CONVERSA
+Estruture a negociação em blocos:
+
+Abertura
+• Como iniciar com autoridade e segurança.
+• Frases estratégicas para estabelecer tom profissional.
+
+Exploração
+• Perguntas estratégicas para entender interesses ocultos.
+• Como extrair informações sem parecer interrogatório.
+
+Argumentação
+• Como apresentar proposta de valor.
+• Como reforçar benefícios e reduzir objeções.
+• Técnicas de storytelling persuasivo.
+
+Gestão de Objeções
+• Liste possíveis objeções e construa respostas estruturadas.
+• Técnicas para neutralizar resistência sem confronto direto.
+• Estratégias de reframe.
+
+Fechamento
+• Sinais de compra ou aceitação.
+• Como conduzir para decisão.
+• Como formalizar próximos passos.
+
+4. ESTRATÉGIA PSICOLÓGICA E COMPORTAMENTAL
+• Técnicas de comunicação não verbal.
+• Controle emocional durante pressão.
+• Estratégias para manter autoridade sem agressividade.
+• Como usar silêncio estrategicamente.
+• Como lidar com manipulações ou jogos de poder.
+
+5. CENÁRIOS E SIMULAÇÕES
+Crie:
+• Melhor cenário possível.
+• Cenário provável.
+• Pior cenário.
+• Plano de ação para cada um.
+• Estratégia caso a outra parte faça contra-ancoragem agressiva.
+
+6. PLANO DE CONCESSÕES INTELIGENTES
+• O que posso conceder sem perder valor estratégico.
+• Ordem correta de concessões.
+• Como trocar concessão por contrapartida.
+
+7. CHECKLIST PRÉ-REUNIÃO
+• Documentos necessários.
+• Dados de apoio.
+• Argumentos quantificáveis.
+• Alinhamento interno (se houver equipe).
+• Preparação mental e postura.
+
+8. PÓS-NEGOCIAÇÃO
+• Como consolidar o acordo.
+• Como registrar pontos acordados.
+• Como evitar retrabalho ou ambiguidades.
+• Estratégia de follow-up profissional.
+
+9. ANÁLISE DE PERFORMANCE
+Após a negociação, gere um modelo de autoavaliação contendo:
+• Pontos fortes da minha atuação.
+• Pontos de melhoria.
+• Ajustes para próximas negociações.
+• Indicadores de sucesso estratégico.
+
+10. ENTREGA FINAL
+Organize tudo de forma estruturada, visualmente clara, estratégica, profissional e executável na prática.
+
+O resultado deve me deixar totalmente preparado, confiante e com vantagem estratégica antes da negociação.</p>
+            </div>
+        </article>
+    </div>
+
+    <footer>
+        <p>"Utilizando a precisão dos dados para guiar o caminho."</p>
+    </footer>
+</body>
+</html>
