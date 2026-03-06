@@ -8,23 +8,18 @@
     <style>
         :root { --primary: #4285F4; --dark: #202124; --gray: #5f6368; --light: #ffffff; }
         body { font-family: 'Segoe UI', Arial, sans-serif; margin: 0; background: #f8f9fa; color: var(--dark); line-height: 1.6; }
-        
         nav { display: flex; justify-content: space-between; padding: 20px 10%; background: white; align-items: center; box-shadow: 0 2px 4px rgba(0,0,0,0.05); position: sticky; top: 0; z-index: 1000; }
         .logo { font-weight: bold; font-size: 1.5rem; color: var(--primary); }
         .nav-links a { margin-left: 25px; text-decoration: none; color: var(--gray); font-weight: 500; }
-
         .hero { display: flex; align-items: center; padding: 80px 10%; background: white; gap: 50px; flex-wrap: wrap; }
         .hero-text { flex: 1; min-width: 300px; }
         .hero-text h1 { font-size: 3.5rem; margin: 0 0 10px 0; line-height: 1.1; }
         .hero-text p { font-size: 1.2rem; color: var(--gray); margin-bottom: 30px; }
-        
         .hero-img { flex: 1; text-align: center; min-width: 300px; }
         .hero-img img { width: 100%; max-width: 400px; border-radius: 30px; box-shadow: 20px 20px 0px var(--primary); object-fit: cover; }
-
         .btn { padding: 12px 30px; border-radius: 5px; text-decoration: none; font-weight: bold; display: inline-block; transition: 0.3s; }
         .btn-primary { background: var(--primary); color: white !important; }
         .btn-primary:hover { opacity: 0.9; transform: scale(1.05); }
-
         .services { padding: 80px 10%; text-align: center; }
         .services-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 20px; margin-top: 50px; }
         .card { background: white; padding: 30px; border-radius: 15px; box-shadow: 0 4px 6px rgba(0,0,0,0.05); transition: 0.3s; display: flex; flex-direction: column; align-items: center; text-align: center; }
@@ -32,8 +27,6 @@
         .card i { font-size: 2.5rem; color: var(--primary); margin-bottom: 20px; }
         .card h3 { margin: 10px 0; font-size: 1.2rem; }
         .card p { font-size: 0.95rem; color: var(--gray); flex-grow: 1; }
-
-        /* Card Novidades */
         .card-novidades { border-top: 4px solid var(--primary); }
         .card-novidades .novidades-list { text-align: left; width: 100%; margin-top: 15px; padding: 0; list-style: none; }
         .card-novidades .novidades-list li { border-bottom: 1px solid #f0f0f0; padding: 8px 0; }
@@ -41,7 +34,6 @@
         .card-novidades .novidades-list a { color: var(--primary); text-decoration: none; font-size: 0.88rem; font-weight: 600; line-height: 1.4; display: block; }
         .card-novidades .novidades-list a:hover { text-decoration: underline; }
         .card-novidades .novidades-list span { color: var(--gray); font-size: 0.78rem; }
-        
         footer { background: white; padding: 60px 10% 40px; text-align: center; border-top: 1px solid #eee; margin-top: 40px; }
         .social-links a { font-size: 1.8rem; margin: 0 15px; transition: 0.3s; }
         .social-links a:hover { opacity: 0.7; }
@@ -73,6 +65,7 @@
 <section class="services">
     <h2>Como eu gero impacto</h2>
     <div class="services-grid">
+
         <div class="card">
             <i class="fas fa-book"></i>
             <h3>Minhas Leituras</h3>
@@ -102,60 +95,27 @@
         </div>
 
         <!-- NOVIDADES_START -->
-<section id="novidades">
-  <h2 class="section-title">Novidades</h2>
-
-  <p class="section-intro">
-    Uma semana de reflexões sem filtro sobre liderança, carreira e estratégia comercial.
-    Vidal foi fundo nas contradições do mundo corporativo — do microgerenciamento disfarçado de alinhamento à agilidade que, no fundo, é só ansiedade bem vestida.
-    Se você quer pensar diferente sobre o que move uma carreira e um negócio em 2026, os artigos desta semana são pra você.
-  </p>
-
-  <ul class="recipe-list">
-
-    <li class="recipe-card">
-      <a href="https://avancosvidalcapelucci.blogspot.com/2026/03/o-alinhamento-que-sufoca-por-que.html" target="_blank" rel="noopener noreferrer">
-        O "Alinhamento" que Sufoca: Por que Liderança não é Coleira
-      </a>
-      <span class="recipe-date">05/03/2026</span>
-      <p class="recipe-summary">Quando reuniões de alinhamento viram instrumento de controle, a liderança morre antes de começar.</p>
-    </li>
-
-    <li class="recipe-card">
-      <a href="https://avancosvidalcapelucci.blogspot.com/2026/03/agilidade-ou-ansiedade-onde-sua.html" target="_blank" rel="noopener noreferrer">
-        Agilidade ou Ansiedade? Onde a sua estratégia comercial está pisando
-      </a>
-      <span class="recipe-date">04/03/2026</span>
-      <p class="recipe-summary">Nem todo corre-corre de fechamento é agilidade — às vezes é só insegurança com um bom nome.</p>
-    </li>
-
-    <li class="recipe-card">
-      <a href="https://avancosvidalcapelucci.blogspot.com/2026/03/o-mito-da-linha-reta-por-que-sua.html" target="_blank" rel="noopener noreferrer">
-        O Mito da Linha Reta: Por que sua carreira não precisa fazer sentido o tempo todo
-      </a>
-      <span class="recipe-date">02/03/2026</span>
-      <p class="recipe-summary">Vendas, Python, Dados e IA — os pontos parecem soltos, mas a trajetória não linear é exatamente o diferencial.</p>
-    </li>
-
-    <li class="recipe-card">
-      <a href="https://avancosvidalcapelucci.blogspot.com/2026/02/de-insights-da-macroeconomia.html" target="_blank" rel="noopener noreferrer">
-        Sexta-feira de Insights: Da Macroeconomia à Simplificação Estratégica
-      </a>
-      <span class="recipe-date">27/02/2026</span>
-      <p class="recipe-summary">5 conclusões sobre o que realmente move o ponteiro na intersecção entre tecnologia, liderança e negócios em 2026.</p>
-    </li>
-
-    <li class="recipe-card">
-      <a href="https://avancosvidalcapelucci.blogspot.com/2026/02/li-recentemente-um-texto-do-cris-dias.html" target="_blank" rel="noopener noreferrer">
-        Por que este blog existe — e o que é um ensaio de verdade
-      </a>
-      <span class="recipe-date">27/02/2026</span>
-      <p class="recipe-summary">Inspirado na origem da palavra "ensaio", Vidal explica por que escrever aqui é descobrir o que pensa — não provar que já sabe.</p>
-    </li>
-
-  </ul>
-</section>
-<!-- NOVIDADES_END -->
+        <div class="card card-novidades">
+            <i class="fas fa-newspaper"></i>
+            <h3>Novidades da Semana</h3>
+            <p>Resumo dos artigos publicados esta semana no blog — atualizado toda sexta-feira.</p>
+            <ul class="novidades-list">
+                <li>
+                    <a href="https://avancosvidalcapelucci.blogspot.com/2026/03/o-alinhamento-que-sufoca-por-que.html" target="_blank">O "Alinhamento" que Sufoca: Por que Liderança não é Coleira</a>
+                    <span>05/03/2026</span>
+                </li>
+                <li>
+                    <a href="https://avancosvidalcapelucci.blogspot.com/2026/03/agilidade-ou-ansiedade-onde-sua.html" target="_blank">Agilidade ou Ansiedade? Onde a sua estratégia comercial está pisando</a>
+                    <span>04/03/2026</span>
+                </li>
+                <li>
+                    <a href="https://avancosvidalcapelucci.blogspot.com/2026/03/o-mito-da-linha-reta-por-que-sua.html" target="_blank">O Mito da Linha Reta: Por que sua carreira não precisa fazer sentido o tempo todo</a>
+                    <span>02/03/2026</span>
+                </li>
+            </ul>
+            <a href="https://avancosvidalcapelucci.blogspot.com/" target="_blank" style="color: var(--primary); text-decoration: none; font-weight: bold; margin-top:15px;">Ver todos os artigos →</a>
+        </div>
+        <!-- NOVIDADES_END -->
 
     </div>
 </section>
@@ -164,12 +124,10 @@
     <p style="font-style: italic; color: var(--gray); font-size: 1.1rem; max-width: 600px; margin: 0 auto 30px;">
         "Acreditando na liderança que respeita o fluxo humano e utiliza a precisão dos dados para guiar o caminho."
     </p>
-    
     <div class="social-links">
         <a href="https://www.linkedin.com/in/vidalsilva" target="_blank" style="color: var(--primary);"><i class="fab fa-linkedin"></i></a>
         <a href="https://github.com/capelucci-star" target="_blank" style="color: var(--dark);"><i class="fab fa-github"></i></a>
     </div>
-    
     <p style="color: #9aa0a6; font-size: 0.85rem; margin-top: 20px;">
         &copy; 2026 Vidal Silva | Partner Sales Manager @ Google Education | LSE MBA Candidate
     </p>
