@@ -1,0 +1,314 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Verdades que todo vendedor precisa ouvir | Vidal Silva</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        :root { --primary: #4285F4; --dark: #202124; --gray: #5f6368; --light: #f8f9fa; }
+        body { font-family: 'Segoe UI', Arial, sans-serif; margin: 0; background: var(--light); color: var(--dark); line-height: 1.7; }
+
+        nav { display: flex; justify-content: space-between; padding: 20px 10%; background: white; align-items: center; box-shadow: 0 2px 4px rgba(0,0,0,0.05); position: sticky; top: 0; z-index: 100; }
+        .logo { font-weight: bold; font-size: 1.2rem; color: var(--primary); text-decoration: none; }
+        .nav-links a { text-decoration: none; color: var(--gray); font-weight: 500; margin-left: 20px; }
+
+        /* Hero do artigo */
+        .article-hero {
+            background: white;
+            padding: 60px 10% 40px;
+            border-bottom: 1px solid #eee;
+        }
+        .article-hero .tag {
+            background: #e8f0fe;
+            color: var(--primary);
+            padding: 5px 14px;
+            border-radius: 20px;
+            font-size: 0.75rem;
+            font-weight: bold;
+            text-transform: uppercase;
+            display: inline-block;
+            margin-bottom: 20px;
+        }
+        .article-hero h1 {
+            font-size: 2.4rem;
+            line-height: 1.2;
+            margin: 0 0 20px 0;
+            max-width: 700px;
+            color: var(--dark);
+        }
+        .article-hero .subtitle {
+            font-size: 1.15rem;
+            color: var(--gray);
+            max-width: 650px;
+            margin-bottom: 30px;
+        }
+        .article-meta {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            color: var(--gray);
+            font-size: 0.9rem;
+        }
+        .article-meta i { color: var(--primary); }
+
+        /* Corpo do artigo */
+        .article-body {
+            max-width: 720px;
+            margin: 50px auto;
+            padding: 0 20px 60px;
+        }
+
+        /* Verdade card */
+        .verdade-card {
+            background: white;
+            border-radius: 12px;
+            padding: 30px 35px;
+            margin-bottom: 25px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+            border-left: 4px solid var(--primary);
+        }
+        .verdade-numero {
+            font-size: 0.8rem;
+            font-weight: bold;
+            text-transform: uppercase;
+            color: var(--primary);
+            letter-spacing: 1px;
+            margin-bottom: 8px;
+        }
+        .verdade-card h2 {
+            font-size: 1.3rem;
+            margin: 0 0 15px 0;
+            color: var(--dark);
+        }
+        .verdade-card p {
+            color: var(--gray);
+            margin: 0 0 12px 0;
+            font-size: 0.97rem;
+        }
+        .verdade-card p:last-child { margin-bottom: 0; }
+
+        /* Destaque */
+        .destaque {
+            background: #e8f0fe;
+            border-radius: 12px;
+            padding: 25px 30px;
+            margin: 35px 0;
+            font-size: 1.1rem;
+            color: var(--dark);
+            font-style: italic;
+            border-left: 4px solid var(--primary);
+        }
+
+        /* Tabela Rainmaker */
+        .rainmaker-table {
+            background: white;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+            margin: 35px 0;
+        }
+        .rainmaker-table table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+        .rainmaker-table th {
+            background: var(--primary);
+            color: white;
+            padding: 14px 20px;
+            text-align: left;
+            font-size: 0.9rem;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+        .rainmaker-table td {
+            padding: 14px 20px;
+            border-bottom: 1px solid #f0f0f0;
+            font-size: 0.95rem;
+            color: var(--gray);
+        }
+        .rainmaker-table tr:last-child td { border-bottom: none; }
+        .rainmaker-table td:first-child { color: #999; }
+        .rainmaker-table td:last-child { color: var(--dark); font-weight: 500; }
+
+        /* Conclusão */
+        .conclusao {
+            background: var(--dark);
+            color: white;
+            border-radius: 12px;
+            padding: 35px;
+            margin-top: 40px;
+        }
+        .conclusao h2 { color: white; margin-top: 0; }
+        .conclusao p { color: #aaa; margin-bottom: 12px; }
+        .conclusao ul { color: #aaa; padding-left: 20px; }
+        .conclusao ul li { margin-bottom: 8px; }
+
+        /* Botão voltar */
+        .btn-back {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            margin-top: 40px;
+            text-decoration: none;
+            color: var(--primary);
+            font-weight: bold;
+            transition: 0.2s;
+        }
+        .btn-back:hover { opacity: 0.7; }
+
+        footer {
+            background: white;
+            padding: 40px 10%;
+            text-align: center;
+            border-top: 1px solid #eee;
+            margin-top: 40px;
+        }
+        footer p { color: var(--gray); font-size: 0.9rem; }
+    </style>
+</head>
+<body>
+
+<nav>
+    <a href="index.html" class="logo">Vidal Silva</a>
+    <div class="nav-links">
+        <a href="textos.html">← Voltar aos artigos</a>
+    </div>
+</nav>
+
+<div class="article-hero">
+    <span class="tag">Vendas & Performance</span>
+    <h1>Verdades que todo vendedor precisa ouvir</h1>
+    <p class="subtitle">Não são técnicas mágicas nem frases motivacionais. São verdades simples, práticas e desconfortáveis que separam o vendedor comum do Rainmaker.</p>
+    <div class="article-meta">
+        <span><i class="fas fa-calendar-alt"></i> Março 2026</span>
+        <span><i class="fas fa-clock"></i> 7 min de leitura</span>
+        <span><i class="fas fa-tag"></i> Vendas Consultivas</span>
+    </div>
+</div>
+
+<div class="article-body">
+
+    <p>Existem verdades que ninguém gosta de ouvir. Mas são exatamente essas verdades que fazem um vendedor sair da média e começar a construir resultado de verdade.</p>
+
+    <div class="destaque">
+        "Vender não é teatro. É responsabilidade. E responsabilidade dói antes de libertar."
+    </div>
+
+    <div class="verdade-card">
+        <div class="verdade-numero">Verdade 01</div>
+        <h2>Ninguém te deve resposta</h2>
+        <p>Você manda mensagem, liga, envia proposta — e o cliente não responde. A primeira reação da maioria? Levar para o lado pessoal.</p>
+        <p>Ele não te deve resposta. Você trabalha com probabilidade, não com garantia. Quando você entende isso, muda seu comportamento: em vez de sofrer com três que não responderam, você abre dez novas conversas.</p>
+        <p><strong>Volume consciente protege sua energia. Quem depende do processo prospera.</strong></p>
+    </div>
+
+    <div class="verdade-card">
+        <div class="verdade-numero">Verdade 02</div>
+        <h2>Seu problema quase nunca é preço</h2>
+        <p>Preço é a desculpa mais confortável. Quase sempre o problema é outro: falta de clareza, falta de impacto bem comunicado, falta de urgência estruturada, falta de diagnóstico profundo.</p>
+        <p>Quando o cliente entende claramente o custo de continuar como está, o preço muda de lugar. <strong>Se você não explicou o impacto antes de falar valor, não reclame da negociação.</strong></p>
+    </div>
+
+    <div class="verdade-card">
+        <div class="verdade-numero">Verdade 03</div>
+        <h2>Se o cliente não decide, você não conduziu</h2>
+        <p>Quando a conversa termina em "vou pensar" ou "depois eu vejo", existe uma grande chance de você não ter conduzido decisão.</p>
+        <p>Conduzir não é pressionar — é organizar, definir próximo passo, marcar data, perguntar prioridade. <strong>Venda é decisão. Decisão não acontece sozinha.</strong></p>
+    </div>
+
+    <div class="verdade-card">
+        <div class="verdade-numero">Verdade 04</div>
+        <h2>Simpatia não paga boleto</h2>
+        <p>Ser simpático é bom. Ser querido é agradável. Mas não fecha contrato. Se sua conversa termina com "gostei de você" mas sem próximo passo claro, você está entretendo, não vendendo.</p>
+        <p><strong>Venda exige direção. Direção exige coragem. Coragem exige maturidade.</strong></p>
+    </div>
+
+    <div class="verdade-card">
+        <div class="verdade-numero">Verdade 05</div>
+        <h2>Rotina é mais importante que talento</h2>
+        <p>Existem vendedores talentosos quebrando todo mês. E vendedores disciplinados crescendo de forma previsível. A diferença? Rotina.</p>
+        <p>Abrir conversa todo dia. Fazer follow up todo dia. Organizar funil todo dia. Encerrar o que não anda todo dia. <strong>Rotina vence motivação. Consistência vence inspiração.</strong></p>
+    </div>
+
+    <div class="verdade-card">
+        <div class="verdade-numero">Verdade 06</div>
+        <h2>Funil cheio não significa venda garantida</h2>
+        <p>Funil cheio dá sensação de segurança. Mas se não tem prioridade, decisor envolvido, prazo definido e próximo passo claro — não é oportunidade. É esperança.</p>
+        <p><strong>Esperança não paga comissão. Limpe seu funil. Encerre o que não anda.</strong></p>
+    </div>
+
+    <div class="verdade-card">
+        <div class="verdade-numero">Verdade 07</div>
+        <h2>Nem todo lead é cliente</h2>
+        <p>Você não precisa vender para todo mundo. Lead não é cliente. Contato não é oportunidade. Interesse não é decisão.</p>
+        <p>Qualifique por: dor real, impacto mensurável, orçamento possível, prazo definido e decisores mapeados. <strong>Qualificar é respeitar seu tempo.</strong></p>
+    </div>
+
+    <div class="verdade-card">
+        <div class="verdade-numero">Verdade 08</div>
+        <h2>Você não precisa convencer ninguém</h2>
+        <p>Convencer cria disputa. Organizar cria decisão. Quando você entra na conversa tentando ganhar, cria resistência. Quando entra tentando entender e conduzir, cria confiança.</p>
+        <p><strong>Pergunte mais. Explique menos. Venda madura não é briga — é construção.</strong></p>
+    </div>
+
+    <div class="verdade-card">
+        <div class="verdade-numero">Verdade 09</div>
+        <h2>Desconforto faz parte do jogo</h2>
+        <p>Se você evita perguntas difíceis, você prolonga sofrimento. Perguntar sobre orçamento, sobre prioridade, sobre quem decide — essas perguntas são desconfortáveis mas evitam semanas de novela.</p>
+        <p><strong>Coragem hoje evita frustração amanhã.</strong></p>
+    </div>
+
+    <div class="verdade-card">
+        <div class="verdade-numero">Verdade 10</div>
+        <h2>Vender é liderar decisão</h2>
+        <p>Você não está ali para apresentar produto. Está ali para liderar decisão. Liderar é organizar, direcionar, resumir, conduzir próximo passo.</p>
+        <p><strong>Quando você assume essa postura, a conversa muda.</strong></p>
+    </div>
+
+    <div class="rainmaker-table">
+        <table>
+            <thead>
+                <tr>
+                    <th>Vendedor Comum</th>
+                    <th>Rainmaker</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr><td>Reage</td><td>Conduz</td></tr>
+                <tr><td>Sofre o silêncio</td><td>Aumenta o volume</td></tr>
+                <tr><td>Reclama de preço</td><td>Organiza impacto</td></tr>
+                <tr><td>Espera o lead</td><td>Cria a conversa</td></tr>
+                <tr><td>Trabalha com motivação</td><td>Trabalha com disciplina</td></tr>
+            </tbody>
+        </table>
+    </div>
+
+    <div class="conclusao">
+        <h2>O que você faz com essas verdades agora?</h2>
+        <p>Você pode ler, concordar e continuar igual. Ou pode começar a aplicar de forma estruturada e disciplinada. Saber é diferente de fazer.</p>
+        <ul>
+            <li>Organizar rotina</li>
+            <li>Conduzir conversa</li>
+            <li>Qualificar melhor</li>
+            <li>Encerrar mais rápido</li>
+            <li>Assumir responsabilidade</li>
+        </ul>
+        <p style="margin-top: 20px; color: #ddd;">Rainmaker não é mágico. É disciplinado.</p>
+    </div>
+
+    <a href="textos.html" class="btn-back">
+        <i class="fas fa-arrow-left"></i> Voltar para Insights & Artigos
+    </a>
+
+</div>
+
+<footer>
+    <p style="font-style: italic; color: var(--gray); max-width: 500px; margin: 0 auto 10px;">
+        "Acreditando na liderança que respeita o fluxo humano e utiliza a precisão dos dados para guiar o caminho."
+    </p>
+    <p>&copy; 2026 Vidal Silva | Partner Sales Manager @ Google Education</p>
+</footer>
+
+</body>
+</html>
