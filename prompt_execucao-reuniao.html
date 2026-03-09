@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Consultor de Execução Estratégica de Reuniões | Vidal Silva</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        :root { --primary: #4285F4; --dark: #202124; --gray: #5f6368; --light: #f8f9fa; --code-bg: #282c34; }
+        body { font-family: 'Segoe UI', Arial, sans-serif; margin: 0; background: var(--light); color: var(--dark); line-height: 1.6; }
+        nav { display: flex; justify-content: space-between; padding: 20px 10%; background: white; align-items: center; box-shadow: 0 2px 4px rgba(0,0,0,0.05); }
+        .logo { font-weight: bold; font-size: 1.2rem; color: var(--primary); text-decoration: none; }
+        .container { max-width: 900px; margin: 50px auto; padding: 0 20px; }
+        h1 { border-left: 5px solid var(--primary); padding-left: 15px; margin-bottom: 10px; }
+        .subtitle { color: var(--gray); margin-bottom: 40px; }
+        .recipe-card { background: white; border-radius: 15px; padding: 30px; margin-bottom: 30px; box-shadow: 0 4px 15px rgba(0,0,0,0.05); border: 1px solid #eee; }
+        .prompt-box { background: var(--code-bg); color: #abb2bf; padding: 25px; border-radius: 10px; position: relative; font-family: 'Courier New', monospace; margin-top: 15px; font-size: 0.9rem; white-space: pre-wrap; line-height: 1.7; }
+        .prompt-box header { position: absolute; top: 0; left: 0; width: 100%; background: #333; padding: 5px 15px; font-size: 0.7rem; color: #999; border-radius: 10px 10px 0 0; box-sizing: border-box; }
+        .prompt-box p { margin-top: 20px; margin-bottom: 0; }
+        .btn-back { text-decoration: none; color: var(--primary); font-weight: bold; display: flex; align-items: center; gap: 5px; margin-bottom: 20px; }
+        .etapas { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 12px; margin: 20px 0; }
+        .etapa { background: #e8f0fe; border-radius: 10px; padding: 12px 16px; font-size: 0.88rem; color: var(--primary); font-weight: 600; }
+        .etapa span { display: block; color: var(--dark); font-weight: 400; font-size: 0.82rem; margin-top: 3px; }
+        footer { background: white; padding: 40px 10%; text-align: center; border-top: 1px solid #eee; margin-top: 40px; }
+        footer p { color: var(--gray); font-size: 0.9rem; font-style: italic; }
+    </style>
+</head>
+<body>
+    <nav>
+        <a href="index.html" class="logo">Vidal Silva</a>
+        <a href="banco-prompt.html" style="text-decoration: none; color: var(--gray);">Voltar ao Banco</a>
+    </nav>
+
+    <div class="container">
+        <a href="banco-prompt.html" class="btn-back"><i class="fas fa-arrow-left"></i> Voltar para Banco de Prompts</a>
+        <h1>🗂️ Consultor de Execução Estratégica de Reuniões</h1>
+        <p class="subtitle">Transforme qualquer reunião estratégica em um Plano de Ação executável, mensurável e pronto para apresentar à liderança.</p>
+
+        <article class="recipe-card">
+            <h3>Como utilizar</h3>
+            <p>Preencha as variáveis entre colchetes <strong>[ ]</strong> com as informações da sua reunião. Quanto mais contexto você fornecer — decisões, prazos, riscos, participantes — mais preciso e completo será o plano gerado.</p>
+
+            <div class="etapas">
+                <div class="etapa">1. Síntese Estratégica<span>Contexto e root cause</span></div>
+                <div class="etapa">2. Ações Executáveis<span>Tabela com owner e prazo</span></div>
+                <div class="etapa">3. Metas SMART<span>Específicas e mensuráveis</span></div>
+                <div class="etapa">4. Cronograma<span>Fases e marcos</span></div>
+                <div class="etapa">5. Análise de Riscos<span>Mitigação e contingência</span></div>
+                <div class="etapa">6. KPIs<span>Execução e resultado</span></div>
+                <div class="etapa">7. Governança<span>Cadência e checkpoints</span></div>
+                <div class="etapa">8. Comunicação<span>Alinhamento interno</span></div>
+                <div class="etapa">9. Priorização<span>Eisenhower e 80/20</span></div>
+                <div class="etapa">10. Plano Final<span>Resumo executivo</span></div>
+                <div class="etapa">11. Recomendações<span>Velocidade e consistência</span></div>
+            </div>
+        </article>
+
+        <article class="recipe-card">
+            <div class="prompt-box">
+                <header>PROMPT COMPLETO</header>
+                <p>Preciso que você atue como meu Consultor Estratégico Sênior em Execução e Desdobramento de Decisões, responsável por transformar os insights, decisões e discussões de uma reunião estratégica em um Plano de Ação estruturado, executável, mensurável e orientado a resultados.
+
+Abaixo estão as informações da reunião:
+
+• Objetivo principal da reunião: [inserir]
+• Participantes e áreas envolvidas: [inserir]
+• Principais decisões tomadas: [inserir]
+• Problemas identificados: [inserir]
+• Oportunidades mapeadas: [inserir]
+• Ideias sugeridas (mesmo que ainda não aprovadas): [inserir]
+• Prazos mencionados: [inserir]
+• Recursos disponíveis (equipe, orçamento, ferramentas): [inserir]
+• Riscos percebidos: [inserir]
+• Metas estratégicas da empresa relacionadas: [inserir]
+
+Com base nessas informações, desenvolva um Plano de Ação Executivo Completo, seguindo rigorosamente as etapas abaixo:
+
+1. SÍNTESE ESTRATÉGICA DA REUNIÃO
+• Resuma o contexto e a intenção estratégica central.
+• Identifique o problema raiz (root cause), se aplicável.
+• Destaque decisões críticas e seus impactos.
+• Aponte desalinhamentos ou riscos implícitos.
+
+2. TRANSFORMAÇÃO DAS DECISÕES EM AÇÕES EXECUTÁVEIS
+Para cada decisão ou encaminhamento:
+• Converta em tarefas claras e objetivas.
+• Defina responsável direto (owner).
+• Estabeleça prazo realista.
+• Classifique prioridade (Alta, Média, Baixa).
+• Determine dependências críticas.
+• Identifique recursos necessários.
+• Defina entregável final esperado.
+Organize isso em formato estruturado de tabela.
+
+3. ESTRUTURAÇÃO EM METAS SMART
+Transforme as principais ações em metas que sejam:
+• Específicas • Mensuráveis • Atingíveis • Relevantes • Temporais
+Explique como cada meta se conecta ao objetivo macro da reunião.
+
+4. CRONOGRAMA ESTRATÉGICO (VISÃO MACRO E MICRO)
+• Estruture o plano em fases.
+• Defina marcos intermediários.
+• Identifique possíveis gargalos.
+• Sugira buffers de tempo.
+• Indique quais ações devem ocorrer em paralelo.
+• Proponha um modelo de acompanhamento semanal.
+
+5. ANÁLISE DE RISCOS E PLANO DE MITIGAÇÃO
+• Liste riscos estratégicos, operacionais e financeiros.
+• Classifique probabilidade e impacto.
+• Sugira ações preventivas.
+• Crie planos de contingência.
+
+6. INDICADORES DE PERFORMANCE (KPIs)
+Defina métricas claras para medir sucesso:
+• Indicadores de execução.
+• Indicadores de resultado.
+• Indicadores de eficiência.
+• Indicadores de impacto estratégico.
+Inclua frequência de acompanhamento e responsável pelo monitoramento.
+
+7. SISTEMA DE ACCOUNTABILITY E GOVERNANÇA
+• Defina cadência de reuniões de acompanhamento.
+• Sugira modelo de relatório de progresso.
+• Estruture checkpoints decisórios.
+• Proponha critérios objetivos para ajustes de rota.
+
+8. COMUNICAÇÃO INTERNA E ALINHAMENTO
+• Sugira como comunicar o plano para a equipe.
+• Estruture mensagem clara e objetiva.
+• Indique formato ideal (e-mail, ata formal, dashboard, apresentação).
+• Crie modelo resumido para compartilhamento executivo.
+
+9. PRIORIZAÇÃO ESTRATÉGICA
+Aplique frameworks como:
+• Matriz de Eisenhower
+• Matriz de Impacto x Esforço
+• Princípio de Pareto (80/20)
+Explique quais ações geram maior alavancagem estratégica.
+
+10. VERSÃO FINAL DO PLANO DE AÇÃO
+Entregue:
+• Resumo executivo (1 página).
+• Plano detalhado.
+• Cronograma estruturado.
+• Lista final de responsáveis.
+• Indicadores definidos.
+• Próximos passos imediatos (primeiras 72 horas).
+
+11. RECOMENDAÇÕES ESTRATÉGICAS AVANÇADAS
+Inclua sugestões para:
+• Aumentar velocidade de execução.
+• Reduzir fricções internas.
+• Garantir consistência.
+• Evitar que o plano fique apenas no papel.
+• Transformar a execução em cultura.
+
+O resultado final deve ser extremamente organizado, profissional, orientado a resultado e pronto para ser apresentado ao board ou liderança.</p>
+            </div>
+        </article>
+    </div>
+
+    <footer>
+        <p>"Acreditando na liderança que respeita o fluxo humano e utiliza a precisão dos dados para guiar o caminho."</p>
+        <p style="margin-top: 8px; font-style: normal;">&copy; 2026 Vidal Silva | Partner Sales Manager @ Google Education</p>
+    </footer>
+</body>
+</html>
