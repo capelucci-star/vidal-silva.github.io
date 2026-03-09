@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Estrategista de Conversas Difíceis | Vidal Silva</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        :root { --primary: #4285F4; --dark: #202124; --gray: #5f6368; --light: #f8f9fa; --code-bg: #282c34; }
+        body { font-family: 'Segoe UI', Arial, sans-serif; margin: 0; background: var(--light); color: var(--dark); line-height: 1.6; }
+        nav { display: flex; justify-content: space-between; padding: 20px 10%; background: white; align-items: center; box-shadow: 0 2px 4px rgba(0,0,0,0.05); }
+        .logo { font-weight: bold; font-size: 1.2rem; color: var(--primary); text-decoration: none; }
+        .container { max-width: 900px; margin: 50px auto; padding: 0 20px; }
+        h1 { border-left: 5px solid var(--primary); padding-left: 15px; margin-bottom: 10px; }
+        .subtitle { color: var(--gray); margin-bottom: 40px; }
+        .recipe-card { background: white; border-radius: 15px; padding: 30px; margin-bottom: 30px; box-shadow: 0 4px 15px rgba(0,0,0,0.05); border: 1px solid #eee; }
+        .prompt-box { background: var(--code-bg); color: #abb2bf; padding: 25px; border-radius: 10px; position: relative; font-family: 'Courier New', monospace; margin-top: 15px; font-size: 0.9rem; white-space: pre-wrap; line-height: 1.7; }
+        .prompt-box header { position: absolute; top: 0; left: 0; width: 100%; background: #333; padding: 5px 15px; font-size: 0.7rem; color: #999; border-radius: 10px 10px 0 0; box-sizing: border-box; }
+        .prompt-box p { margin-top: 20px; margin-bottom: 0; }
+        .btn-back { text-decoration: none; color: var(--primary); font-weight: bold; display: flex; align-items: center; gap: 5px; margin-bottom: 20px; }
+        .etapas { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 12px; margin: 20px 0; }
+        .etapa { background: #e8f0fe; border-radius: 10px; padding: 12px 16px; font-size: 0.88rem; color: var(--primary); font-weight: 600; }
+        .etapa span { display: block; color: var(--dark); font-weight: 400; font-size: 0.82rem; margin-top: 3px; }
+        footer { background: white; padding: 40px 10%; text-align: center; border-top: 1px solid #eee; margin-top: 40px; }
+        footer p { color: var(--gray); font-size: 0.9rem; font-style: italic; }
+    </style>
+</head>
+<body>
+    <nav>
+        <a href="index.html" class="logo">Vidal Silva</a>
+        <a href="banco-prompt.html" style="text-decoration: none; color: var(--gray);">Voltar ao Banco</a>
+    </nav>
+
+    <div class="container">
+        <a href="banco-prompt.html" class="btn-back"><i class="fas fa-arrow-left"></i> Voltar para Banco de Prompts</a>
+        <h1>🧠 Estrategista de Conversas Difíceis</h1>
+        <p class="subtitle">Preparação executiva completa para conversas delicadas — com roteiro estratégico, gestão emocional, simulação de reações e plano pós-conversa.</p>
+
+        <article class="recipe-card">
+            <h3>Como utilizar</h3>
+            <p>Preencha as variáveis entre colchetes <strong>[ ]</strong> com o contexto real da sua situação. Quanto mais detalhes você fornecer sobre a relação, o objetivo e o perfil da outra pessoa, mais preciso e personalizado será o roteiro gerado.</p>
+
+            <div class="etapas">
+                <div class="etapa">1. Diagnóstico<span>Interesses e gatilhos</span></div>
+                <div class="etapa">2. Posicionamento<span>Mensagem e limites</span></div>
+                <div class="etapa">3. Roteiro<span>Abertura ao encerramento</span></div>
+                <div class="etapa">4. Inteligência Emocional<span>Controle e ancoragem</span></div>
+                <div class="etapa">5. Negociação<span>BATNA e escuta ativa</span></div>
+                <div class="etapa">6. Cenários<span>Melhor, médio e negativo</span></div>
+                <div class="etapa">7. Preparação Final<span>Frase-chave e postura</span></div>
+                <div class="etapa">8. Pós-Conversa<span>Registro e follow-up</span></div>
+            </div>
+        </article>
+
+        <article class="recipe-card">
+            <div class="prompt-box">
+                <header>PROMPT COMPLETO</header>
+                <p>A partir de agora você será meu Estrategista de Comunicação para Conversas Difíceis, especializado em gestão de conflitos, inteligência emocional, negociação estratégica e posicionamento profissional.
+
+Preciso me preparar para uma conversa delicada. Aqui estão os detalhes do contexto:
+
+• Tipo de relação envolvida: [chefe, colaborador, sócio, cliente, parceiro, familiar, etc.]
+• Tema central da conversa: [descrever]
+• Meu objetivo principal: [resolver conflito, impor limite, pedir aumento, dar feedback, encerrar contrato, etc.]
+• Resultado ideal esperado: [descrever]
+• Resultado mínimo aceitável: [descrever]
+• Meu maior receio nessa conversa: [descrever]
+• Perfil da outra pessoa (comportamento, temperamento, histórico): [descrever]
+• Ambiente onde acontecerá (presencial, online, formal, informal): [descrever]
+
+Com base nessas informações, desenvolva uma estratégia completa e estruturada, seguindo os pontos abaixo:
+
+1. DIAGNÓSTICO ESTRATÉGICO DA SITUAÇÃO
+• Analise os interesses ocultos e explícitos de ambas as partes.
+• Identifique possíveis gatilhos emocionais envolvidos.
+• Avalie riscos de escalada de conflito.
+• Determine os pontos de tensão e as zonas de negociação possíveis.
+• Classifique o nível de sensibilidade da conversa (baixo, médio, alto impacto).
+
+2. CLAREZA DE POSICIONAMENTO
+• Estruturar minha mensagem principal em uma frase clara e objetiva.
+• Definir quais limites são inegociáveis.
+• Identificar pontos flexíveis para concessão estratégica.
+• Formular meu posicionamento sem agressividade e sem submissão.
+
+3. ESTRUTURA IDEAL DA CONVERSA (ROTEIRO ESTRATÉGICO)
+
+3.1. Abertura
+• Como iniciar a conversa com maturidade e segurança.
+• Frases que reduzem resistência inicial.
+
+3.2. Contextualização
+• Como apresentar o problema sem acusação.
+• Uso de comunicação não violenta (CNV).
+• Estrutura: fato → impacto → sentimento → necessidade.
+
+3.3. Exposição do Ponto Principal
+• Frases claras, firmes e profissionais.
+• Como evitar justificativas excessivas.
+• Como demonstrar racionalidade e controle emocional.
+
+3.4. Gestão de Reações Difíceis
+Simule possíveis respostas da outra pessoa:
+• Defesa • Ataque • Vitimização • Manipulação • Desvio de assunto
+Para cada cenário, forneça respostas estratégicas.
+
+3.5. Encerramento
+• Como consolidar acordos.
+• Como reforçar profissionalismo.
+• Como finalizar mesmo sem consenso total.
+
+4. INTELIGÊNCIA EMOCIONAL E CONTROLE INTERNO
+• Estratégias para controlar ansiedade antes da conversa.
+• Técnicas de respiração e ancoragem emocional.
+• Como manter postura corporal estratégica.
+• Como lidar com silêncio e tensão.
+• Como evitar entrar em modo defensivo.
+
+5. ESTRATÉGIA DE NEGOCIAÇÃO
+• Identifique a melhor abordagem: colaborativa, assertiva ou firme.
+• Sugira técnica de negociação aplicável (BATNA, ancoragem, escuta ativa, espelhamento).
+• Avalie minha alternativa caso o diálogo não evolua (plano B).
+• Defina qual seria meu limite de saída.
+
+6. ANÁLISE DE RISCOS E CENÁRIOS
+Simule três cenários:
+1. Melhor cenário possível
+2. Cenário intermediário
+3. Cenário negativo
+Explique como devo reagir estrategicamente em cada um.
+
+7. MENSAGEM FINAL PREPARATÓRIA
+Construa um resumo final com:
+• Minha frase-chave
+• Meu objetivo claro
+• Meu limite definido
+• Minha postura ideal
+Entregue como se fosse uma preparação executiva pré-reunião.
+
+8. PÓS-CONVERSA
+Sugira:
+• Como registrar o que foi acordado.
+• Como fazer follow-up estratégico.
+• Como proteger minha posição profissional após o diálogo.</p>
+            </div>
+        </article>
+    </div>
+
+    <footer>
+        <p>"Acreditando na liderança que respeita o fluxo humano e utiliza a precisão dos dados para guiar o caminho."</p>
+        <p style="margin-top: 8px; font-style: normal;">&copy; 2026 Vidal Silva | Partner Sales Manager @ Google Education</p>
+    </footer>
+</body>
+</html>
