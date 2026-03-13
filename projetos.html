@@ -6,15 +6,106 @@
     <title>Projetos | Vidal Silva</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <style>
-        :root { --primary: #4285F4; --dark: #202124; --gray: #5f6368; --light: #f8f9fa; }
-        body { font-family: 'Segoe UI', Arial, sans-serif; margin: 0; background: var(--light); color: var(--dark); }
+        :root { --primary: #4285F4; --dark: #202124; --gray: #5f6368; --light: #f8f9fa; --code-bg: #1e1e2e; }
+        body { font-family: 'Segoe UI', Arial, sans-serif; margin: 0; background: var(--light); color: var(--dark); line-height: 1.6; }
         nav { display: flex; justify-content: space-between; padding: 20px 10%; background: white; align-items: center; box-shadow: 0 2px 4px rgba(0,0,0,0.05); }
-        .container { max-width: 900px; margin: 50px auto; padding: 0 20px; }
+        .container { max-width: 900px; margin: 50px auto; padding: 0 20px 60px; }
+
+        /* Cards de projeto (estilo original) */
         .project-card { background: white; border-radius: 15px; padding: 25px; display: flex; align-items: center; gap: 20px; box-shadow: 0 4px 15px rgba(0,0,0,0.05); text-decoration: none; color: inherit; transition: 0.3s; }
         .project-card:hover { transform: scale(1.02); border-left: 5px solid var(--primary); }
-        .project-icon { font-size: 2.5rem; color: var(--primary); }
+        .project-icon { font-size: 2.5rem; color: var(--primary); flex-shrink: 0; }
         .project-info h2 { margin: 0; font-size: 1.4rem; }
         .project-info p { margin: 5px 0 0; color: var(--gray); }
+
+        /* Separador de seção */
+        .section-title {
+            font-size: 1.1rem;
+            font-weight: bold;
+            color: var(--gray);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin: 50px 0 20px 0;
+            padding-bottom: 10px;
+            border-bottom: 2px solid #eee;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        .section-title i { color: var(--primary); }
+
+        /* Card do Prompt Base */
+        .prompt-base-card {
+            background: white;
+            border-radius: 15px;
+            padding: 30px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+            border: 1px solid #eee;
+        }
+        .prompt-base-card .card-header {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            margin-bottom: 8px;
+        }
+        .prompt-base-card .card-header i {
+            font-size: 2rem;
+            color: var(--primary);
+        }
+        .prompt-base-card h2 {
+            margin: 0;
+            font-size: 1.4rem;
+        }
+        .prompt-base-card .card-desc {
+            color: var(--gray);
+            font-size: 0.95rem;
+            margin: 0 0 20px 44px;
+        }
+
+        /* Bloco dark do prompt */
+        .prompt-block {
+            background: var(--code-bg);
+            border-radius: 10px;
+            padding: 25px 25px 20px;
+            position: relative;
+            font-family: 'Courier New', monospace;
+            font-size: 0.88rem;
+            line-height: 1.8;
+            color: #cdd6f4;
+        }
+        .prompt-block .block-header {
+            position: absolute;
+            top: 0; left: 0;
+            width: 100%;
+            background: #313244;
+            padding: 6px 18px;
+            font-size: 0.7rem;
+            color: #888;
+            border-radius: 10px 10px 0 0;
+            box-sizing: border-box;
+            letter-spacing: 0.5px;
+            text-transform: uppercase;
+        }
+        .prompt-block .content {
+            margin-top: 22px;
+        }
+        .prompt-block .pilar {
+            margin-bottom: 20px;
+        }
+        .prompt-block .pilar-titulo {
+            color: #89b4fa;
+            font-weight: bold;
+            margin-bottom: 6px;
+        }
+        .prompt-block .pilar-texto {
+            color: #cdd6f4;
+            padding-left: 12px;
+            border-left: 2px solid #313244;
+        }
+        .prompt-block .pilar-texto em {
+            color: #a6e3a1;
+            font-style: normal;
+        }
     </style>
 </head>
 <body>
@@ -27,7 +118,10 @@
         <h1>Meus Projetos</h1>
         <p style="color: var(--gray); margin-bottom: 40px;">Explorações técnicas em IA, Vendas e Dados.</p>
 
-        <a href="banco-prompts.html" class="project-card">
+        <!-- Seção: Banco de Prompts -->
+        <div class="section-title"><i class="fas fa-terminal"></i> Banco de Prompts</div>
+
+        <a href="banco-prompt.html" class="project-card">
             <div class="project-icon"><i class="fas fa-terminal"></i></div>
             <div class="project-info">
                 <h2>Banco de Prompts para Vendas & Sheets</h2>
@@ -36,7 +130,67 @@
             <i class="fas fa-chevron-right" style="margin-left: auto; color: #ccc;"></i>
         </a>
 
-        <div class="project-card" style="margin-top: 20px; opacity: 0.6;">
+        <!-- Seção: Meu Prompt Base -->
+        <div class="section-title"><i class="fas fa-lightbulb"></i> Meu Prompt Base</div>
+
+        <div class="prompt-base-card">
+            <div class="card-header">
+                <i class="fas fa-code"></i>
+                <h2>Os 5 Pilares do Meu Prompt Base</h2>
+            </div>
+            <p class="card-desc">O framework que uso para extrair o máximo da IA em qualquer contexto — do LinkedIn ao planejamento estratégico.</p>
+
+            <div class="prompt-block">
+                <div class="block-header">Prompt Base — Vidal Silva 2026</div>
+                <div class="content">
+
+                    <div class="pilar">
+                        <div class="pilar-titulo">1. Definição da Tarefa com Critério de Sucesso</div>
+                        <div class="pilar-texto">
+                            Não peça apenas um resumo. Peça: <em>"Resuma este artigo técnico para que eu possa usá-lo como argumento em uma reunião de diretoria com foco em ROI."</em>
+                            Se a IA sabe o critério de sucesso (convencer a diretoria), o tom muda completamente.
+                        </div>
+                    </div>
+
+                    <div class="pilar">
+                        <div class="pilar-titulo">2. Contexto Real (Grounding)</div>
+                        <div class="pilar-texto">
+                            Forneça os documentos. Em vez de perguntar sobre o mercado de educação, suba o Censo Escolar 2025.
+                            A IA trabalha sobre fatos, não sobre o que ela <em>"acha"</em>. Este passo é o favorito de quem usa NotebookLM.
+                        </div>
+                    </div>
+
+                    <div class="pilar">
+                        <div class="pilar-titulo">3. Decomposição de Referência</div>
+                        <div class="pilar-texto">
+                            Se você gosta do estilo de escrita do Cris Dias, não diga apenas <em>"escreva como ele"</em>. Peça para a IA: <em>"Analise este texto, identifique o uso de metáforas, a estrutura de frases curtas e o tom provocativo. Agora, aplique esse padrão ao meu tema."</em>
+                        </div>
+                    </div>
+
+                    <div class="pilar">
+                        <div class="pilar-titulo">4. Briefing de Saída</div>
+                        <div class="pilar-texto">
+                            Defina o formato da entrega. Você quer um parágrafo para o LinkedIn? Um bullet point para o blog? Um script de áudio para o Notebook?
+                            Definir o output economiza <em>90% do seu tempo de edição</em>.
+                        </div>
+                    </div>
+
+                    <div class="pilar">
+                        <div class="pilar-titulo">5. Acordo de Restrições (Constraints)</div>
+                        <div class="pilar-texto">
+                            Este é o passo da Maturidade. Diga o que você NÃO quer. Ex: <em>"Não use jargões de marketing, não cite Python ou MBA de forma direta, e não exceda 100 palavras."</em>
+                            Isso elimina o ruído e garante que a entrega seja exatamente o que você precisa.
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+
+        <!-- Seção: Em breve -->
+        <div class="section-title"><i class="fas fa-flask"></i> Em Desenvolvimento</div>
+
+        <div class="project-card" style="opacity: 0.6;">
             <div class="project-icon"><i class="fab fa-python"></i></div>
             <div class="project-info">
                 <h2>Análise Preditiva em Python (Em breve)</h2>
