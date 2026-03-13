@@ -1,0 +1,258 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Protocolo da Pausa Estratégica | Vidal Silva</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        :root { --primary: #4285F4; --dark: #202124; --gray: #5f6368; --light: #f8f9fa; }
+        body { font-family: 'Segoe UI', Arial, sans-serif; margin: 0; background: var(--light); color: var(--dark); line-height: 1.7; }
+
+        nav { display: flex; justify-content: space-between; padding: 20px 10%; background: white; align-items: center; box-shadow: 0 2px 4px rgba(0,0,0,0.05); position: sticky; top: 0; z-index: 100; }
+        .logo { font-weight: bold; font-size: 1.2rem; color: var(--primary); text-decoration: none; }
+        .nav-links a { text-decoration: none; color: var(--gray); font-weight: 500; margin-left: 20px; }
+
+        .article-hero {
+            background: white;
+            padding: 60px 10% 40px;
+            border-bottom: 1px solid #eee;
+        }
+        .article-hero .tag {
+            background: #e8f0fe;
+            color: var(--primary);
+            padding: 5px 14px;
+            border-radius: 20px;
+            font-size: 0.75rem;
+            font-weight: bold;
+            text-transform: uppercase;
+            display: inline-block;
+            margin-bottom: 20px;
+        }
+        .article-hero h1 {
+            font-size: 2.4rem;
+            line-height: 1.2;
+            margin: 0 0 20px 0;
+            max-width: 700px;
+        }
+        .article-hero .subtitle {
+            font-size: 1.15rem;
+            color: var(--gray);
+            max-width: 650px;
+            margin-bottom: 30px;
+        }
+        .article-meta {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            color: var(--gray);
+            font-size: 0.9rem;
+        }
+        .article-meta i { color: var(--primary); }
+
+        .article-body {
+            max-width: 720px;
+            margin: 50px auto;
+            padding: 0 20px 60px;
+        }
+
+        .intro {
+            font-size: 1.05rem;
+            color: var(--gray);
+            margin-bottom: 40px;
+            border-left: 4px solid var(--primary);
+            padding-left: 20px;
+        }
+
+        /* Cards das etapas */
+        .etapa-card {
+            background: white;
+            border-radius: 12px;
+            padding: 30px 35px;
+            margin-bottom: 25px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+            border: 1px solid #eee;
+            position: relative;
+        }
+        .etapa-numero {
+            position: absolute;
+            top: -16px;
+            left: 30px;
+            background: var(--primary);
+            color: white;
+            width: 32px;
+            height: 32px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            font-size: 0.9rem;
+        }
+        .etapa-card h2 {
+            font-size: 1.25rem;
+            margin: 8px 0 6px 0;
+            color: var(--dark);
+        }
+        .etapa-card .etapa-subtitulo {
+            font-style: italic;
+            color: var(--gray);
+            font-size: 0.95rem;
+            margin-bottom: 18px;
+        }
+        .etapa-acao {
+            background: #f8f9fa;
+            border-radius: 8px;
+            padding: 14px 18px;
+            margin-bottom: 14px;
+            font-size: 0.95rem;
+        }
+        .etapa-acao strong { color: var(--primary); }
+        .etapa-porque {
+            background: #e8f0fe;
+            border-radius: 8px;
+            padding: 14px 18px;
+            font-size: 0.93rem;
+            color: var(--dark);
+        }
+        .etapa-porque strong { color: var(--primary); }
+
+        /* Destaque final */
+        .destaque-final {
+            background: var(--dark);
+            color: white;
+            border-radius: 12px;
+            padding: 35px;
+            margin-top: 40px;
+            text-align: center;
+        }
+        .destaque-final p {
+            font-size: 1.15rem;
+            font-style: italic;
+            color: #ddd;
+            margin: 0;
+            line-height: 1.8;
+        }
+        .destaque-final span {
+            display: block;
+            margin-top: 15px;
+            font-size: 0.9rem;
+            color: #888;
+            font-style: normal;
+        }
+
+        .btn-back {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            margin-top: 40px;
+            text-decoration: none;
+            color: var(--primary);
+            font-weight: bold;
+        }
+        .btn-back:hover { opacity: 0.7; }
+
+        footer {
+            background: white;
+            padding: 40px 10%;
+            text-align: center;
+            border-top: 1px solid #eee;
+            margin-top: 40px;
+        }
+        footer p { color: var(--gray); font-size: 0.9rem; }
+    </style>
+</head>
+<body>
+
+<nav>
+    <a href="index.html" class="logo">Vidal Silva</a>
+    <div class="nav-links">
+        <a href="textos.html">← Voltar aos artigos</a>
+    </div>
+</nav>
+
+<div class="article-hero">
+    <span class="tag">Liderança & Inteligência Emocional</span>
+    <h1>Protocolo da Pausa Estratégica</h1>
+    <p class="subtitle">30 a 60 segundos que separam o líder reativo do estrategista consciente. Um método simples, baseado em neurociência, para responder em vez de reagir.</p>
+    <div class="article-meta">
+        <span><i class="fas fa-calendar-alt"></i> Março 2026</span>
+        <span><i class="fas fa-clock"></i> 4 min de leitura</span>
+        <span><i class="fas fa-tag"></i> Inteligência Emocional</span>
+    </div>
+</div>
+
+<div class="article-body">
+
+    <p class="intro">
+        O estresse não avisa que está chegando. Ele aparece no meio de uma reunião difícil, de um e-mail inesperado, de um silêncio que pesa. A diferença entre reagir e responder cabe em menos de um minuto — se você souber o que fazer com ele.
+    </p>
+
+    <div class="etapa-card">
+        <div class="etapa-numero">1</div>
+        <h2>O Corte — Aterramento</h2>
+        <p class="etapa-subtitulo">Ao sentir o gatilho do estresse ou da reatividade, interrompa o fluxo físico imediatamente.</p>
+        <div class="etapa-acao">
+            <strong>Ação:</strong> Desvie o olhar da tela. Se estiver sentado, sinta o peso do corpo na cadeira e os pés no chão.
+        </div>
+        <div class="etapa-porque">
+            <strong>Por quê:</strong> Isso retira a energia da "mente ativa" (o pensar) e a traz para a realidade física (o ser). Você interrompe o ciclo automático antes que ele tome conta.
+        </div>
+    </div>
+
+    <div class="etapa-card">
+        <div class="etapa-numero">2</div>
+        <h2>A Respiração "Sinal"</h2>
+        <p class="etapa-subtitulo">Não tente mudar o mundo. Apenas mude o seu oxigênio.</p>
+        <div class="etapa-acao">
+            <strong>Ação:</strong> Inspire profundamente pelo nariz expandindo o abdômen e solte o ar pela boca de forma lenta, como se estivesse soprando um canudo. Faça isso apenas duas vezes.
+        </div>
+        <div class="etapa-porque">
+            <strong>Por quê:</strong> Isso sinaliza ao seu sistema nervoso que não há perigo real, desarmando o modo "luta ou fuga". A expiração longa ativa o nervo vago e reduz o cortisol em segundos.
+        </div>
+    </div>
+
+    <div class="etapa-card">
+        <div class="etapa-numero">3</div>
+        <h2>A Pergunta da Curadoria</h2>
+        <p class="etapa-subtitulo">No silêncio que sobra após a respiração, faça a pergunta de discernimento.</p>
+        <div class="etapa-acao">
+            <strong>Pergunta:</strong> "Eu preciso agir agora ou posso apenas observar?" ou "Qual é o sinal importante aqui e o que é apenas ruído?"
+        </div>
+        <div class="etapa-porque">
+            <strong>Por quê:</strong> Aqui você ativa sua maturidade humana. Você deixa de ser o robô que reage para ser o estrategista que escolhe a batalha. A pergunta certa vale mais do que a resposta rápida.
+        </div>
+    </div>
+
+    <div class="etapa-card">
+        <div class="etapa-numero">4</div>
+        <h2>O Reinício Consciente</h2>
+        <p class="etapa-subtitulo">Retorne à tarefa com um "alerta relaxado".</p>
+        <div class="etapa-acao">
+            <strong>Ação:</strong> Retome o que estava fazendo, mas com a consciência de que você é a testemunha da tarefa — não a vítima dela.
+        </div>
+        <div class="etapa-porque">
+            <strong>Por quê:</strong> O retorno consciente marca a diferença entre continuar no piloto automático e operar com presença. Você volta ao mesmo ambiente, mas como uma pessoa diferente.
+        </div>
+    </div>
+
+    <div class="destaque-final">
+        <p>"Você não pode controlar o que acontece. Mas pode controlar o que acontece nos 30 segundos depois."</p>
+        <span>— Protocolo da Pausa Estratégica</span>
+    </div>
+
+    <a href="textos.html" class="btn-back">
+        <i class="fas fa-arrow-left"></i> Voltar para Insights & Artigos
+    </a>
+
+</div>
+
+<footer>
+    <p style="font-style: italic; max-width: 500px; margin: 0 auto 10px;">
+        "Acreditando na liderança que respeita o fluxo humano e utiliza a precisão dos dados para guiar o caminho."
+    </p>
+    <p>&copy; 2026 Vidal Silva | Partner Sales Manager @ Google Education</p>
+</footer>
+
+</body>
+</html>
