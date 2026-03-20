@@ -23,11 +23,9 @@
 
         .livros-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(350px, 1fr)); gap: 30px; padding: 0 10% 80px; }
         
-        /* AJUSTE DO CARD: Altura fixa para não crescer com a imagem */
-        .livro-card { background: white; border-radius: 15px; overflow: hidden; display: flex; box-shadow: 0 4px 15px rgba(0,0,0,0.05); transition: 0.3s; height: 200px; }
-        .livro-card:hover { transform: translateY(-5px); }
+        .livro-card { background: white; border-radius: 15px; overflow: hidden; display: flex; box-shadow: 0 4px 15px rgba(0,0,0,0.05); transition: 0.3s; height: 200px; text-decoration: none; color: inherit; }
+        .livro-card:hover { transform: translateY(-5px); box-shadow: 0 8px 25px rgba(0,0,0,0.1); }
         
-        /* AJUSTE DA CAPA: Garante que a imagem caiba no espaço pequeno */
         .livro-capa { 
             width: 130px; 
             min-width: 130px; 
@@ -35,11 +33,10 @@
             background: #eee; 
             overflow: hidden; 
         }
-        
         .livro-capa img { 
             width: 100%; 
             height: 100%; 
-            object-fit: cover; /* Faz a imagem preencher o card sem deformar */
+            object-fit: cover;
         }
 
         .livro-info { padding: 20px; flex: 1; display: flex; flex-direction: column; justify-content: center; }
@@ -47,6 +44,15 @@
         .livro-info .autor { color: var(--gray); font-size: 0.9rem; margin-bottom: 10px; display: block; }
         .livro-info .tag { background: #e8f0fe; color: var(--primary); padding: 3px 10px; border-radius: 5px; font-size: 0.75rem; font-weight: bold; align-self: flex-start; }
         .livro-info p { font-size: 0.85rem; color: #444; margin-top: 10px; font-style: italic; border-left: 3px solid var(--primary); padding-left: 10px; margin-bottom: 0; }
+        .livro-info .review-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 5px;
+            margin-top: 12px;
+            font-size: 0.8rem;
+            font-weight: 700;
+            color: var(--primary);
+        }
 
         footer { background: white; padding: 40px 10%; text-align: center; border-top: 1px solid #eee; }
     </style>
@@ -75,7 +81,7 @@
 </div>
 
 <section class="livros-grid">
-    <div class="livro-card">
+    <a href="review-poder-habito.html" class="livro-card">
         <div class="livro-capa">
             <img src="habito.jpg" alt="Capa do livro O Poder do Hábito">
         </div>
@@ -84,10 +90,10 @@
             <h3>O Poder do Hábito</h3>
             <span class="autor">Charles Duhigg</span>
             <p>"Essencial para entender como as rotinas corporativas e individuais moldam o sucesso a longo prazo."</p>
+            <span class="review-link"><i class="fas fa-book-open"></i> Ler review completo →</span>
         </div>
-    </div>
-    
-    </section>
+    </a>
+</section>
 
 <footer>
     <p>"Utilizando a precisão dos dados para guiar o caminho."</p>
