@@ -1,0 +1,516 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Review: O Poder do Hábito | Vidal Silva</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;1,400&family=Source+Serif+4:wght@300;400;600&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #4285F4;
+            --dark: #202124;
+            --gray: #5f6368;
+            --ink: #1a1a2e;
+            --paper: #faf9f7;
+            --accent: #c9a84c;
+        }
+
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+
+        body {
+            font-family: 'Source Serif 4', Georgia, serif;
+            background: var(--paper);
+            color: var(--ink);
+            line-height: 1.8;
+        }
+
+        /* NAV */
+        nav {
+            display: flex;
+            justify-content: space-between;
+            padding: 18px 10%;
+            background: white;
+            align-items: center;
+            box-shadow: 0 1px 0 rgba(0,0,0,0.08);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+        .logo { font-weight: bold; font-size: 1.2rem; color: var(--primary); text-decoration: none; font-family: 'Segoe UI', sans-serif; }
+        .nav-links a { text-decoration: none; color: var(--gray); font-size: 0.9rem; font-family: 'Segoe UI', sans-serif; }
+
+        /* HERO EDITORIAL */
+        .hero {
+            background: var(--ink);
+            color: white;
+            padding: 80px 10% 60px;
+            position: relative;
+            overflow: hidden;
+        }
+        .hero::before {
+            content: '"';
+            position: absolute;
+            top: -40px;
+            right: 8%;
+            font-family: 'Playfair Display', serif;
+            font-size: 400px;
+            color: rgba(255,255,255,0.03);
+            line-height: 1;
+            pointer-events: none;
+        }
+        .hero-label {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            font-family: 'Segoe UI', sans-serif;
+            font-size: 0.72rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            color: var(--accent);
+            margin-bottom: 25px;
+        }
+        .hero-label::before {
+            content: '';
+            display: block;
+            width: 30px;
+            height: 1px;
+            background: var(--accent);
+        }
+        .hero h1 {
+            font-family: 'Playfair Display', serif;
+            font-size: clamp(2rem, 5vw, 3.2rem);
+            line-height: 1.15;
+            max-width: 700px;
+            margin-bottom: 20px;
+            font-weight: 700;
+        }
+        .hero h1 em {
+            font-style: italic;
+            color: var(--accent);
+        }
+        .hero .subtitle {
+            font-size: 1.05rem;
+            color: rgba(255,255,255,0.65);
+            max-width: 580px;
+            margin-bottom: 35px;
+            font-weight: 300;
+        }
+        .hero-meta {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+            font-size: 0.82rem;
+            color: rgba(255,255,255,0.45);
+            font-family: 'Segoe UI', sans-serif;
+            flex-wrap: wrap;
+        }
+        .hero-meta span { display: flex; align-items: center; gap: 6px; }
+        .hero-meta i { color: var(--accent); }
+
+        /* RATING */
+        .rating-bar {
+            background: white;
+            padding: 25px 10%;
+            display: flex;
+            align-items: center;
+            gap: 30px;
+            border-bottom: 2px solid #f0ede8;
+            flex-wrap: wrap;
+        }
+        .rating-label {
+            font-family: 'Segoe UI', sans-serif;
+            font-size: 0.75rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            color: var(--gray);
+        }
+        .stars { color: var(--accent); font-size: 1.1rem; letter-spacing: 2px; }
+        .rating-tag {
+            background: var(--ink);
+            color: white;
+            padding: 4px 14px;
+            border-radius: 4px;
+            font-size: 0.75rem;
+            font-weight: 700;
+            font-family: 'Segoe UI', sans-serif;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        /* BODY */
+        .article-body {
+            max-width: 680px;
+            margin: 60px auto;
+            padding: 0 20px 80px;
+        }
+
+        .intro-text {
+            font-size: 1.15rem;
+            color: #3c4043;
+            margin-bottom: 40px;
+            padding-bottom: 40px;
+            border-bottom: 1px solid #e8e4dd;
+            font-weight: 300;
+        }
+
+        /* SEÇÃO */
+        .secao {
+            margin-bottom: 50px;
+        }
+        .secao-numero {
+            font-family: 'Playfair Display', serif;
+            font-size: 3.5rem;
+            color: #e8e4dd;
+            line-height: 1;
+            margin-bottom: -10px;
+            display: block;
+        }
+        .secao h2 {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.5rem;
+            color: var(--ink);
+            margin-bottom: 18px;
+            font-weight: 700;
+        }
+        .secao p {
+            color: #3c4043;
+            margin-bottom: 16px;
+            font-size: 1rem;
+        }
+
+        /* LOOP VISUAL */
+        .loop-visual {
+            display: flex;
+            align-items: center;
+            gap: 0;
+            margin: 25px 0;
+            flex-wrap: wrap;
+        }
+        .loop-item {
+            background: var(--ink);
+            color: white;
+            padding: 14px 20px;
+            flex: 1;
+            min-width: 100px;
+            text-align: center;
+        }
+        .loop-item:first-child { border-radius: 8px 0 0 8px; }
+        .loop-item:last-child { border-radius: 0 8px 8px 0; background: var(--accent); color: var(--ink); }
+        .loop-item .loop-num { font-size: 0.65rem; text-transform: uppercase; letter-spacing: 1px; opacity: 0.6; font-family: 'Segoe UI', sans-serif; }
+        .loop-item .loop-name { font-family: 'Playfair Display', serif; font-size: 1rem; font-weight: 700; margin-top: 4px; }
+        .loop-arrow {
+            color: var(--gray);
+            font-size: 1rem;
+            padding: 0 4px;
+        }
+
+        /* DESTAQUE LATERAL */
+        .pullquote {
+            border-left: 3px solid var(--accent);
+            padding: 5px 0 5px 25px;
+            margin: 30px 0;
+        }
+        .pullquote p {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.25rem;
+            font-style: italic;
+            color: var(--ink);
+            line-height: 1.6;
+        }
+        .pullquote cite {
+            display: block;
+            font-size: 0.8rem;
+            color: var(--gray);
+            font-style: normal;
+            margin-top: 8px;
+            font-family: 'Segoe UI', sans-serif;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        /* LISTA ESTILIZADA */
+        .lista-editorial {
+            list-style: none;
+            padding: 0;
+            margin: 20px 0;
+        }
+        .lista-editorial li {
+            display: flex;
+            gap: 15px;
+            padding: 14px 0;
+            border-bottom: 1px solid #f0ede8;
+            font-size: 0.97rem;
+            color: #3c4043;
+        }
+        .lista-editorial li:last-child { border-bottom: none; }
+        .lista-editorial li::before {
+            content: '→';
+            color: var(--accent);
+            font-weight: bold;
+            flex-shrink: 0;
+            margin-top: 1px;
+        }
+        .lista-editorial li strong { color: var(--ink); }
+
+        /* BOX FRAMEWORK */
+        .framework-box {
+            background: var(--ink);
+            color: white;
+            border-radius: 12px;
+            padding: 35px;
+            margin: 40px 0;
+        }
+        .framework-box h3 {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.3rem;
+            margin-bottom: 20px;
+            color: var(--accent);
+        }
+        .framework-steps {
+            counter-reset: steps;
+            list-style: none;
+            padding: 0;
+        }
+        .framework-steps li {
+            counter-increment: steps;
+            display: flex;
+            gap: 15px;
+            margin-bottom: 16px;
+            font-size: 0.95rem;
+            color: rgba(255,255,255,0.8);
+            align-items: flex-start;
+        }
+        .framework-steps li::before {
+            content: counter(steps);
+            background: var(--accent);
+            color: var(--ink);
+            width: 26px;
+            height: 26px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 700;
+            font-size: 0.8rem;
+            flex-shrink: 0;
+            font-family: 'Segoe UI', sans-serif;
+        }
+
+        /* ALERTA */
+        .alerta {
+            background: #fff8e1;
+            border-left: 4px solid var(--accent);
+            padding: 20px 25px;
+            border-radius: 0 8px 8px 0;
+            margin: 25px 0;
+        }
+        .alerta p {
+            color: #5d4037;
+            font-size: 0.95rem;
+            margin: 0;
+        }
+        .alerta strong { color: #3e2723; }
+
+        /* VEREDICTO FINAL */
+        .veredicto {
+            background: linear-gradient(135deg, var(--ink) 0%, #2d3561 100%);
+            border-radius: 12px;
+            padding: 40px;
+            margin-top: 50px;
+            text-align: center;
+            color: white;
+        }
+        .veredicto .veredicto-label {
+            font-size: 0.72rem;
+            text-transform: uppercase;
+            letter-spacing: 3px;
+            color: var(--accent);
+            font-family: 'Segoe UI', sans-serif;
+            margin-bottom: 15px;
+        }
+        .veredicto p {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.15rem;
+            font-style: italic;
+            line-height: 1.7;
+            color: rgba(255,255,255,0.85);
+            max-width: 500px;
+            margin: 0 auto;
+        }
+        .veredicto .stars-final {
+            font-size: 1.5rem;
+            color: var(--accent);
+            letter-spacing: 4px;
+            margin-top: 20px;
+            display: block;
+        }
+
+        /* BTN VOLTAR */
+        .btn-back {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            margin-top: 40px;
+            text-decoration: none;
+            color: var(--primary);
+            font-weight: 600;
+            font-family: 'Segoe UI', sans-serif;
+            font-size: 0.9rem;
+        }
+        .btn-back:hover { opacity: 0.7; }
+
+        footer {
+            background: var(--ink);
+            padding: 40px 10%;
+            text-align: center;
+        }
+        footer p { color: rgba(255,255,255,0.35); font-size: 0.85rem; font-family: 'Segoe UI', sans-serif; }
+        footer p:first-child { font-style: italic; color: rgba(255,255,255,0.5); margin-bottom: 8px; font-family: 'Source Serif 4', serif; }
+    </style>
+</head>
+<body>
+
+<nav>
+    <a href="index.html" class="logo">Vidal Silva</a>
+    <a href="leituras.html" style="text-decoration:none; color: var(--gray); font-family: 'Segoe UI', sans-serif; font-size: 0.9rem;">← Voltar às Leituras</a>
+</nav>
+
+<!-- HERO -->
+<div class="hero">
+    <div class="hero-label">Review de Leitura</div>
+    <h1>Além da Força de Vontade: o que aprendi lendo <em>"O Poder do Hábito"</em></h1>
+    <p class="subtitle">Uma anatomia fascinante de como o nosso cérebro opera no "piloto automático" — e como podemos reprogramar esse código biológico.</p>
+    <div class="hero-meta">
+        <span><i class="fas fa-user"></i> Charles Duhigg</span>
+        <span><i class="fas fa-calendar-alt"></i> Março 2026</span>
+        <span><i class="fas fa-clock"></i> 8 min de leitura</span>
+        <span><i class="fas fa-tag"></i> Liderança & Comportamento</span>
+    </div>
+</div>
+
+<!-- RATING BAR -->
+<div class="rating-bar">
+    <span class="rating-label">Avaliação</span>
+    <span class="stars">★★★★★</span>
+    <span class="rating-tag">Leitura Obrigatória</span>
+    <span style="color: var(--gray); font-size: 0.85rem; font-family: 'Segoe UI', sans-serif; margin-left: auto;">Categoria: Comportamento & Produtividade</span>
+</div>
+
+<!-- CORPO -->
+<div class="article-body">
+
+    <p class="intro-text">Como alguém que lida diariamente com gestão de parcerias e análise de dados, minha expectativa era encontrar um guia de produtividade. O que encontrei foi uma anatomia de como nosso cérebro opera — e como podemos reprogramar esse código.</p>
+
+    <!-- 1 -->
+    <div class="secao">
+        <span class="secao-numero">01</span>
+        <h2>A Engenharia do Loop: Deixa, Rotina e Recompensa</h2>
+        <p>A primeira grande lição é que o hábito não é um bloco único de comportamento, mas um ciclo de três estágios que ocorre nos gânglios basais, uma parte primitiva do nosso cérebro.</p>
+
+        <div class="loop-visual">
+            <div class="loop-item">
+                <div class="loop-num">Estágio 1</div>
+                <div class="loop-name">Deixa</div>
+            </div>
+            <span class="loop-arrow">→</span>
+            <div class="loop-item">
+                <div class="loop-num">Estágio 2</div>
+                <div class="loop-name">Rotina</div>
+            </div>
+            <span class="loop-arrow">→</span>
+            <div class="loop-item">
+                <div class="loop-num">Estágio 3</div>
+                <div class="loop-name">Recompensa</div>
+            </div>
+        </div>
+
+        <p>O insight de ouro é o <strong>Anseio</strong>. O hábito só se torna inquebrável quando o cérebro começa a antecipar a recompensa antes mesmo da rotina terminar. É por isso que o frescor da pasta de dentes é o que nos faz escovar os dentes — muito mais do que a saúde bucal a longo prazo.</p>
+    </div>
+
+    <!-- 2 -->
+    <div class="secao">
+        <span class="secao-numero">02</span>
+        <h2>Hábitos Angulares: O Efeito Dominó</h2>
+        <p>Não precisamos mudar tudo de uma vez. Existem os chamados <strong>Hábitos Angulares</strong> — pequenas vitórias que desencadeiam uma reação em cadeia.</p>
+
+        <div class="pullquote">
+            <p>"Paul O'Neill focou exclusivamente na segurança do trabalho para transformar a Alcoa em uma máquina de lucro. Uma mudança angular que refatorou tudo ao redor."</p>
+            <cite>— Lição do livro</cite>
+        </div>
+
+        <p>No meu dia a dia, percebo que pequenas rotinas — organizar a agenda, praticar exercícios — acabam refatorando minha produtividade em áreas que pareciam não ter relação direta.</p>
+    </div>
+
+    <!-- 3 -->
+    <div class="secao">
+        <span class="secao-numero">03</span>
+        <h2>A Força de Vontade é um Músculo</h2>
+        <p>A ciência mostra que a autodisciplina é um recurso finito — ela se esgota ao longo do dia, o famoso <em>ego depletion</em>.</p>
+
+        <ul class="lista-editorial">
+            <li><strong>Pontos de Inflexão:</strong> Para não falhar, precisamos planejar como reagir aos momentos de estresse antes que eles aconteçam.</li>
+            <li><strong>O Método LATTE:</strong> Assim como o Starbucks treina baristas com um roteiro para clientes difíceis (Listen, Acknowledge, Take Action, Thank, Explain), podemos criar nossos próprios "scripts" para momentos de crise.</li>
+        </ul>
+    </div>
+
+    <!-- 4 -->
+    <div class="secao">
+        <span class="secao-numero">04</span>
+        <h2>O Lado Sombrio: Dados e Manipulação</h2>
+        <p>Como alguém que trabalha com tecnologia, o capítulo sobre a Target e o uso de Big Data me fez refletir profundamente.</p>
+
+        <div class="alerta">
+            <p>As empresas conseguem prever nossos hábitos — como uma gravidez — antes mesmo de nós termos consciência deles. Elas usam a <strong>Técnica do Sanduíche</strong>: embrulham algo novo em algo familiar para que nosso cérebro não rejeite a mudança.</p>
+        </div>
+
+        <p>É um lembrete poderoso de que nossa privacidade e nossas escolhas estão constantemente sob o radar de algoritmos treinados para nos conhecer melhor do que nós mesmos.</p>
+    </div>
+
+    <!-- 5 -->
+    <div class="secao">
+        <span class="secao-numero">05</span>
+        <h2>Responsabilidade e Consciência</h2>
+        <p>O livro encerra com uma provocação ética: somos responsáveis pelo que fazemos no automático?</p>
+
+        <div class="pullquote">
+            <p>"Uma vez que entendemos como um hábito funciona, ganhamos a liberdade — e, consequentemente, a responsabilidade — de transformá-lo."</p>
+            <cite>— Charles Duhigg</cite>
+        </div>
+
+        <p>Como dizia William James, o primeiro ato de livre-arbítrio é acreditar que ele existe.</p>
+    </div>
+
+    <!-- FRAMEWORK FINAL -->
+    <div class="framework-box">
+        <h3>O Guia Prático — Framework de Mudança</h3>
+        <ol class="framework-steps">
+            <li>Identifique a rotina que deseja mudar.</li>
+            <li>Experimente recompensas diferentes para isolar o que você realmente anseia.</li>
+            <li>Isole a deixa: lugar, hora, estado emocional.</li>
+            <li>Tenha um plano claro: "Quando eu vir X, farei Y".</li>
+        </ol>
+    </div>
+
+    <!-- VEREDICTO -->
+    <div class="veredicto">
+        <div class="veredicto-label">Veredicto Final</div>
+        <p>Mudar hábitos não é fácil nem rápido. Mas entender a engenharia por trás deles é o primeiro passo para deixar de ser refém do próprio piloto automático.</p>
+        <span class="stars-final">★★★★★</span>
+    </div>
+
+    <a href="leituras.html" class="btn-back">
+        <i class="fas fa-arrow-left"></i> Voltar para Minhas Leituras
+    </a>
+
+</div>
+
+<footer>
+    <p>"Acreditando na liderança que respeita o fluxo humano e utiliza a precisão dos dados para guiar o caminho."</p>
+    <p>&copy; 2026 Vidal Silva | Partner Sales Manager @ Google Education</p>
+</footer>
+
+</body>
+</html>
