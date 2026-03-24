@@ -1,0 +1,805 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Plano de Storytelling Comercial — 8 Semanas</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;1,400&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --ink: #1a1714;
+    --ink-light: #6b6560;
+    --ink-faint: #b5b0aa;
+    --paper: #faf8f4;
+    --paper-warm: #f2ede4;
+    --paper-card: #ffffff;
+    --accent: #c75c2a;
+    --accent-light: #f5e8e0;
+    --accent-2: #2a6b8a;
+    --accent-2-light: #e0eff5;
+    --green: #3a6b3a;
+    --green-light: #e4f0e4;
+    --border: rgba(26,23,20,0.10);
+    --border-strong: rgba(26,23,20,0.20);
+    --radius: 4px;
+    --radius-lg: 10px;
+  }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    background: var(--paper);
+    color: var(--ink);
+    font-family: 'DM Sans', sans-serif;
+    font-weight: 300;
+    line-height: 1.7;
+    min-height: 100vh;
+  }
+
+  /* ── HERO ── */
+  .hero {
+    background: var(--ink);
+    color: var(--paper);
+    padding: 80px 40px 60px;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .hero::before {
+    content: '';
+    position: absolute;
+    top: -60px; right: -60px;
+    width: 320px; height: 320px;
+    border-radius: 50%;
+    background: var(--accent);
+    opacity: 0.12;
+  }
+
+  .hero::after {
+    content: '"';
+    position: absolute;
+    bottom: -40px; left: 30px;
+    font-family: 'Playfair Display', serif;
+    font-size: 260px;
+    color: rgba(255,255,255,0.04);
+    line-height: 1;
+  }
+
+  .hero-inner { max-width: 780px; margin: 0 auto; position: relative; }
+
+  .hero-eyebrow {
+    font-size: 11px;
+    font-weight: 500;
+    letter-spacing: .14em;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin-bottom: 20px;
+  }
+
+  .hero h1 {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(32px, 5vw, 52px);
+    font-weight: 600;
+    line-height: 1.15;
+    margin-bottom: 20px;
+    color: #fff;
+  }
+
+  .hero h1 em {
+    font-style: italic;
+    color: var(--accent);
+  }
+
+  .hero-desc {
+    font-size: 16px;
+    color: rgba(250,248,244,0.65);
+    max-width: 560px;
+    line-height: 1.75;
+  }
+
+  .hero-meta {
+    display: flex;
+    gap: 24px;
+    margin-top: 36px;
+    flex-wrap: wrap;
+  }
+
+  .hero-pill {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 12px;
+    color: rgba(250,248,244,0.55);
+    font-weight: 400;
+  }
+
+  .hero-pill span {
+    display: inline-block;
+    width: 6px; height: 6px;
+    border-radius: 50%;
+    background: var(--accent);
+  }
+
+  /* ── TABS ── */
+  .tabs-wrap {
+    background: var(--paper-warm);
+    border-bottom: 1px solid var(--border);
+    position: sticky;
+    top: 0;
+    z-index: 100;
+  }
+
+  .tabs {
+    max-width: 780px;
+    margin: 0 auto;
+    display: flex;
+    gap: 0;
+    padding: 0 40px;
+  }
+
+  .tab-btn {
+    padding: 18px 28px;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 13px;
+    font-weight: 400;
+    color: var(--ink-light);
+    background: transparent;
+    border: none;
+    border-bottom: 2px solid transparent;
+    cursor: pointer;
+    transition: all .2s;
+    white-space: nowrap;
+    position: relative;
+    top: 1px;
+  }
+
+  .tab-btn:hover { color: var(--ink); }
+
+  .tab-btn.active {
+    color: var(--ink);
+    font-weight: 500;
+    border-bottom-color: var(--accent);
+  }
+
+  /* ── MAIN ── */
+  .main {
+    max-width: 780px;
+    margin: 0 auto;
+    padding: 48px 40px 80px;
+  }
+
+  .month-intro {
+    margin-bottom: 36px;
+    padding-bottom: 28px;
+    border-bottom: 1px solid var(--border);
+  }
+
+  .month-intro h2 {
+    font-family: 'Playfair Display', serif;
+    font-size: 26px;
+    font-weight: 400;
+    color: var(--ink);
+    margin-bottom: 10px;
+  }
+
+  .month-intro p {
+    font-size: 14px;
+    color: var(--ink-light);
+    max-width: 560px;
+  }
+
+  /* ── WEEK CARDS ── */
+  .weeks { display: flex; flex-direction: column; gap: 16px; }
+
+  .week {
+    background: var(--paper-card);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-lg);
+    overflow: hidden;
+    transition: border-color .2s, box-shadow .2s;
+  }
+
+  .week:hover { border-color: var(--border-strong); }
+  .week.open { box-shadow: 0 4px 24px rgba(26,23,20,0.07); }
+
+  .week-header {
+    display: grid;
+    grid-template-columns: auto 1fr auto;
+    align-items: center;
+    gap: 16px;
+    padding: 22px 24px;
+    cursor: pointer;
+    user-select: none;
+  }
+
+  .week-num {
+    font-family: 'Playfair Display', serif;
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: .1em;
+    text-transform: uppercase;
+    padding: 4px 12px;
+    border-radius: 999px;
+    white-space: nowrap;
+  }
+
+  .m1 .week-num { background: var(--accent-light); color: var(--accent); }
+  .m2 .week-num { background: var(--green-light); color: var(--green); }
+
+  .week-titles { min-width: 0; }
+
+  .week-title {
+    font-size: 15px;
+    font-weight: 500;
+    color: var(--ink);
+    margin-bottom: 3px;
+    line-height: 1.4;
+  }
+
+  .week-sub {
+    font-size: 12px;
+    color: var(--ink-faint);
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
+  .week-chevron {
+    color: var(--ink-faint);
+    font-size: 12px;
+    transition: transform .25s;
+    flex-shrink: 0;
+  }
+
+  .week.open .week-chevron { transform: rotate(180deg); }
+
+  /* ── WEEK BODY ── */
+  .week-body {
+    display: none;
+    padding: 0 24px 24px;
+    border-top: 1px solid var(--border);
+    animation: fadeIn .2s ease;
+  }
+
+  @keyframes fadeIn { from { opacity: 0; transform: translateY(-4px); } to { opacity: 1; transform: translateY(0); } }
+
+  .week.open .week-body { display: block; }
+
+  .section-label {
+    font-size: 10px;
+    font-weight: 500;
+    letter-spacing: .12em;
+    text-transform: uppercase;
+    color: var(--ink-faint);
+    margin-top: 22px;
+    margin-bottom: 10px;
+  }
+
+  .concept {
+    background: var(--paper-warm);
+    border-radius: var(--radius);
+    padding: 14px 16px;
+    margin-bottom: 10px;
+  }
+
+  .concept p { font-size: 13.5px; color: var(--ink-light); line-height: 1.65; }
+  .concept strong { color: var(--ink); font-weight: 500; }
+  .concept em { color: var(--ink); font-style: italic; }
+
+  .tags { display: flex; flex-wrap: wrap; gap: 6px; }
+
+  .tag {
+    font-size: 11px;
+    font-weight: 500;
+    padding: 4px 12px;
+    border-radius: 999px;
+    background: var(--paper-warm);
+    color: var(--ink-light);
+    border: 1px solid var(--border);
+  }
+
+  .practice {
+    border-radius: var(--radius);
+    padding: 16px 18px;
+    margin-top: 4px;
+  }
+
+  .m1 .practice { background: var(--accent-light); border-left: 3px solid var(--accent); }
+  .m2 .practice { background: var(--green-light); border-left: 3px solid var(--green); }
+
+  .practice-label {
+    font-size: 11px;
+    font-weight: 500;
+    letter-spacing: .08em;
+    text-transform: uppercase;
+    margin-bottom: 8px;
+  }
+
+  .m1 .practice-label { color: var(--accent); }
+  .m2 .practice-label { color: var(--green); }
+
+  .practice p { font-size: 13.5px; line-height: 1.65; }
+  .m1 .practice p { color: #8b3d1a; }
+  .m2 .practice p { color: #2a4e2a; }
+  .practice strong { font-weight: 500; }
+
+  .deliverable {
+    display: flex;
+    align-items: flex-start;
+    gap: 10px;
+    font-size: 13px;
+    color: var(--ink-light);
+    padding: 4px 0;
+    line-height: 1.5;
+  }
+
+  .deliverable::before {
+    content: '→';
+    color: var(--ink-faint);
+    flex-shrink: 0;
+    margin-top: 1px;
+  }
+
+  /* ── READING LIST ── */
+  .reading {
+    margin-top: 48px;
+    padding: 28px 32px;
+    background: var(--ink);
+    border-radius: var(--radius-lg);
+    color: var(--paper);
+  }
+
+  .reading h3 {
+    font-family: 'Playfair Display', serif;
+    font-size: 18px;
+    font-weight: 400;
+    margin-bottom: 16px;
+    color: #fff;
+  }
+
+  .books {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    gap: 12px;
+  }
+
+  .book {
+    padding: 12px 14px;
+    background: rgba(255,255,255,0.06);
+    border-radius: var(--radius);
+    border: 1px solid rgba(255,255,255,0.08);
+  }
+
+  .book-title {
+    font-size: 13px;
+    font-weight: 500;
+    color: rgba(250,248,244,0.9);
+    margin-bottom: 3px;
+    font-style: italic;
+    font-family: 'Playfair Display', serif;
+  }
+
+  .book-author { font-size: 11px; color: rgba(250,248,244,0.4); }
+
+  /* ── PRINCIPLE BANNER ── */
+  .principle {
+    margin: 36px 0 0;
+    padding: 24px 28px;
+    border-left: 3px solid var(--accent);
+    background: var(--accent-light);
+    border-radius: 0 var(--radius-lg) var(--radius-lg) 0;
+  }
+
+  .principle p {
+    font-family: 'Playfair Display', serif;
+    font-size: 16px;
+    font-style: italic;
+    color: var(--ink);
+    line-height: 1.6;
+  }
+
+  .principle cite {
+    display: block;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 12px;
+    color: var(--ink-faint);
+    font-style: normal;
+    margin-top: 8px;
+    letter-spacing: .04em;
+  }
+
+  /* ── MONTH TOGGLE ── */
+  .month-panel { display: none; }
+  .month-panel.active { display: block; }
+
+  /* ── RESPONSIVE ── */
+  @media (max-width: 600px) {
+    .hero { padding: 60px 24px 48px; }
+    .tabs { padding: 0 16px; }
+    .tab-btn { padding: 16px 16px; font-size: 12px; }
+    .main { padding: 36px 24px 60px; }
+    .week-header { padding: 18px 18px; }
+    .week-body { padding: 0 18px 20px; }
+    .week-sub { display: none; }
+    .books { grid-template-columns: 1fr 1fr; }
+  }
+</style>
+</head>
+<body>
+
+<!-- HERO -->
+<header class="hero">
+  <div class="hero-inner">
+    <div class="hero-eyebrow">Desenvolvimento Profissional · 8 Semanas</div>
+    <h1>Storytelling <em>Estratégico</em><br>para Consultores Comerciais</h1>
+    <p class="hero-desc">Da neurociência da persuasão à execução em vendas B2B — um plano prático para transformar dados em narrativas que vendem.</p>
+    <div class="hero-meta">
+      <div class="hero-pill"><span></span> 2 meses de desenvolvimento</div>
+      <div class="hero-pill"><span></span> Foco em B2B e channel sales</div>
+      <div class="hero-pill"><span></span> Frameworks testados + práticas semanais</div>
+    </div>
+  </div>
+</header>
+
+<!-- TABS -->
+<nav class="tabs-wrap">
+  <div class="tabs">
+    <button class="tab-btn active" onclick="showMonth('m1', this)">Mês 1 — A Base Humana</button>
+    <button class="tab-btn" onclick="showMonth('m2', this)">Mês 2 — Execução e Escala</button>
+  </div>
+</nav>
+
+<!-- MAIN -->
+<main class="main">
+
+  <!-- MÊS 1 -->
+  <div id="m1" class="month-panel active">
+    <div class="month-intro">
+      <h2>A base e o diferencial humano</h2>
+      <p>O foco aqui é entender por que a história importa mais que o dado isolado — e construir os alicerces da sua voz narrativa em contexto comercial.</p>
+    </div>
+    <div class="weeks">
+
+      <!-- S1 -->
+      <div class="week m1" onclick="toggle(this)">
+        <div class="week-header">
+          <span class="week-num">Semana 1</span>
+          <div class="week-titles">
+            <div class="week-title">Por que a história vende mais que o dado</div>
+            <div class="week-sub">Neurociência da persuasão · O fim da apresentação técnica</div>
+          </div>
+          <span class="week-chevron">▼</span>
+        </div>
+        <div class="week-body">
+          <div class="section-label">Conceitos-chave</div>
+          <div class="concept">
+            <p><strong>O paradoxo do dado:</strong> O comprador já tem acesso a dados. O que ele não tem é um significado para eles. Quem dá significado, fecha. Quem apresenta planilha, perde para o Google.</p>
+          </div>
+          <div class="concept">
+            <p><strong>Framework: Dado → Insight → Narrativa → Ação.</strong> Cada dado sozinho é neutro. Seu trabalho como consultor é percorrer esse caminho antes do cliente — e levá-lo junto na história.</p>
+          </div>
+          <div class="concept">
+            <p><strong>IA democratizou a forma, não a origem.</strong> Arquétipos (herói, mentor, jornada) estão disponíveis para todos. Sua vantagem competitiva é a <em>experiência vivida</em> que alimenta a história — cicatrizes de negociação, contexto LATAM, anos de EdTech.</p>
+          </div>
+          <div class="section-label">Frameworks para estudar</div>
+          <div class="tags">
+            <span class="tag">Story Spine (Pixar)</span>
+            <span class="tag">Jornada do Herói simplificada</span>
+            <span class="tag">SCR — Situação · Complicação · Resolução</span>
+          </div>
+          <div class="section-label">Prática da semana</div>
+          <div class="practice">
+            <div class="practice-label">Exercício: "O dado que mudou tudo"</div>
+            <p>Escolha um KPI que você apresentou a um parceiro (taxa de adoção, expansão de cobertura, etc.). Escreva duas versões: uma com o dado puro e outra como narrativa SCR de 3 parágrafos. Compare o impacto emocional das duas versões.</p>
+          </div>
+          <div class="section-label">Entregável</div>
+          <div class="deliverable">Narrativa SCR escrita sobre um resultado real de parceiro ou cliente</div>
+        </div>
+      </div>
+
+      <!-- S2 -->
+      <div class="week m1" onclick="toggle(this)">
+        <div class="week-header">
+          <span class="week-num">Semana 2</span>
+          <div class="week-titles">
+            <div class="week-title">Neurociência e o efeito do transporte narrativo</div>
+            <div class="week-sub">Oxitocina · Vulnerabilidade estratégica · Confiança acelerada</div>
+          </div>
+          <span class="week-chevron">▼</span>
+        </div>
+        <div class="week-body">
+          <div class="section-label">Conceitos-chave</div>
+          <div class="concept">
+            <p><strong>Transporte narrativo (Green & Brock, 2000):</strong> Quando alguém está imerso em uma história, a resistência cognitiva cai. O comprador para de contra-argumentar e começa a sentir. Você não está "convencendo" — está criando uma experiência compartilhada.</p>
+          </div>
+          <div class="concept">
+            <p><strong>Oxitocina e empatia:</strong> Histórias com arco de tensão → resolução disparam oxitocina. Isso aumenta generosidade e confiança. Paul Zak (Claremont Graduate University) mediu isso: narrativas com tensão dramática = mais disposição para cooperar.</p>
+          </div>
+          <div class="concept">
+            <p><strong>Vulnerabilidade estratégica:</strong> Compartilhar uma falha real (não uma fraqueza) humaniza e cria espelhamento. O cliente pensa: <em>"esse cara é real, não é só pitch."</em> Brené Brown chama de grounded confidence — coragem sem arrogância.</p>
+          </div>
+          <div class="concept">
+            <p><strong>Regra do 30/70:</strong> Em uma conversa comercial, 30% do tempo é sua história/contexto. 70% é espaço para o cliente. A narrativa abre — o silêncio fecha.</p>
+          </div>
+          <div class="section-label">Prática da semana</div>
+          <div class="practice">
+            <div class="practice-label">Exercício: "A falha que me ensinou"</div>
+            <p>Escreva um parágrafo de 5–7 linhas sobre uma falha real sua em vendas ou gestão de parceiros. Mostre a falha, o impacto emocional, o que você aprendeu, e como isso mudou sua abordagem. Leia em voz alta e cronometre: deve soar como conversa, não como relatório.</p>
+          </div>
+          <div class="section-label">Entregável</div>
+          <div class="deliverable">Parágrafo de vulnerabilidade estratégica pronto para usar em abertura de conversa comercial</div>
+        </div>
+      </div>
+
+      <!-- S3 -->
+      <div class="week m1" onclick="toggle(this)">
+        <div class="week-header">
+          <span class="week-num">Semana 3</span>
+          <div class="week-titles">
+            <div class="week-title">Business Storytelling — transformar dados em jornada</div>
+            <div class="week-sub">ROI como narrativa · O dashboard que "grita" · Cases que vendem</div>
+          </div>
+          <span class="week-chevron">▼</span>
+        </div>
+        <div class="week-body">
+          <div class="section-label">Conceitos-chave</div>
+          <div class="concept">
+            <p><strong>O framework STAR comercial:</strong> Situação (contexto do cliente) → Tensão (o problema que ele não nomeou ainda) → Ação (o que você ou o parceiro fez) → Resultado (com número e emoção). Diferente do STAR de RH: aqui a ênfase é na <em>tensão</em>, não na tarefa.</p>
+          </div>
+          <div class="concept">
+            <p><strong>Narrativa de dado:</strong> Em vez de "crescemos 40% em adoção", diga: <em>"Em março, 3 de cada 10 professores ainda não tinham aberto a plataforma. Em agosto, essa escola virou referência nacional."</em> O número continua lá — mas agora tem personagens, tempo e transformação.</p>
+          </div>
+          <div class="concept">
+            <p><strong>O "villain" no storytelling B2B:</strong> Todo bom case precisa de um vilão — não uma empresa concorrente, mas um obstáculo sistêmico (falta de adoção, resistência cultural, orçamento fragmentado). Isso libera o cliente de se sentir culpado e o posiciona como herói que superou algo real.</p>
+          </div>
+          <div class="section-label">Frameworks para estudar</div>
+          <div class="tags">
+            <span class="tag">STAR comercial</span>
+            <span class="tag">Before / After / Bridge</span>
+            <span class="tag">Problem / Agitate / Solve</span>
+          </div>
+          <div class="section-label">Prática da semana</div>
+          <div class="practice">
+            <div class="practice-label">Exercício: "O dashboard que grita"</div>
+            <p>Pegue um relatório de desempenho de parceiro (ou crie um fictício realista). Identifique o dado mais crítico. Construa uma narrativa oral de 3 minutos seguindo o STAR comercial: comece com a cena (quem era esse parceiro antes?), introduza a tensão, mostre a virada, termine com o impacto humano além do número.</p>
+          </div>
+          <div class="section-label">Entregável</div>
+          <div class="deliverable">Case de parceiro reescrito como narrativa STAR — pronto para QBR ou pitch de novo parceiro</div>
+        </div>
+      </div>
+
+      <!-- S4 -->
+      <div class="week m1" onclick="toggle(this)">
+        <div class="week-header">
+          <span class="week-num">Semana 4</span>
+          <div class="week-titles">
+            <div class="week-title">Sua bússola narrativa — identidade e direção</div>
+            <div class="week-sub">Narrative identity · Personal brand story · Logline profissional</div>
+          </div>
+          <span class="week-chevron">▼</span>
+        </div>
+        <div class="week-body">
+          <div class="section-label">Conceitos-chave</div>
+          <div class="concept">
+            <p><strong>Narrative identity (Dan McAdams):</strong> Somos a história que contamos sobre nós mesmos. Profissionais que articulam claramente seu "por que" criam mais confiança, são mais lembrados e têm mais facilidade de ser indicados. Seu posicionamento como AE/BDM precisa de uma história, não só de um currículo.</p>
+          </div>
+          <div class="concept">
+            <p><strong>A intenção da narrativa:</strong> Antes de qualquer apresentação, reunião ou e-mail, pergunte: <em>"Qual estado emocional quero que o cliente/parceiro sinta ao terminar essa conversa?"</em> Confiança? Urgência? Curiosidade? Isso define qual história você conta e como.</p>
+          </div>
+          <div class="concept">
+            <p><strong>O "logline" profissional:</strong> Roteiristas de Hollywood usam loglines para sintetizar filmes inteiros em 1–2 frases. Você precisa do seu: <em>"Ajudo [perfil de cliente] a [resultado concreto] mesmo quando [principal obstáculo]."</em></p>
+          </div>
+          <div class="section-label">Prática da semana</div>
+          <div class="practice">
+            <div class="practice-label">Exercício: "Minha bússola em 3 camadas"</div>
+            <p><strong>Camada 1 — Logline:</strong> Escreva sua frase profissional no formato acima.<br><br><strong>Camada 2 — Origem:</strong> Em 3 parágrafos, descreva o momento que te formou como consultor comercial — a virada que definiu como você trabalha hoje.<br><br><strong>Camada 3 — Direção:</strong> Que papel você quer jogar no mercado nos próximos 5 anos? Escreva como uma cena: onde você está, o que está fazendo, quem está ao lado.</p>
+          </div>
+          <div class="section-label">Entregável</div>
+          <div class="deliverable">Documento "Bússola Narrativa" — 1 logline + história de origem + visão de futuro — base do LinkedIn e pitches de entrevista</div>
+        </div>
+      </div>
+
+    </div><!-- /weeks -->
+
+    <div class="principle">
+      <p>"A IA democratizou a forma. Sua vantagem competitiva é a experiência vivida que a alimenta — cicatrizes de negociação, contexto LATAM, anos na trincheira."</p>
+      <cite>Princípio central do mês 1</cite>
+    </div>
+  </div>
+
+  <!-- MÊS 2 -->
+  <div id="m2" class="month-panel">
+    <div class="month-intro">
+      <h2>Execução, escala e o seu sistema</h2>
+      <p>Aqui você aprende a usar a tecnologia para potencializar sua voz — não para substituí-la — e consolida um sistema narrativo que funciona em qualquer situação comercial.</p>
+    </div>
+    <div class="weeks">
+
+      <!-- S5 -->
+      <div class="week m2" onclick="toggle(this)">
+        <div class="week-header">
+          <span class="week-num">Semana 5</span>
+          <div class="week-titles">
+            <div class="week-title">Histórias adaptativas — contexto em tempo real</div>
+            <div class="week-sub">Storytelling situacional · Leitura de sala · Pivô narrativo</div>
+          </div>
+          <span class="week-chevron">▼</span>
+        </div>
+        <div class="week-body">
+          <div class="section-label">Conceitos-chave</div>
+          <div class="concept">
+            <p><strong>Storytelling situacional:</strong> A melhor história não é a mais preparada — é a mais relevante para aquele momento. Consultores de alto desempenho têm um repertório de 5–7 histórias-chave e sabem qual puxar dependendo do interlocutor, humor da sala e estágio do pipeline.</p>
+          </div>
+          <div class="concept">
+            <p><strong>O "hook" de 10 segundos:</strong> As primeiras 2 frases decidem se a pessoa vai ouvir o resto. Não comece com contexto — comece com a cena mais interessante ou com a pergunta que o cliente não esperava. Depois volte para o início.</p>
+          </div>
+          <div class="concept">
+            <p><strong>Sinais de desengajamento e pivô:</strong> Aprenda a ler: cruzamento de braços, olhar para o celular, respostas monossilábicas. Quando aparecerem, pivote: <em>"Posso mudar o ângulo — o que seria mais útil para vocês nesse momento?"</em> Isso em si é uma habilidade narrativa.</p>
+          </div>
+          <div class="section-label">Prática da semana</div>
+          <div class="practice">
+            <div class="practice-label">Exercício: "Biblioteca de histórias"</div>
+            <p>Mapeie 5 situações comerciais recorrentes (primeira reunião com parceiro, QBR difícil, resistência de preço, expansão de conta, perda de deal). Para cada uma, escreva a história que você contaria — com hook de 10 segundos, contexto mínimo e resolução relevante. Esse é seu repertório ativo.</p>
+          </div>
+          <div class="section-label">Entregável</div>
+          <div class="deliverable">Biblioteca de 5 histórias comerciais indexadas por situação — para usar em vendas e entrevistas</div>
+        </div>
+      </div>
+
+      <!-- S6 -->
+      <div class="week m2" onclick="toggle(this)">
+        <div class="week-header">
+          <span class="week-num">Semana 6</span>
+          <div class="week-titles">
+            <div class="week-title">Storytelling em apresentações e demos</div>
+            <div class="week-sub">Estrutura de pitch · Slide como cena · Apresentar sem ler</div>
+          </div>
+          <span class="week-chevron">▼</span>
+        </div>
+        <div class="week-body">
+          <div class="section-label">Conceitos-chave</div>
+          <div class="concept">
+            <p><strong>O modelo Minto (Pyramid Principle):</strong> Comece pela conclusão (o que você quer que o cliente faça ou sinta), depois apresente os argumentos, depois os dados. O oposto do relatório acadêmico — e muito mais eficaz em ambientes B2B com tempo limitado.</p>
+          </div>
+          <div class="concept">
+            <p><strong>Slide como cena cinematográfica:</strong> Cada slide deve ter um conflito implícito. "Cobertura atual vs. potencial de mercado" é um conflito. "Adoção em 3 meses" é uma jornada. Slides que só mostram dados sem tensão são wallpaper — ninguém lembra.</p>
+          </div>
+          <div class="concept">
+            <p><strong>A regra do "e daí?":</strong> Para cada slide ou dado, pergunte: <em>"e daí para o cliente?"</em> Se você não consegue responder em 1 frase, o slide não deveria estar lá. Isso reduz decks de 40 slides para 12 que realmente vendem.</p>
+          </div>
+          <div class="section-label">Prática da semana</div>
+          <div class="practice">
+            <div class="practice-label">Exercício: "Grave e assista"</div>
+            <p>Grave um vídeo de 3 minutos explicando um resultado de parceiro ou produto complexo usando apenas analogias e histórias — sem jargão técnico. Assista e identifique: onde você perdeu o fio? Onde a energia caiu? Onde estava mais autêntico? Refaça uma vez com essas correções.</p>
+          </div>
+          <div class="section-label">Entregável</div>
+          <div class="deliverable">Vídeo de 3 minutos gravado e revisado — habilidade de apresentação oral sem slides como muleta</div>
+        </div>
+      </div>
+
+      <!-- S7 -->
+      <div class="week m2" onclick="toggle(this)">
+        <div class="week-header">
+          <span class="week-num">Semana 7</span>
+          <div class="week-titles">
+            <div class="week-title">Storytelling escrito — LinkedIn, e-mail e proposta</div>
+            <div class="week-sub">Narrativa em texto · Cold outreach que abre portas · Proposta que conecta</div>
+          </div>
+          <span class="week-chevron">▼</span>
+        </div>
+        <div class="week-body">
+          <div class="section-label">Conceitos-chave</div>
+          <div class="concept">
+            <p><strong>O "subject line" como primeira linha da história:</strong> Em e-mail frio, o assunto é o hook. Não <em>"Parceria Comercial"</em> — mas <em>"Como a [empresa similar] expandiu cobertura em 60% em 90 dias"</em>. O cliente precisa se ver na história antes de abrir.</p>
+          </div>
+          <div class="concept">
+            <p><strong>LinkedIn como narrativa contínua:</strong> Posts que performam bem no B2B seguem este padrão: cena de abertura (algo real que aconteceu) → tensão ou insight inesperado → virada → lição acionável. Não listas. Não conteúdo genérico. Experiências reais com nome e lugar.</p>
+          </div>
+          <div class="concept">
+            <p><strong>Proposta como caso de sucesso antecipado:</strong> A proposta mais eficaz não descreve o produto — descreve o futuro do cliente se ele decidir avançar. <em>"Imagine que em 6 meses, seus parceiros..."</em> Isso muda o enquadramento de custo para investimento.</p>
+          </div>
+          <div class="section-label">Prática da semana</div>
+          <div class="practice">
+            <div class="practice-label">Exercício: "Post + e-mail de prospecção"</div>
+            <p>Escreva um post de LinkedIn de 150–200 palavras baseado em uma experiência real sua. Depois escreva um e-mail de cold outreach de 5 linhas para um perfil de decisor — usando a mesma história como abertura adaptada.</p>
+          </div>
+          <div class="section-label">Entregável</div>
+          <div class="deliverable">Post de LinkedIn publicado (ou rascunho final) + template de e-mail de prospecção narrativo</div>
+        </div>
+      </div>
+
+      <!-- S8 -->
+      <div class="week m2" onclick="toggle(this)">
+        <div class="week-header">
+          <span class="week-num">Semana 8</span>
+          <div class="week-titles">
+            <div class="week-title">Consolidação — seu sistema de storytelling</div>
+            <div class="week-sub">Integração · IA como acelerador · Projeto final</div>
+          </div>
+          <span class="week-chevron">▼</span>
+        </div>
+        <div class="week-body">
+          <div class="section-label">Conceitos-chave</div>
+          <div class="concept">
+            <p><strong>IA como estrutura, você como alma:</strong> Use ferramentas de IA para esboçar frameworks (SCR, STAR, Pirâmide de Minto), revisar clareza e identificar onde a narrativa perde ritmo. Nunca use para gerar a experiência — essa é sua vantagem irreproduzível.</p>
+          </div>
+          <div class="concept">
+            <p><strong>O sistema de 3 peças:</strong> Todo consultor comercial eficaz em storytelling tem: (1) uma história de origem pessoal autêntica, (2) um repertório de casos de clientes com estrutura STAR, e (3) um modelo de apresentação que começa com tensão. Com esses três, você está pronto para qualquer situação.</p>
+          </div>
+          <div class="concept">
+            <p><strong>Iteração contínua:</strong> Storytelling não é uma habilidade estática — cada conversa comercial é um dado novo. Depois de cada reunião importante, escreva 3 linhas: o que funcionou narrativamente, o que caiu flat, o que você faria diferente. Em 6 meses, esse diário vale mais que qualquer curso.</p>
+          </div>
+          <div class="section-label">Prática da semana</div>
+          <div class="practice">
+            <div class="practice-label">Projeto final: "Seu sistema narrativo completo"</div>
+            <p><strong>Reúna em um documento:</strong><br><br>
+            1. Logline profissional (da semana 4)<br>
+            2. História de origem (da semana 4)<br>
+            3. Biblioteca de 5 histórias comerciais (da semana 5)<br>
+            4. 1 case reescrito em STAR (da semana 3)<br>
+            5. 1 post de LinkedIn publicado (da semana 7)<br><br>
+            Esse é seu kit de storytelling ativo — revisável a cada trimestre.</p>
+          </div>
+          <div class="section-label">Entregável</div>
+          <div class="deliverable">Documento "Sistema Narrativo Pessoal" — seu ativo comercial de longo prazo</div>
+        </div>
+      </div>
+
+    </div><!-- /weeks -->
+
+    <div class="principle">
+      <p>"Storytelling não é sobre contar histórias bonitas. É sobre criar o estado emocional certo no momento certo — para que o cliente tome a decisão que já faz sentido para ele."</p>
+      <cite>Princípio central do mês 2</cite>
+    </div>
+  </div>
+
+  <!-- LEITURAS -->
+  <div class="reading">
+    <h3>Leituras recomendadas</h3>
+    <div class="books">
+      <div class="book">
+        <div class="book-title">Building a StoryBrand</div>
+        <div class="book-author">Donald Miller</div>
+      </div>
+      <div class="book">
+        <div class="book-title">Made to Stick</div>
+        <div class="book-author">Chip & Dan Heath</div>
+      </div>
+      <div class="book">
+        <div class="book-title">The Storyteller's Secret</div>
+        <div class="book-author">Carmine Gallo</div>
+      </div>
+      <div class="book">
+        <div class="book-title">Dare to Lead</div>
+        <div class="book-author">Brené Brown</div>
+      </div>
+      <div class="book">
+        <div class="book-title">The McKinsey Way</div>
+        <div class="book-author">Ethan Rasiel</div>
+      </div>
+      <div class="book">
+        <div class="book-title">Pitch Anything</div>
+        <div class="book-author">Oren Klaff</div>
+      </div>
+    </div>
+  </div>
+
+</main>
+
+<script>
+  function toggle(card) {
+    card.classList.toggle('open');
+  }
+
+  function showMonth(id, btn) {
+    document.querySelectorAll('.month-panel').forEach(p => p.classList.remove('active'));
+    document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+    document.getElementById(id).classList.add('active');
+    btn.classList.add('active');
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  }
+</script>
+</body>
+</html>
