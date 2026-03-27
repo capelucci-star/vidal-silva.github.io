@@ -10,41 +10,93 @@
         body { font-family: 'Segoe UI', Arial, sans-serif; margin: 0; background: var(--light); color: var(--dark); line-height: 1.6; }
         nav { display: flex; justify-content: space-between; padding: 20px 10%; background: white; align-items: center; box-shadow: 0 2px 4px rgba(0,0,0,0.05); }
         .logo { font-weight: bold; font-size: 1.2rem; color: var(--primary); text-decoration: none; }
-        .container { max-width: 800px; margin: 50px auto; padding: 0 20px; }
-        
-        h1 { border-left: 5px solid var(--primary); padding-left: 15px; margin-bottom: 40px; }
+        .container { max-width: 900px; margin: 50px auto; padding: 0 20px 60px; }
 
-        .recipe-card { 
-            background: white; 
-            padding: 30px; 
-            border-radius: 15px; 
-            box-shadow: 0 4px 15px rgba(0,0,0,0.05); 
-            border: 1px solid #eee; 
-            margin-bottom: 30px;
+        h1 { border-left: 5px solid var(--primary); padding-left: 15px; margin-bottom: 10px; }
+        .page-subtitle { color: var(--gray); margin-bottom: 50px; }
+
+        /* BOX TEMÁTICO */
+        .tema-box {
+            background: white;
+            border-radius: 16px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.06);
+            border: 1px solid #eee;
+            margin-bottom: 40px;
+            overflow: hidden;
+        }
+        .tema-header {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            padding: 20px 30px;
+            border-bottom: 1px solid #f0f0f0;
+        }
+        .tema-icon {
+            font-size: 1.1rem;
+            color: white;
+            background: var(--primary);
+            width: 36px;
+            height: 36px;
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+        }
+        .tema-header h2 { margin: 0; font-size: 1.1rem; color: var(--dark); }
+        .tema-count {
+            margin-left: auto;
+            background: #f0f4ff;
+            color: var(--primary);
+            font-size: 0.75rem;
+            font-weight: 700;
+            padding: 3px 10px;
+            border-radius: 20px;
+        }
+
+        /* CARDS DENTRO DO BOX */
+        .tema-cards { padding: 10px 30px 20px; }
+
+        .recipe-card {
             display: flex;
             align-items: flex-start;
-            gap: 25px;
-            transition: 0.3s;
+            gap: 20px;
+            padding: 20px 0;
+            border-bottom: 1px solid #f5f5f5;
+            transition: 0.2s;
         }
-        .recipe-card:hover { transform: translateX(10px); }
+        .recipe-card:last-child { border-bottom: none; }
+        .recipe-card:hover { transform: translateX(6px); }
 
         .icon-circle {
             background: #e8f0fe;
-            width: 70px;
-            height: 70px;
+            width: 52px;
+            height: 52px;
             border-radius: 50%;
             display: flex;
             align-items: center;
             justify-content: center;
             flex-shrink: 0;
         }
-        .icon-circle i { font-size: 1.8rem; color: var(--primary); }
+        .icon-circle i { font-size: 1.3rem; color: var(--primary); }
 
-        .tag { background: #e8f0fe; color: var(--primary); padding: 4px 12px; border-radius: 20px; font-size: 0.75rem; font-weight: bold; text-transform: uppercase; }
-        .recipe-content h2 { margin: 10px 0 5px 0; font-size: 1.4rem; color: var(--dark); }
-        .recipe-content p { color: var(--gray); margin-bottom: 15px; font-size: 0.95rem; }
+        .tag {
+            background: #e8f0fe;
+            color: var(--primary);
+            padding: 3px 10px;
+            border-radius: 20px;
+            font-size: 0.72rem;
+            font-weight: bold;
+            text-transform: uppercase;
+            display: inline-block;
+            margin-bottom: 5px;
+        }
+        .recipe-content h3 { margin: 0 0 5px 0; font-size: 1.05rem; color: var(--dark); }
+        .recipe-content p { color: var(--gray); margin-bottom: 8px; font-size: 0.88rem; line-height: 1.5; }
+        .recipe-content a { color: var(--primary); text-decoration: none; font-weight: bold; font-size: 0.85rem; }
+        .recipe-content a:hover { text-decoration: underline; }
 
-        .btn-back { display: inline-block; margin-top: 20px; text-decoration: none; color: var(--primary); font-weight: bold; }
+        .btn-back { display: inline-block; margin-top: 10px; text-decoration: none; color: var(--primary); font-weight: bold; }
     </style>
 </head>
 <body>
@@ -55,78 +107,114 @@
 
     <div class="container">
         <h1>Insights & Artigos</h1>
+        <p class="page-subtitle">Reflexões sobre vendas, liderança, carreira e o futuro da educação digital.</p>
 
-        <article class="recipe-card">
-            <div class="icon-circle">
-                <i class="fas fa-pause-circle"></i>
+        <!-- BOX 1: VENDAS & PERFORMANCE -->
+        <div class="tema-box">
+            <div class="tema-header">
+                <div class="tema-icon"><i class="fas fa-chart-line"></i></div>
+                <h2>Vendas & Performance</h2>
+                <span class="tema-count">2 artigos</span>
             </div>
-            <div class="recipe-content">
-                <span class="tag">Liderança & Inteligência Emocional</span>
-                <h2>Protocolo da Pausa Estratégica</h2>
-                <p>30 a 60 segundos que separam o líder reativo do estrategista consciente. Um método simples para responder em vez de reagir.</p>
-                <a href="artigo-pausa-estrategica.html" style="color: var(--primary); text-decoration: none; font-weight: bold;">Ler artigo completo →</a>
+            <div class="tema-cards">
+                <div class="recipe-card">
+                    <div class="icon-circle"><i class="fas fa-trophy"></i></div>
+                    <div class="recipe-content">
+                        <span class="tag">Vendas Consultivas</span>
+                        <h3>Guia Definitivo: Os 10 Pilares da Influência em Vendas Consultivas</h3>
+                        <p>Para transformar uma relação de "fornecedor" em "parceiro estratégico", é necessário dominar estes 10 pilares fundamentais.</p>
+                        <a href="artigo-10-pilares-vendas.html">Ler artigo completo →</a>
+                    </div>
+                </div>
+                <div class="recipe-card">
+                    <div class="icon-circle"><i class="fas fa-handshake"></i></div>
+                    <div class="recipe-content">
+                        <span class="tag">Mentalidade</span>
+                        <h3>Verdades que todo vendedor precisa ouvir</h3>
+                        <p>Não são técnicas mágicas nem frases motivacionais. São verdades simples, práticas e desconfortáveis que separam o vendedor comum do Rainmaker.</p>
+                        <a href="artigo-vendas-verdades.html">Ler artigo completo →</a>
+                    </div>
+                </div>
             </div>
-        </article>
+        </div>
 
-        <article class="recipe-card">
-            <div class="icon-circle">
-                <i class="fas fa-handshake"></i>
+        <!-- BOX 2: LIDERANÇA & INTELIGÊNCIA EMOCIONAL -->
+        <div class="tema-box">
+            <div class="tema-header">
+                <div class="tema-icon"><i class="fas fa-brain"></i></div>
+                <h2>Liderança & Inteligência Emocional</h2>
+                <span class="tema-count">1 artigo</span>
             </div>
-            <div class="recipe-content">
-                <span class="tag">Vendas & Performance</span>
-                <h2>Verdades que todo vendedor precisa ouvir</h2>
-                <p>Não são técnicas mágicas nem frases motivacionais. São verdades simples, práticas e desconfortáveis que separam o vendedor comum do Rainmaker.</p>
-                <a href="artigo-vendas-verdades.html" style="color: var(--primary); text-decoration: none; font-weight: bold;">Ler artigo completo →</a>
+            <div class="tema-cards">
+                <div class="recipe-card">
+                    <div class="icon-circle"><i class="fas fa-pause-circle"></i></div>
+                    <div class="recipe-content">
+                        <span class="tag">Inteligência Emocional</span>
+                        <h3>Protocolo da Pausa Estratégica</h3>
+                        <p>30 a 60 segundos que separam o líder reativo do estrategista consciente. Um método simples para responder em vez de reagir.</p>
+                        <a href="artigo-pausa-estrategica.html">Ler artigo completo →</a>
+                    </div>
+                </div>
             </div>
-        </article>
-        
-        <article class="recipe-card">
-            <div class="icon-circle">
-                <i class="fas fa-user-tie"></i>
-            </div>
-            <div class="recipe-content">
-                <span class="tag">Carreira & Liderança</span>
-                <h2>RH: O código oculto das entrevistas</h2>
-                <p>O que as empresas realmente testam além do currículo? Uma análise sobre conexão e resolução de problemas.</p>
-                <a href="artigo-entrevistas.html" style="color: var(--primary); text-decoration: none; font-weight: bold;">Ler artigo completo →</a>
-            </div>
-        </article>
+        </div>
 
-        <article class="recipe-card">
-            <div class="icon-circle">
-                <i class="fas fa-feather-alt"></i>
+        <!-- BOX 3: ESTRATÉGIA & FUTURO -->
+        <div class="tema-box">
+            <div class="tema-header">
+                <div class="tema-icon"><i class="fas fa-rocket"></i></div>
+                <h2>Estratégia & Futuro</h2>
+                <span class="tema-count">3 artigos</span>
             </div>
-            <div class="recipe-content">
-                <span class="tag">Liderança & Marketing</span>
-                <h2>Storytelling B2B: Conexão Real</h2>
-                <p>A verdadeira diferenciação em 2026 não vem de dados isolados, mas da capacidade de humanizar a marca e construir confiança.</p>
-                <a href="artigo-storytelling.html" style="color: var(--primary); text-decoration: none; font-weight: bold;">Ler artigo completo →</a>
+            <div class="tema-cards">
+                <div class="recipe-card">
+                    <div class="icon-circle"><i class="fas fa-rocket"></i></div>
+                    <div class="recipe-content">
+                        <span class="tag">Estratégia & Futuro</span>
+                        <h3>Liderança 2026: O Diferencial Humano na Era da IA</h3>
+                        <p>Como manter a soberania intelectual e a visão de ecossistema em um mercado cada vez mais automatizado.</p>
+                        <a href="artigo-lideranca-2026.html">Ler artigo completo →</a>
+                    </div>
+                </div>
+                <div class="recipe-card">
+                    <div class="icon-circle"><i class="fas fa-brain"></i></div>
+                    <div class="recipe-content">
+                        <span class="tag">Estratégia & IA</span>
+                        <h3>Do Caos dos Números à Liderança de Propósito</h3>
+                        <p>Por que bater metas não justifica o custo da fragmentação emocional e como a IA muda esse jogo em 2026.</p>
+                        <a href="lideranca-proposito.html">Ler artigo completo →</a>
+                    </div>
+                </div>
+                <div class="recipe-card">
+                    <div class="icon-circle"><i class="fas fa-feather-alt"></i></div>
+                    <div class="recipe-content">
+                        <span class="tag">Liderança & Marketing</span>
+                        <h3>Storytelling B2B: Conexão Real</h3>
+                        <p>A verdadeira diferenciação em 2026 não vem de dados isolados, mas da capacidade de humanizar a marca e construir confiança.</p>
+                        <a href="artigo-storytelling.html">Ler artigo completo →</a>
+                    </div>
+                </div>
             </div>
-        </article>
+        </div>
 
-        <article class="recipe-card">
-            <div class="icon-circle">
-                <i class="fas fa-brain"></i>
+        <!-- BOX 4: CARREIRA & DESENVOLVIMENTO -->
+        <div class="tema-box">
+            <div class="tema-header">
+                <div class="tema-icon"><i class="fas fa-user-tie"></i></div>
+                <h2>Carreira & Desenvolvimento</h2>
+                <span class="tema-count">1 artigo</span>
             </div>
-            <div class="recipe-content">
-                <span class="tag">Estratégia & IA</span>
-                <h2>Do Caos dos Números à Liderança de Propósito</h2>
-                <p>Por que bater metas não justifica o custo da fragmentação emocional e como a IA muda esse jogo em 2026.</p>
-                <a href="lideranca-proposito.html" style="color: var(--primary); text-decoration: none; font-weight: bold;">Ler artigo completo →</a>
+            <div class="tema-cards">
+                <div class="recipe-card">
+                    <div class="icon-circle"><i class="fas fa-user-tie"></i></div>
+                    <div class="recipe-content">
+                        <span class="tag">Carreira & Liderança</span>
+                        <h3>RH: O código oculto das entrevistas</h3>
+                        <p>O que as empresas realmente testam além do currículo? Uma análise sobre conexão e resolução de problemas.</p>
+                        <a href="artigo-entrevistas.html">Ler artigo completo →</a>
+                    </div>
+                </div>
             </div>
-        </article>
-
-        <article class="recipe-card">
-            <div class="icon-circle">
-                <i class="fas fa-rocket"></i>
-            </div>
-            <div class="recipe-content">
-                <span class="tag">Estratégia & Futuro</span>
-                <h2>Liderança 2026: O Diferencial Humano na Era da IA</h2>
-                <p>Como manter a soberania intelectual e a visão de ecossistema em um mercado cada vez mais automatizado.</p>
-                <a href="artigo-lideranca-2026.html" style="color: var(--primary); text-decoration: none; font-weight: bold;">Ler artigo completo →</a>
-            </div>
-        </article>
+        </div>
 
         <a href="index.html" class="btn-back"><i class="fas fa-arrow-left"></i> Voltar para Home</a>
     </div>
