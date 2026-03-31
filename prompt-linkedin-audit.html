@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Auditor LinkedIn | Vidal Silva</title>
+    <title>Auditor de Perfil LinkedIn | Vidal Silva</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <style>
         :root { --primary: #4285F4; --dark: #202124; --gray: #5f6368; --light: #f8f9fa; --code-bg: #282c34; }
@@ -14,12 +14,10 @@
         h1 { border-left: 5px solid var(--primary); padding-left: 15px; margin-bottom: 10px; }
         .subtitle { color: var(--gray); margin-bottom: 40px; }
         .recipe-card { background: white; border-radius: 15px; padding: 30px; margin-bottom: 30px; box-shadow: 0 4px 15px rgba(0,0,0,0.05); border: 1px solid #eee; }
-        .prompt-box-full { background: var(--code-bg); color: #abb2bf; padding: 25px; border-radius: 10px; position: relative; font-family: 'Courier New', monospace; font-size: 0.95rem; line-height: 1.7; margin-top: 20px; }
-        .prompt-box-full header { position: absolute; top: 0; left: 0; width: 100%; background: #333; padding: 5px 15px; font-size: 0.7rem; color: #999; border-radius: 10px 10px 0 0; box-sizing: border-box; }
-        .btn-back { text-decoration: none; color: var(--primary); font-weight: bold; display: flex; align-items: center; gap: 5px; margin-bottom: 30px; }
-        .step-list { margin-top: 20px; padding-left: 20px; }
-        .step-list li { margin-bottom: 10px; }
-        footer { text-align: center; padding: 40px; color: var(--gray); font-style: italic; }
+        .prompt-box { background: var(--code-bg); color: #abb2bf; padding: 45px 25px 25px; border-radius: 10px; position: relative; font-family: 'Courier New', monospace; margin-top: 15px; font-size: 0.95rem; white-space: pre-wrap; }
+        .prompt-box header { position: absolute; top: 0; left: 0; width: 100%; background: #333; padding: 10px 15px; font-size: 0.7rem; color: #999; border-radius: 10px 10px 0 0; box-sizing: border-box; text-transform: uppercase; letter-spacing: 1px; }
+        .btn-back { text-decoration: none; color: var(--primary); font-weight: bold; display: flex; align-items: center; gap: 5px; margin-bottom: 20px; }
+        strong { color: var(--primary); }
     </style>
 </head>
 <body>
@@ -29,44 +27,42 @@
     </nav>
 
     <div class="container">
-        <a href="index.html" class="btn-back"><i class="fas fa-arrow-left"></i> Voltar ao Banco de Prompts</a>
+        <a href="index.html" class="btn-back"><i class="fas fa-arrow-left"></i> Voltar para Banco de Prompts</a>
         <h1>🔍 Auditor de Perfil LinkedIn 360°</h1>
-        <p class="subtitle">Framework de análise profunda para transformar seu perfil em uma máquina de atração de oportunidades.</p>
+        <p class="subtitle">Análise técnica e estratégica de marca pessoal para otimização de SEO e conversão de recrutadores.</p>
 
         <article class="recipe-card">
-            <h3>Como utilizar este Prompt</h3>
-            <ul class="step-list">
-                <li><strong>Passo 1:</strong> No seu LinkedIn, vá em "Eu" > "Ver Perfil" > "Mais" > "Salvar em PDF".</li>
-                <li><strong>Passo 2:</strong> Suba esse arquivo PDF no Gemini ou ChatGPT.</li>
-                <li><strong>Passo 3:</strong> Copie e cole o prompt abaixo para iniciar a auditoria.</li>
-            </ul>
+            <h3>Como utilizar</h3>
+            <p>1. Exporte seu perfil do LinkedIn em <strong>PDF</strong> (Eu > Ver Perfil > Mais > Salvar em PDF).<br>
+               2. Anexe o arquivo na sua IA de preferência.<br>
+               3. Copie e cole o prompt abaixo para receber o diagnóstico completo.</p>
+            
+            <div class="prompt-box">
+                <header>PROMPT COMPLETO</header>
+Você é um especialista em recrutamento e marca pessoal no LinkedIn. Sua tarefa é analisar detalhadamente o perfil de um profissional que deseja ser encontrado e abordado por recrutadores. Avalie os seguintes pontos com base no perfil em PDF anexado:
 
-            <div class="prompt-box-full">
-                <header>PROMPT MESTRE</header>
-                <p>
-                    Você é um especialista em recrutamento e marca pessoal no LinkedIn. Sua tarefa é analisar detalhadamente o perfil de um profissional que deseja ser encontrado e abordado por recrutadores. Avalie os seguintes pontos com base no perfil em PDF anexado:<br><br>
-                    
-                    <strong>1. Título Profissional:</strong> Está claro, objetivo e otimizado com palavras-chave?<br>
-                    <strong>2. Sobre (Resumo):</strong> O texto é estratégico, com storytelling e foco em conquistas?<br>
-                    <strong>3. Experiências:</strong> As descrições focam em entregas, resultados e ferramentas?<br>
-                    <strong>4. Competências:</strong> Estão listadas de forma clara e relevante?<br>
-                    <strong>5. Destaques:</strong> Utiliza a seção para portfólio ou projetos?<br>
-                    <strong>6. SEO e Palavras-chave:</strong> Utiliza termos relevantes para busca?<br><br>
+1. Título Profissional: Está claro, objetivo e otimizado com palavras-chave da área de atuação?
+2. Sobre (Resumo): O texto é estratégico, com storytelling, foco em competências, conquistas e abertura para novas oportunidades? Está escrito de forma humanizada e profissional?
+3. Experiências Profissionais: As descrições estão completas, com foco em entregas, resultados e ferramentas utilizadas?
+4. Competências: As principais competências técnicas e comportamentais da área estão listadas de forma clara e relevante?
+5. Destaques: O perfil utiliza a seção de “Destaques” para mostrar portfólio, certificados, projetos ou postagens relevantes?
+6. URL personalizada: O link do perfil está otimizado (sem números aleatórios)?
+7. Atividades e Engajamento: O conteúdo está alinhado ao objetivo de atrair recrutadores?
+8. Recomendações: O perfil possui recomendações que reforçam sua credibilidade?
+9. Palavras-chave e SEO: O perfil utiliza termos relevantes da área para facilitar a busca?
 
-                    Para cada item, entregue uma <strong>porcentagem de desempenho (0-100%)</strong>, uma justificativa técnica e pontos de melhoria.<br><br>
-                    
-                    Ao final, entregue: um resumo geral da impressão do perfil, uma lista de melhorias prioritárias, sugestão de título otimizado e uma nova sugestão para o campo "Sobre" com alto impacto.
-                </p>
+Para cada item acima, entregue:
+- Uma porcentagem de desempenho (0% a 100%).
+- Uma justificativa objetiva e técnica explicando como chegou a essa nota.
+- Pontos positivos e oportunidades de melhoria com linguagem direta e construtiva.
+
+Ao final, entregue também:
+- Um resumo geral da impressão do perfil.
+- Uma lista de melhorias práticas e prioritárias.
+- Uma sugestão de título profissional otimizado.
+- Uma sugestão de mensagem para o campo “Sobre”, que possa atrair recrutadores com clareza e impacto.
             </div>
         </article>
-
-        <div style="background: #e8f0fe; padding: 20px; border-radius: 10px; color: #1967d2; font-size: 0.9rem;">
-            <i class="fas fa-lightbulb"></i> <strong>Dica de Partner Manager:</strong> Use este prompt a cada 3 meses para garantir que seu perfil acompanhe as tendências de busca do algoritmo de Recrutamento.
-        </div>
     </div>
-
-    <footer>
-        <p>"Otimizando a visibilidade através da estratégia."</p>
-    </footer>
 </body>
 </html>
