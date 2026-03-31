@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tirador de Pedidos vs Construtor | Vidal Silva</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        :root { --primary: #4285F4; --dark: #202124; --gray: #5f6368; --light: #f8f9fa; }
+        body { font-family: 'Segoe UI', Arial, sans-serif; margin: 0; background: var(--light); color: var(--dark); line-height: 1.7; }
+
+        nav { display: flex; justify-content: space-between; padding: 20px 10%; background: white; align-items: center; box-shadow: 0 2px 4px rgba(0,0,0,0.05); position: sticky; top: 0; z-index: 100; }
+        .logo { font-weight: bold; font-size: 1.2rem; color: var(--primary); text-decoration: none; }
+        .nav-links a { text-decoration: none; color: var(--gray); font-weight: 500; margin-left: 20px; }
+
+        /* Hero do artigo */
+        .article-hero { background: white; padding: 60px 10% 40px; border-bottom: 1px solid #eee; }
+        .article-hero .tag { background: #e8f0fe; color: var(--primary); padding: 5px 14px; border-radius: 20px; font-size: 0.75rem; font-weight: bold; text-transform: uppercase; display: inline-block; margin-bottom: 20px; }
+        .article-hero h1 { font-size: 2.4rem; line-height: 1.2; margin: 0 0 20px 0; max-width: 800px; color: var(--dark); }
+        .article-hero .subtitle { font-size: 1.15rem; color: var(--gray); max-width: 750px; margin-bottom: 30px; }
+        .article-meta { display: flex; align-items: center; gap: 15px; color: var(--gray); font-size: 0.9rem; }
+        .article-meta i { color: var(--primary); }
+
+        /* Corpo do artigo */
+        .article-body { max-width: 720px; margin: 50px auto; padding: 0 20px 60px; }
+
+        /* Card de Atitude/Diferencial */
+        .verdade-card { background: white; border-radius: 12px; padding: 30px 35px; margin-bottom: 25px; box-shadow: 0 4px 15px rgba(0,0,0,0.05); border-left: 4px solid var(--primary); }
+        .verdade-numero { font-size: 0.8rem; font-weight: bold; text-transform: uppercase; color: var(--primary); letter-spacing: 1px; margin-bottom: 8px; }
+        .verdade-card h2 { font-size: 1.3rem; margin: 0 0 15px 0; color: var(--dark); }
+        .verdade-card p { color: var(--gray); margin: 0 0 12px 0; font-size: 0.97rem; }
+        .verdade-card p:last-child { margin-bottom: 0; }
+
+        .destaque { background: #e8f0fe; border-radius: 12px; padding: 25px 30px; margin: 35px 0; font-size: 1.1rem; color: var(--dark); font-style: italic; border-left: 4px solid var(--primary); }
+
+        .rainmaker-table { background: white; border-radius: 12px; overflow: hidden; box-shadow: 0 4px 15px rgba(0,0,0,0.05); margin: 35px 0; }
+        .rainmaker-table table { width: 100%; border-collapse: collapse; }
+        .rainmaker-table th { background: var(--primary); color: white; padding: 14px 20px; text-align: left; font-size: 0.9rem; text-transform: uppercase; }
+        .rainmaker-table td { padding: 14px 20px; border-bottom: 1px solid #f0f0f0; font-size: 0.95rem; color: var(--gray); }
+        .rainmaker-table td:last-child { color: var(--dark); font-weight: 500; }
+
+        .conclusao { background: var(--dark); color: white; border-radius: 12px; padding: 35px; margin-top: 40px; }
+        .conclusao h2 { color: white; margin-top: 0; }
+        .conclusao p { color: #aaa; margin-bottom: 12px; }
+
+        .btn-back { display: inline-flex; align-items: center; gap: 8px; margin-top: 40px; text-decoration: none; color: var(--primary); font-weight: bold; transition: 0.2s; }
+        .btn-back:hover { opacity: 0.7; }
+
+        footer { background: white; padding: 40px 10%; text-align: center; border-top: 1px solid #eee; margin-top: 40px; }
+        footer p { color: var(--gray); font-size: 0.9rem; }
+    </style>
+</head>
+<body>
+
+<nav>
+    <a href="index.html" class="logo">Vidal Silva</a>
+    <div class="nav-links">
+        <a href="textos.html">← Voltar aos artigos</a>
+    </div>
+</nav>
+
+<div class="article-hero">
+    <span class="tag">Cultura Comercial</span>
+    <h1>"Tirador de Pedidos" vs. "Construtor de Negócios": Em qual lado sua empresa está?</h1>
+    <p class="subtitle">A distinção entre atendimento reativo e venda estratégica em 2026 não é mais apenas performance — é sobrevivência.</p>
+    <div class="article-meta">
+        <span><i class="fas fa-calendar-alt"></i> Março 2026</span>
+        <span><i class="fas fa-clock"></i> 8 min de leitura</span>
+        <span><i class="fas fa-user-tie"></i> Vidal Silva</span>
+    </div>
+</div>
+
+<div class="article-body">
+
+    <p>Em mais de duas décadas de trajetória na área comercial, acompanhei crises e transformações tecnológicas. Um diagnóstico permanece: empresas estagnam quando confundem atendimento com venda estratégica.</p>
+
+    <div class="destaque">
+        "A IA executa a parte técnica com perfeição. O que sobra para o humano é a capacidade de construir parceria e desenhar soluções onde outros só veem catálogos."
+    </div>
+
+    <h2>A Anatomia do Tirador de Pedidos</h2>
+    <p>O tirador de pedidos é reativo. Ele parece produtivo porque responde rápido, mas ele não controla o funil; ele é refém dele. Se o telefone não toca, ele não tem o que vender.</p>
+
+    <div class="rainmaker-table">
+        <table>
+            <thead>
+                <tr>
+                    <th>Característica</th>
+                    <th>Tirador de Pedidos</th>
+                    <th>Construtor (Rainmaker)</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr><td>Movimento</td><td>Espera o lead chegar</td><td>Cria o próprio fluxo</td></tr>
+                <tr><td>Foco</td><td>Produto e catálogo</td><td>Diagnóstico e Solução</td></tr>
+                <tr><td>Condução</td><td>"Qualquer coisa me chama"</td><td>Data e Próximo Passo firmes</td></tr>
+                <tr><td>Valor</td><td>Briga por preço</td><td>Defende o ROI</td></tr>
+            </tbody>
+        </table>
+    </div>
+
+    <h2>5 Atitudes para se tornar um Construtor de Negócios</h2>
+
+    <div class="verdade-card">
+        <div class="verdade-numero">Prática 01</div>
+        <h2>Estabeleça o "Ritual da Prospecção"</h2>
+        <p>Não espere o telefone tocar. Reserve o primeiro bloco do seu dia para abrir novas conversas. A constância vence a motivação. Quem controla o início do funil, controla o resultado do final do mês.</p>
+    </div>
+
+    <div class="verdade-card">
+        <div class="verdade-numero">Prática 02</div>
+        <h2>Domine a Arte da Pergunta Estratégica</h2>
+        <p>Pare de apresentar e comece a diagnosticar. Antes de qualquer slide, faça perguntas profundas: <em>"O que acontece no seu negócio se esse problema não for resolvido nos próximos 90 dias?"</em></p>
+    </div>
+
+    <div class="verdade-card">
+        <div class="verdade-numero">Prática 03</div>
+        <h2>Saia com um "Próximo Passo Firme"</h2>
+        <p>Nunca encerre uma chamada com frases passivas. Agende o próximo encontro ainda dentro da conversa atual. Se não há data no calendário, não há compromisso real.</p>
+    </div>
+
+    <div class="verdade-card">
+        <div class="verdade-numero">Prática 04</div>
+        <h2>Follow-up de Valor (Contexto > Lembrete)</h2>
+        <p>Esqueça o "passando para ver se você viu a proposta". Envie um insight novo, um artigo ou uma solução para uma dúvida levantada. Mostre que você pensa no sucesso do cliente.</p>
+    </div>
+
+    <div class="verdade-card">
+        <div class="verdade-numero">Prática 05</div>
+        <h2>Defenda o Valor, Não o Preço</h2>
+        <p>Mude o foco para o impacto financeiro (ROI). Se a solução evita uma perda de 100, o preço de 10 se torna irrelevante. Treine para enxergar cifras de valor, não etiquetas de desconto.</p>
+    </div>
+
+    <div class="conclusao">
+        <h2>O Papel da Liderança</h2>
+        <p>Vendedores não nascem tiradores de pedidos; eles são moldados por ambientes reativos. Em 2026, a máquina tira o pedido. O humano constrói a estratégia.</p>
+        <p>Lidere para que sua equipe tenha tempo de exercer a criatividade e a parceria consultiva que a IA não pode replicar.</p>
+    </div>
+
+    <a href="textos.html" class="btn-back">
+        <i class="fas fa-arrow-left"></i> Voltar para Insights & Artigos
+    </a>
+
+</div>
+
+<footer>
+    <p style="font-style: italic; color: var(--gray); max-width: 500px; margin: 0 auto 10px;">
+        "O mercado é volátil, mas o profissional que gera decisão será sempre o ativo mais valioso."
+    </p>
+    <p>&copy; 2026 Vidal Silva | Partner Sales Manager @ Google Education</p>
+</footer>
+
+</body>
+</html>
