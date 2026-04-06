@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Arquiteto de Execução | Vidal Silva</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        :root { --primary: #4285F4; --dark: #202124; --gray: #5f6368; --light: #f8f9fa; --code-bg: #282c34; }
+        body { font-family: 'Segoe UI', Arial, sans-serif; margin: 0; background: var(--light); color: var(--dark); line-height: 1.6; }
+        nav { display: flex; justify-content: space-between; padding: 20px 10%; background: white; align-items: center; box-shadow: 0 2px 4px rgba(0,0,0,0.05); }
+        .logo { font-weight: bold; font-size: 1.2rem; color: var(--primary); text-decoration: none; }
+        .container { max-width: 900px; margin: 50px auto; padding: 0 20px; }
+        h1 { border-left: 5px solid var(--primary); padding-left: 15px; margin-bottom: 10px; }
+        .subtitle { color: var(--gray); margin-bottom: 40px; }
+        .recipe-card { background: white; border-radius: 15px; padding: 30px; margin-bottom: 30px; box-shadow: 0 4px 15px rgba(0,0,0,0.05); border: 1px solid #eee; }
+        .prompt-box { background: var(--code-bg); color: #abb2bf; padding: 45px 25px 25px; border-radius: 10px; position: relative; font-family: 'Courier New', monospace; margin-top: 15px; font-size: 0.95rem; white-space: pre-wrap; }
+        .prompt-box header { position: absolute; top: 0; left: 0; width: 100%; background: #333; padding: 10px 15px; font-size: 0.7rem; color: #999; border-radius: 10px 10px 0 0; box-sizing: border-box; text-transform: uppercase; }
+        .btn-back { text-decoration: none; color: var(--primary); font-weight: bold; display: flex; align-items: center; gap: 5px; margin-bottom: 20px; }
+    </style>
+</head>
+<body>
+    <nav>
+        <a href="index.html" class="logo">Vidal Silva</a>
+        <a href="index.html" style="text-decoration: none; color: var(--gray);">Voltar ao Banco</a>
+    </nav>
+
+    <div class="container">
+        <a href="index.html" class="btn-back"><i class="fas fa-arrow-left"></i> Voltar para Banco de Prompts</a>
+        <h1>🏗️ O Arquiteto de Planos de Ação</h1>
+        <p class="subtitle">Converta discussões abstratas em cronogramas táticos e garanta que nenhuma ideia se perca após o "encerrar reunião".</p>
+
+        <article class="recipe-card">
+            <h3>Como utilizar</h3>
+            <p>1. Cole a transcrição da reunião (do Google Meet/Zoom) ou suas anotações soltas no campo indicado.<br>
+               2. O prompt irá gerar automaticamente uma estrutura de <strong>Responsabilidades (Accountability)</strong>, <strong>Prazos</strong> e um <strong>Resumo Executivo</strong> pronto para ser enviado por e-mail ou Slack.</p>
+            
+            <div class="prompt-box">
+                <header>PROMPT COMPLETO</header>
+Gemini, a partir de agora você atuará como meu Analista de Execução Estratégica e Organização de Reuniões, especializado em transformar discussões, brainstormings e trocas de ideias em planos de ação claros, estruturados e executáveis.
+
+Vou fornecer abaixo anotações de reunião, transcrição, ideias soltas ou tópicos discutidos. Seu papel é organizar essas informações, identificar decisões implícitas e converter tudo em próximos passos objetivos, priorizados e acionáveis.
+
+Aqui está o conteúdo da reunião: 
+[inserir anotações, ideias, decisões, transcrição ou resumo da reunião]
+
+Com base nesse material, siga as instruções abaixo:
+
+1. Estrutura de Ideias: Identifique temas principais, decisões explícitas/implícitas e desafios.
+2. Objetivos: Determine o propósito da reunião e os resultados esperados.
+3. Próximos Passos: Converta ideias em tarefas práticas com nível de prioridade e esforço.
+4. Plano de Ação: Organize em curto (imediato), médio (estratégico) e longo prazo (estrutural).
+5. Accountability: Sugira responsáveis ou áreas ideais para cada tarefa.
+6. Prazos e Checkpoints: Estabeleça marcos de acompanhamento e indicadores de progresso.
+7. Gestão de Riscos: Identifique gargalos e sugira soluções preventivas.
+8. Resumo Executivo: Gere um texto curto e claro para compartilhar com a equipe.
+9. Formatação: Apresente o resultado em tabelas e listas fáceis de copiar para Notion, Trello ou Asana.
+
+O objetivo é transformar uma reunião potencialmente confusa em um plano de execução claro, estratégico e imediatamente aplicável.
+            </div>
+        </article>
+    </div>
+
+    <footer style="text-align: center; padding: 40px; color: var(--gray); font-style: italic;">
+        <p>"Ideias sem execução são apenas alucinações."</p>
+    </footer>
+</body>
+</html>
