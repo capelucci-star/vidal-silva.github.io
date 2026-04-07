@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ecossistema de Decisão | Vidal Silva</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        :root { --primary: #4285F4; --dark: #202124; --gray: #5f6368; --light: #f8f9fa; }
+        body { font-family: 'Segoe UI', Arial, sans-serif; margin: 0; background: var(--light); color: var(--dark); line-height: 1.7; }
+        nav { display: flex; justify-content: space-between; padding: 20px 10%; background: white; align-items: center; box-shadow: 0 2px 4px rgba(0,0,0,0.05); position: sticky; top: 0; z-index: 100; }
+        .logo { font-weight: bold; font-size: 1.2rem; color: var(--primary); text-decoration: none; }
+        .nav-links a { text-decoration: none; color: var(--gray); font-weight: 500; margin-left: 20px; }
+        .article-hero { background: white; padding: 60px 10% 40px; border-bottom: 1px solid #eee; }
+        .article-hero .tag { background: #e8f0fe; color: var(--primary); padding: 5px 14px; border-radius: 20px; font-size: 0.75rem; font-weight: bold; text-transform: uppercase; display: inline-block; margin-bottom: 20px; }
+        .article-hero h1 { font-size: 2.4rem; line-height: 1.2; margin: 0 0 20px 0; max-width: 800px; color: var(--dark); }
+        .article-hero .subtitle { font-size: 1.15rem; color: var(--gray); max-width: 750px; margin-bottom: 30px; }
+        .article-body { max-width: 720px; margin: 50px auto; padding: 0 20px 60px; }
+        .verdade-card { background: white; border-radius: 12px; padding: 25px 30px; margin-bottom: 20px; box-shadow: 0 4px 15px rgba(0,0,0,0.05); border-left: 4px solid var(--primary); }
+        .verdade-numero { font-size: 0.75rem; font-weight: bold; color: var(--primary); text-transform: uppercase; margin-bottom: 5px; }
+        .verdade-card h2 { font-size: 1.2rem; margin: 0 0 10px 0; color: var(--dark); }
+        .rainmaker-table { background: white; border-radius: 12px; overflow: hidden; box-shadow: 0 4px 15px rgba(0,0,0,0.05); margin: 35px 0; }
+        .rainmaker-table table { width: 100%; border-collapse: collapse; }
+        .rainmaker-table th { background: var(--primary); color: white; padding: 14px 20px; text-align: left; font-size: 0.9rem; text-transform: uppercase; }
+        .rainmaker-table td { padding: 14px 20px; border-bottom: 1px solid #f0f0f0; font-size: 0.95rem; color: var(--gray); }
+        .destaque { background: #e8f0fe; border-radius: 12px; padding: 25px 30px; margin: 35px 0; font-size: 1.1rem; color: var(--dark); font-style: italic; border-left: 4px solid var(--primary); }
+        .conclusao { background: var(--dark); color: white; border-radius: 12px; padding: 35px; margin-top: 40px; }
+        .btn-back { display: inline-flex; align-items: center; gap: 8px; margin-top: 40px; text-decoration: none; color: var(--primary); font-weight: bold; }
+        footer { background: white; padding: 40px 10%; text-align: center; border-top: 1px solid #eee; margin-top: 40px; }
+    </style>
+</head>
+<body>
+
+<nav>
+    <a href="index.html" class="logo">Vidal Silva</a>
+    <div class="nav-links"><a href="texto.html">← Voltar aos artigos</a></div>
+</nav>
+
+<div class="article-hero">
+    <span class="tag">Vendas Complexas</span>
+    <h1>Venda Complexa: A Arte de Mapear o Ecossistema de Decisão</h1>
+    <p class="subtitle">Por que o fechamento não é um evento isolado, mas o resultado de uma orquestração estratégica de pessoas.</p>
+    <div class="article-meta" style="color: var(--gray); font-size: 0.9rem;">
+        <span><i class="fas fa-calendar-alt"></i> Abril 2026</span> | 
+        <span><i class="fas fa-sitemap"></i> Mapeamento de Stakeholders</span>
+    </div>
+</div>
+
+<div class="article-body">
+
+    <p>Existe um mito de que fechar grandes contratos depende apenas de carisma. Na realidade de 2026, a decisão é um organismo vivo. Errar o mapeamento de quem realmente move a agulha é o caminho mais curto para o "congelamento" do projeto.</p>
+
+    <div class="destaque">
+        "Não venda para o cargo. Venda para o papel de influência. Em qualquer comitê, o 'sim' é uma construção coletiva, mas o 'não' pode vir de um único agente ignorado."
+    </div>
+
+    <h3>👥 Os Perfis que Movem (ou Travam) o Negócio</h3>
+
+    <div class="verdade-card">
+        <div class="verdade-numero">Agente 01</div>
+        <h2>O Usuário (Influenciador de Rotina)</h2>
+        <p>É quem opera a solução. Se ele sentir que a ferramenta trará mais burocracia, ele sabotará a adoção antes mesmo do contrato ser assinado.</p>
+    </div>
+
+    <div class="verdade-card">
+        <div class="verdade-numero">Agente 02</div>
+        <h2>O Técnico (Influenciador de Segurança)</h2>
+        <p>O guardião (TI, Jurídico ou Compliance). Ele detém o poder do veto. Sua missão é garantir que o projeto não represente um risco sistêmico.</p>
+    </div>
+
+    <div class="verdade-card">
+        <div class="verdade-numero">Agente 03</div>
+        <h2>O Pagador (Influenciador Financeiro)</h2>
+        <p>Focado em ROI e balanço. Para ele, funcionalidades são secundárias; o que importa é a eficiência e a redução de custos comprovada.</p>
+    </div>
+
+    <div class="verdade-card">
+        <div class="verdade-numero">Agente 04</div>
+        <h2>O Mentor (Influenciador Interno)</h2>
+        <p>Seu maior aliado. É quem vende a ideia quando você não está na sala. Sem um mentor, você está apenas "empurrando" uma proposta.</p>
+    </div>
+
+    <h3>📈 Comunicação Segmentada</h3>
+    <p>O segredo não é falar bem, mas falar a coisa certa para a pessoa certa. Veja como segmentar sua narrativa:</p>
+
+    <div class="rainmaker-table">
+        <table>
+            <thead>
+                <tr>
+                    <th>Perfil</th>
+                    <th>O que ele busca?</th>
+                    <th>Sua Moeda de Troca</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr><td>Técnico</td><td>Segurança e Estabilidade</td><td>Dados, Certificações e SLAs</td></tr>
+                <tr><td>Usuário</td><td>Ganho de Tempo</td><td>Facilidade de uso e UX</td></tr>
+                <tr><td>Pagador</td><td>Resultado Financeiro</td><td>Cálculo de ROI e Impacto no EBITDA</td></tr>
+                <tr><td>Decisor</td><td>Confiança no Processo</td><td>Visão Estratégica e *Case* de Sucesso</td></tr>
+            </tbody>
+        </table>
+    </div>
+
+    <div class="conclusao">
+        <h2>Conclusão</h2>
+        <p>Mapear o ecossistema transforma a sorte em consequência natural. Garanta que cada Agente de Influência tenha a informação certa para defender sua solução internamente.</p>
+        <p><strong>Seu funil reflete o status desses agentes ou apenas etapas frias?</strong></p>
+    </div>
+
+    <a href="texto.html" class="btn-back"><i class="fas fa-arrow-left"></i> Voltar para Insights & Artigos</a>
+
+</div>
+
+<footer>
+    <p>&copy; 2026 Vidal Silva | Partner Sales Manager @ Google Education</p>
+</footer>
+
+</body>
+</html>
