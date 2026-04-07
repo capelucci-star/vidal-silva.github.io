@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Inteligência Salarial | Vidal Silva</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        :root { --primary: #4285F4; --dark: #202124; --gray: #5f6368; --light: #f8f9fa; --code-bg: #282c34; }
+        body { font-family: 'Segoe UI', Arial, sans-serif; margin: 0; background: var(--light); color: var(--dark); line-height: 1.6; }
+        nav { display: flex; justify-content: space-between; padding: 20px 10%; background: white; align-items: center; box-shadow: 0 2px 4px rgba(0,0,0,0.05); }
+        .logo { font-weight: bold; font-size: 1.2rem; color: var(--primary); text-decoration: none; }
+        .container { max-width: 900px; margin: 50px auto; padding: 0 20px; }
+        h1 { border-left: 5px solid var(--primary); padding-left: 15px; margin-bottom: 10px; }
+        .subtitle { color: var(--gray); margin-bottom: 40px; }
+        .recipe-card { background: white; border-radius: 15px; padding: 30px; margin-bottom: 30px; box-shadow: 0 4px 15px rgba(0,0,0,0.05); border: 1px solid #eee; }
+        .prompt-box { background: var(--code-bg); color: #abb2bf; padding: 45px 25px 25px; border-radius: 10px; position: relative; font-family: 'Courier New', monospace; margin-top: 15px; font-size: 0.95rem; white-space: pre-wrap; }
+        .prompt-box header { position: absolute; top: 0; left: 0; width: 100%; background: #333; padding: 10px 15px; font-size: 0.7rem; color: #999; border-radius: 10px 10px 0 0; box-sizing: border-box; text-transform: uppercase; }
+        .btn-back { text-decoration: none; color: var(--primary); font-weight: bold; display: flex; align-items: center; gap: 5px; margin-bottom: 20px; }
+    </style>
+</head>
+<body>
+    <nav>
+        <a href="index.html" class="logo">Vidal Silva</a>
+        <a href="index.html" style="text-decoration: none; color: var(--gray);">Voltar ao Banco</a>
+    </nav>
+
+    <div class="container">
+        <a href="index.html" class="btn-back"><i class="fas fa-arrow-left"></i> Voltar para Banco de Prompts</a>
+        <h1>💰 Mentor de Inteligência Salarial</h1>
+        <p class="subtitle">Descubra seu valor de mercado real e entenda quais competências destravam os salários de elite no seu setor.</p>
+
+        <article class="recipe-card">
+            <h3>Como utilizar</h3>
+            <p>Preencha as variáveis <strong>[ ]</strong> com seus dados atuais. Este prompt é calibrado para analisar benchmarks de mercado, bônus variáveis e benefícios de acordo com a senioridade e o tamanho da empresa.</p>
+            
+            <div class="prompt-box">
+                <header>PROMPT COMPLETO</header>
+Aja como um mentor sênior de carreira muito experiente em negociações salariais, me ajude a saber qual é a faixa salarial do meu cargo no mercado.
+
+Meus Dados:
+Cargo Atual: [Ex: Gerente de Marketing]
+Tempo de Experiência: [Ex: 8 anos]
+Setor: [Ex: Comunicação/Finanças]
+Localização: [Ex: São Paulo - Remoto ou Presencial]
+Tamanho da Empresa: [Pequena/Média/Grande]
+
+Me traga:
+1. Estimativa de Faixa: Uma estimativa da faixa salarial (mínimo, média e máximo) para esse perfil em 2026.
+2. Percentil 90: Quais variáveis (certificações, idiomas, metas, ferramentas específicas) costumam justificar o topo da faixa.
+3. Perks & Benefits: Uma lista de benefícios e bônus comuns para este nível de senioridade neste setor (ex: PLR, Stock Options, Auxílios específicos).
+4. Estratégia de Negociação: Sugira 3 pontos de destaque que eu deveria enfatizar em uma conversa de revisão salarial baseada nesses dados.
+            </div>
+        </article>
+    </div>
+
+    <footer style="text-align: center; padding: 40px; color: var(--gray); font-style: italic;">
+        <p>"Valor é o que você entrega; preço é o que o mercado paga."</p>
+    </footer>
+</body>
+</html>
