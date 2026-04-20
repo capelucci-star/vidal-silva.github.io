@@ -1,0 +1,418 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Arquiteto de Fluxos de Trabalho | Vidal Silva</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        :root { --primary: #4285F4; --dark: #202124; --gray: #5f6368; --light: #f8f9fa; --code-bg: #282c34; }
+        body { font-family: 'Segoe UI', Arial, sans-serif; margin: 0; background: var(--light); color: var(--dark); line-height: 1.6; }
+        nav { display: flex; justify-content: space-between; padding: 20px 10%; background: white; align-items: center; box-shadow: 0 2px 4px rgba(0,0,0,0.05); }
+        .logo { font-weight: bold; font-size: 1.2rem; color: var(--primary); text-decoration: none; }
+
+        .hero {
+            background: linear-gradient(135deg, #0d1b2a 0%, #1b2a3b 60%, #1e3a5f 100%);
+            padding: 70px 20px 55px;
+            text-align: center;
+            color: white;
+            position: relative;
+            overflow: hidden;
+        }
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: -80px; right: -60px;
+            width: 380px; height: 380px;
+            background: radial-gradient(circle, rgba(66,133,244,0.13) 0%, transparent 70%);
+            border-radius: 50%;
+        }
+        .hero-tag {
+            display: inline-block;
+            background: rgba(66,133,244,0.2);
+            border: 1px solid rgba(66,133,244,0.45);
+            color: #8ab4f8;
+            padding: 5px 16px;
+            border-radius: 20px;
+            font-size: 0.78rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 20px;
+        }
+        .hero h1 {
+            font-size: 2rem;
+            font-weight: 800;
+            margin: 0 0 12px;
+            line-height: 1.25;
+            max-width: 660px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+        .hero-sub {
+            color: rgba(255,255,255,0.55);
+            font-size: 0.97rem;
+            max-width: 520px;
+            margin: 0 auto;
+        }
+        .hero-badges {
+            margin-top: 24px;
+            display: flex;
+            justify-content: center;
+            gap: 12px;
+            flex-wrap: wrap;
+        }
+        .badge {
+            background: rgba(255,255,255,0.08);
+            border: 1px solid rgba(255,255,255,0.15);
+            color: rgba(255,255,255,0.7);
+            padding: 5px 14px;
+            border-radius: 20px;
+            font-size: 0.78rem;
+            font-weight: 600;
+        }
+        .badge i { margin-right: 5px; }
+
+        .container { max-width: 820px; margin: 0 auto; padding: 55px 20px 80px; }
+
+        .intro {
+            background: white;
+            border-radius: 14px;
+            border: 1px solid #e8eef8;
+            box-shadow: 0 4px 18px rgba(0,0,0,0.05);
+            padding: 28px 32px;
+            margin-bottom: 40px;
+            font-size: 1.02rem;
+            color: #333;
+            line-height: 1.75;
+        }
+        .intro p { margin: 0 0 10px; }
+        .intro p:last-child { margin: 0; color: var(--gray); }
+
+        .section-label {
+            font-size: 0.78rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            color: var(--primary);
+            font-weight: 700;
+            margin: 0 0 16px;
+        }
+
+        /* INPUTS */
+        .inputs-card {
+            background: white;
+            border-radius: 14px;
+            border: 1px solid #e8eef8;
+            box-shadow: 0 3px 14px rgba(0,0,0,0.05);
+            padding: 28px 30px;
+            margin-bottom: 40px;
+        }
+        .inputs-card h3 { margin: 0 0 18px; font-size: 0.95rem; color: var(--dark); }
+        .input-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 10px;
+        }
+        .input-item {
+            display: flex;
+            align-items: flex-start;
+            gap: 10px;
+            background: #f8f9fa;
+            border-radius: 8px;
+            padding: 10px 14px;
+            font-size: 0.88rem;
+            color: #333;
+            line-height: 1.5;
+        }
+        .input-item i { color: var(--primary); margin-top: 2px; flex-shrink: 0; font-size: 0.8rem; }
+
+        /* ETAPAS DO PROMPT */
+        .etapas { display: flex; flex-direction: column; gap: 14px; margin-bottom: 40px; }
+        .etapa {
+            background: white;
+            border-radius: 12px;
+            border: 1px solid #e8eef8;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.04);
+            padding: 18px 22px;
+            display: flex;
+            gap: 16px;
+            align-items: flex-start;
+        }
+        .etapa-num {
+            background: var(--primary);
+            color: white;
+            font-weight: 800;
+            font-size: 0.78rem;
+            min-width: 32px;
+            height: 32px;
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+            margin-top: 1px;
+        }
+        .etapa-body h4 { margin: 0 0 4px; font-size: 0.97rem; color: var(--dark); }
+        .etapa-body p { margin: 0; font-size: 0.87rem; color: var(--gray); line-height: 1.55; }
+
+        /* PROMPT COMPLETO */
+        .prompt-block {
+            background: var(--code-bg);
+            border-radius: 14px;
+            padding: 30px 28px 26px;
+            margin-bottom: 40px;
+            position: relative;
+            font-family: 'Courier New', monospace;
+            font-size: 0.88rem;
+            line-height: 1.75;
+            color: #abb2bf;
+        }
+        .prompt-block::before {
+            content: 'PROMPT COMPLETO';
+            position: absolute;
+            top: 0; left: 0;
+            background: #333;
+            color: #888;
+            font-size: 0.65rem;
+            font-family: 'Segoe UI', sans-serif;
+            font-weight: 700;
+            letter-spacing: 1px;
+            padding: 4px 14px;
+            border-radius: 14px 0 8px 0;
+        }
+        .prompt-block p { margin: 14px 0 0; }
+        .prompt-block .var { color: #e06c75; }
+        .prompt-block .label { color: #61afef; font-weight: bold; }
+        .prompt-block .comment { color: #5c6370; font-style: italic; }
+
+        /* DICA */
+        .tip-box {
+            background: #f0f5ff;
+            border-left: 4px solid var(--primary);
+            border-radius: 12px;
+            padding: 22px 26px;
+            margin-bottom: 40px;
+            font-size: 0.93rem;
+            color: #333;
+            line-height: 1.7;
+        }
+        .tip-box strong { color: var(--primary); }
+
+        .btn-back {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            color: var(--primary);
+            text-decoration: none;
+            font-weight: bold;
+            font-size: 0.95rem;
+        }
+        .btn-back:hover { text-decoration: underline; }
+
+        @media (max-width: 600px) {
+            .input-grid { grid-template-columns: 1fr; }
+        }
+    </style>
+</head>
+<body>
+    <nav>
+        <a href="index.html" class="logo">Vidal Silva</a>
+        <a href="prompts.html" style="text-decoration: none; color: var(--gray);">← Banco de Prompts</a>
+    </nav>
+
+    <div class="hero">
+        <div class="hero-tag"><i class="fas fa-calendar-check"></i> &nbsp;Planejamento & Gestão Estratégica</div>
+        <h1>Arquiteto de Fluxos de Trabalho</h1>
+        <p class="hero-sub">Mapear, estruturar, otimizar e documentar qualquer processo do zero — com diagnóstico, SOPs, matriz RACI, KPIs e plano de melhoria contínua.</p>
+        <div class="hero-badges">
+            <span class="badge"><i class="fas fa-project-diagram"></i> Mapeamento de Processos</span>
+            <span class="badge"><i class="fas fa-tasks"></i> 15 Módulos</span>
+            <span class="badge"><i class="fas fa-layer-group"></i> SOP + RACI + KPIs</span>
+        </div>
+    </div>
+
+    <div class="container">
+
+        <div class="intro">
+            <p>Este é um dos prompts mais completos do banco. Ele transforma o Claude num analista de processos sênior — capaz de pegar um fluxo confuso, cheio de gargalos e dependências implícitas, e devolver uma operação documentada, padronizada e pronta para escalar.</p>
+            <p>Ideal para processos comerciais, onboarding, entregas recorrentes, operações de parceiros ou qualquer rotina que dependa de mais de uma pessoa para funcionar.</p>
+        </div>
+
+        <p class="section-label"><i class="fas fa-fill-drip"></i> &nbsp;O que você precisa preencher antes de rodar</p>
+        <div class="inputs-card">
+            <h3>Preencha os campos abaixo com o contexto do seu processo:</h3>
+            <div class="input-grid">
+                <div class="input-item"><i class="fas fa-chevron-right"></i> Tipo de fluxo ou processo</div>
+                <div class="input-item"><i class="fas fa-chevron-right"></i> Objetivo principal do fluxo</div>
+                <div class="input-item"><i class="fas fa-chevron-right"></i> Resultado final esperado</div>
+                <div class="input-item"><i class="fas fa-chevron-right"></i> Etapas que já existem hoje</div>
+                <div class="input-item"><i class="fas fa-chevron-right"></i> Problemas atuais ou gargalos percebidos</div>
+                <div class="input-item"><i class="fas fa-chevron-right"></i> Pessoas ou áreas envolvidas</div>
+                <div class="input-item"><i class="fas fa-chevron-right"></i> Ferramentas usadas atualmente</div>
+                <div class="input-item"><i class="fas fa-chevron-right"></i> Frequência do processo</div>
+                <div class="input-item"><i class="fas fa-chevron-right"></i> Prazos, SLAs ou tempo ideal</div>
+                <div class="input-item"><i class="fas fa-chevron-right"></i> Nível de urgência / importância</div>
+                <div class="input-item"><i class="fas fa-chevron-right"></i> Etapas com aprovação ou validação</div>
+                <div class="input-item"><i class="fas fa-chevron-right"></i> Tarefas manuais ou suscetíveis a erro</div>
+                <div class="input-item"><i class="fas fa-chevron-right"></i> Restrições, limitações ou dependências críticas</div>
+            </div>
+        </div>
+
+        <p class="section-label"><i class="fas fa-list-ol"></i> &nbsp;O que o prompt entrega — 15 módulos</p>
+        <div class="etapas">
+            <div class="etapa">
+                <div class="etapa-num">01</div>
+                <div class="etapa-body">
+                    <h4>Diagnóstico Estratégico do Fluxo Atual</h4>
+                    <p>Gargalos, retrabalhos, ruídos, dependências implícitas e riscos operacionais — antes de qualquer reorganização.</p>
+                </div>
+            </div>
+            <div class="etapa">
+                <div class="etapa-num">02</div>
+                <div class="etapa-body">
+                    <h4>Mapeamento Completo do Início ao Fim</h4>
+                    <p>Cada etapa com nome, objetivo, responsável, entregável, critério de conclusão, tempo estimado e dependências.</p>
+                </div>
+            </div>
+            <div class="etapa">
+                <div class="etapa-num">03</div>
+                <div class="etapa-body">
+                    <h4>Fases Operacionais</h4>
+                    <p>Planejamento, execução, revisão, aprovação, entrega, monitoramento — adaptadas ao seu contexto.</p>
+                </div>
+            </div>
+            <div class="etapa">
+                <div class="etapa-num">04</div>
+                <div class="etapa-body">
+                    <h4>Papéis, Responsabilidades e Handoffs</h4>
+                    <p>Quem executa, quem aprova, quem revisa, onde passa o bastão — com mini matriz RACI.</p>
+                </div>
+            </div>
+            <div class="etapa">
+                <div class="etapa-num">05</div>
+                <div class="etapa-body">
+                    <h4>Prioridade, Sequência e Dependência</h4>
+                    <p>Etapas críticas, paralelas, delegáveis e automatizáveis — com visão de caminho crítico.</p>
+                </div>
+            </div>
+            <div class="etapa">
+                <div class="etapa-num">06</div>
+                <div class="etapa-body">
+                    <h4>Otimização com Visão de Eficiência</h4>
+                    <p>Sugestões concretas para eliminar, fundir, encurtar, automatizar ou transformar etapas em checklist.</p>
+                </div>
+            </div>
+            <div class="etapa">
+                <div class="etapa-num">07</div>
+                <div class="etapa-body">
+                    <h4>SOPs e Checklists de Execução</h4>
+                    <p>SOP resumido, checklist por etapa e checklist final de qualidade — prontos para uso.</p>
+                </div>
+            </div>
+            <div class="etapa">
+                <div class="etapa-num">08</div>
+                <div class="etapa-body">
+                    <h4>Modelo de Comunicação e Alinhamento</h4>
+                    <p>Rituais, checkpoints, status reports e mensagens-padrão para manter todos sincronizados.</p>
+                </div>
+            </div>
+            <div class="etapa">
+                <div class="etapa-num">09</div>
+                <div class="etapa-body">
+                    <h4>Ferramentas e Formatos de Organização</h4>
+                    <p>Recomendação de kanban, calendário, tabela ou dashboard — com sugestão de ferramentas (Notion, Asana, Sheets etc.).</p>
+                </div>
+            </div>
+            <div class="etapa">
+                <div class="etapa-num">10</div>
+                <div class="etapa-body">
+                    <h4>Indicadores de Acompanhamento (KPIs)</h4>
+                    <p>Tempo por etapa, taxa de retrabalho, SLA cumprido, gargalos recorrentes — com orientação de interpretação.</p>
+                </div>
+            </div>
+            <div class="etapa">
+                <div class="etapa-num">11</div>
+                <div class="etapa-body">
+                    <h4>Plano de Melhoria Contínua</h4>
+                    <p>Periodicidade de revisão, perguntas de auditoria e como escalar o processo com aumento de demanda.</p>
+                </div>
+            </div>
+            <div class="etapa">
+                <div class="etapa-num">12</div>
+                <div class="etapa-body">
+                    <h4>Versão Executiva + Versão Operacional</h4>
+                    <p>Entrega em dois formatos: visão macro para liderança e detalhamento passo a passo para quem executa.</p>
+                </div>
+            </div>
+            <div class="etapa">
+                <div class="etapa-num">13</div>
+                <div class="etapa-body">
+                    <h4>Protocolos para Imprevistos</h4>
+                    <p>Atraso de etapa, ausência de responsável, mudança de prioridade, demanda urgente — com respostas práticas para cada cenário.</p>
+                </div>
+            </div>
+            <div class="etapa">
+                <div class="etapa-num">14</div>
+                <div class="etapa-body">
+                    <h4>Recomendação Estratégica Final</h4>
+                    <p>O que ajustar primeiro, o que traz ganho rápido, o que exige mudança estrutural e o que monitorar nas primeiras semanas.</p>
+                </div>
+            </div>
+            <div class="etapa">
+                <div class="etapa-num">15</div>
+                <div class="etapa-body">
+                    <h4>Formato Estruturado da Entrega</h4>
+                    <p>Títulos, subtítulos, tabelas, listas operacionais e linguagem escaneável — pronto para apresentar ou documentar.</p>
+                </div>
+            </div>
+        </div>
+
+        <p class="section-label"><i class="fas fa-code"></i> &nbsp;Prompt completo</p>
+        <div class="prompt-block">
+            <p><span class="label">Claude,</span> a partir deste momento você será meu Especialista em Organização de Fluxos de Trabalho, Processos e Operações, com a função de mapear, estruturar, otimizar e documentar um fluxo de trabalho completo do início ao fim, de maneira estratégica, prática e altamente profissional.</p>
+            <p>Quero que você atue como um analista de processos, combinando visão operacional, eficiência, lógica de execução, gestão de prioridades, padronização, produtividade e melhoria contínua.</p>
+            <p><span class="label">Aqui estão as informações sobre o fluxo de trabalho que preciso organizar:</span></p>
+            <p>
+                Tipo de fluxo ou processo: <span class="var">[inserir]</span><br>
+                Objetivo principal desse fluxo: <span class="var">[inserir]</span><br>
+                Resultado final esperado: <span class="var">[inserir]</span><br>
+                Etapas que já existem hoje: <span class="var">[inserir]</span><br>
+                Problemas atuais ou gargalos percebidos: <span class="var">[inserir]</span><br>
+                Pessoas ou áreas envolvidas: <span class="var">[inserir]</span><br>
+                Ferramentas usadas atualmente: <span class="var">[inserir]</span><br>
+                Frequência do processo (diário, semanal, mensal, por demanda): <span class="var">[inserir]</span><br>
+                Prazos, SLAs ou tempo ideal de execução: <span class="var">[inserir]</span><br>
+                Nível de urgência/importância: <span class="var">[inserir]</span><br>
+                Se existe aprovação, validação ou revisão em alguma etapa: <span class="var">[inserir]</span><br>
+                Se existem tarefas manuais, repetitivas ou suscetíveis a erro: <span class="var">[inserir]</span><br>
+                Restrições, limitações ou dependências críticas: <span class="var">[inserir]</span>
+            </p>
+            <p><span class="label">Com base nessas informações, quero que você construa um fluxo de trabalho completo seguindo esta estrutura:</span></p>
+            <p>
+                1. Diagnóstico Estratégico do Fluxo Atual<br>
+                2. Mapeamento Completo do Início ao Fim<br>
+                3. Fases Operacionais<br>
+                4. Papéis, Responsabilidades e Handoffs (mini RACI)<br>
+                5. Prioridade, Sequência e Dependência<br>
+                6. Otimização com Visão de Eficiência<br>
+                7. SOPs e Checklists de Execução<br>
+                8. Modelo de Comunicação e Alinhamento<br>
+                9. Ferramentas e Formatos de Organização<br>
+                10. Indicadores de Acompanhamento (KPIs)<br>
+                11. Plano de Melhoria Contínua<br>
+                12. Versão Executiva + Versão Operacional<br>
+                13. Protocolos para Imprevistos<br>
+                14. Recomendação Estratégica Final<br>
+                15. Entrega com títulos, tabelas, listas operacionais e linguagem escaneável
+            </p>
+            <p><span class="comment">// Não me entregue apenas ideias soltas. Quero um fluxo de trabalho completo, organizado, otimizado e pronto para ser aplicado na prática.</span></p>
+        </div>
+
+        <div class="tip-box">
+            <strong>Como usar melhor este prompt:</strong> quanto mais detalhado você preencher os campos de contexto, mais cirúrgica será a entrega. Se o processo envolver mais de 3 pessoas ou tiver etapas com aprovação, priorize pedir o módulo 4 (RACI) e o módulo 7 (SOPs) separadamente para aprofundar cada um.
+        </div>
+
+        <a href="prompts.html" class="btn-back"><i class="fas fa-arrow-left"></i> Voltar para o Banco de Prompts</a>
+    </div>
+</body>
+</html>
