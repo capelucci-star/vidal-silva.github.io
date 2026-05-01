@@ -1,0 +1,375 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Consultor Estratégico de Alto Nível | Vidal Silva</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        :root { --primary: #4285F4; --dark: #202124; --gray: #5f6368; --light: #f8f9fa; --code-bg: #282c34; }
+        body { font-family: 'Segoe UI', Arial, sans-serif; margin: 0; background: var(--light); color: var(--dark); line-height: 1.6; }
+        nav { display: flex; justify-content: space-between; padding: 20px 10%; background: white; align-items: center; box-shadow: 0 2px 4px rgba(0,0,0,0.05); }
+        .logo { font-weight: bold; font-size: 1.2rem; color: var(--primary); text-decoration: none; }
+
+        .hero {
+            background: linear-gradient(135deg, #0d1b2a 0%, #1b2a3b 60%, #1e3a5f 100%);
+            padding: 70px 20px 55px;
+            text-align: center;
+            color: white;
+            position: relative;
+            overflow: hidden;
+        }
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: -80px; right: -60px;
+            width: 380px; height: 380px;
+            background: radial-gradient(circle, rgba(66,133,244,0.13) 0%, transparent 70%);
+            border-radius: 50%;
+        }
+        .hero-tag {
+            display: inline-block;
+            background: rgba(66,133,244,0.2);
+            border: 1px solid rgba(66,133,244,0.45);
+            color: #8ab4f8;
+            padding: 5px 16px;
+            border-radius: 20px;
+            font-size: 0.78rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 20px;
+        }
+        .hero h1 {
+            font-size: 2rem;
+            font-weight: 800;
+            margin: 0 0 12px;
+            line-height: 1.25;
+            max-width: 660px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+        .hero-sub {
+            color: rgba(255,255,255,0.55);
+            font-size: 0.97rem;
+            max-width: 520px;
+            margin: 0 auto;
+        }
+        .hero-badges {
+            margin-top: 24px;
+            display: flex;
+            justify-content: center;
+            gap: 12px;
+            flex-wrap: wrap;
+        }
+        .badge {
+            background: rgba(255,255,255,0.08);
+            border: 1px solid rgba(255,255,255,0.15);
+            color: rgba(255,255,255,0.7);
+            padding: 5px 14px;
+            border-radius: 20px;
+            font-size: 0.78rem;
+            font-weight: 600;
+        }
+        .badge i { margin-right: 5px; }
+
+        .container { max-width: 820px; margin: 0 auto; padding: 55px 20px 80px; }
+
+        .intro {
+            background: white;
+            border-radius: 14px;
+            border: 1px solid #e8eef8;
+            box-shadow: 0 4px 18px rgba(0,0,0,0.05);
+            padding: 28px 32px;
+            margin-bottom: 40px;
+            font-size: 1.02rem;
+            color: #333;
+            line-height: 1.75;
+        }
+        .intro p { margin: 0 0 10px; }
+        .intro p:last-child { margin: 0; color: var(--gray); }
+
+        .section-label {
+            font-size: 0.78rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            color: var(--primary);
+            font-weight: 700;
+            margin: 0 0 16px;
+        }
+
+        /* INPUTS */
+        .inputs-card {
+            background: white;
+            border-radius: 14px;
+            border: 1px solid #e8eef8;
+            box-shadow: 0 3px 14px rgba(0,0,0,0.05);
+            padding: 28px 30px;
+            margin-bottom: 40px;
+        }
+        .inputs-card h3 { margin: 0 0 18px; font-size: 0.95rem; color: var(--dark); }
+        .input-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 10px;
+        }
+        .input-item {
+            display: flex;
+            align-items: flex-start;
+            gap: 10px;
+            background: #f8f9fa;
+            border-radius: 8px;
+            padding: 10px 14px;
+            font-size: 0.88rem;
+            color: #333;
+            line-height: 1.5;
+        }
+        .input-item i { color: var(--primary); margin-top: 2px; flex-shrink: 0; font-size: 0.8rem; }
+        .input-item.full { grid-column: 1 / -1; }
+
+        /* ETAPAS */
+        .etapas { display: flex; flex-direction: column; gap: 14px; margin-bottom: 40px; }
+        .etapa {
+            background: white;
+            border-radius: 12px;
+            border: 1px solid #e8eef8;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.04);
+            padding: 18px 22px;
+            display: flex;
+            gap: 16px;
+            align-items: flex-start;
+        }
+        .etapa-num {
+            background: var(--primary);
+            color: white;
+            font-weight: 800;
+            font-size: 0.78rem;
+            min-width: 32px;
+            height: 32px;
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+            margin-top: 1px;
+        }
+        .etapa-body h4 { margin: 0 0 4px; font-size: 0.97rem; color: var(--dark); }
+        .etapa-body p  { margin: 0; font-size: 0.87rem; color: var(--gray); line-height: 1.55; }
+
+        /* PROMPT COMPLETO */
+        .prompt-block {
+            background: var(--code-bg);
+            border-radius: 14px;
+            padding: 30px 28px 26px;
+            margin-bottom: 40px;
+            position: relative;
+            font-family: 'Courier New', monospace;
+            font-size: 0.88rem;
+            line-height: 1.8;
+            color: #abb2bf;
+        }
+        .prompt-block::before {
+            content: 'PROMPT COMPLETO';
+            position: absolute;
+            top: 0; left: 0;
+            background: #333;
+            color: #888;
+            font-size: 0.65rem;
+            font-family: 'Segoe UI', sans-serif;
+            font-weight: 700;
+            letter-spacing: 1px;
+            padding: 4px 14px;
+            border-radius: 14px 0 8px 0;
+        }
+        .prompt-block p { margin: 14px 0 0; }
+        .prompt-block .var   { color: #e06c75; }
+        .prompt-block .label { color: #61afef; font-weight: bold; }
+        .prompt-block .step  { color: #e5c07b; font-weight: bold; }
+        .prompt-block .sub   { color: #98c379; }
+
+        /* DICA */
+        .tip-box {
+            background: #f0f5ff;
+            border-left: 4px solid var(--primary);
+            border-radius: 12px;
+            padding: 22px 26px;
+            margin-bottom: 40px;
+            font-size: 0.93rem;
+            color: #333;
+            line-height: 1.7;
+        }
+        .tip-box strong { color: var(--primary); }
+
+        .btn-back {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            color: var(--primary);
+            text-decoration: none;
+            font-weight: bold;
+            font-size: 0.95rem;
+        }
+        .btn-back:hover { text-decoration: underline; }
+
+        @media (max-width: 600px) {
+            .input-grid { grid-template-columns: 1fr; }
+        }
+    </style>
+</head>
+<body>
+    <nav>
+        <a href="index.html" class="logo">Vidal Silva</a>
+        <a href="prompts.html" style="text-decoration: none; color: var(--gray);">← Banco de Prompts</a>
+    </nav>
+
+    <div class="hero">
+        <div class="hero-tag"><i class="fas fa-calendar-check"></i> &nbsp;Planejamento & Gestão Estratégica</div>
+        <h1>Consultor Estratégico de Alto Nível</h1>
+        <p class="hero-sub">Transforme qualquer problema em um plano estruturado, executável e mensurável — com diagnóstico de causa raiz, múltiplos caminhos de solução, KPIs e planos de contingência.</p>
+        <div class="hero-badges">
+            <span class="badge"><i class="fas fa-search"></i> Root Cause Analysis</span>
+            <span class="badge"><i class="fas fa-tasks"></i> 11 Módulos</span>
+            <span class="badge"><i class="fas fa-chart-bar"></i> SMART + KPIs + Riscos</span>
+        </div>
+    </div>
+
+    <div class="container">
+
+        <div class="intro">
+            <p>Este prompt transforma o Claude num estrategista de negócios sênior. Em vez de gerar uma lista genérica de sugestões, ele força um processo rigoroso: diagnóstico antes de solução, múltiplos caminhos antes de decidir, métricas antes de executar.</p>
+            <p>Use para problemas complexos de negócio, travamentos estratégicos, decisões de alto impacto ou qualquer situação onde o caminho não está claro e as apostas são altas.</p>
+        </div>
+
+        <p class="section-label"><i class="fas fa-fill-drip"></i> &nbsp;O que preencher antes de rodar</p>
+        <div class="inputs-card">
+            <h3>Forneça o máximo de contexto possível nos campos abaixo:</h3>
+            <div class="input-grid">
+                <div class="input-item full"><i class="fas fa-exclamation-circle"></i> <strong>Descrição detalhada do problema</strong> — quanto mais específico, mais cirúrgico o diagnóstico</div>
+                <div class="input-item"><i class="fas fa-chevron-right"></i> Área / negócio envolvido</div>
+                <div class="input-item"><i class="fas fa-chevron-right"></i> Objetivo final desejado</div>
+                <div class="input-item"><i class="fas fa-chevron-right"></i> Prazo disponível</div>
+                <div class="input-item"><i class="fas fa-chevron-right"></i> Recursos disponíveis</div>
+                <div class="input-item"><i class="fas fa-chevron-right"></i> Restrições ou limitações</div>
+                <div class="input-item"><i class="fas fa-chevron-right"></i> Tentativas anteriores (se houver)</div>
+            </div>
+        </div>
+
+        <p class="section-label"><i class="fas fa-list-ol"></i> &nbsp;O que o prompt entrega — 11 módulos</p>
+        <div class="etapas">
+            <div class="etapa">
+                <div class="etapa-num">01</div>
+                <div class="etapa-body">
+                    <h4>Diagnóstico Estratégico Profundo</h4>
+                    <p>Causa raiz, separação entre sintomas e problema real, fatores internos e externos, hipóteses e perguntas de aprofundamento.</p>
+                </div>
+            </div>
+            <div class="etapa">
+                <div class="etapa-num">02</div>
+                <div class="etapa-body">
+                    <h4>Definição Clara do Objetivo Estratégico</h4>
+                    <p>Objetivo no formato SMART, critérios de sucesso, resultado mínimo aceitável vs resultado ideal.</p>
+                </div>
+            </div>
+            <div class="etapa">
+                <div class="etapa-num">03</div>
+                <div class="etapa-body">
+                    <h4>Mapeamento de Possíveis Caminhos</h4>
+                    <p>Múltiplas abordagens com vantagens, desvantagens, riscos, complexidade e tempo — seguido da recomendação estratégica justificada.</p>
+                </div>
+            </div>
+            <div class="etapa">
+                <div class="etapa-num">04</div>
+                <div class="etapa-body">
+                    <h4>Plano de Ação Detalhado</h4>
+                    <p>Fases sequenciais com ações práticas, responsáveis, recursos, tempo estimado e classificação por impacto vs esforço.</p>
+                </div>
+            </div>
+            <div class="etapa">
+                <div class="etapa-num">05</div>
+                <div class="etapa-body">
+                    <h4>Cronograma Estratégico</h4>
+                    <p>Ordem lógica de execução com margens de segurança (buffers) e marcos importantes (milestones).</p>
+                </div>
+            </div>
+            <div class="etapa">
+                <div class="etapa-num">06</div>
+                <div class="etapa-body">
+                    <h4>Métricas e KPIs de Sucesso</h4>
+                    <p>Indicadores principais e secundários, frequência de análise e critérios para acionar ajustes.</p>
+                </div>
+            </div>
+            <div class="etapa">
+                <div class="etapa-num">07</div>
+                <div class="etapa-body">
+                    <h4>Análise de Riscos e Contingências</h4>
+                    <p>Possíveis falhas mapeadas com probabilidade, impacto e plano alternativo para cada cenário.</p>
+                </div>
+            </div>
+            <div class="etapa">
+                <div class="etapa-num">08</div>
+                <div class="etapa-body">
+                    <h4>Estratégia de Execução e Consistência</h4>
+                    <p>Como manter disciplina, evitar abandono e criar rotinas de acompanhamento que sustentam o plano no longo prazo.</p>
+                </div>
+            </div>
+            <div class="etapa">
+                <div class="etapa-num">09</div>
+                <div class="etapa-body">
+                    <h4>Sistema de Ajuste Contínuo</h4>
+                    <p>Quando revisar, quando mudar de estratégia e como identificar rapidamente o que não está funcionando.</p>
+                </div>
+            </div>
+            <div class="etapa">
+                <div class="etapa-num">10</div>
+                <div class="etapa-body">
+                    <h4>Recomendações Estratégicas Finais</h4>
+                    <p>Conselhos de especialista, otimizações adicionais e como acelerar resultados sem comprometer qualidade.</p>
+                </div>
+            </div>
+            <div class="etapa">
+                <div class="etapa-num">11</div>
+                <div class="etapa-body">
+                    <h4>Formato Estruturado da Entrega</h4>
+                    <p>Resposta organizada com títulos, subtítulos, tabelas e linguagem escaneável — pronta para apresentar ou executar.</p>
+                </div>
+            </div>
+        </div>
+
+        <p class="section-label"><i class="fas fa-code"></i> &nbsp;Prompt completo</p>
+        <div class="prompt-block">
+            <p><span class="label">Claude,</span> a partir deste momento você será meu Consultor Estratégico de Alto Nível, especializado em diagnóstico, tomada de decisão e construção de planos de ação orientados a resultado.</p>
+            <p>Seu objetivo é transformar qualquer problema em um plano estruturado, executável, mensurável e adaptável, como faria um estrategista experiente de negócios.</p>
+            <p><span class="label">Aqui está o problema que preciso resolver:</span> <span class="var">[inserir descrição detalhada do problema]</span></p>
+            <p>
+                <span class="label">Contexto adicional:</span><br>
+                Área/negócio: <span class="var">[inserir]</span><br>
+                Objetivo final desejado: <span class="var">[inserir]</span><br>
+                Prazo: <span class="var">[inserir]</span><br>
+                Recursos disponíveis: <span class="var">[inserir]</span><br>
+                Restrições ou limitações: <span class="var">[inserir]</span><br>
+                Tentativas anteriores (se houver): <span class="var">[inserir]</span>
+            </p>
+            <p><span class="label">Com base nisso, siga rigorosamente as etapas abaixo:</span></p>
+            <p>
+                <span class="step">1. Diagnóstico Estratégico Profundo</span> — causa raiz, sintomas vs problema real, fatores internos e externos, gargalos, riscos ocultos e hipóteses.<br><br>
+                <span class="step">2. Definição Clara do Objetivo Estratégico</span> — objetivo SMART, critérios de sucesso, resultado mínimo aceitável vs resultado ideal.<br><br>
+                <span class="step">3. Mapeamento de Possíveis Caminhos</span> — múltiplas abordagens com vantagens, desvantagens, riscos, complexidade e recomendação justificada.<br><br>
+                <span class="step">4. Plano de Ação Detalhado</span> — fases, ações práticas, responsáveis, recursos, tempo estimado e priorização por impacto vs esforço.<br><br>
+                <span class="step">5. Cronograma Estratégico</span> — ordem lógica de execução, buffers de segurança e milestones.<br><br>
+                <span class="step">6. Métricas e KPIs de Sucesso</span> — indicadores principais e secundários, frequência de análise e critérios de ajuste.<br><br>
+                <span class="step">7. Análise de Riscos e Contingências</span> — falhas mapeadas com probabilidade, impacto e plano alternativo.<br><br>
+                <span class="step">8. Estratégia de Execução e Consistência</span> — como manter disciplina, evitar abandono e criar rotinas de acompanhamento.<br><br>
+                <span class="step">9. Sistema de Ajuste Contínuo</span> — quando revisar, quando mudar de estratégia, como identificar o que não funciona.<br><br>
+                <span class="step">10. Recomendações Estratégicas Finais</span> — conselhos de especialista, otimizações e como acelerar resultados.<br><br>
+                <span class="step">11. Formato da Entrega</span> — resposta clara, estruturada, escaneável e direta para execução.
+            </p>
+        </div>
+
+        <div class="tip-box">
+            <strong>Como extrair o máximo deste prompt:</strong> descreva o problema com o máximo de contexto possível — histórico, tentativas anteriores e restrições reais. Quanto mais específico o input, mais o Claude consegue ir além do diagnóstico óbvio e chegar na causa raiz de verdade. Para problemas muito amplos, rode o módulo 1 isolado primeiro e use o diagnóstico para refinar os outros campos antes de pedir o plano completo.
+        </div>
+
+        <a href="prompts.html" class="btn-back"><i class="fas fa-arrow-left"></i> Voltar para o Banco de Prompts</a>
+    </div>
+</body>
+</html>
