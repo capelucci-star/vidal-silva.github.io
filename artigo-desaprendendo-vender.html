@@ -1,0 +1,327 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Desaprendendo a Vender: 10 Mentiras que Sabotam seu Protagonismo | Vidal Silva</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        :root { --primary: #4285F4; --dark: #202124; --gray: #5f6368; --light: #f8f9fa; }
+        body { font-family: 'Segoe UI', Arial, sans-serif; margin: 0; background: var(--light); color: var(--dark); line-height: 1.7; }
+
+        nav { display: flex; justify-content: space-between; padding: 20px 10%; background: white; align-items: center; box-shadow: 0 2px 4px rgba(0,0,0,0.05); position: sticky; top: 0; z-index: 100; }
+        .logo { font-weight: bold; font-size: 1.2rem; color: var(--primary); text-decoration: none; }
+        .nav-links a { text-decoration: none; color: var(--gray); font-weight: 500; }
+
+        /* HERO */
+        .article-hero {
+            background: white;
+            padding: 60px 10% 40px;
+            border-bottom: 1px solid #eee;
+        }
+        .article-hero .tag {
+            background: #e8f0fe;
+            color: var(--primary);
+            padding: 5px 14px;
+            border-radius: 20px;
+            font-size: 0.75rem;
+            font-weight: bold;
+            text-transform: uppercase;
+            display: inline-block;
+            margin-bottom: 20px;
+        }
+        .article-hero h1 {
+            font-size: 2.3rem;
+            line-height: 1.2;
+            margin: 0 0 20px 0;
+            max-width: 720px;
+        }
+        .article-hero .subtitle {
+            font-size: 1.1rem;
+            color: var(--gray);
+            max-width: 650px;
+            margin-bottom: 30px;
+        }
+        .article-meta {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+            color: var(--gray);
+            font-size: 0.88rem;
+            flex-wrap: wrap;
+        }
+        .article-meta i { color: var(--primary); }
+
+        /* CORPO */
+        .article-body {
+            max-width: 760px;
+            margin: 50px auto;
+            padding: 0 20px 60px;
+        }
+
+        .intro {
+            font-size: 1.05rem;
+            color: #3c4043;
+            border-left: 4px solid var(--primary);
+            padding-left: 20px;
+            margin-bottom: 45px;
+            line-height: 1.8;
+        }
+
+        /* MENTIRA CARD */
+        .mentira-card {
+            background: white;
+            border-radius: 12px;
+            padding: 0;
+            margin-bottom: 18px;
+            box-shadow: 0 3px 12px rgba(0,0,0,0.06);
+            border: 1px solid #eee;
+            overflow: hidden;
+            display: flex;
+        }
+        .mentira-lado {
+            background: var(--dark);
+            color: white;
+            width: 64px;
+            min-width: 64px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 20px 0;
+            gap: 6px;
+        }
+        .mentira-lado .num {
+            font-size: 1.4rem;
+            font-weight: 800;
+            line-height: 1;
+        }
+        .mentira-lado .label-mito {
+            font-size: 0.55rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            color: rgba(255,255,255,0.4);
+            writing-mode: horizontal-tb;
+        }
+        .mentira-corpo {
+            padding: 22px 25px;
+            flex: 1;
+        }
+        .mentira-corpo h2 {
+            font-size: 1.05rem;
+            margin: 0 0 10px 0;
+            color: var(--dark);
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        .mentira-badge {
+            background: #fff3e0;
+            color: #e65100;
+            font-size: 0.68rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            padding: 2px 8px;
+            border-radius: 4px;
+        }
+        .mentira-corpo p {
+            color: var(--gray);
+            margin: 0;
+            font-size: 0.95rem;
+        }
+        .mentira-corpo .verdade {
+            margin-top: 10px;
+            padding-top: 10px;
+            border-top: 1px dashed #eee;
+            font-size: 0.88rem;
+            color: var(--primary);
+            font-weight: 600;
+            display: flex;
+            align-items: flex-start;
+            gap: 6px;
+        }
+        .mentira-corpo .verdade::before {
+            content: '→';
+            flex-shrink: 0;
+        }
+
+        /* DESTAQUE CENTRAL */
+        .destaque {
+            background: var(--dark);
+            color: white;
+            border-radius: 12px;
+            padding: 35px 40px;
+            margin: 40px 0;
+            text-align: center;
+        }
+        .destaque .label {
+            font-size: 0.72rem;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            color: var(--primary);
+            margin-bottom: 15px;
+            display: block;
+        }
+        .destaque p {
+            font-size: 1.15rem;
+            font-style: italic;
+            color: rgba(255,255,255,0.85);
+            line-height: 1.8;
+            margin: 0;
+        }
+
+        .btn-back {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            margin-top: 40px;
+            text-decoration: none;
+            color: var(--primary);
+            font-weight: bold;
+        }
+        .btn-back:hover { opacity: 0.7; }
+
+        footer {
+            background: white;
+            padding: 40px 10%;
+            text-align: center;
+            border-top: 1px solid #eee;
+        }
+        footer p { color: var(--gray); font-size: 0.9rem; }
+    </style>
+</head>
+<body>
+
+<nav>
+    <a href="index.html" class="logo">Vidal Silva</a>
+    <div class="nav-links">
+        <a href="textos.html">← Voltar aos artigos</a>
+    </div>
+</nav>
+
+<div class="article-hero">
+    <span class="tag">Vendas & Performance</span>
+    <h1>Desaprendendo a Vender: 10 Mentiras que Sabotam seu Protagonismo</h1>
+    <p class="subtitle">Muitos profissionais carregam conceitos sobre vendas que nunca lhes pertenceram. Para retomar o protagonismo, o primeiro passo não é dominar uma técnica nova — é desaprender o que te contaram.</p>
+    <div class="article-meta">
+        <span><i class="fas fa-calendar-alt"></i> Março 2026</span>
+        <span><i class="fas fa-clock"></i> 6 min de leitura</span>
+        <span><i class="fas fa-tag"></i> Vendas & Performance</span>
+    </div>
+</div>
+
+<div class="article-body">
+
+    <p class="intro">Vender bem não é um dom místico — é prática organizada. E essa evolução começa ao eliminar os mitos que moldam comportamentos reativos e inseguros.</p>
+
+    <div class="mentira-card">
+        <div class="mentira-lado"><span class="num">1</span><span class="label-mito">mito</span></div>
+        <div class="mentira-corpo">
+            <h2>Vender é convencer pessoas <span class="mentira-badge">Mito</span></h2>
+            <p>A ideia de "convencer" cria um clima de disputa. Se você entra na reunião para ganhar, você para de escutar.</p>
+            <div class="verdade">Vender é ajudar o outro a decidir com clareza. Você não vence uma briga; você pavimenta um caminho.</div>
+        </div>
+    </div>
+
+    <div class="mentira-card">
+        <div class="mentira-lado"><span class="num">2</span><span class="label-mito">mito</span></div>
+        <div class="mentira-corpo">
+            <h2>O bom vendedor fala muito <span class="mentira-badge">Mito</span></h2>
+            <p>Falar demais geralmente é sintoma de ansiedade. O protagonismo comercial nasce da escuta ativa.</p>
+            <div class="verdade">Quem fala apenas o necessário e entende o silêncio como ferramenta estratégica é quem realmente conduz a conversa.</div>
+        </div>
+    </div>
+
+    <div class="mentira-card">
+        <div class="mentira-lado"><span class="num">3</span><span class="label-mito">mito</span></div>
+        <div class="mentira-corpo">
+            <h2>O preço é o maior obstáculo <span class="mentira-badge">Mito</span></h2>
+            <p>O preço só se torna um problema quando o valor não foi estabelecido. Se a conversa for mal conduzida, o cliente negociará apenas o cifrão.</p>
+            <div class="verdade">Preço sem contexto é sempre caro. Foque no impacto da solução e o custo se tornará secundário.</div>
+        </div>
+    </div>
+
+    <div class="mentira-card">
+        <div class="mentira-lado"><span class="num">4</span><span class="label-mito">mito</span></div>
+        <div class="mentira-corpo">
+            <h2>Se o cliente quiser, ele pede <span class="mentira-badge">Mito</span></h2>
+            <p>Esperar o cliente tomar a iniciativa é terceirizar sua responsabilidade. Muitas vezes, ele nem domina a solução técnica.</p>
+            <div class="verdade">O profissional maduro oferece o diagnóstico e o próximo passo antes de ser solicitado. Vender é conduzir, não apenas atender.</div>
+        </div>
+    </div>
+
+    <div class="mentira-card">
+        <div class="mentira-lado"><span class="num">5</span><span class="label-mito">mito</span></div>
+        <div class="mentira-corpo">
+            <h2>Insistir é ser chato <span class="mentira-badge">Mito</span></h2>
+            <p>O "chato" é aquele que aparece sem contexto ou ignora o que foi combinado.</p>
+            <div class="verdade">Fazer o follow-up com clareza é sinal de cuidado e profissionalismo. O acompanhamento organizado vence o silêncio e constrói confiança.</div>
+        </div>
+    </div>
+
+    <div class="mentira-card">
+        <div class="mentira-lado"><span class="num">6</span><span class="label-mito">mito</span></div>
+        <div class="mentira-corpo">
+            <h2>Vender é um dom nato <span class="mentira-badge">Mito</span></h2>
+            <p>Essa é uma mentira que gera comparações tóxicas. O que parece talento natural é, quase sempre, rotina e método.</p>
+            <div class="verdade">A disciplina diária de prospecção e acompanhamento sempre vence o talento desorganizado.</div>
+        </div>
+    </div>
+
+    <div class="mentira-card">
+        <div class="mentira-lado"><span class="num">7</span><span class="label-mito">mito</span></div>
+        <div class="mentira-corpo">
+            <h2>Sentimentos não cabem na venda <span class="mentira-badge">Mito</span></h2>
+            <p>Tratar a venda como algo frio e artificial é um erro estratégico. Validar as dores e a experiência do cliente fortalece a conexão.</p>
+            <div class="verdade">Negociações de alto nível unem empatia com estrutura técnica.</div>
+        </div>
+    </div>
+
+    <div class="mentira-card">
+        <div class="mentira-lado"><span class="num">8</span><span class="label-mito">mito</span></div>
+        <div class="mentira-corpo">
+            <h2>Quanto mais informação, melhor <span class="mentira-badge">Mito</span></h2>
+            <p>Explicar cada detalhe técnico cansa e confunde. O cliente precisa do necessário para dar o próximo passo.</p>
+            <div class="verdade">Excesso de dados gera paralisia. Direção e clareza geram decisão.</div>
+        </div>
+    </div>
+
+    <div class="mentira-card">
+        <div class="mentira-lado"><span class="num">9</span><span class="label-mito">mito</span></div>
+        <div class="mentira-corpo">
+            <h2>É preciso agradar a todos <span class="mentira-badge">Mito</span></h2>
+            <p>Tentar ser querido por todos leva ao medo de conversas difíceis e a descontos sem critério.</p>
+            <div class="verdade">Ser assertivo é mais valioso do que ser "bonzinho". O cliente respeita a honestidade, não a concordância cega.</div>
+        </div>
+    </div>
+
+    <div class="mentira-card">
+        <div class="mentira-lado"><span class="num">10</span><span class="label-mito">mito</span></div>
+        <div class="mentira-corpo">
+            <h2>Venda exige pressão <span class="mentira-badge">Mito</span></h2>
+            <p>A pressão é o último recurso de quem não tem método e está desesperado pelo fechamento.</p>
+            <div class="verdade">Quem confia no processo e mantém um acompanhamento organizado não pressiona — conduz com segurança.</div>
+        </div>
+    </div>
+
+    <div class="destaque">
+        <span class="label">O Ponto Central</span>
+        <p>"Para retomar o protagonismo, o primeiro passo não é dominar uma técnica nova — é desaprender o que te contaram."</p>
+    </div>
+
+    <a href="textos.html" class="btn-back">
+        <i class="fas fa-arrow-left"></i> Voltar para Insights & Artigos
+    </a>
+
+</div>
+
+<footer>
+    <p style="font-style: italic; max-width: 500px; margin: 0 auto 10px;">
+        "Acreditando na liderança que respeita o fluxo humano e utiliza a precisão dos dados para guiar o caminho."
+    </p>
+    <p>&copy; 2026 Vidal Silva | Partner Sales Manager @ Google Education</p>
+</footer>
+
+</body>
+</html>
