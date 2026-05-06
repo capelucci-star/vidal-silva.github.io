@@ -1,0 +1,406 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Organizador de Delegação de Tarefas | Vidal Silva</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        :root { --primary: #4285F4; --dark: #202124; --gray: #5f6368; --light: #f8f9fa; --code-bg: #282c34; }
+        body { font-family: 'Segoe UI', Arial, sans-serif; margin: 0; background: var(--light); color: var(--dark); line-height: 1.6; }
+        nav { display: flex; justify-content: space-between; padding: 20px 10%; background: white; align-items: center; box-shadow: 0 2px 4px rgba(0,0,0,0.05); }
+        .logo { font-weight: bold; font-size: 1.2rem; color: var(--primary); text-decoration: none; }
+
+        .hero {
+            background: linear-gradient(135deg, #003d33 0%, #006655 55%, #00897b 100%);
+            padding: 70px 20px 55px;
+            text-align: center;
+            color: white;
+            position: relative;
+            overflow: hidden;
+        }
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: -80px; right: -60px;
+            width: 380px; height: 380px;
+            background: radial-gradient(circle, rgba(0,188,212,0.15) 0%, transparent 70%);
+            border-radius: 50%;
+        }
+        .hero-tag {
+            display: inline-block;
+            background: rgba(0,188,212,0.2);
+            border: 1px solid rgba(0,188,212,0.45);
+            color: #80deea;
+            padding: 5px 16px;
+            border-radius: 20px;
+            font-size: 0.78rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 20px;
+        }
+        .hero h1 {
+            font-size: 2rem;
+            font-weight: 800;
+            margin: 0 0 12px;
+            line-height: 1.25;
+            max-width: 660px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+        .hero-sub {
+            color: rgba(255,255,255,0.6);
+            font-size: 0.97rem;
+            max-width: 520px;
+            margin: 0 auto;
+        }
+        .hero-badges {
+            margin-top: 24px;
+            display: flex;
+            justify-content: center;
+            gap: 12px;
+            flex-wrap: wrap;
+        }
+        .badge {
+            background: rgba(255,255,255,0.08);
+            border: 1px solid rgba(255,255,255,0.18);
+            color: rgba(255,255,255,0.75);
+            padding: 5px 14px;
+            border-radius: 20px;
+            font-size: 0.78rem;
+            font-weight: 600;
+        }
+        .badge i { margin-right: 5px; }
+
+        .container { max-width: 820px; margin: 0 auto; padding: 55px 20px 80px; }
+
+        .intro {
+            background: white;
+            border-radius: 14px;
+            border: 1px solid #e8eef8;
+            box-shadow: 0 4px 18px rgba(0,0,0,0.05);
+            padding: 28px 32px;
+            margin-bottom: 40px;
+            font-size: 1.02rem;
+            color: #333;
+            line-height: 1.75;
+        }
+        .intro p { margin: 0 0 10px; }
+        .intro p:last-child { margin: 0; color: var(--gray); }
+
+        .section-label {
+            font-size: 0.78rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            color: #00897b;
+            font-weight: 700;
+            margin: 0 0 16px;
+        }
+
+        /* INPUT */
+        .input-card {
+            background: white;
+            border-radius: 14px;
+            border: 1px solid #e8eef8;
+            box-shadow: 0 3px 14px rgba(0,0,0,0.05);
+            padding: 26px 30px;
+            margin-bottom: 40px;
+        }
+        .input-card h3 { margin: 0 0 14px; font-size: 0.95rem; color: var(--dark); }
+        .input-main {
+            background: #f0fdf9;
+            border: 1px solid #b2dfdb;
+            border-radius: 10px;
+            padding: 16px 18px;
+            font-size: 0.92rem;
+            color: #333;
+            line-height: 1.65;
+        }
+        .input-main i { color: #00897b; margin-right: 8px; }
+
+        /* ETAPAS */
+        .etapas { display: flex; flex-direction: column; gap: 14px; margin-bottom: 40px; }
+        .etapa {
+            background: white;
+            border-radius: 12px;
+            border: 1px solid #e8eef8;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.04);
+            padding: 18px 22px;
+            display: flex;
+            gap: 16px;
+            align-items: flex-start;
+        }
+        .etapa-num {
+            background: #00897b;
+            color: white;
+            font-weight: 800;
+            font-size: 0.78rem;
+            min-width: 32px;
+            height: 32px;
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+            margin-top: 1px;
+        }
+        .etapa-body h4 { margin: 0 0 4px; font-size: 0.97rem; color: var(--dark); }
+        .etapa-body p  { margin: 0; font-size: 0.87rem; color: var(--gray); line-height: 1.55; }
+
+        /* DIFERENCIAL */
+        .diferencial-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 12px;
+            margin-bottom: 40px;
+        }
+        .dif-card {
+            background: white;
+            border-radius: 12px;
+            border: 1px solid #e8eef8;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.04);
+            padding: 18px 20px;
+            display: flex;
+            gap: 12px;
+            align-items: flex-start;
+        }
+        .dif-icon {
+            width: 36px; height: 36px;
+            border-radius: 9px;
+            background: #e0f2f1;
+            color: #00897b;
+            display: flex; align-items: center; justify-content: center;
+            font-size: 0.9rem;
+            flex-shrink: 0;
+        }
+        .dif-card h4 { margin: 0 0 3px; font-size: 0.9rem; color: var(--dark); }
+        .dif-card p  { margin: 0; font-size: 0.82rem; color: var(--gray); line-height: 1.5; }
+
+        /* PROMPT COMPLETO */
+        .prompt-block {
+            background: var(--code-bg);
+            border-radius: 14px;
+            padding: 30px 28px 26px;
+            margin-bottom: 40px;
+            position: relative;
+            font-family: 'Courier New', monospace;
+            font-size: 0.88rem;
+            line-height: 1.8;
+            color: #abb2bf;
+        }
+        .prompt-block::before {
+            content: 'PROMPT COMPLETO';
+            position: absolute;
+            top: 0; left: 0;
+            background: #333;
+            color: #888;
+            font-size: 0.65rem;
+            font-family: 'Segoe UI', sans-serif;
+            font-weight: 700;
+            letter-spacing: 1px;
+            padding: 4px 14px;
+            border-radius: 14px 0 8px 0;
+        }
+        .prompt-block p { margin: 14px 0 0; }
+        .prompt-block .var   { color: #e06c75; }
+        .prompt-block .label { color: #61afef; font-weight: bold; }
+        .prompt-block .step  { color: #e5c07b; font-weight: bold; }
+
+        /* DICA */
+        .tip-box {
+            background: #e0f2f1;
+            border-left: 4px solid #00897b;
+            border-radius: 12px;
+            padding: 22px 26px;
+            margin-bottom: 40px;
+            font-size: 0.93rem;
+            color: #333;
+            line-height: 1.7;
+        }
+        .tip-box strong { color: #00695c; }
+
+        .btn-back {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            color: var(--primary);
+            text-decoration: none;
+            font-weight: bold;
+            font-size: 0.95rem;
+        }
+        .btn-back:hover { text-decoration: underline; }
+
+        @media (max-width: 600px) {
+            .diferencial-grid { grid-template-columns: 1fr; }
+        }
+    </style>
+</head>
+<body>
+    <nav>
+        <a href="index.html" class="logo">Vidal Silva</a>
+        <a href="prompts.html" style="text-decoration: none; color: var(--gray);">← Banco de Prompts</a>
+    </nav>
+
+    <div class="hero">
+        <div class="hero-tag"><i class="fas fa-clock"></i> &nbsp;Produtividade & Gestão do Tempo</div>
+        <h1>Organizador de Delegação de Tarefas</h1>
+        <p class="hero-sub">Transforme informações brutas em briefings profissionais prontos para envio — com diagnóstico de lacunas, critérios de qualidade, checklist final e zero retrabalho.</p>
+        <div class="hero-badges">
+            <span class="badge"><i class="fas fa-search"></i> Diagnóstico de Lacunas</span>
+            <span class="badge"><i class="fas fa-tasks"></i> 10 Módulos</span>
+            <span class="badge"><i class="fas fa-paper-plane"></i> Briefing Pronto para Envio</span>
+        </div>
+    </div>
+
+    <div class="container">
+
+        <div class="intro">
+            <p>A maioria do retrabalho nas equipes não vem de falta de competência — vem de briefing ruim. Instrução ambígua gera execução errada. Este prompt resolve isso antes de acontecer: ele analisa o que você tem, aponta o que está faltando e monta um briefing profissional completo, pronto para delegar sem ajustes.</p>
+            <p>Use sempre que precisar passar uma tarefa para alguém — seja um colaborador, freelancer, parceiro ou até para si mesmo em outro momento.</p>
+        </div>
+
+        <p class="section-label"><i class="fas fa-fill-drip"></i> &nbsp;O que você precisa fornecer</p>
+        <div class="input-card">
+            <h3>Um único campo de entrada — mas quanto mais rico, melhor o resultado:</h3>
+            <div class="input-main">
+                <i class="fas fa-edit"></i>
+                <strong>Descrição da tarefa:</strong> inclua o contexto, o objetivo, qualquer informação disponível, o que você já tentou e quaisquer restrições conhecidas. Quanto mais detalhado, mais o Claude consegue identificar lacunas antes de você delegar.
+            </div>
+        </div>
+
+        <p class="section-label"><i class="fas fa-list-ol"></i> &nbsp;O que o prompt entrega — 10 módulos</p>
+        <div class="etapas">
+            <div class="etapa">
+                <div class="etapa-num">01</div>
+                <div class="etapa-body">
+                    <h4>Diagnóstico da Informação Atual</h4>
+                    <p>Lacunas, ambiguidades, suposições implícitas e pontos mal definidos — com perguntas estratégicas para resolver antes de delegar.</p>
+                </div>
+            </div>
+            <div class="etapa">
+                <div class="etapa-num">02</div>
+                <div class="etapa-body">
+                    <h4>Objetivo da Tarefa com Clareza Total</h4>
+                    <p>Resultado esperado, critério de sucesso, impacto no todo e nível de qualidade mínimo vs ideal — reescrito como instrução oficial.</p>
+                </div>
+            </div>
+            <div class="etapa">
+                <div class="etapa-num">03</div>
+                <div class="etapa-body">
+                    <h4>Contexto Completo para Execução</h4>
+                    <p>Por que a tarefa existe, para quem é, referências relevantes e restrições importantes — tudo que o executor precisa saber antes de começar.</p>
+                </div>
+            </div>
+            <div class="etapa">
+                <div class="etapa-num">04</div>
+                <div class="etapa-body">
+                    <h4>Tarefa Quebrada em Etapas Executáveis</h4>
+                    <p>Sequência lógica, subtarefas organizadas, dependências entre etapas e pontos de atenção — sem margem para dúvida.</p>
+                </div>
+            </div>
+            <div class="etapa">
+                <div class="etapa-num">05</div>
+                <div class="etapa-body">
+                    <h4>Critérios de Qualidade e Entrega</h4>
+                    <p>Formato de entrega, padrões mínimos, exemplos de "bom" e "ruim" e erros que devem ser evitados.</p>
+                </div>
+            </div>
+            <div class="etapa">
+                <div class="etapa-num">06</div>
+                <div class="etapa-body">
+                    <h4>Antecipação de Problemas e Diretrizes Preventivas</h4>
+                    <p>Erros comuns, interpretações equivocadas e gargalos operacionais — com instruções preventivas para cada um.</p>
+                </div>
+            </div>
+            <div class="etapa">
+                <div class="etapa-num">07</div>
+                <div class="etapa-body">
+                    <h4>Comunicação Adaptada ao Executor</h4>
+                    <p>Tom e nível de detalhe ajustados ao perfil de quem vai executar — iniciante, intermediário ou avançado.</p>
+                </div>
+            </div>
+            <div class="etapa">
+                <div class="etapa-num">08</div>
+                <div class="etapa-body">
+                    <h4>Briefing Final Pronto para Delegação</h4>
+                    <p>Documento completo, claro, organizado e com linguagem direta — pronto para enviar sem nenhum ajuste adicional.</p>
+                </div>
+            </div>
+            <div class="etapa">
+                <div class="etapa-num">09</div>
+                <div class="etapa-body">
+                    <h4>Melhorias Estratégicas na Delegação</h4>
+                    <p>O que pode ser automatizado, padronizado ou transformado em processo recorrente para futuras delegações.</p>
+                </div>
+            </div>
+            <div class="etapa">
+                <div class="etapa-num">10</div>
+                <div class="etapa-body">
+                    <h4>Checklist Final Antes de Delegar</h4>
+                    <p>Validação rápida: está claro? Está completo? Está executável? Está mensurável? Está alinhado com o objetivo?</p>
+                </div>
+            </div>
+        </div>
+
+        <p class="section-label"><i class="fas fa-star"></i> &nbsp;O que diferencia esse prompt</p>
+        <div class="diferencial-grid">
+            <div class="dif-card">
+                <div class="dif-icon"><i class="fas fa-search"></i></div>
+                <div>
+                    <h4>Diagnóstico antes de ação</h4>
+                    <p>Ele aponta o que está faltando antes de montar o briefing — não deixa lacuna passar.</p>
+                </div>
+            </div>
+            <div class="dif-card">
+                <div class="dif-icon"><i class="fas fa-user-check"></i></div>
+                <div>
+                    <h4>Adaptado ao executor</h4>
+                    <p>Ajusta o nível de detalhe e o tom para quem vai receber — não é um briefing genérico.</p>
+                </div>
+            </div>
+            <div class="dif-card">
+                <div class="dif-icon"><i class="fas fa-shield-alt"></i></div>
+                <div>
+                    <h4>Prevenção de retrabalho</h4>
+                    <p>Antecipa erros e mal-entendidos antes que eles aconteçam na execução.</p>
+                </div>
+            </div>
+            <div class="dif-card">
+                <div class="dif-icon"><i class="fas fa-paper-plane"></i></div>
+                <div>
+                    <h4>Pronto para envio</h4>
+                    <p>O briefing final sai formatado para enviar diretamente — sem precisar reescrever nada.</p>
+                </div>
+            </div>
+        </div>
+
+        <p class="section-label"><i class="fas fa-code"></i> &nbsp;Prompt completo</p>
+        <div class="prompt-block">
+            <p><span class="label">Claude,</span> a partir de agora você será meu Consultor Estratégico de Organização e Delegação de Tarefas, responsável por estruturar, refinar e transformar informações brutas em instruções claras, completas e executáveis por qualquer pessoa ou equipe.</p>
+            <p>Meu objetivo é garantir clareza absoluta, redução de retrabalho e máxima eficiência na execução antes de delegar qualquer tarefa.</p>
+            <p><span class="label">Aqui estão as informações iniciais da tarefa:</span> <span class="var">[inserir descrição da tarefa, contexto, objetivo e qualquer informação disponível]</span></p>
+            <p><span class="label">Com base nisso, execute as etapas abaixo:</span></p>
+            <p>
+                <span class="step">1. Diagnóstico da Informação Atual</span> — lacunas, ambiguidades, suposições implícitas, pontos mal definidos e perguntas estratégicas para resolver antes de delegar.<br><br>
+                <span class="step">2. Objetivo com Clareza Total</span> — resultado esperado, critério de sucesso, impacto no todo e nível de qualidade mínimo vs ideal. Reescreva como instrução oficial.<br><br>
+                <span class="step">3. Contexto Completo para Execução</span> — por que existe, para quem é, referências relevantes e restrições importantes.<br><br>
+                <span class="step">4. Tarefa em Etapas Executáveis</span> — sequência lógica, subtarefas, dependências e pontos de atenção em cada fase.<br><br>
+                <span class="step">5. Critérios de Qualidade e Entrega</span> — formato, padrões mínimos, exemplos de bom e ruim, erros a evitar.<br><br>
+                <span class="step">6. Antecipação de Problemas</span> — erros comuns, interpretações equivocadas, gargalos e instruções preventivas para cada um.<br><br>
+                <span class="step">7. Comunicação Adaptada ao Executor</span> — tom e nível de detalhe ajustados ao perfil de quem vai executar.<br><br>
+                <span class="step">8. Briefing Final Pronto para Delegação</span> — documento claro, organizado e com linguagem direta, pronto para enviar sem ajustes.<br><br>
+                <span class="step">9. Melhorias Estratégicas na Delegação</span> — o que automatizar, padronizar ou transformar em processo recorrente.<br><br>
+                <span class="step">10. Checklist Final</span> — está claro? Está completo? Está executável? Está mensurável? Está alinhado com o objetivo?
+            </p>
+            <p><span class="label">Entrega final:</span> extremamente clara, escaneável, profissional, sem ambiguidades e pronta para envio imediato.</p>
+        </div>
+
+        <div class="tip-box">
+            <strong>Dica de uso:</strong> se você ainda não sabe exatamente o que precisa delegar, rode apenas o módulo 1 primeiro. As perguntas que o Claude vai gerar vão clarear o objetivo antes de você investir tempo montando o briefing completo. Isso economiza mais tempo do que parece.
+        </div>
+
+        <a href="prompts.html" class="btn-back"><i class="fas fa-arrow-left"></i> Voltar para o Banco de Prompts</a>
+    </div>
+</body>
+</html>
