@@ -1,0 +1,950 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Gestão de Canais | Vidal Silva</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+  <style>
+    :root {
+      --primary: #4285F4;
+      --primary-dark: #1a73e8;
+      --success: #34a853;
+      --warning: #fbbc04;
+      --danger: #ea4335;
+      --dark: #202124;
+      --gray: #5f6368;
+      --light-gray: #f8f9fa;
+      --border: #e0e0e0;
+      --white: #ffffff;
+      --hot: #ea4335;
+      --warm: #fbbc04;
+      --cool: #4285F4;
+      --cold: #9aa0a6;
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      font-family: 'Segoe UI', Arial, sans-serif;
+      background: #f1f3f4;
+      color: var(--dark);
+      min-height: 100vh;
+    }
+
+    /* ─── NAV ─── */
+    nav {
+      display: flex; justify-content: space-between; align-items: center;
+      padding: 14px 5%; background: white;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.08); position: sticky; top: 0; z-index: 200;
+    }
+    .logo { font-weight: 700; font-size: 1.3rem; color: var(--primary); text-decoration: none; }
+    .nav-links a { margin-left: 20px; text-decoration: none; color: var(--gray); font-weight: 500; font-size: 0.95rem; }
+    .nav-links a.active { color: var(--primary); }
+
+    /* ─── LAYOUT ─── */
+    .app-wrapper { display: flex; min-height: calc(100vh - 57px); }
+
+    .sidebar {
+      width: 220px; background: white; border-right: 1px solid var(--border);
+      padding: 24px 0; flex-shrink: 0;
+    }
+    .sidebar-item {
+      display: flex; align-items: center; gap: 12px;
+      padding: 12px 24px; cursor: pointer; color: var(--gray);
+      font-size: 0.92rem; font-weight: 500; transition: 0.2s;
+      border-left: 3px solid transparent;
+    }
+    .sidebar-item:hover { background: #f8f9fa; color: var(--primary); }
+    .sidebar-item.active { color: var(--primary); background: #e8f0fe; border-left-color: var(--primary); }
+    .sidebar-item i { width: 18px; text-align: center; }
+
+    .main { flex: 1; padding: 28px 32px; overflow-y: auto; }
+
+    /* ─── SECTION TITLES ─── */
+    .page-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 24px; }
+    .page-header h2 { font-size: 1.5rem; font-weight: 700; }
+    .page-header p { color: var(--gray); font-size: 0.9rem; margin-top: 2px; }
+
+    /* ─── DASHBOARD ─── */
+    .kpi-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 16px; margin-bottom: 28px; }
+    .kpi-card {
+      background: white; border-radius: 12px; padding: 20px 24px;
+      box-shadow: 0 1px 4px rgba(0,0,0,0.07); display: flex; align-items: center; gap: 16px;
+    }
+    .kpi-icon { width: 48px; height: 48px; border-radius: 12px; display: flex; align-items: center; justify-content: center; font-size: 1.4rem; flex-shrink: 0; }
+    .kpi-icon.blue { background: #e8f0fe; color: var(--primary); }
+    .kpi-icon.green { background: #e6f4ea; color: var(--success); }
+    .kpi-icon.yellow { background: #fef7e0; color: #f9ab00; }
+    .kpi-icon.red { background: #fce8e6; color: var(--danger); }
+    .kpi-icon.purple { background: #f3e8fd; color: #a142f4; }
+    .kpi-value { font-size: 1.8rem; font-weight: 700; line-height: 1; }
+    .kpi-label { font-size: 0.8rem; color: var(--gray); margin-top: 3px; }
+
+    .dash-grid { display: grid; grid-template-columns: 2fr 1fr; gap: 20px; }
+    @media (max-width: 900px) { .dash-grid { grid-template-columns: 1fr; } }
+
+    .dash-card { background: white; border-radius: 12px; padding: 20px 24px; box-shadow: 0 1px 4px rgba(0,0,0,0.07); }
+    .dash-card h3 { font-size: 1rem; font-weight: 600; margin-bottom: 16px; color: var(--dark); }
+
+    /* Engagement bar */
+    .engagement-bars { display: flex; flex-direction: column; gap: 10px; }
+    .eng-row { display: flex; align-items: center; gap: 10px; font-size: 0.88rem; }
+    .eng-label { width: 60px; flex-shrink: 0; }
+    .eng-bar-wrap { flex: 1; height: 10px; background: #f1f3f4; border-radius: 99px; overflow: hidden; }
+    .eng-bar { height: 100%; border-radius: 99px; transition: width 0.6s; }
+    .eng-count { width: 24px; text-align: right; color: var(--gray); font-size: 0.82rem; }
+
+    /* Upcoming */
+    .upcoming-list { display: flex; flex-direction: column; gap: 10px; }
+    .upcoming-item { display: flex; align-items: flex-start; gap: 12px; padding: 10px; border-radius: 8px; background: #f8f9fa; }
+    .upcoming-date { background: var(--primary); color: white; border-radius: 8px; padding: 4px 10px; font-size: 0.78rem; font-weight: 600; white-space: nowrap; }
+    .upcoming-date.overdue { background: var(--danger); }
+    .upcoming-date.today { background: var(--success); }
+    .upcoming-info strong { font-size: 0.88rem; display: block; }
+    .upcoming-info span { font-size: 0.8rem; color: var(--gray); }
+
+    /* Recent activity */
+    .activity-list { display: flex; flex-direction: column; gap: 0; }
+    .activity-item { display: flex; gap: 14px; padding: 12px 0; border-bottom: 1px solid #f1f3f4; }
+    .activity-item:last-child { border-bottom: none; }
+    .activity-dot { width: 10px; height: 10px; border-radius: 50%; background: var(--primary); flex-shrink: 0; margin-top: 5px; }
+    .activity-dot.green { background: var(--success); }
+    .activity-dot.yellow { background: var(--warning); }
+    .activity-dot.red { background: var(--danger); }
+    .activity-text strong { font-size: 0.88rem; }
+    .activity-text p { font-size: 0.8rem; color: var(--gray); margin-top: 1px; }
+    .activity-time { margin-left: auto; font-size: 0.78rem; color: var(--gray); white-space: nowrap; flex-shrink: 0; }
+
+    /* ─── CHANNEL LIST ─── */
+    .toolbar { display: flex; gap: 12px; margin-bottom: 16px; flex-wrap: wrap; align-items: center; }
+    .search-box { display: flex; align-items: center; gap: 8px; background: white; border: 1px solid var(--border); border-radius: 8px; padding: 8px 14px; flex: 1; min-width: 200px; }
+    .search-box input { border: none; outline: none; font-size: 0.9rem; width: 100%; }
+    .search-box i { color: var(--gray); }
+    select.filter-select { padding: 8px 14px; border: 1px solid var(--border); border-radius: 8px; background: white; font-size: 0.88rem; color: var(--dark); outline: none; cursor: pointer; }
+    .btn { padding: 9px 18px; border-radius: 8px; border: none; font-size: 0.88rem; font-weight: 600; cursor: pointer; display: inline-flex; align-items: center; gap: 7px; transition: 0.2s; }
+    .btn-primary { background: var(--primary); color: white; }
+    .btn-primary:hover { background: var(--primary-dark); }
+    .btn-secondary { background: white; color: var(--gray); border: 1px solid var(--border); }
+    .btn-secondary:hover { background: #f8f9fa; }
+    .btn-sm { padding: 5px 10px; font-size: 0.8rem; }
+    .btn-danger { background: #fce8e6; color: var(--danger); }
+    .btn-danger:hover { background: #f5c6c2; }
+
+    .channel-table { background: white; border-radius: 12px; box-shadow: 0 1px 4px rgba(0,0,0,0.07); overflow: hidden; }
+    table { width: 100%; border-collapse: collapse; }
+    thead th { background: #f8f9fa; font-size: 0.78rem; font-weight: 600; text-transform: uppercase; color: var(--gray); letter-spacing: 0.05em; padding: 12px 16px; text-align: left; border-bottom: 1px solid var(--border); }
+    tbody tr { border-bottom: 1px solid #f1f3f4; transition: background 0.15s; }
+    tbody tr:last-child { border-bottom: none; }
+    tbody tr:hover { background: #fafbff; cursor: pointer; }
+    tbody td { padding: 12px 16px; font-size: 0.88rem; vertical-align: middle; }
+
+    .badge-engagement { display: inline-flex; align-items: center; gap: 5px; padding: 3px 10px; border-radius: 99px; font-size: 0.78rem; font-weight: 600; white-space: nowrap; }
+    .badge-hot { background: #fce8e6; color: var(--hot); }
+    .badge-warm { background: #fef7e0; color: #c87000; }
+    .badge-cool { background: #e8f0fe; color: var(--cool); }
+    .badge-cold { background: #f1f3f4; color: #5f6368; }
+
+    .contact-avatar { width: 32px; height: 32px; border-radius: 50%; background: var(--primary); color: white; display: flex; align-items: center; justify-content: center; font-size: 0.8rem; font-weight: 700; flex-shrink: 0; }
+
+    .actions-cell { display: flex; gap: 6px; opacity: 0; transition: opacity 0.15s; }
+    tr:hover .actions-cell { opacity: 1; }
+
+    /* ─── MODAL ─── */
+    .overlay {
+      position: fixed; inset: 0; background: rgba(0,0,0,0.45); z-index: 500;
+      display: flex; align-items: center; justify-content: center; padding: 20px;
+      opacity: 0; pointer-events: none; transition: opacity 0.2s;
+    }
+    .overlay.open { opacity: 1; pointer-events: all; }
+    .modal {
+      background: white; border-radius: 16px; width: 100%; max-width: 640px;
+      max-height: 90vh; overflow-y: auto;
+      transform: translateY(20px); transition: transform 0.2s;
+      box-shadow: 0 20px 60px rgba(0,0,0,0.2);
+    }
+    .overlay.open .modal { transform: translateY(0); }
+    .modal-header { display: flex; justify-content: space-between; align-items: center; padding: 20px 24px; border-bottom: 1px solid var(--border); }
+    .modal-header h3 { font-size: 1.1rem; font-weight: 700; }
+    .modal-close { background: none; border: none; font-size: 1.3rem; cursor: pointer; color: var(--gray); padding: 4px; border-radius: 6px; }
+    .modal-close:hover { background: #f1f3f4; }
+    .modal-body { padding: 24px; }
+    .modal-footer { padding: 16px 24px; border-top: 1px solid var(--border); display: flex; justify-content: flex-end; gap: 10px; }
+
+    /* ─── FORM ─── */
+    .form-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+    @media (max-width: 580px) { .form-grid { grid-template-columns: 1fr; } }
+    .form-group { display: flex; flex-direction: column; gap: 6px; }
+    .form-group.full { grid-column: 1 / -1; }
+    .form-group label { font-size: 0.82rem; font-weight: 600; color: var(--gray); text-transform: uppercase; letter-spacing: 0.04em; }
+    .form-group input, .form-group select, .form-group textarea {
+      padding: 9px 12px; border: 1px solid var(--border); border-radius: 8px;
+      font-size: 0.9rem; outline: none; transition: border-color 0.15s; font-family: inherit;
+    }
+    .form-group input:focus, .form-group select:focus, .form-group textarea:focus { border-color: var(--primary); box-shadow: 0 0 0 3px rgba(66,133,244,0.12); }
+    .form-group textarea { resize: vertical; min-height: 80px; }
+    .section-divider { font-size: 0.8rem; font-weight: 700; text-transform: uppercase; color: var(--gray); letter-spacing: 0.06em; grid-column: 1/-1; margin-top: 8px; padding-top: 16px; border-top: 1px solid var(--border); }
+
+    /* ─── DETAIL PANEL ─── */
+    .detail-overlay {
+      position: fixed; inset: 0; background: rgba(0,0,0,0.35); z-index: 400;
+      display: flex; justify-content: flex-end;
+      opacity: 0; pointer-events: none; transition: opacity 0.25s;
+    }
+    .detail-overlay.open { opacity: 1; pointer-events: all; }
+    .detail-panel {
+      width: min(560px, 100%); height: 100%; background: white;
+      overflow-y: auto; display: flex; flex-direction: column;
+      transform: translateX(100%); transition: transform 0.3s cubic-bezier(0.4,0,0.2,1);
+      box-shadow: -8px 0 40px rgba(0,0,0,0.12);
+    }
+    .detail-overlay.open .detail-panel { transform: translateX(0); }
+
+    .detail-header { padding: 20px 24px; border-bottom: 1px solid var(--border); display: flex; justify-content: space-between; align-items: flex-start; }
+    .detail-header-info h3 { font-size: 1.2rem; font-weight: 700; }
+    .detail-header-info p { font-size: 0.85rem; color: var(--gray); margin-top: 2px; }
+    .detail-body { padding: 20px 24px; flex: 1; }
+
+    .detail-section { margin-bottom: 24px; }
+    .detail-section h4 { font-size: 0.8rem; font-weight: 700; text-transform: uppercase; color: var(--gray); letter-spacing: 0.06em; margin-bottom: 12px; }
+    .info-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+    .info-item label { font-size: 0.75rem; color: var(--gray); display: block; margin-bottom: 2px; }
+    .info-item span { font-size: 0.9rem; font-weight: 500; word-break: break-all; }
+    .info-item a { color: var(--primary); text-decoration: none; }
+    .info-item a:hover { text-decoration: underline; }
+
+    /* Timeline */
+    .timeline { display: flex; flex-direction: column; gap: 0; }
+    .timeline-item { display: flex; gap: 14px; padding-bottom: 20px; position: relative; }
+    .timeline-item:not(:last-child)::before { content: ''; position: absolute; left: 17px; top: 34px; bottom: 0; width: 2px; background: #f1f3f4; }
+    .tl-dot { width: 34px; height: 34px; border-radius: 50%; background: var(--primary); color: white; display: flex; align-items: center; justify-content: center; font-size: 0.85rem; flex-shrink: 0; z-index: 1; }
+    .tl-dot.call { background: var(--success); }
+    .tl-dot.email { background: #4285f4; }
+    .tl-dot.meeting { background: #a142f4; }
+    .tl-dot.message { background: var(--warning); color: var(--dark); }
+    .tl-dot.other { background: var(--gray); }
+    .tl-content { flex: 1; padding-top: 4px; }
+    .tl-header { display: flex; justify-content: space-between; align-items: center; }
+    .tl-type { font-size: 0.82rem; font-weight: 600; }
+    .tl-date { font-size: 0.78rem; color: var(--gray); }
+    .tl-notes { font-size: 0.85rem; color: var(--gray); margin-top: 4px; line-height: 1.5; }
+    .tl-delete { background: none; border: none; cursor: pointer; color: #ccc; padding: 2px; border-radius: 4px; font-size: 0.8rem; }
+    .tl-delete:hover { color: var(--danger); background: #fce8e6; }
+
+    .empty-state { text-align: center; padding: 40px 20px; color: var(--gray); }
+    .empty-state i { font-size: 2.5rem; margin-bottom: 12px; opacity: 0.4; }
+    .empty-state p { font-size: 0.9rem; }
+
+    /* Next contact box */
+    .next-contact-box { background: #e8f0fe; border-radius: 10px; padding: 14px 16px; display: flex; align-items: flex-start; gap: 12px; }
+    .next-contact-box i { color: var(--primary); margin-top: 2px; }
+    .next-contact-box strong { font-size: 0.88rem; display: block; }
+    .next-contact-box span { font-size: 0.82rem; color: var(--gray); }
+    .next-contact-box.overdue { background: #fce8e6; }
+    .next-contact-box.overdue i { color: var(--danger); }
+
+    .section-hidden { display: none; }
+
+    /* Scrollbar */
+    ::-webkit-scrollbar { width: 6px; }
+    ::-webkit-scrollbar-track { background: transparent; }
+    ::-webkit-scrollbar-thumb { background: #dadce0; border-radius: 3px; }
+
+    /* Toast */
+    .toast {
+      position: fixed; bottom: 28px; left: 50%; transform: translateX(-50%) translateY(80px);
+      background: #202124; color: white; padding: 12px 22px; border-radius: 10px;
+      font-size: 0.88rem; z-index: 1000; transition: transform 0.3s;
+      box-shadow: 0 4px 16px rgba(0,0,0,0.2);
+    }
+    .toast.show { transform: translateX(-50%) translateY(0); }
+  </style>
+</head>
+<body>
+
+<nav>
+  <a href="index.html" class="logo">Vidal Silva</a>
+  <div class="nav-links">
+    <a href="index.html">Home</a>
+    <a href="canais.html" class="active">Canais</a>
+  </div>
+</nav>
+
+<div class="app-wrapper">
+  <aside class="sidebar">
+    <div class="sidebar-item active" onclick="showSection('dashboard')">
+      <i class="fas fa-chart-pie"></i> Dashboard
+    </div>
+    <div class="sidebar-item" onclick="showSection('channels')">
+      <i class="fas fa-building"></i> Canais
+    </div>
+    <div class="sidebar-item" onclick="showSection('agenda')">
+      <i class="fas fa-calendar-alt"></i> Agenda
+    </div>
+  </aside>
+
+  <main class="main">
+
+    <!-- ══ DASHBOARD ══ -->
+    <section id="sec-dashboard">
+      <div class="page-header">
+        <div>
+          <h2>Dashboard</h2>
+          <p id="dash-subtitle">Visão geral dos seus canais</p>
+        </div>
+        <button class="btn btn-primary" onclick="openAddChannel()"><i class="fas fa-plus"></i> Novo Canal</button>
+      </div>
+
+      <div class="kpi-grid" id="kpi-grid"></div>
+
+      <div class="dash-grid">
+        <div class="dash-card">
+          <h3><i class="fas fa-fire" style="color:var(--danger);margin-right:6px"></i>Atividade Recente</h3>
+          <div class="activity-list" id="recent-activity"></div>
+        </div>
+        <div style="display:flex;flex-direction:column;gap:20px">
+          <div class="dash-card">
+            <h3><i class="fas fa-thermometer-half" style="color:var(--primary);margin-right:6px"></i>Engajamento</h3>
+            <div class="engagement-bars" id="engagement-bars"></div>
+          </div>
+          <div class="dash-card">
+            <h3><i class="fas fa-clock" style="color:var(--warning);margin-right:6px"></i>Próximos Contatos</h3>
+            <div class="upcoming-list" id="upcoming-contacts"></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ══ CHANNELS ══ -->
+    <section id="sec-channels" class="section-hidden">
+      <div class="page-header">
+        <div>
+          <h2>Canais</h2>
+          <p id="channels-count"></p>
+        </div>
+        <button class="btn btn-primary" onclick="openAddChannel()"><i class="fas fa-plus"></i> Novo Canal</button>
+      </div>
+
+      <div class="toolbar">
+        <div class="search-box">
+          <i class="fas fa-search"></i>
+          <input type="text" id="search-input" placeholder="Buscar canal, contato..." oninput="renderChannelList()">
+        </div>
+        <select class="filter-select" id="filter-engagement" onchange="renderChannelList()">
+          <option value="">Todos engajamentos</option>
+          <option value="hot">🔴 Quente</option>
+          <option value="warm">🟡 Morno</option>
+          <option value="cool">🔵 Frio</option>
+          <option value="cold">⚪ Inativo</option>
+        </select>
+        <select class="filter-select" id="sort-by" onchange="renderChannelList()">
+          <option value="name">Ordenar: Nome</option>
+          <option value="recent">Último Contato</option>
+          <option value="next">Próximo Contato</option>
+          <option value="engagement">Engajamento</option>
+        </select>
+      </div>
+
+      <div class="channel-table">
+        <table>
+          <thead>
+            <tr>
+              <th>Canal</th>
+              <th>Contato</th>
+              <th>Email</th>
+              <th>Engajamento</th>
+              <th>Último Contato</th>
+              <th>Próximo Contato</th>
+              <th></th>
+            </tr>
+          </thead>
+          <tbody id="channel-tbody"></tbody>
+        </table>
+      </div>
+    </section>
+
+    <!-- ══ AGENDA ══ -->
+    <section id="sec-agenda" class="section-hidden">
+      <div class="page-header">
+        <div>
+          <h2>Agenda</h2>
+          <p>Todos os contatos agendados</p>
+        </div>
+      </div>
+      <div id="agenda-list"></div>
+    </section>
+
+  </main>
+</div>
+
+<!-- ══ MODAL: ADD / EDIT CHANNEL ══ -->
+<div class="overlay" id="channel-modal">
+  <div class="modal">
+    <div class="modal-header">
+      <h3 id="modal-title">Novo Canal</h3>
+      <button class="modal-close" onclick="closeModal('channel-modal')">&times;</button>
+    </div>
+    <div class="modal-body">
+      <form id="channel-form" onsubmit="saveChannel(event)">
+        <div class="form-grid">
+          <div class="section-divider">Dados do Canal</div>
+          <div class="form-group">
+            <label>Nome do Canal *</label>
+            <input type="text" id="f-name" placeholder="Ex: Escola Beta" required>
+          </div>
+          <div class="form-group">
+            <label>Engajamento</label>
+            <select id="f-engagement">
+              <option value="warm">🟡 Morno</option>
+              <option value="hot">🔴 Quente</option>
+              <option value="cool">🔵 Frio</option>
+              <option value="cold">⚪ Inativo</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label>Rede Social</label>
+            <input type="url" id="f-social" placeholder="https://linkedin.com/company/...">
+          </div>
+          <div class="form-group">
+            <label>Link no CRM</label>
+            <input type="url" id="f-crm" placeholder="https://crm.google.com/...">
+          </div>
+
+          <div class="section-divider">Contato Principal</div>
+          <div class="form-group">
+            <label>Nome do Contato *</label>
+            <input type="text" id="f-contact-name" placeholder="Ex: Ana Lima" required>
+          </div>
+          <div class="form-group">
+            <label>Função / Cargo</label>
+            <input type="text" id="f-role" placeholder="Ex: Diretora Comercial">
+          </div>
+          <div class="form-group full">
+            <label>Email</label>
+            <input type="email" id="f-email" placeholder="contato@empresa.com">
+          </div>
+
+          <div class="section-divider">Próximo Contato</div>
+          <div class="form-group">
+            <label>Data Prevista</label>
+            <input type="date" id="f-next-date">
+          </div>
+          <div class="form-group">
+            <label>Pauta / Objetivo</label>
+            <input type="text" id="f-next-notes" placeholder="Ex: Follow-up proposta">
+          </div>
+        </div>
+        <input type="hidden" id="f-id">
+      </form>
+    </div>
+    <div class="modal-footer">
+      <button class="btn btn-secondary" onclick="closeModal('channel-modal')">Cancelar</button>
+      <button class="btn btn-primary" onclick="document.getElementById('channel-form').requestSubmit()">
+        <i class="fas fa-save"></i> Salvar
+      </button>
+    </div>
+  </div>
+</div>
+
+<!-- ══ MODAL: ADD INTERACTION ══ -->
+<div class="overlay" id="interaction-modal">
+  <div class="modal" style="max-width:480px">
+    <div class="modal-header">
+      <h3>Registrar Contato</h3>
+      <button class="modal-close" onclick="closeModal('interaction-modal')">&times;</button>
+    </div>
+    <div class="modal-body">
+      <form id="interaction-form" onsubmit="saveInteraction(event)">
+        <div class="form-grid" style="grid-template-columns:1fr">
+          <div class="form-group">
+            <label>Data do Contato *</label>
+            <input type="date" id="i-date" required>
+          </div>
+          <div class="form-group">
+            <label>Tipo de Contato</label>
+            <select id="i-type">
+              <option value="call">📞 Ligação</option>
+              <option value="email">✉️ Email</option>
+              <option value="meeting">🤝 Reunião</option>
+              <option value="message">💬 Mensagem</option>
+              <option value="other">📋 Outro</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label>Notas / Resumo</label>
+            <textarea id="i-notes" placeholder="O que foi discutido? Resultados?"></textarea>
+          </div>
+        </div>
+        <input type="hidden" id="i-channel-id">
+      </form>
+    </div>
+    <div class="modal-footer">
+      <button class="btn btn-secondary" onclick="closeModal('interaction-modal')">Cancelar</button>
+      <button class="btn btn-primary" onclick="document.getElementById('interaction-form').requestSubmit()">
+        <i class="fas fa-check"></i> Registrar
+      </button>
+    </div>
+  </div>
+</div>
+
+<!-- ══ DETAIL PANEL ══ -->
+<div class="detail-overlay" id="detail-overlay" onclick="closeDetailPanel(event)">
+  <div class="detail-panel" id="detail-panel">
+    <div class="detail-header">
+      <div class="detail-header-info">
+        <h3 id="dp-name">—</h3>
+        <p id="dp-sub">—</p>
+      </div>
+      <div style="display:flex;gap:8px;align-items:center">
+        <button class="btn btn-secondary btn-sm" onclick="editCurrentChannel()"><i class="fas fa-edit"></i> Editar</button>
+        <button class="modal-close" onclick="closeDetailPanel()">&times;</button>
+      </div>
+    </div>
+    <div class="detail-body">
+      <div class="detail-section">
+        <div id="dp-next-contact"></div>
+      </div>
+      <div class="detail-section">
+        <h4>Informações</h4>
+        <div class="info-grid" id="dp-info"></div>
+      </div>
+      <div class="detail-section">
+        <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:12px">
+          <h4 style="margin-bottom:0">Histórico de Contatos</h4>
+          <button class="btn btn-primary btn-sm" onclick="openAddInteraction()"><i class="fas fa-plus"></i> Registrar</button>
+        </div>
+        <div class="timeline" id="dp-timeline"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="toast" id="toast"></div>
+
+<script>
+// ══ DATA LAYER ══
+const STORAGE_KEY = 'canal_mgr_v2';
+
+function loadData() {
+  const raw = localStorage.getItem(STORAGE_KEY);
+  return raw ? JSON.parse(raw) : { channels: [] };
+}
+
+function saveData(data) {
+  localStorage.setItem(STORAGE_KEY, JSON.stringify(data));
+}
+
+let data = loadData();
+let currentChannelId = null;
+
+// ══ SEED DEMO DATA ══
+if (data.channels.length === 0) {
+  const demo = [
+    { name: 'Colégio Horizonte', email: 'ana@horizonteedu.com', contactName: 'Ana Lima', role: 'Diretora Comercial', social: 'https://linkedin.com/company/colegio-horizonte', crm: '', engagement: 'hot', nextDate: fmtDateAdd(3), nextNotes: 'Apresentar proposta workspace', interactions: [{ id: uid(), date: fmtDateAdd(-5), type: 'meeting', notes: 'Reunião de kick-off, boa receptividade' }, { id: uid(), date: fmtDateAdd(-12), type: 'call', notes: 'Primeiro contato, agendou reunião' }] },
+    { name: 'Instituto Ágora', email: 'marcos@agora.edu.br', contactName: 'Marcos Pinho', role: 'Gerente de TI', social: '', crm: 'https://crm.google.com/example', engagement: 'warm', nextDate: fmtDateAdd(7), nextNotes: 'Demo de ferramentas IA', interactions: [{ id: uid(), date: fmtDateAdd(-8), type: 'email', notes: 'Enviou RFP, prazo 30 dias' }] },
+    { name: 'Escola Nova Era', email: 'lucia@novaera.com', contactName: 'Lúcia Ferreira', role: 'CEO', social: '', crm: '', engagement: 'cool', nextDate: fmtDateAdd(-2), nextNotes: 'Reativar conversa sobre licenças', interactions: [] },
+    { name: 'Faculdade Omega', email: 'pedro@omega.edu', contactName: 'Pedro Campos', role: 'Pró-Reitor', social: '', crm: '', engagement: 'warm', nextDate: fmtDateAdd(14), nextNotes: 'Revisão de contrato', interactions: [{ id: uid(), date: fmtDateAdd(-20), type: 'meeting', notes: 'Negociação inicial bem encaminhada' }] },
+    { name: 'Centro Educacional Sul', email: 'carla@cesul.edu', contactName: 'Carla Souza', role: 'Coordenadora', social: '', crm: '', engagement: 'cold', nextDate: '', nextNotes: '', interactions: [] },
+  ];
+  demo.forEach(c => { c.id = uid(); c.createdAt = new Date().toISOString(); });
+  data.channels = demo;
+  saveData(data);
+}
+
+function uid() { return Date.now().toString(36) + Math.random().toString(36).slice(2, 7); }
+
+function fmtDateAdd(days) {
+  const d = new Date();
+  d.setDate(d.getDate() + days);
+  return d.toISOString().slice(0, 10);
+}
+
+function today() { return new Date().toISOString().slice(0, 10); }
+
+function fmtDate(str) {
+  if (!str) return '—';
+  const [y, m, d] = str.split('-');
+  return `${d}/${m}/${y}`;
+}
+
+function daysUntil(str) {
+  if (!str) return null;
+  const diff = Math.round((new Date(str + 'T12:00:00') - new Date()) / 86400000);
+  return diff;
+}
+
+const TYPE_ICONS = { call: 'fa-phone', email: 'fa-envelope', meeting: 'fa-handshake', message: 'fa-comment', other: 'fa-clipboard' };
+const TYPE_LABELS = { call: 'Ligação', email: 'Email', meeting: 'Reunião', message: 'Mensagem', other: 'Outro' };
+const ENG_LABELS = { hot: 'Quente', warm: 'Morno', cool: 'Frio', cold: 'Inativo' };
+const ENG_ORDER = { hot: 0, warm: 1, cool: 2, cold: 3 };
+
+function engBadge(level) {
+  return `<span class="badge-engagement badge-${level}">${level === 'hot' ? '🔴' : level === 'warm' ? '🟡' : level === 'cool' ? '🔵' : '⚪'} ${ENG_LABELS[level] || level}</span>`;
+}
+
+function initials(name) { return (name || '?').split(' ').slice(0, 2).map(w => w[0]).join('').toUpperCase(); }
+
+// ══ NAVIGATION ══
+function showSection(id) {
+  ['dashboard', 'channels', 'agenda'].forEach(s => {
+    document.getElementById(`sec-${s}`).classList.toggle('section-hidden', s !== id);
+  });
+  document.querySelectorAll('.sidebar-item').forEach((el, i) => {
+    el.classList.toggle('active', ['dashboard', 'channels', 'agenda'][i] === id);
+  });
+  if (id === 'dashboard') renderDashboard();
+  if (id === 'channels') renderChannelList();
+  if (id === 'agenda') renderAgenda();
+}
+
+// ══ DASHBOARD ══
+function renderDashboard() {
+  const channels = data.channels;
+  const total = channels.length;
+  const hot = channels.filter(c => c.engagement === 'hot').length;
+  const warm = channels.filter(c => c.engagement === 'warm').length;
+  const allInteractions = channels.flatMap(c => c.interactions || []);
+  const upcoming = channels.filter(c => c.nextDate && c.nextDate >= today()).length;
+  const overdue = channels.filter(c => c.nextDate && c.nextDate < today()).length;
+
+  document.getElementById('dash-subtitle').textContent = `${total} canais · ${allInteractions.length} interações registradas`;
+
+  document.getElementById('kpi-grid').innerHTML = `
+    <div class="kpi-card"><div class="kpi-icon blue"><i class="fas fa-building"></i></div><div><div class="kpi-value">${total}</div><div class="kpi-label">Total de Canais</div></div></div>
+    <div class="kpi-card"><div class="kpi-icon red"><i class="fas fa-fire"></i></div><div><div class="kpi-value">${hot}</div><div class="kpi-label">Canais Quentes</div></div></div>
+    <div class="kpi-card"><div class="kpi-icon yellow"><i class="fas fa-thermometer-half"></i></div><div><div class="kpi-value">${warm}</div><div class="kpi-label">Canais Mornos</div></div></div>
+    <div class="kpi-card"><div class="kpi-icon green"><i class="fas fa-calendar-check"></i></div><div><div class="kpi-value">${upcoming}</div><div class="kpi-label">Agendados</div></div></div>
+    <div class="kpi-card"><div class="kpi-icon purple"><i class="fas fa-comments"></i></div><div><div class="kpi-value">${allInteractions.length}</div><div class="kpi-label">Interações</div></div></div>
+    ${overdue > 0 ? `<div class="kpi-card"><div class="kpi-icon red"><i class="fas fa-exclamation-circle"></i></div><div><div class="kpi-value">${overdue}</div><div class="kpi-label">Atrasados</div></div></div>` : ''}
+  `;
+
+  // Engagement bars
+  const engCounts = { hot: 0, warm: 0, cool: 0, cold: 0 };
+  channels.forEach(c => { if (engCounts[c.engagement] !== undefined) engCounts[c.engagement]++; });
+  const maxEng = Math.max(...Object.values(engCounts), 1);
+  const engColors = { hot: '#ea4335', warm: '#fbbc04', cool: '#4285F4', cold: '#9aa0a6' };
+  document.getElementById('engagement-bars').innerHTML = Object.entries(engCounts).map(([k, v]) => `
+    <div class="eng-row">
+      <span class="eng-label">${ENG_LABELS[k]}</span>
+      <div class="eng-bar-wrap"><div class="eng-bar" style="width:${(v/maxEng*100).toFixed(0)}%;background:${engColors[k]}"></div></div>
+      <span class="eng-count">${v}</span>
+    </div>
+  `).join('');
+
+  // Upcoming contacts
+  const upcomingList = channels
+    .filter(c => c.nextDate)
+    .sort((a, b) => a.nextDate.localeCompare(b.nextDate))
+    .slice(0, 5);
+  document.getElementById('upcoming-contacts').innerHTML = upcomingList.length === 0
+    ? '<div class="empty-state" style="padding:16px"><i class="fas fa-calendar" style="font-size:1.5rem;margin-bottom:8px"></i><p>Nenhum agendamento</p></div>'
+    : upcomingList.map(c => {
+        const days = daysUntil(c.nextDate);
+        const cls = days < 0 ? 'overdue' : days === 0 ? 'today' : '';
+        const label = days < 0 ? `${Math.abs(days)}d atrasado` : days === 0 ? 'Hoje' : `Em ${days}d`;
+        return `<div class="upcoming-item" onclick="openDetail('${c.id}')" style="cursor:pointer">
+          <span class="upcoming-date ${cls}">${label}</span>
+          <div class="upcoming-info"><strong>${c.name}</strong><span>${c.nextNotes || '—'}</span></div>
+        </div>`;
+      }).join('');
+
+  // Recent activity
+  const activities = channels.flatMap(c => (c.interactions || []).map(i => ({ ...i, channelName: c.name, channelId: c.id })))
+    .sort((a, b) => b.date.localeCompare(a.date)).slice(0, 8);
+  const dotColor = { call: 'green', email: 'blue', meeting: 'purple', message: 'yellow', other: '' };
+  document.getElementById('recent-activity').innerHTML = activities.length === 0
+    ? '<div class="empty-state" style="padding:16px"><i class="fas fa-history" style="font-size:1.5rem;margin-bottom:8px"></i><p>Nenhuma interação registrada</p></div>'
+    : activities.map(a => {
+        const days = Math.round((new Date() - new Date(a.date + 'T12:00:00')) / 86400000);
+        const timeLabel = days === 0 ? 'Hoje' : days === 1 ? 'Ontem' : `${days}d atrás`;
+        return `<div class="activity-item" onclick="openDetail('${a.channelId}')" style="cursor:pointer">
+          <span class="activity-dot ${dotColor[a.type] || ''}"></span>
+          <div class="activity-text"><strong>${a.channelName}</strong><p>${TYPE_LABELS[a.type]} · ${a.notes || '—'}</p></div>
+          <span class="activity-time">${timeLabel}</span>
+        </div>`;
+      }).join('');
+}
+
+// ══ CHANNEL LIST ══
+function renderChannelList() {
+  const q = (document.getElementById('search-input')?.value || '').toLowerCase();
+  const engFilter = document.getElementById('filter-engagement')?.value || '';
+  const sortBy = document.getElementById('sort-by')?.value || 'name';
+
+  let channels = [...data.channels];
+
+  if (q) channels = channels.filter(c =>
+    c.name.toLowerCase().includes(q) ||
+    (c.contactName || '').toLowerCase().includes(q) ||
+    (c.email || '').toLowerCase().includes(q)
+  );
+  if (engFilter) channels = channels.filter(c => c.engagement === engFilter);
+
+  if (sortBy === 'name') channels.sort((a, b) => a.name.localeCompare(b.name));
+  else if (sortBy === 'engagement') channels.sort((a, b) => ENG_ORDER[a.engagement] - ENG_ORDER[b.engagement]);
+  else if (sortBy === 'recent') channels.sort((a, b) => {
+    const la = (a.interactions || []).sort((x, y) => y.date.localeCompare(x.date))[0]?.date || '';
+    const lb = (b.interactions || []).sort((x, y) => y.date.localeCompare(x.date))[0]?.date || '';
+    return lb.localeCompare(la);
+  });
+  else if (sortBy === 'next') channels.sort((a, b) => (a.nextDate || 'z').localeCompare(b.nextDate || 'z'));
+
+  document.getElementById('channels-count').textContent = `${channels.length} de ${data.channels.length} canais`;
+
+  document.getElementById('channel-tbody').innerHTML = channels.map(c => {
+    const lastInteraction = (c.interactions || []).sort((a, b) => b.date.localeCompare(a.date))[0];
+    const days = c.nextDate ? daysUntil(c.nextDate) : null;
+    const nextLabel = days === null ? '—'
+      : days < 0 ? `<span style="color:var(--danger);font-weight:600">${fmtDate(c.nextDate)} (atrasado)</span>`
+      : days === 0 ? `<span style="color:var(--success);font-weight:600">Hoje</span>`
+      : fmtDate(c.nextDate);
+    return `
+      <tr onclick="openDetail('${c.id}')">
+        <td><div style="display:flex;align-items:center;gap:10px">
+          <div class="contact-avatar">${initials(c.name)}</div>
+          <div><strong style="font-size:0.9rem">${c.name}</strong>${c.social ? `<a href="${c.social}" target="_blank" onclick="event.stopPropagation()" style="display:block;font-size:0.75rem;color:var(--primary)"><i class="fab fa-linkedin"></i> Perfil</a>` : ''}</div>
+        </div></td>
+        <td><strong style="font-size:0.88rem">${c.contactName || '—'}</strong><br><span style="font-size:0.78rem;color:var(--gray)">${c.role || ''}</span></td>
+        <td style="color:var(--gray)">${c.email ? `<a href="mailto:${c.email}" onclick="event.stopPropagation()" style="color:var(--primary)">${c.email}</a>` : '—'}</td>
+        <td>${engBadge(c.engagement)}</td>
+        <td style="color:var(--gray)">${lastInteraction ? fmtDate(lastInteraction.date) : '—'}</td>
+        <td>${nextLabel}</td>
+        <td><div class="actions-cell">
+          <button class="btn btn-secondary btn-sm" onclick="event.stopPropagation();editChannel('${c.id}')"><i class="fas fa-edit"></i></button>
+          <button class="btn btn-danger btn-sm" onclick="event.stopPropagation();deleteChannel('${c.id}')"><i class="fas fa-trash"></i></button>
+        </div></td>
+      </tr>`;
+  }).join('') || `<tr><td colspan="7"><div class="empty-state"><i class="fas fa-search"></i><p>Nenhum canal encontrado</p></div></td></tr>`;
+}
+
+// ══ AGENDA ══
+function renderAgenda() {
+  const items = data.channels
+    .filter(c => c.nextDate)
+    .sort((a, b) => a.nextDate.localeCompare(b.nextDate));
+
+  if (!items.length) {
+    document.getElementById('agenda-list').innerHTML = '<div class="empty-state" style="padding:60px"><i class="fas fa-calendar"></i><p>Nenhum contato agendado</p></div>';
+    return;
+  }
+
+  const overdue = items.filter(c => c.nextDate < today());
+  const upcoming = items.filter(c => c.nextDate >= today());
+
+  let html = '';
+  if (overdue.length) {
+    html += `<div class="dash-card" style="margin-bottom:16px;border-left:4px solid var(--danger)">
+      <h3 style="color:var(--danger)"><i class="fas fa-exclamation-circle"></i> Atrasados (${overdue.length})</h3>
+      ${overdue.map(c => agendaItem(c)).join('')}</div>`;
+  }
+  if (upcoming.length) {
+    html += `<div class="dash-card" style="margin-bottom:16px">
+      <h3><i class="fas fa-calendar-check" style="color:var(--success)"></i> Próximos (${upcoming.length})</h3>
+      ${upcoming.map(c => agendaItem(c)).join('')}</div>`;
+  }
+  document.getElementById('agenda-list').innerHTML = html;
+}
+
+function agendaItem(c) {
+  const days = daysUntil(c.nextDate);
+  const cls = days < 0 ? 'overdue' : days === 0 ? 'today' : '';
+  const label = days < 0 ? `${Math.abs(days)}d atrasado` : days === 0 ? 'Hoje' : `Em ${days}d`;
+  return `<div class="upcoming-item" onclick="openDetail('${c.id}')" style="cursor:pointer;margin-bottom:8px">
+    <span class="upcoming-date ${cls}">${label}</span>
+    <div class="upcoming-info" style="flex:1">
+      <strong>${c.name}</strong>
+      <span>${fmtDate(c.nextDate)} · ${c.nextNotes || 'Sem pauta definida'}</span>
+    </div>
+    <span>${engBadge(c.engagement)}</span>
+  </div>`;
+}
+
+// ══ DETAIL PANEL ══
+function openDetail(id) {
+  currentChannelId = id;
+  const c = data.channels.find(ch => ch.id === id);
+  if (!c) return;
+
+  document.getElementById('dp-name').textContent = c.name;
+  document.getElementById('dp-sub').innerHTML = `${engBadge(c.engagement)} &nbsp;·&nbsp; ${c.contactName || ''}`;
+
+  // Next contact
+  let nextHtml = '';
+  if (c.nextDate) {
+    const days = daysUntil(c.nextDate);
+    const cls = days < 0 ? 'overdue' : '';
+    const label = days < 0 ? `Atrasado ${Math.abs(days)} dias` : days === 0 ? 'Hoje!' : `Em ${days} dias`;
+    nextHtml = `<div class="next-contact-box ${cls}">
+      <i class="fas fa-calendar-alt"></i>
+      <div><strong>${fmtDate(c.nextDate)} · ${label}</strong><span>${c.nextNotes || ''}</span></div>
+    </div>`;
+  }
+  document.getElementById('dp-next-contact').innerHTML = nextHtml;
+
+  // Info
+  document.getElementById('dp-info').innerHTML = `
+    <div class="info-item"><label>Contato</label><span>${c.contactName || '—'}</span></div>
+    <div class="info-item"><label>Função</label><span>${c.role || '—'}</span></div>
+    <div class="info-item"><label>Email</label><span>${c.email ? `<a href="mailto:${c.email}">${c.email}</a>` : '—'}</span></div>
+    <div class="info-item"><label>Rede Social</label><span>${c.social ? `<a href="${c.social}" target="_blank">Acessar</a>` : '—'}</span></div>
+    <div class="info-item"><label>CRM</label><span>${c.crm ? `<a href="${c.crm}" target="_blank">Acessar</a>` : '—'}</span></div>
+    <div class="info-item"><label>Engajamento</label><span>${engBadge(c.engagement)}</span></div>
+  `;
+
+  // Timeline
+  const interactions = [...(c.interactions || [])].sort((a, b) => b.date.localeCompare(a.date));
+  document.getElementById('dp-timeline').innerHTML = interactions.length === 0
+    ? '<div class="empty-state"><i class="fas fa-comments"></i><p>Nenhuma interação registrada ainda</p></div>'
+    : interactions.map(i => `
+        <div class="timeline-item">
+          <div class="tl-dot ${i.type}"><i class="fas ${TYPE_ICONS[i.type] || 'fa-clipboard'}"></i></div>
+          <div class="tl-content">
+            <div class="tl-header">
+              <span class="tl-type">${TYPE_LABELS[i.type] || i.type}</span>
+              <div style="display:flex;align-items:center;gap:8px">
+                <span class="tl-date">${fmtDate(i.date)}</span>
+                <button class="tl-delete" onclick="deleteInteraction('${id}','${i.id}')" title="Remover"><i class="fas fa-times"></i></button>
+              </div>
+            </div>
+            ${i.notes ? `<p class="tl-notes">${i.notes}</p>` : ''}
+          </div>
+        </div>`).join('');
+
+  document.getElementById('detail-overlay').classList.add('open');
+}
+
+function closeDetailPanel(e) {
+  if (!e || e.target === document.getElementById('detail-overlay')) {
+    document.getElementById('detail-overlay').classList.remove('open');
+  }
+}
+
+function editCurrentChannel() {
+  closeDetailPanel();
+  editChannel(currentChannelId);
+}
+
+// ══ ADD / EDIT CHANNEL ══
+function openAddChannel() {
+  document.getElementById('modal-title').textContent = 'Novo Canal';
+  document.getElementById('channel-form').reset();
+  document.getElementById('f-id').value = '';
+  openModal('channel-modal');
+}
+
+function editChannel(id) {
+  const c = data.channels.find(ch => ch.id === id);
+  if (!c) return;
+  document.getElementById('modal-title').textContent = 'Editar Canal';
+  document.getElementById('f-id').value = c.id;
+  document.getElementById('f-name').value = c.name || '';
+  document.getElementById('f-engagement').value = c.engagement || 'warm';
+  document.getElementById('f-social').value = c.social || '';
+  document.getElementById('f-crm').value = c.crm || '';
+  document.getElementById('f-contact-name').value = c.contactName || '';
+  document.getElementById('f-role').value = c.role || '';
+  document.getElementById('f-email').value = c.email || '';
+  document.getElementById('f-next-date').value = c.nextDate || '';
+  document.getElementById('f-next-notes').value = c.nextNotes || '';
+  openModal('channel-modal');
+}
+
+function saveChannel(e) {
+  e.preventDefault();
+  const id = document.getElementById('f-id').value;
+  const payload = {
+    name: document.getElementById('f-name').value.trim(),
+    engagement: document.getElementById('f-engagement').value,
+    social: document.getElementById('f-social').value.trim(),
+    crm: document.getElementById('f-crm').value.trim(),
+    contactName: document.getElementById('f-contact-name').value.trim(),
+    role: document.getElementById('f-role').value.trim(),
+    email: document.getElementById('f-email').value.trim(),
+    nextDate: document.getElementById('f-next-date').value,
+    nextNotes: document.getElementById('f-next-notes').value.trim(),
+  };
+
+  if (id) {
+    const idx = data.channels.findIndex(c => c.id === id);
+    if (idx > -1) data.channels[idx] = { ...data.channels[idx], ...payload };
+  } else {
+    data.channels.push({ id: uid(), createdAt: new Date().toISOString(), interactions: [], ...payload });
+  }
+  saveData(data);
+  closeModal('channel-modal');
+  toast(id ? 'Canal atualizado!' : 'Canal adicionado!');
+  renderChannelList();
+  renderDashboard();
+}
+
+function deleteChannel(id) {
+  if (!confirm('Remover este canal? Esta ação não pode ser desfeita.')) return;
+  data.channels = data.channels.filter(c => c.id !== id);
+  saveData(data);
+  toast('Canal removido.');
+  renderChannelList();
+  renderDashboard();
+}
+
+// ══ INTERACTIONS ══
+function openAddInteraction() {
+  document.getElementById('i-channel-id').value = currentChannelId;
+  document.getElementById('i-date').value = today();
+  document.getElementById('i-type').value = 'call';
+  document.getElementById('i-notes').value = '';
+  openModal('interaction-modal');
+}
+
+function saveInteraction(e) {
+  e.preventDefault();
+  const channelId = document.getElementById('i-channel-id').value;
+  const c = data.channels.find(ch => ch.id === channelId);
+  if (!c) return;
+  if (!c.interactions) c.interactions = [];
+  c.interactions.push({
+    id: uid(),
+    date: document.getElementById('i-date').value,
+    type: document.getElementById('i-type').value,
+    notes: document.getElementById('i-notes').value.trim(),
+  });
+  saveData(data);
+  closeModal('interaction-modal');
+  toast('Contato registrado!');
+  openDetail(channelId);
+  renderDashboard();
+}
+
+function deleteInteraction(channelId, interactionId) {
+  const c = data.channels.find(ch => ch.id === channelId);
+  if (!c) return;
+  c.interactions = (c.interactions || []).filter(i => i.id !== interactionId);
+  saveData(data);
+  openDetail(channelId);
+  toast('Interação removida.');
+}
+
+// ══ MODAL HELPERS ══
+function openModal(id) { document.getElementById(id).classList.add('open'); }
+function closeModal(id) { document.getElementById(id).classList.remove('open'); }
+
+document.addEventListener('keydown', e => {
+  if (e.key === 'Escape') {
+    closeModal('channel-modal');
+    closeModal('interaction-modal');
+    document.getElementById('detail-overlay').classList.remove('open');
+  }
+});
+
+// ══ TOAST ══
+function toast(msg) {
+  const el = document.getElementById('toast');
+  el.textContent = msg;
+  el.classList.add('show');
+  setTimeout(() => el.classList.remove('show'), 2800);
+}
+
+// ══ INIT ══
+renderDashboard();
+</script>
+</body>
+</html>
