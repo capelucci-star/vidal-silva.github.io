@@ -304,13 +304,15 @@
     <div class="logo-lock"><i class="fas fa-lock"></i></div>
     <h2 id="login-title">Gestão de Canais</h2>
     <p id="login-subtitle">Digite sua senha para continuar</p>
+    <div class="login-input-wrap" style="margin-bottom:12px">
+      <input type="text" id="login-username" placeholder="Usuário" onkeydown="if(event.key==='Enter')document.getElementById('login-password').focus()" autocomplete="username">
+    </div>
     <div class="login-input-wrap">
-      <input type="password" id="login-password" placeholder="Senha" onkeydown="if(event.key==='Enter')doLogin()">
+      <input type="password" id="login-password" placeholder="Senha" onkeydown="if(event.key==='Enter')doLogin()" autocomplete="current-password">
       <button class="eye-btn" onclick="toggleEye()" tabindex="-1"><i class="fas fa-eye" id="eye-icon"></i></button>
     </div>
     <div class="login-error" id="login-error"></div>
     <button class="login-btn" onclick="doLogin()">Entrar</button>
-    <div class="login-hint" id="login-hint"></div>
   </div>
 </div>
 
@@ -999,15 +1001,14 @@ function toast(msg) {
 }
 
 // ══ AUTH ══
-const AUTH_KEY = 'canal_auth_hash';
 const SESSION_KEY = 'canal_session';
+const USER_HASH = 'e9db9cc9b4d2554d6c1bc1853eb4fa4f41ec392e032013515b40c3be7b202d88';
+const PASS_HASH = '2788447ff0d3785da1a112c2d68727b451f87d485db066c8be4a6cfe5e4c320d';
 
 async function sha256(text) {
   const buf = await crypto.subtle.digest('SHA-256', new TextEncoder().encode(text));
   return Array.from(new Uint8Array(buf)).map(b => b.toString(16).padStart(2, '0')).join('');
 }
-
-function isFirstTime() { return !localStorage.getItem(AUTH_KEY); }
 
 function unlockApp() {
   document.getElementById('login-screen').style.display = 'none';
@@ -1017,24 +1018,21 @@ function unlockApp() {
 }
 
 async function doLogin() {
+  const user = document.getElementById('login-username').value.trim();
   const pw = document.getElementById('login-password').value;
   const errEl = document.getElementById('login-error');
-  if (!pw) { errEl.textContent = 'Digite a senha.'; return; }
 
-  if (isFirstTime()) {
-    const hash = await sha256(pw);
-    localStorage.setItem(AUTH_KEY, hash);
+  if (!user || !pw) { errEl.textContent = 'Preencha usuário e senha.'; return; }
+
+  const [uHash, pHash] = await Promise.all([sha256(user), sha256(pw)]);
+
+  if (uHash === USER_HASH && pHash === PASS_HASH) {
+    errEl.textContent = '';
     unlockApp();
   } else {
-    const hash = await sha256(pw);
-    if (hash === localStorage.getItem(AUTH_KEY)) {
-      errEl.textContent = '';
-      unlockApp();
-    } else {
-      errEl.textContent = 'Senha incorreta.';
-      document.getElementById('login-password').value = '';
-      document.getElementById('login-password').focus();
-    }
+    errEl.textContent = 'Usuário ou senha incorretos.';
+    document.getElementById('login-password').value = '';
+    document.getElementById('login-password').focus();
   }
 }
 
@@ -1045,27 +1043,9 @@ function toggleEye() {
   else { inp.type = 'password'; ico.className = 'fas fa-eye'; }
 }
 
-function showChangePassword() {
-  document.getElementById('login-title').textContent = 'Nova Senha';
-  document.getElementById('login-subtitle').textContent = 'Digite a nova senha para proteger a página';
-  document.getElementById('login-hint').innerHTML = '<a onclick="initLoginScreen()">Cancelar</a>';
-  localStorage.removeItem(AUTH_KEY);
-  sessionStorage.removeItem(SESSION_KEY);
-  document.getElementById('login-password').value = '';
-  document.getElementById('login-error').textContent = '';
-  document.getElementById('login-screen').style.display = 'flex';
-  document.getElementById('app-wrapper').style.display = 'none';
-}
-
 function initLoginScreen() {
   if (sessionStorage.getItem(SESSION_KEY)) { unlockApp(); return; }
-  const first = isFirstTime();
-  document.getElementById('login-title').textContent = first ? 'Criar Senha' : 'Gestão de Canais';
-  document.getElementById('login-subtitle').textContent = first
-    ? 'Defina uma senha para proteger esta página'
-    : 'Digite sua senha para continuar';
-  document.getElementById('login-hint').innerHTML = first ? '' : '<a onclick="showChangePassword()">Esqueci / Alterar senha</a>';
-  document.getElementById('login-password').focus();
+  document.getElementById('login-username').focus();
 }
 
 // ══ INIT ══
