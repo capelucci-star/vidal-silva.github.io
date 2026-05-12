@@ -5,6 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Gestão de Canais | Vidal Silva</title>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+  <script src="https://cdn.sheetjs.com/xlsx-0.20.3/package/dist/xlsx.full.min.js"></script>
   <style>
     :root {
       --primary: #4285F4;
@@ -398,6 +399,7 @@
           <option value="next">Próximo Contato</option>
           <option value="engagement">Engajamento</option>
         </select>
+        <button class="btn btn-secondary" onclick="exportExcel()"><i class="fas fa-file-excel" style="color:#1d6f42"></i> Exportar Excel</button>
       </div>
 
       <div class="channel-table">
@@ -993,6 +995,55 @@ function deleteInteraction(channelId, interactionId) {
   saveData(data);
   openDetail(channelId);
   toast('Interação removida.');
+}
+
+// ══ EXPORT EXCEL ══
+function exportExcel() {
+  const wb = XLSX.utils.book_new();
+
+  // Sheet 1 — Canais
+  const channelRows = data.channels.map(c => {
+    const interactions = (c.interactions || []).sort((a, b) => b.date.localeCompare(a.date));
+    const lastDate = interactions[0]?.date || '';
+    return {
+      'Canal': c.name || '',
+      'País': c.country || '',
+      'Cidade': c.city || '',
+      'Nome do Contato': c.contactName || '',
+      'Função': c.role || '',
+      'Email': c.email || '',
+      'Rede Social': c.social || '',
+      'Link CRM': c.crm || '',
+      'Engajamento': ENG_LABELS[c.engagement] || c.engagement || '',
+      'Último Contato': lastDate ? fmtDate(lastDate) : '',
+      'Próximo Contato': c.nextDate ? fmtDate(c.nextDate) : '',
+      'Pauta Próximo Contato': c.nextNotes || '',
+      'Total de Interações': (c.interactions || []).length,
+    };
+  });
+  const ws1 = XLSX.utils.json_to_sheet(channelRows);
+  ws1['!cols'] = [20,12,14,20,18,28,30,30,12,14,14,28,10].map(w => ({ wch: w }));
+  XLSX.utils.book_append_sheet(wb, ws1, 'Canais');
+
+  // Sheet 2 — Histórico de Contatos
+  const historyRows = data.channels.flatMap(c =>
+    (c.interactions || []).map(i => ({
+      'Canal': c.name || '',
+      'País': c.country || '',
+      'Cidade': c.city || '',
+      'Contato': c.contactName || '',
+      'Data': fmtDate(i.date),
+      'Tipo': TYPE_LABELS[i.type] || i.type || '',
+      'Notas': i.notes || '',
+    }))
+  ).sort((a, b) => b['Data'].localeCompare(a['Data']));
+  const ws2 = XLSX.utils.json_to_sheet(historyRows.length ? historyRows : [{ 'Canal': 'Nenhuma interação registrada' }]);
+  ws2['!cols'] = [20,12,14,20,12,12,50].map(w => ({ wch: w }));
+  XLSX.utils.book_append_sheet(wb, ws2, 'Histórico de Contatos');
+
+  const date = new Date().toISOString().slice(0, 10);
+  XLSX.writeFile(wb, `canais_${date}.xlsx`);
+  toast('Exportado com sucesso!');
 }
 
 // ══ MODAL HELPERS ══
