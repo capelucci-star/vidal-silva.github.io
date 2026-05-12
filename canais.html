@@ -250,6 +250,42 @@
     ::-webkit-scrollbar-track { background: transparent; }
     ::-webkit-scrollbar-thumb { background: #dadce0; border-radius: 3px; }
 
+    /* ─── LOGIN ─── */
+    #login-screen {
+      position: fixed; inset: 0; background: #f1f3f4;
+      display: flex; align-items: center; justify-content: center;
+      z-index: 9999; padding: 20px;
+    }
+    .login-card {
+      background: white; border-radius: 20px; padding: 48px 40px;
+      width: 100%; max-width: 380px;
+      box-shadow: 0 8px 40px rgba(0,0,0,0.12); text-align: center;
+    }
+    .login-card .logo-lock { font-size: 2.4rem; color: var(--primary); margin-bottom: 16px; }
+    .login-card h2 { font-size: 1.3rem; font-weight: 700; margin-bottom: 4px; }
+    .login-card p { font-size: 0.88rem; color: var(--gray); margin-bottom: 28px; }
+    .login-input-wrap { position: relative; margin-bottom: 16px; }
+    .login-input-wrap input {
+      width: 100%; padding: 12px 44px 12px 16px;
+      border: 1.5px solid var(--border); border-radius: 10px;
+      font-size: 0.95rem; outline: none; transition: border-color 0.15s;
+    }
+    .login-input-wrap input:focus { border-color: var(--primary); box-shadow: 0 0 0 3px rgba(66,133,244,0.12); }
+    .login-input-wrap .eye-btn {
+      position: absolute; right: 12px; top: 50%; transform: translateY(-50%);
+      background: none; border: none; cursor: pointer; color: var(--gray); font-size: 1rem;
+    }
+    .login-btn {
+      width: 100%; padding: 13px; background: var(--primary); color: white;
+      border: none; border-radius: 10px; font-size: 0.95rem; font-weight: 600;
+      cursor: pointer; transition: 0.2s; margin-bottom: 12px;
+    }
+    .login-btn:hover { background: var(--primary-dark); }
+    .login-error { color: var(--danger); font-size: 0.82rem; min-height: 18px; margin-top: -4px; }
+    .login-hint { font-size: 0.78rem; color: var(--gray); margin-top: 12px; }
+    .login-hint a { color: var(--primary); cursor: pointer; text-decoration: underline; }
+    #app-wrapper { display: none; }
+
     /* Toast */
     .toast {
       position: fixed; bottom: 28px; left: 50%; transform: translateX(-50%) translateY(80px);
@@ -262,6 +298,25 @@
 </head>
 <body>
 
+<!-- ══ LOGIN SCREEN ══ -->
+<div id="login-screen">
+  <div class="login-card">
+    <div class="logo-lock"><i class="fas fa-lock"></i></div>
+    <h2 id="login-title">Gestão de Canais</h2>
+    <p id="login-subtitle">Digite sua senha para continuar</p>
+    <div class="login-input-wrap" style="margin-bottom:12px">
+      <input type="text" id="login-username" placeholder="Usuário" onkeydown="if(event.key==='Enter')document.getElementById('login-password').focus()" autocomplete="username">
+    </div>
+    <div class="login-input-wrap">
+      <input type="password" id="login-password" placeholder="Senha" onkeydown="if(event.key==='Enter')doLogin()" autocomplete="current-password">
+      <button class="eye-btn" onclick="toggleEye()" tabindex="-1"><i class="fas fa-eye" id="eye-icon"></i></button>
+    </div>
+    <div class="login-error" id="login-error"></div>
+    <button class="login-btn" onclick="doLogin()">Entrar</button>
+  </div>
+</div>
+
+<div id="app-wrapper">
 <nav>
   <a href="index.html" class="logo">Vidal Silva</a>
   <div class="nav-links">
@@ -518,6 +573,8 @@
     </div>
   </div>
 </div>
+
+</div><!-- /app-wrapper -->
 
 <div class="toast" id="toast"></div>
 
@@ -943,8 +1000,56 @@ function toast(msg) {
   setTimeout(() => el.classList.remove('show'), 2800);
 }
 
+// ══ AUTH ══
+const SESSION_KEY = 'canal_session';
+const USER_HASH = 'e9db9cc9b4d2554d6c1bc1853eb4fa4f41ec392e032013515b40c3be7b202d88';
+const PASS_HASH = '2788447ff0d3785da1a112c2d68727b451f87d485db066c8be4a6cfe5e4c320d';
+
+async function sha256(text) {
+  const buf = await crypto.subtle.digest('SHA-256', new TextEncoder().encode(text));
+  return Array.from(new Uint8Array(buf)).map(b => b.toString(16).padStart(2, '0')).join('');
+}
+
+function unlockApp() {
+  document.getElementById('login-screen').style.display = 'none';
+  document.getElementById('app-wrapper').style.display = 'block';
+  sessionStorage.setItem(SESSION_KEY, '1');
+  renderDashboard();
+}
+
+async function doLogin() {
+  const user = document.getElementById('login-username').value.trim();
+  const pw = document.getElementById('login-password').value;
+  const errEl = document.getElementById('login-error');
+
+  if (!user || !pw) { errEl.textContent = 'Preencha usuário e senha.'; return; }
+
+  const [uHash, pHash] = await Promise.all([sha256(user), sha256(pw)]);
+
+  if (uHash === USER_HASH && pHash === PASS_HASH) {
+    errEl.textContent = '';
+    unlockApp();
+  } else {
+    errEl.textContent = 'Usuário ou senha incorretos.';
+    document.getElementById('login-password').value = '';
+    document.getElementById('login-password').focus();
+  }
+}
+
+function toggleEye() {
+  const inp = document.getElementById('login-password');
+  const ico = document.getElementById('eye-icon');
+  if (inp.type === 'password') { inp.type = 'text'; ico.className = 'fas fa-eye-slash'; }
+  else { inp.type = 'password'; ico.className = 'fas fa-eye'; }
+}
+
+function initLoginScreen() {
+  if (sessionStorage.getItem(SESSION_KEY)) { unlockApp(); return; }
+  document.getElementById('login-username').focus();
+}
+
 // ══ INIT ══
-renderDashboard();
+initLoginScreen();
 </script>
 </body>
 </html>
