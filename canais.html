@@ -465,6 +465,15 @@
             <input type="url" id="f-crm" placeholder="https://crm.google.com/...">
           </div>
 
+          <div class="form-group">
+            <label>País</label>
+            <input type="text" id="f-country" placeholder="Ex: Brasil">
+          </div>
+          <div class="form-group">
+            <label>Cidade</label>
+            <input type="text" id="f-city" placeholder="Ex: São Paulo">
+          </div>
+
           <div class="section-divider">Contato Principal</div>
           <div class="form-group">
             <label>Nome do Contato *</label>
@@ -843,6 +852,8 @@ function openDetail(id) {
     <div class="info-item"><label>Contato</label><span>${c.contactName || '—'}</span></div>
     <div class="info-item"><label>Função</label><span>${c.role || '—'}</span></div>
     <div class="info-item"><label>Email</label><span>${c.email ? `<a href="mailto:${c.email}">${c.email}</a>` : '—'}</span></div>
+    <div class="info-item"><label>País</label><span>${c.country || '—'}</span></div>
+    <div class="info-item"><label>Cidade</label><span>${c.city || '—'}</span></div>
     <div class="info-item"><label>Rede Social</label><span>${c.social ? `<a href="${c.social}" target="_blank">Acessar</a>` : '—'}</span></div>
     <div class="info-item"><label>CRM</label><span>${c.crm ? `<a href="${c.crm}" target="_blank">Acessar</a>` : '—'}</span></div>
     <div class="info-item"><label>Engajamento</label><span>${engBadge(c.engagement)}</span></div>
@@ -903,6 +914,8 @@ function editChannel(id) {
   document.getElementById('f-email').value = c.email || '';
   document.getElementById('f-next-date').value = c.nextDate || '';
   document.getElementById('f-next-notes').value = c.nextNotes || '';
+  document.getElementById('f-country').value = c.country || '';
+  document.getElementById('f-city').value = c.city || '';
   openModal('channel-modal');
 }
 
@@ -919,6 +932,8 @@ function saveChannel(e) {
     email: document.getElementById('f-email').value.trim(),
     nextDate: document.getElementById('f-next-date').value,
     nextNotes: document.getElementById('f-next-notes').value.trim(),
+    country: document.getElementById('f-country').value.trim(),
+    city: document.getElementById('f-city').value.trim(),
   };
 
   if (id) {
