@@ -6,6 +6,8 @@
   <title>Gestão de Canais | Vidal Silva</title>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
   <script src="https://cdn.sheetjs.com/xlsx-0.20.3/package/dist/xlsx.full.min.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-app-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore-compat.js"></script>
   <style>
     :root {
       --primary: #4285F4; --primary-dark: #1a73e8;
@@ -247,6 +249,12 @@
     /* TOAST */
     .toast { position:fixed; bottom:28px; left:50%; transform:translateX(-50%) translateY(80px); background:#202124; color:white; padding:12px 22px; border-radius:10px; font-size:.88rem; z-index:1000; transition:transform .3s; box-shadow:0 4px 16px rgba(0,0,0,.2); }
     .toast.show { transform:translateX(-50%) translateY(0); }
+
+    /* LOADING */
+    .loading-overlay { position:fixed; inset:0; background:rgba(255,255,255,.85); z-index:8000; display:flex; flex-direction:column; align-items:center; justify-content:center; gap:12px; }
+    .loading-spinner { width:40px; height:40px; border:3px solid var(--border); border-top-color:var(--primary); border-radius:50%; animation:spin .7s linear infinite; }
+    @keyframes spin { to { transform:rotate(360deg); } }
+    .loading-text { font-size:.9rem; color:var(--gray); font-weight:500; }
   </style>
 </head>
 <body>
@@ -267,6 +275,12 @@
     <div class="login-error" id="login-error"></div>
     <button class="login-btn" onclick="doLogin()">Entrar</button>
   </div>
+</div>
+
+<!-- LOADING -->
+<div class="loading-overlay" id="loading-overlay" style="display:none">
+  <div class="loading-spinner"></div>
+  <div class="loading-text">Carregando dados...</div>
 </div>
 
 <div id="app-wrapper">
@@ -634,53 +648,99 @@
 <div class="toast" id="toast"></div>
 
 <script>
+// ══ FIREBASE ══
+const firebaseConfig = {
+  apiKey: "AIzaSyCZggFzpwsZYLLDV8eiJDvgIyKpstxmXAI",
+  authDomain: "canais-vidal.firebaseapp.com",
+  projectId: "canais-vidal",
+  storageBucket: "canais-vidal.firebasestorage.app",
+  messagingSenderId: "260924790492",
+  appId: "1:260924790492:web:255d630f9ba3abc8420619"
+};
+firebase.initializeApp(firebaseConfig);
+const db = firebase.firestore();
+
 // ══ DATA ══
 const STORAGE_KEY = 'canal_mgr_v3';
-
-function loadData() {
-  const raw = localStorage.getItem(STORAGE_KEY);
-  if (raw) return JSON.parse(raw);
-  // migrate from v2
-  const v2 = localStorage.getItem('canal_mgr_v2');
-  if (v2) {
-    const old = JSON.parse(v2);
-    old.channels.forEach(c => {
-      if (!c.contacts) {
-        c.contacts = [
-          { name: c.contactName || '', role: c.role || '', email: c.email || '' },
-          { name: '', role: '', email: '' },
-          { name: '', role: '', email: '' }
-        ];
-      }
-      if (!c.tasks) c.tasks = [];
-    });
-    return old;
-  }
-  return { channels: [] };
-}
-
-function saveData(d) { localStorage.setItem(STORAGE_KEY, JSON.stringify(d)); }
-
-let data = loadData();
+let data = { channels: [] };
 let currentChannelId = null;
 let currentTab = 'info';
 
-// Ensure all channels have contacts/tasks arrays
-data.channels.forEach(c => {
-  if (!c.contacts) {
-    c.contacts = [
-      { name: c.contactName || '', role: c.role || '', email: c.email || '' },
-      { name: '', role: '', email: '' },
-      { name: '', role: '', email: '' }
-    ];
-  }
-  while (c.contacts.length < 3) c.contacts.push({ name: '', role: '', email: '' });
-  if (!c.tasks) c.tasks = [];
-});
-saveData(data);
+function uid() { return Date.now().toString(36) + Math.random().toString(36).slice(2, 7); }
+function fmtDateAdd(days) { const d = new Date(); d.setDate(d.getDate() + days); return d.toISOString().slice(0, 10); }
+function today() { return new Date().toISOString().slice(0, 10); }
+function fmtDate(str) { if (!str) return '—'; const [y, m, d] = str.split('-'); return `${d}/${m}/${y}`; }
+function daysUntil(str) { if (!str) return null; return Math.round((new Date(str + 'T12:00:00') - new Date()) / 86400000); }
 
-// Seed demo data
-if (data.channels.length === 0) {
+const TYPE_ICONS = { call: 'fa-phone', email: 'fa-envelope', meeting: 'fa-handshake', message: 'fa-comment', other: 'fa-clipboard' };
+const TYPE_LABELS = { call: 'Ligação', email: 'Email', meeting: 'Reunião', message: 'Mensagem', other: 'Outro' };
+const ENG_LABELS = { hot: 'Quente', warm: 'Morno', cool: 'Frio', cold: 'Inativo' };
+const ENG_ORDER = { hot: 0, warm: 1, cool: 2, cold: 3 };
+
+function saveLocalData() { localStorage.setItem(STORAGE_KEY, JSON.stringify(data)); }
+
+async function syncChannelToFirestore(channel) {
+  try { await db.collection('channels').doc(channel.id).set(channel); }
+  catch(e) { console.error('Firestore sync error:', e); }
+}
+
+async function deleteChannelFromFirestore(id) {
+  try { await db.collection('channels').doc(id).delete(); }
+  catch(e) { console.error('Firestore delete error:', e); }
+}
+
+function ensureChannelArrays() {
+  data.channels.forEach(c => {
+    if (!c.contacts) {
+      c.contacts = [
+        { name: c.contactName || '', role: c.role || '', email: c.email || '' },
+        { name: '', role: '', email: '' },
+        { name: '', role: '', email: '' }
+      ];
+    }
+    while (c.contacts.length < 3) c.contacts.push({ name: '', role: '', email: '' });
+    if (!c.tasks) c.tasks = [];
+  });
+}
+
+async function initData() {
+  // Try Firestore first
+  try {
+    const snap = await db.collection('channels').get();
+    if (!snap.empty) {
+      data.channels = snap.docs.map(d => d.data());
+      ensureChannelArrays();
+      saveLocalData();
+      return;
+    }
+  } catch(e) { console.error('Firestore load error:', e); }
+
+  // Fall back to localStorage
+  const raw = localStorage.getItem(STORAGE_KEY);
+  if (raw) {
+    data = JSON.parse(raw);
+    // v2 migration
+    const v2 = localStorage.getItem('canal_mgr_v2');
+    if (!raw && v2) {
+      const old = JSON.parse(v2);
+      old.channels.forEach(c => {
+        if (!c.contacts) {
+          c.contacts = [
+            { name: c.contactName || '', role: c.role || '', email: c.email || '' },
+            { name: '', role: '', email: '' },
+            { name: '', role: '', email: '' }
+          ];
+        }
+        if (!c.tasks) c.tasks = [];
+      });
+      data = old;
+    }
+    ensureChannelArrays();
+    for (const c of data.channels) syncChannelToFirestore(c);
+    return;
+  }
+
+  // Seed demo data
   const demo = [
     { name: 'Colégio Horizonte', country: 'Brasil', city: 'São Paulo', social: 'https://linkedin.com/company/colegio-horizonte', crm: '', engagement: 'hot',
       contacts: [{ name: 'Ana Lima', role: 'Diretora Comercial', email: 'ana@horizonteedu.com' }, { name: 'Ricardo Melo', role: 'Diretor Financeiro', email: 'ricardo@horizonteedu.com' }, { name: '', role: '', email: '' }],
@@ -698,19 +758,9 @@ if (data.channels.length === 0) {
   ];
   demo.forEach(c => { c.id = uid(); c.createdAt = new Date().toISOString(); });
   data.channels = demo;
-  saveData(data);
+  saveLocalData();
+  for (const c of demo) syncChannelToFirestore(c);
 }
-
-function uid() { return Date.now().toString(36) + Math.random().toString(36).slice(2, 7); }
-function fmtDateAdd(days) { const d = new Date(); d.setDate(d.getDate() + days); return d.toISOString().slice(0, 10); }
-function today() { return new Date().toISOString().slice(0, 10); }
-function fmtDate(str) { if (!str) return '—'; const [y, m, d] = str.split('-'); return `${d}/${m}/${y}`; }
-function daysUntil(str) { if (!str) return null; return Math.round((new Date(str + 'T12:00:00') - new Date()) / 86400000); }
-
-const TYPE_ICONS = { call: 'fa-phone', email: 'fa-envelope', meeting: 'fa-handshake', message: 'fa-comment', other: 'fa-clipboard' };
-const TYPE_LABELS = { call: 'Ligação', email: 'Email', meeting: 'Reunião', message: 'Mensagem', other: 'Outro' };
-const ENG_LABELS = { hot: 'Quente', warm: 'Morno', cool: 'Frio', cold: 'Inativo' };
-const ENG_ORDER = { hot: 0, warm: 1, cool: 2, cold: 3 };
 
 function engBadge(level) {
   const icons = { hot: '🔴', warm: '🟡', cool: '🔵', cold: '⚪' };
@@ -884,10 +934,8 @@ function openDetail(id, tab) {
   if (!c) return;
 
   document.getElementById('dp-name').textContent = c.name;
-  const pc = primaryContact(c);
   document.getElementById('dp-sub').innerHTML = `${engBadge(c.engagement)} &nbsp;·&nbsp; ${[c.city, c.country].filter(Boolean).join(', ') || ''}`;
 
-  // Next contact
   let nextHtml = '';
   if (c.nextDate) {
     const days = daysUntil(c.nextDate);
@@ -900,7 +948,6 @@ function openDetail(id, tab) {
   }
   document.getElementById('dp-next-contact').innerHTML = nextHtml;
 
-  // Canal info
   document.getElementById('dp-info').innerHTML = `
     <div class="info-item"><label>País</label><span>${c.country || '—'}</span></div>
     <div class="info-item"><label>Cidade</label><span>${c.city || '—'}</span></div>
@@ -909,7 +956,6 @@ function openDetail(id, tab) {
     <div class="info-item"><label>Engajamento</label><span>${engBadge(c.engagement)}</span></div>
   `;
 
-  // Contacts
   const contacts = (c.contacts || []).filter(ct => ct.name);
   document.getElementById('dp-contacts').innerHTML = contacts.length === 0
     ? '<div style="font-size:.85rem;color:var(--gray)">Nenhum contato cadastrado.</div>'
@@ -923,7 +969,6 @@ function openDetail(id, tab) {
           <div class="contact-card-email">${ct.email ? `<a href="mailto:${ct.email}" style="color:var(--primary);font-size:.82rem">${ct.email}</a>` : ''}</div>
         </div>`).join('');
 
-  // Timeline
   const interactions = [...(c.interactions || [])].sort((a, b) => b.date.localeCompare(a.date));
   document.getElementById('dp-timeline').innerHTML = interactions.length === 0
     ? '<div class="empty-state"><i class="fas fa-comments"></i><p>Nenhuma interação registrada ainda</p></div>'
@@ -942,13 +987,11 @@ function openDetail(id, tab) {
           </div>
         </div>`).join('');
 
-  // Tasks
   renderTasks(c);
 
-  // Tab badge
   const openCount = (c.tasks || []).filter(t => t.status === 'open').length;
   const badge = document.getElementById('tab-tasks-badge');
-  if (openCount > 0) { badge.textContent = openCount; badge.style.display = 'inline'; badge.className = 'tab-badge' + (openCount > 0 ? '' : ''); }
+  if (openCount > 0) { badge.textContent = openCount; badge.style.display = 'inline'; badge.className = 'tab-badge'; }
   else { badge.style.display = 'none'; }
 
   switchTab(tab || 'info');
@@ -1063,13 +1106,16 @@ function saveChannel(e) {
     nextDate: document.getElementById('f-next-date').value,
     nextNotes: document.getElementById('f-next-notes').value.trim(),
   };
+  let changedChannel;
   if (id) {
     const idx = data.channels.findIndex(c => c.id === id);
-    if (idx > -1) data.channels[idx] = { ...data.channels[idx], ...payload };
+    if (idx > -1) { data.channels[idx] = { ...data.channels[idx], ...payload }; changedChannel = data.channels[idx]; }
   } else {
-    data.channels.push({ id: uid(), createdAt: new Date().toISOString(), interactions: [], tasks: [], ...payload });
+    changedChannel = { id: uid(), createdAt: new Date().toISOString(), interactions: [], tasks: [], ...payload };
+    data.channels.push(changedChannel);
   }
-  saveData(data);
+  saveLocalData();
+  if (changedChannel) syncChannelToFirestore(changedChannel);
   closeModal('channel-modal');
   toast(id ? 'Canal atualizado!' : 'Canal adicionado!');
   renderChannelList();
@@ -1079,7 +1125,8 @@ function saveChannel(e) {
 function deleteChannel(id) {
   if (!confirm('Remover este canal? Esta ação não pode ser desfeita.')) return;
   data.channels = data.channels.filter(c => c.id !== id);
-  saveData(data);
+  saveLocalData();
+  deleteChannelFromFirestore(id);
   toast('Canal removido.');
   renderChannelList();
   renderDashboard();
@@ -1100,7 +1147,8 @@ function saveInteraction(e) {
   if (!c) return;
   if (!c.interactions) c.interactions = [];
   c.interactions.push({ id: uid(), date: document.getElementById('i-date').value, type: document.getElementById('i-type').value, notes: document.getElementById('i-notes').value.trim() });
-  saveData(data);
+  saveLocalData();
+  syncChannelToFirestore(c);
   closeModal('interaction-modal');
   toast('Contato registrado!');
   openDetail(channelId, 'history');
@@ -1110,7 +1158,8 @@ function deleteInteraction(channelId, interactionId) {
   const c = data.channels.find(ch => ch.id === channelId);
   if (!c) return;
   c.interactions = (c.interactions || []).filter(i => i.id !== interactionId);
-  saveData(data);
+  saveLocalData();
+  syncChannelToFirestore(c);
   openDetail(channelId, 'history');
   toast('Interação removida.');
 }
@@ -1136,7 +1185,8 @@ function saveTask(e) {
     status: 'open',
     createdAt: new Date().toISOString(),
   });
-  saveData(data);
+  saveLocalData();
+  syncChannelToFirestore(c);
   closeModal('task-modal');
   toast('Tarefa criada!');
   openDetail(channelId, 'tasks');
@@ -1159,7 +1209,8 @@ function confirmCloseTask() {
   t.status = 'done';
   t.closedAt = new Date().toISOString();
   t.closeNotes = closeNotes;
-  saveData(data);
+  saveLocalData();
+  syncChannelToFirestore(c);
   closeModal('close-task-modal');
   toast('Tarefa concluída!');
   openDetail(channelId, 'tasks');
@@ -1169,7 +1220,8 @@ function deleteTask(channelId, taskId) {
   const c = data.channels.find(ch => ch.id === channelId);
   if (!c) return;
   c.tasks = (c.tasks || []).filter(t => t.id !== taskId);
-  saveData(data);
+  saveLocalData();
+  syncChannelToFirestore(c);
   openDetail(channelId, 'tasks');
   toast('Tarefa removida.');
 }
@@ -1178,7 +1230,6 @@ function deleteTask(channelId, taskId) {
 function exportExcel() {
   const wb = XLSX.utils.book_new();
 
-  // Sheet 1 — Canais
   const channelRows = data.channels.map(c => {
     const interactions = (c.interactions || []).sort((a, b) => b.date.localeCompare(a.date));
     const lastDate = interactions[0]?.date || '';
@@ -1210,7 +1261,6 @@ function exportExcel() {
   ws1['!cols'] = [22,12,14,12,20,18,28,20,18,28,20,18,28,30,30,14,14,28,10,10].map(w => ({ wch: w }));
   XLSX.utils.book_append_sheet(wb, ws1, 'Canais');
 
-  // Sheet 2 — Histórico
   const historyRows = data.channels.flatMap(c =>
     (c.interactions || []).map(i => ({
       'Canal': c.name || '',
@@ -1224,7 +1274,6 @@ function exportExcel() {
   ws2['!cols'] = [22,20,12,12,50].map(w => ({ wch: w }));
   XLSX.utils.book_append_sheet(wb, ws2, 'Histórico de Contatos');
 
-  // Sheet 3 — Tarefas
   const taskRows = data.channels.flatMap(c =>
     (c.tasks || []).map(t => ({
       'Canal': c.name || '',
@@ -1273,19 +1322,24 @@ async function sha256(text) {
   const buf = await crypto.subtle.digest('SHA-256', new TextEncoder().encode(text));
   return Array.from(new Uint8Array(buf)).map(b => b.toString(16).padStart(2, '0')).join('');
 }
-function unlockApp() {
+
+async function unlockApp() {
   document.getElementById('login-screen').style.display = 'none';
+  document.getElementById('loading-overlay').style.display = 'flex';
+  await initData();
+  document.getElementById('loading-overlay').style.display = 'none';
   document.getElementById('app-wrapper').style.display = 'block';
   sessionStorage.setItem(SESSION_KEY, '1');
   renderDashboard();
 }
+
 async function doLogin() {
   const user = document.getElementById('login-username').value.trim();
   const pw = document.getElementById('login-password').value;
   const errEl = document.getElementById('login-error');
   if (!user || !pw) { errEl.textContent = 'Preencha usuário e senha.'; return; }
   const [uHash, pHash] = await Promise.all([sha256(user), sha256(pw)]);
-  if (uHash === USER_HASH && pHash === PASS_HASH) { errEl.textContent = ''; unlockApp(); }
+  if (uHash === USER_HASH && pHash === PASS_HASH) { errEl.textContent = ''; await unlockApp(); }
   else { errEl.textContent = 'Usuário ou senha incorretos.'; document.getElementById('login-password').value = ''; document.getElementById('login-password').focus(); }
 }
 function toggleEye() {
