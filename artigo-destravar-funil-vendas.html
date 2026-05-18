@@ -1,0 +1,244 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Diagnosticar e Destravar o Funil de Vendas | Vidal Silva</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        :root { --primary: #4285F4; --dark: #202124; --gray: #5f6368; --light: #f8f9fa; }
+        body { font-family: 'Segoe UI', Arial, sans-serif; margin: 0; background: var(--light); color: var(--dark); line-height: 1.7; }
+        nav { display: flex; justify-content: space-between; padding: 20px 10%; background: white; align-items: center; box-shadow: 0 2px 4px rgba(0,0,0,0.05); position: sticky; top: 0; z-index: 100; }
+        .logo { font-weight: bold; font-size: 1.2rem; color: var(--primary); text-decoration: none; }
+        .nav-links a { text-decoration: none; color: var(--gray); font-weight: 500; margin-left: 20px; }
+
+        .article-hero { background: white; padding: 60px 10% 40px; border-bottom: 1px solid #eee; }
+        .article-hero .tag { background: #e8f0fe; color: var(--primary); padding: 5px 14px; border-radius: 20px; font-size: 0.75rem; font-weight: bold; text-transform: uppercase; display: inline-block; margin-bottom: 20px; }
+        .article-hero h1 { font-size: 2.2rem; line-height: 1.2; margin: 0 0 20px 0; max-width: 800px; color: var(--dark); }
+        .article-hero .subtitle { font-size: 1.1rem; color: var(--gray); max-width: 750px; margin-bottom: 30px; }
+        .article-meta { color: var(--gray); font-size: 0.9rem; }
+        .article-meta span { margin-right: 15px; }
+        .article-meta i { margin-right: 5px; }
+
+        .article-body { max-width: 720px; margin: 50px auto; padding: 0 20px 60px; }
+        .article-body p { margin-bottom: 20px; font-size: 1rem; color: #333; }
+
+        /* PASSO CARDS */
+        .passo-card {
+            background: white;
+            border-radius: 12px;
+            padding: 28px 30px;
+            margin-bottom: 24px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+            border-left: 4px solid var(--primary);
+        }
+        .passo-num {
+            font-size: 0.72rem;
+            font-weight: 700;
+            color: var(--primary);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 6px;
+        }
+        .passo-card h2 { font-size: 1.2rem; margin: 0 0 12px 0; color: var(--dark); }
+        .passo-card p { margin: 0 0 12px; font-size: 0.97rem; color: #444; line-height: 1.7; }
+        .passo-card p:last-child { margin: 0; }
+
+        .diagnostico {
+            background: #fff8e1;
+            border-radius: 8px;
+            padding: 12px 16px;
+            margin-bottom: 10px;
+            font-size: 0.9rem;
+            color: #5d4037;
+        }
+        .diagnostico strong { color: #e65100; }
+
+        .resolver {
+            background: #e8f5e9;
+            border-radius: 8px;
+            padding: 12px 16px;
+            font-size: 0.9rem;
+            color: #2e7d32;
+        }
+        .resolver strong { color: #1b5e20; }
+
+        /* DESTAQUE */
+        .destaque {
+            background: #e8f0fe;
+            border-radius: 12px;
+            padding: 25px 30px;
+            margin: 35px 0;
+            font-size: 1.08rem;
+            color: var(--dark);
+            font-style: italic;
+            border-left: 4px solid var(--primary);
+            line-height: 1.7;
+        }
+
+        /* MÉTRICAS TABLE */
+        .metricas-table {
+            background: white;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+            margin: 35px 0;
+        }
+        .metricas-table table { width: 100%; border-collapse: collapse; }
+        .metricas-table th {
+            background: var(--primary);
+            color: white;
+            padding: 14px 20px;
+            text-align: left;
+            font-size: 0.88rem;
+            text-transform: uppercase;
+        }
+        .metricas-table td {
+            padding: 14px 20px;
+            border-bottom: 1px solid #f0f0f0;
+            font-size: 0.93rem;
+            color: var(--gray);
+            vertical-align: top;
+        }
+        .metricas-table tr:last-child td { border-bottom: none; }
+
+        /* CONCLUSÃO */
+        .conclusao {
+            background: var(--dark);
+            color: white;
+            border-radius: 12px;
+            padding: 35px;
+            margin-top: 40px;
+        }
+        .conclusao h2 { margin: 0 0 15px; font-size: 1.3rem; }
+        .conclusao p { margin: 0 0 12px; color: rgba(255,255,255,0.82); line-height: 1.7; font-size: 0.97rem; }
+        .conclusao p:last-child { margin: 0; }
+        .conclusao strong { color: #8ab4f8; }
+
+        .btn-back { display: inline-flex; align-items: center; gap: 8px; margin-top: 40px; text-decoration: none; color: var(--primary); font-weight: bold; font-size: 0.95rem; }
+        .btn-back:hover { text-decoration: underline; }
+
+        footer { background: white; padding: 40px 10%; text-align: center; border-top: 1px solid #eee; margin-top: 40px; color: var(--gray); font-size: 0.9rem; }
+    </style>
+</head>
+<body>
+
+<nav>
+    <a href="index.html" class="logo">Vidal Silva</a>
+    <div class="nav-links"><a href="insights.html">← Voltar aos artigos</a></div>
+</nav>
+
+<div class="article-hero">
+    <span class="tag">Gestão Comercial</span>
+    <h1>[Guia Prático] Como Diagnosticar e Destravar o Funil de Vendas da sua Empresa</h1>
+    <p class="subtitle">O problema quase nunca é a falta de oportunidades. É a falta de visão sobre o que acontece dentro do seu processo.</p>
+    <div class="article-meta">
+        <span><i class="fas fa-calendar-alt"></i> Maio 2026</span>
+        <span><i class="fas fa-filter"></i> Pipeline & Conversão</span>
+    </div>
+</div>
+
+<div class="article-body">
+
+    <p>Existe um padrão que se repete em empresas de quase todos os setores. O gestor abre o CRM, olha o painel comercial e diz: <strong>"Temos muitas oportunidades no funil… o problema é que o time não está fechando."</strong></p>
+
+    <p>Se você já passou por isso, preciso te dar um choque de realidade: o problema quase nunca é a falta de oportunidades. É a falta de visão sobre o que acontece dentro do seu processo.</p>
+
+    <div class="destaque">
+        "Muitos líderes olham para o funil de vendas como uma fotografia — um registro estático de quantos negócios estão em cada etapa hoje. Mas vendas não é foto; vendas é movimento."
+    </div>
+
+    <p>Para construir uma máquina de vendas previsível, você precisa aprender a analisar o fluxo. Neste guia, você vai identificar os 3 principais gargalos ocultos que travam as suas conversões — e o passo a passo para destravá-los.</p>
+
+    <h3>Os 3 Gargalos que Travam o Funil</h3>
+
+    <!-- PASSO 1 -->
+    <div class="passo-card">
+        <div class="passo-num">Passo 01</div>
+        <h2>Filtrar a Entrada — Blindagem de ICP</h2>
+        <p>Muitas empresas acreditam que o problema está na conversão final, mas o erro começa antes mesmo do vendedor abrir a boca. Se o marketing atrai leads genéricos e você joga tudo direto para o comercial, o funil entope.</p>
+        <p>O vendedor acaba gastando o seu ativo mais caro — o tempo — com quem nunca teve potencial real de compra.</p>
+        <div class="diagnostico">
+            <strong>🔍 Diagnóstico:</strong> O funil está cheio, mas o time comercial reclama constantemente que os leads são "frios" ou "sem perfil".
+        </div>
+        <div class="resolver">
+            <strong>✅ Como Resolver:</strong> Estabeleça critérios rígidos de qualificação baseados no seu Cliente Ideal (ICP). Crie uma etapa intermediária de pré-vendas (SDR) ou use filtros mais inteligentes nos seus formulários. Não trate volume de cadastros como oportunidade de negócio.
+        </div>
+    </div>
+
+    <!-- PASSO 2 -->
+    <div class="passo-card">
+        <div class="passo-num">Passo 02</div>
+        <h2>Eliminar o "Limbo" e Limpar a Casa</h2>
+        <p>Este é o gargalo mais perigoso da operação comercial: negócios que não avançam, mas também não são dados como perdidos pelo vendedor. Eles ficam congelados por semanas ou meses na mesma etapa.</p>
+        <p>Isso cria uma <strong>falsa sensação de segurança</strong>. Você olha o pipeline cheio, mas, na prática, ele está apenas entupido de "leads zumbis".</p>
+        <div class="diagnostico">
+            <strong>🔍 Diagnóstico:</strong> Verifique o tempo de permanência dos leads em cada etapa. Se mais da metade das suas oportunidades estão paradas há meses sem evolução, você está no limbo.
+        </div>
+        <div class="resolver">
+            <strong>✅ Como Resolver:</strong> Defina uma Política de Gatilhos de Passagem clara. Se um lead não responde em X dias ou não cumpre o requisito para avançar, ele deve receber o status de "Perdido" (Lost). Limpar o funil te dá clareza real sobre o seu faturamento futuro.
+        </div>
+    </div>
+
+    <!-- PASSO 3 -->
+    <div class="passo-card">
+        <div class="passo-num">Passo 03</div>
+        <h2>Mapear a "Zona de Perda" — Taxa de Transição</h2>
+        <p>Muitas empresas perdem vendas de forma recorrente exatamente no mesmo ponto do processo — por exemplo, logo após o envio da proposta comercial — mas a gestão não percebe o padrão porque só olha o resultado final do mês.</p>
+        <p>Se você perde muitos contratos após a proposta, raramente o problema é o preço. Geralmente é a falta de construção de valor ao longo das etapas anteriores.</p>
+        <div class="diagnostico">
+            <strong>🔍 Diagnóstico:</strong> Analise a conversão entre as etapas. De 10 reuniões feitas, quantas avançam para proposta? De 10 propostas enviadas, quantas vão para o fechamento?
+        </div>
+        <div class="resolver">
+            <strong>✅ Como Resolver:</strong> Identifique onde está a maior queda. Se a perda é grande na transição da proposta para o fechamento, treine seu time em apresentação de valor e contorno de objeções — em vez de dar descontos agressivos.
+        </div>
+    </div>
+
+    <h3>O que Acompanhar a Partir de Hoje</h3>
+    <p>Para transformar o seu funil em uma máquina previsível, substitua o achismo por dados de movimentação. Toda semana, analise com seu time:</p>
+
+    <div class="metricas-table">
+        <table>
+            <thead>
+                <tr>
+                    <th>Métrica</th>
+                    <th>O que revela</th>
+                    <th>Sinal de alerta</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td><strong>Maturidade do Lead</strong></td>
+                    <td>Se quem entra tem perfil real para comprar</td>
+                    <td>Time reclama de leads frios com frequência</td>
+                </tr>
+                <tr>
+                    <td><strong>Tempo de Ciclo</strong></td>
+                    <td>Quanto tempo do primeiro contato até o fechamento</td>
+                    <td>Ciclo inflando mês a mês abre espaço para concorrência</td>
+                </tr>
+                <tr>
+                    <td><strong>Velocidade de Fluxo</strong></td>
+                    <td>Se os negócios estão caminhando ou estacionados</td>
+                    <td>Muitas oportunidades paradas na mesma etapa há semanas</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <div class="conclusao">
+        <h2>A Lógica é Simples</h2>
+        <p>Você não consegue gerenciar aquilo que não enxerga. Quando você passa a gerir o <strong>movimento do funil</strong> — e não apenas o volume — o resultado na linha final aparece.</p>
+        <p>Qual desses 3 passos está sendo o maior ponto cego na sua operação hoje?</p>
+    </div>
+
+    <a href="insights.html" class="btn-back"><i class="fas fa-arrow-left"></i> Voltar para Insights & Artigos</a>
+
+</div>
+
+<footer>
+    <p>&copy; 2026 Vidal Silva | Channel BDM @ AnyDesk</p>
+</footer>
+
+</body>
+</html>
