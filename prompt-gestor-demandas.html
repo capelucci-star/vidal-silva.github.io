@@ -1,0 +1,449 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gestor Estratégico de Demandas | Vidal Silva</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        :root { --primary: #4285F4; --dark: #202124; --gray: #5f6368; --light: #f8f9fa; --code-bg: #282c34; --accent: #00bcd4; }
+        body { font-family: 'Segoe UI', Arial, sans-serif; margin: 0; background: var(--light); color: var(--dark); line-height: 1.6; }
+        nav { display: flex; justify-content: space-between; padding: 20px 10%; background: white; align-items: center; box-shadow: 0 2px 4px rgba(0,0,0,0.05); }
+        .logo { font-weight: bold; font-size: 1.2rem; color: var(--primary); text-decoration: none; }
+
+        .hero {
+            background: linear-gradient(135deg, #1a0a2e 0%, #2d1654 55%, #4a2080 100%);
+            padding: 70px 20px 55px;
+            text-align: center;
+            color: white;
+            position: relative;
+            overflow: hidden;
+        }
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: -80px; right: -60px;
+            width: 380px; height: 380px;
+            background: radial-gradient(circle, rgba(156,39,176,0.2) 0%, transparent 70%);
+            border-radius: 50%;
+        }
+        .hero::after {
+            content: '';
+            position: absolute;
+            bottom: -60px; left: -40px;
+            width: 280px; height: 280px;
+            background: radial-gradient(circle, rgba(0,188,212,0.1) 0%, transparent 70%);
+            border-radius: 50%;
+        }
+        .hero-tag {
+            display: inline-block;
+            background: rgba(156,39,176,0.25);
+            border: 1px solid rgba(156,39,176,0.5);
+            color: #ce93d8;
+            padding: 5px 16px;
+            border-radius: 20px;
+            font-size: 0.78rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 20px;
+        }
+        .hero h1 {
+            font-size: 2rem;
+            font-weight: 800;
+            margin: 0 0 12px;
+            line-height: 1.25;
+            max-width: 660px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+        .hero-sub {
+            color: rgba(255,255,255,0.6);
+            font-size: 0.97rem;
+            max-width: 520px;
+            margin: 0 auto;
+        }
+        .hero-badges {
+            margin-top: 24px;
+            display: flex;
+            justify-content: center;
+            gap: 12px;
+            flex-wrap: wrap;
+        }
+        .badge {
+            background: rgba(255,255,255,0.08);
+            border: 1px solid rgba(255,255,255,0.18);
+            color: rgba(255,255,255,0.75);
+            padding: 5px 14px;
+            border-radius: 20px;
+            font-size: 0.78rem;
+            font-weight: 600;
+        }
+        .badge i { margin-right: 5px; }
+
+        .container { max-width: 820px; margin: 0 auto; padding: 55px 20px 80px; }
+
+        .intro {
+            background: white;
+            border-radius: 14px;
+            border: 1px solid #e8eef8;
+            box-shadow: 0 4px 18px rgba(0,0,0,0.05);
+            padding: 28px 32px;
+            margin-bottom: 40px;
+            font-size: 1.02rem;
+            color: #333;
+            line-height: 1.75;
+        }
+        .intro p { margin: 0 0 10px; }
+        .intro p:last-child { margin: 0; color: var(--gray); }
+
+        .section-label {
+            font-size: 0.78rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            color: #7b1fa2;
+            font-weight: 700;
+            margin: 0 0 16px;
+        }
+
+        /* INPUTS */
+        .inputs-card {
+            background: white;
+            border-radius: 14px;
+            border: 1px solid #e8eef8;
+            box-shadow: 0 3px 14px rgba(0,0,0,0.05);
+            padding: 26px 30px;
+            margin-bottom: 40px;
+        }
+        .inputs-card h3 { margin: 0 0 16px; font-size: 0.95rem; color: var(--dark); }
+        .input-main {
+            background: #f9f0ff;
+            border: 1px solid #e1bee7;
+            border-radius: 10px;
+            padding: 16px 18px;
+            font-size: 0.92rem;
+            color: #333;
+            line-height: 1.65;
+            margin-bottom: 12px;
+        }
+        .input-main i { color: #7b1fa2; margin-right: 8px; }
+        .input-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 10px;
+            margin-top: 12px;
+        }
+        .input-item {
+            display: flex;
+            align-items: flex-start;
+            gap: 10px;
+            background: #f8f9fa;
+            border-radius: 8px;
+            padding: 10px 14px;
+            font-size: 0.88rem;
+            color: #333;
+            line-height: 1.5;
+        }
+        .input-item i { color: #7b1fa2; margin-top: 2px; flex-shrink: 0; font-size: 0.8rem; }
+
+        /* DIFERENCIAL */
+        .diferencial-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 12px;
+            margin-bottom: 40px;
+        }
+        .dif-card {
+            background: white;
+            border-radius: 12px;
+            border: 1px solid #e8eef8;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.04);
+            padding: 18px 20px;
+            display: flex;
+            gap: 12px;
+            align-items: flex-start;
+        }
+        .dif-icon {
+            width: 36px; height: 36px;
+            border-radius: 9px;
+            background: #f3e5f5;
+            color: #7b1fa2;
+            display: flex; align-items: center; justify-content: center;
+            font-size: 0.9rem;
+            flex-shrink: 0;
+        }
+        .dif-card h4 { margin: 0 0 3px; font-size: 0.9rem; color: var(--dark); }
+        .dif-card p  { margin: 0; font-size: 0.82rem; color: var(--gray); line-height: 1.5; }
+
+        /* ETAPAS */
+        .etapas { display: flex; flex-direction: column; gap: 12px; margin-bottom: 40px; }
+        .etapa {
+            background: white;
+            border-radius: 12px;
+            border: 1px solid #e8eef8;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.04);
+            padding: 17px 22px;
+            display: flex;
+            gap: 16px;
+            align-items: flex-start;
+        }
+        .etapa-num {
+            background: #7b1fa2;
+            color: white;
+            font-weight: 800;
+            font-size: 0.78rem;
+            min-width: 32px;
+            height: 32px;
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+            margin-top: 1px;
+        }
+        .etapa-body h4 { margin: 0 0 4px; font-size: 0.97rem; color: var(--dark); }
+        .etapa-body p  { margin: 0; font-size: 0.87rem; color: var(--gray); line-height: 1.55; }
+
+        /* PROMPT COMPLETO */
+        .prompt-block {
+            background: var(--code-bg);
+            border-radius: 14px;
+            padding: 30px 28px 26px;
+            margin-bottom: 40px;
+            position: relative;
+            font-family: 'Courier New', monospace;
+            font-size: 0.88rem;
+            line-height: 1.8;
+            color: #abb2bf;
+        }
+        .prompt-block::before {
+            content: 'PROMPT COMPLETO';
+            position: absolute;
+            top: 0; left: 0;
+            background: #333;
+            color: #888;
+            font-size: 0.65rem;
+            font-family: 'Segoe UI', sans-serif;
+            font-weight: 700;
+            letter-spacing: 1px;
+            padding: 4px 14px;
+            border-radius: 14px 0 8px 0;
+        }
+        .prompt-block p  { margin: 14px 0 0; }
+        .prompt-block .var   { color: #e06c75; }
+        .prompt-block .label { color: #61afef; font-weight: bold; }
+        .prompt-block .step  { color: #e5c07b; font-weight: bold; }
+
+        /* DICA */
+        .tip-box {
+            background: #f3e5f5;
+            border-left: 4px solid #7b1fa2;
+            border-radius: 12px;
+            padding: 22px 26px;
+            margin-bottom: 40px;
+            font-size: 0.93rem;
+            color: #333;
+            line-height: 1.7;
+        }
+        .tip-box strong { color: #4a148c; }
+
+        .btn-back {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            color: var(--primary);
+            text-decoration: none;
+            font-weight: bold;
+            font-size: 0.95rem;
+        }
+        .btn-back:hover { text-decoration: underline; }
+
+        @media (max-width: 600px) {
+            .input-grid { grid-template-columns: 1fr; }
+            .diferencial-grid { grid-template-columns: 1fr; }
+        }
+    </style>
+</head>
+<body>
+    <nav>
+        <a href="index.html" class="logo">Vidal Silva</a>
+        <a href="prompts.html" style="text-decoration: none; color: var(--gray);">← Banco de Prompts</a>
+    </nav>
+
+    <div class="hero">
+        <div class="hero-tag"><i class="fas fa-clock"></i> &nbsp;Produtividade & Gestão do Tempo</div>
+        <h1>Gestor Estratégico de Demandas e Prioridades</h1>
+        <p class="hero-sub">Transforme um alto volume de tarefas, projetos e responsabilidades em um plano estruturado, viável e executável — com Eisenhower, batching, buffers e protocolo de sobrecarga.</p>
+        <div class="hero-badges">
+            <span class="badge"><i class="fas fa-layer-group"></i> Eisenhower + 80/20</span>
+            <span class="badge"><i class="fas fa-tasks"></i> 10 Módulos</span>
+            <span class="badge"><i class="fas fa-exclamation-triangle"></i> Protocolo de Sobrecarga</span>
+        </div>
+    </div>
+
+    <div class="container">
+
+        <div class="intro">
+            <p>Quando o volume de demandas ultrapassa a capacidade de processar, o cérebro entra em modo reativo — apaga o incêndio mais próximo, ignora o mais importante. Este prompt resolve isso de forma estrutural: ele pega toda a sua lista, classifica com lógica estratégica e devolve um plano de execução realista com agenda, buffers e protocolo para quando surgir mais coisa.</p>
+            <p>Use quando estiver com muita coisa ao mesmo tempo e precisar de um norte claro sobre o que fazer primeiro — e o que pode esperar ou ser eliminado.</p>
+        </div>
+
+        <p class="section-label"><i class="fas fa-fill-drip"></i> &nbsp;O que preencher antes de rodar</p>
+        <div class="inputs-card">
+            <h3>Quanto mais completo o input, mais precisa a priorização:</h3>
+            <div class="input-main">
+                <i class="fas fa-list-ul"></i>
+                <strong>Lista completa de demandas:</strong> todas as tarefas, projetos, responsabilidades, prazos, contextos e objetivos — jogue tudo aqui sem filtro. O Claude vai organizar.
+            </div>
+            <div class="input-grid">
+                <div class="input-item"><i class="fas fa-chevron-right"></i> Tempo disponível (diário / semanal)</div>
+                <div class="input-item"><i class="fas fa-chevron-right"></i> Nível de energia ao longo do dia</div>
+                <div class="input-item"><i class="fas fa-chevron-right"></i> Recursos disponíveis (equipe, ferramentas)</div>
+                <div class="input-item"><i class="fas fa-chevron-right"></i> Prazos críticos</div>
+                <div class="input-item"><i class="fas fa-chevron-right"></i> Objetivos principais (financeiros, profissionais, pessoais)</div>
+            </div>
+        </div>
+
+        <p class="section-label"><i class="fas fa-star"></i> &nbsp;O que diferencia esse prompt</p>
+        <div class="diferencial-grid">
+            <div class="dif-card">
+                <div class="dif-icon"><i class="fas fa-th-large"></i></div>
+                <div>
+                    <h4>Eisenhower + ROI de tempo</h4>
+                    <p>Classifica por urgência e impacto real — e ainda aponta o que consome tempo sem retorno proporcional.</p>
+                </div>
+            </div>
+            <div class="dif-card">
+                <div class="dif-icon"><i class="fas fa-object-group"></i></div>
+                <div>
+                    <h4>Batching inteligente</h4>
+                    <p>Agrupa tarefas semelhantes para ganhar eficiência e reduzir o custo de troca de contexto.</p>
+                </div>
+            </div>
+            <div class="dif-card">
+                <div class="dif-icon"><i class="fas fa-exclamation-triangle"></i></div>
+                <div>
+                    <h4>Protocolo de sobrecarga</h4>
+                    <p>Define critérios claros para quando surgir nova demanda ou o volume ficar inviável — sem improvisar.</p>
+                </div>
+            </div>
+            <div class="dif-card">
+                <div class="dif-icon"><i class="fas fa-cut"></i></div>
+                <div>
+                    <h4>Eliminar o que não serve</h4>
+                    <p>Identifica ativamente o que pode ser cortado, delegado ou automatizado — não apenas reorganizado.</p>
+                </div>
+            </div>
+        </div>
+
+        <p class="section-label"><i class="fas fa-list-ol"></i> &nbsp;O que o prompt entrega — 10 módulos</p>
+        <div class="etapas">
+            <div class="etapa">
+                <div class="etapa-num">01</div>
+                <div class="etapa-body">
+                    <h4>Diagnóstico Estratégico das Demandas</h4>
+                    <p>Classificação por impacto e urgência (Eisenhower), detecção de sobrecarga, conflitos de prioridade e tarefas de baixo ROI.</p>
+                </div>
+            </div>
+            <div class="etapa">
+                <div class="etapa-num">02</div>
+                <div class="etapa-body">
+                    <h4>Priorização Inteligente e Estruturada</h4>
+                    <p>Hierarquia clara em 4 níveis — máxima, estratégica, secundária e adiável/eliminável — com justificativa para cada decisão.</p>
+                </div>
+            </div>
+            <div class="etapa">
+                <div class="etapa-num">03</div>
+                <div class="etapa-body">
+                    <h4>Transformação em Plano Executável</h4>
+                    <p>Blocos de execução, sequência lógica, subtarefas e identificação do que pode rodar em paralelo.</p>
+                </div>
+            </div>
+            <div class="etapa">
+                <div class="etapa-num">04</div>
+                <div class="etapa-body">
+                    <h4>Agenda Viável e Realista</h4>
+                    <p>Distribuição semanal com blocos de foco profundo, blocos operacionais, pausas e margens de segurança para imprevistos.</p>
+                </div>
+            </div>
+            <div class="etapa">
+                <div class="etapa-num">05</div>
+                <div class="etapa-body">
+                    <h4>Otimização e Eficiência</h4>
+                    <p>O que delegar, automatizar, agrupar por batching ou simplificar — com sugestões de ferramentas quando aplicável.</p>
+                </div>
+            </div>
+            <div class="etapa">
+                <div class="etapa-num">06</div>
+                <div class="etapa-body">
+                    <h4>Gestão de Imprevistos e Sobrecarga</h4>
+                    <p>Protocolo claro para nova demanda, atraso ou volume inviável — com critérios de re-priorização rápida e o que cortar.</p>
+                </div>
+            </div>
+            <div class="etapa">
+                <div class="etapa-num">07</div>
+                <div class="etapa-body">
+                    <h4>Sistema de Acompanhamento e Controle</h4>
+                    <p>KPIs de progresso, checkpoints semanais e critérios para avaliar se o plano está funcionando de verdade.</p>
+                </div>
+            </div>
+            <div class="etapa">
+                <div class="etapa-num">08</div>
+                <div class="etapa-body">
+                    <h4>Estratégias de Execução e Alta Performance</h4>
+                    <p>Como iniciar tarefas difíceis, evitar procrastinação, manter consistência em alto volume e lidar com fadiga mental.</p>
+                </div>
+            </div>
+            <div class="etapa">
+                <div class="etapa-num">09</div>
+                <div class="etapa-body">
+                    <h4>Ajuste Contínuo e Melhoria do Sistema</h4>
+                    <p>Como revisar semanalmente, adaptar conforme mudanças e tornar o sistema mais eficiente com o tempo.</p>
+                </div>
+            </div>
+            <div class="etapa">
+                <div class="etapa-num">10</div>
+                <div class="etapa-body">
+                    <h4>Entrega Final Escaneável</h4>
+                    <p>Tudo organizado de forma clara, visual e prática — pronto para execução imediata sem precisar reinterpretar.</p>
+                </div>
+            </div>
+        </div>
+
+        <p class="section-label"><i class="fas fa-code"></i> &nbsp;Prompt completo</p>
+        <div class="prompt-block">
+            <p><span class="label">Claude,</span> a partir de agora você será meu Gestor Estratégico de Demandas e Prioridades, com foco em transformar um alto volume de tarefas, projetos e responsabilidades em um plano estruturado, viável, priorizado e executável, considerando limitações reais de tempo, energia e recursos.</p>
+            <p>
+                <span class="label">Minhas demandas atuais:</span> <span class="var">[inserir lista completa de tarefas, projetos, responsabilidades, prazos, contextos e objetivos]</span>
+            </p>
+            <p>
+                <span class="label">Contexto adicional:</span><br>
+                Tempo disponível (diário/semanal): <span class="var">[inserir]</span><br>
+                Nível de energia ao longo do dia: <span class="var">[inserir, se souber]</span><br>
+                Recursos disponíveis (equipe, ferramentas, suporte): <span class="var">[inserir]</span><br>
+                Prazos críticos: <span class="var">[inserir]</span><br>
+                Objetivos principais (financeiros, profissionais, pessoais): <span class="var">[inserir]</span>
+            </p>
+            <p><span class="label">Execute uma análise estratégica completa com os módulos abaixo:</span></p>
+            <p>
+                <span class="step">1. Diagnóstico das Demandas</span> — Eisenhower, tarefas de baixo ROI, sobrecarga e gargalos estruturais.<br><br>
+                <span class="step">2. Priorização Estruturada</span> — 4 níveis de prioridade com justificativa estratégica para cada decisão.<br><br>
+                <span class="step">3. Plano Executável</span> — blocos de execução, sequência lógica, subtarefas e paralelos possíveis.<br><br>
+                <span class="step">4. Agenda Viável</span> — distribuição semanal com deep work, blocos operacionais, pausas e buffers.<br><br>
+                <span class="step">5. Otimização e Eficiência</span> — delegar, automatizar, agrupar (batching) e simplificar.<br><br>
+                <span class="step">6. Protocolo de Imprevistos</span> — critérios de re-priorização e o que cortar quando o volume ficar inviável.<br><br>
+                <span class="step">7. Acompanhamento e Controle</span> — KPIs, checkpoints semanais e critérios de avaliação do plano.<br><br>
+                <span class="step">8. Alta Performance</span> — antiprocrastinação, consistência em alto volume e gestão de fadiga mental.<br><br>
+                <span class="step">9. Ajuste Contínuo</span> — como revisar, adaptar e tornar o sistema mais eficiente com o tempo.<br><br>
+                <span class="step">10. Entrega Final</span> — clara, visual, escaneável e pronta para execução imediata.
+            </p>
+        </div>
+
+        <div class="tip-box">
+            <strong>Como usar melhor este prompt:</strong> jogue tudo na lista sem filtrar — quanto mais completa e bagunçada, melhor o diagnóstico. O Claude vai encontrar os padrões, os conflitos e as prioridades ocultas que você não está conseguindo ver porque está dentro da sobrecarga. Se tiver muita coisa, separe por categoria antes de colar: trabalho, projetos pessoais, compromissos fixos.
+        </div>
+
+        <a href="prompts.html" class="btn-back"><i class="fas fa-arrow-left"></i> Voltar para o Banco de Prompts</a>
+    </div>
+</body>
+</html>
