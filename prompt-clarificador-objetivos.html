@@ -1,0 +1,520 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Clarificador de Objetivos Vagos | Vidal Silva</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        :root { --primary: #4285F4; --dark: #202124; --gray: #5f6368; --light: #f8f9fa; --code-bg: #282c34; }
+        body { font-family: 'Segoe UI', Arial, sans-serif; margin: 0; background: var(--light); color: var(--dark); line-height: 1.6; }
+        nav { display: flex; justify-content: space-between; padding: 20px 10%; background: white; align-items: center; box-shadow: 0 2px 4px rgba(0,0,0,0.05); }
+        .logo { font-weight: bold; font-size: 1.2rem; color: var(--primary); text-decoration: none; }
+
+        .hero {
+            background: linear-gradient(135deg, #1a1a00 0%, #3d3000 55%, #665200 100%);
+            padding: 70px 20px 55px;
+            text-align: center;
+            color: white;
+            position: relative;
+            overflow: hidden;
+        }
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: -80px; right: -60px;
+            width: 380px; height: 380px;
+            background: radial-gradient(circle, rgba(251,188,4,0.15) 0%, transparent 70%);
+            border-radius: 50%;
+        }
+        .hero::after {
+            content: '';
+            position: absolute;
+            bottom: -60px; left: -40px;
+            width: 280px; height: 280px;
+            background: radial-gradient(circle, rgba(255,255,255,0.04) 0%, transparent 70%);
+            border-radius: 50%;
+        }
+        .hero-tag {
+            display: inline-block;
+            background: rgba(251,188,4,0.2);
+            border: 1px solid rgba(251,188,4,0.45);
+            color: #ffe082;
+            padding: 5px 16px;
+            border-radius: 20px;
+            font-size: 0.78rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 20px;
+        }
+        .hero h1 {
+            font-size: 2rem;
+            font-weight: 800;
+            margin: 0 0 12px;
+            line-height: 1.25;
+            max-width: 680px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+        .hero-sub {
+            color: rgba(255,255,255,0.6);
+            font-size: 0.97rem;
+            max-width: 520px;
+            margin: 0 auto;
+        }
+        .hero-badges {
+            margin-top: 24px;
+            display: flex;
+            justify-content: center;
+            gap: 12px;
+            flex-wrap: wrap;
+        }
+        .badge {
+            background: rgba(255,255,255,0.08);
+            border: 1px solid rgba(255,255,255,0.18);
+            color: rgba(255,255,255,0.75);
+            padding: 5px 14px;
+            border-radius: 20px;
+            font-size: 0.78rem;
+            font-weight: 600;
+        }
+        .badge i { margin-right: 5px; }
+
+        .container { max-width: 820px; margin: 0 auto; padding: 55px 20px 80px; }
+
+        .intro {
+            background: white;
+            border-radius: 14px;
+            border: 1px solid #e8eef8;
+            box-shadow: 0 4px 18px rgba(0,0,0,0.05);
+            padding: 28px 32px;
+            margin-bottom: 40px;
+            font-size: 1.02rem;
+            color: #333;
+            line-height: 1.75;
+        }
+        .intro p { margin: 0 0 10px; }
+        .intro p:last-child { margin: 0; color: var(--gray); }
+
+        .section-label {
+            font-size: 0.78rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            color: #b8860b;
+            font-weight: 700;
+            margin: 0 0 16px;
+        }
+
+        /* EXEMPLOS DE USO */
+        .exemplos {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 12px;
+            margin-bottom: 40px;
+        }
+        .exemplo-card {
+            background: white;
+            border-radius: 12px;
+            border: 1px solid #e8eef8;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.04);
+            padding: 18px 20px;
+        }
+        .exemplo-antes {
+            font-size: 0.85rem;
+            color: #c62828;
+            background: #fff5f5;
+            border-radius: 7px;
+            padding: 8px 12px;
+            margin-bottom: 10px;
+            font-style: italic;
+        }
+        .exemplo-label {
+            font-size: 0.7rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            margin-bottom: 4px;
+        }
+        .exemplo-label.antes { color: #c62828; }
+        .exemplo-label.depois { color: #2e7d32; }
+        .exemplo-depois {
+            font-size: 0.85rem;
+            color: #2e7d32;
+            background: #f0f9f0;
+            border-radius: 7px;
+            padding: 8px 12px;
+        }
+
+        /* INPUTS */
+        .inputs-card {
+            background: white;
+            border-radius: 14px;
+            border: 1px solid #e8eef8;
+            box-shadow: 0 3px 14px rgba(0,0,0,0.05);
+            padding: 26px 30px;
+            margin-bottom: 40px;
+        }
+        .inputs-card h3 { margin: 0 0 16px; font-size: 0.95rem; color: var(--dark); }
+        .input-main {
+            background: #fffde7;
+            border: 1px solid #fff176;
+            border-radius: 10px;
+            padding: 16px 18px;
+            font-size: 0.92rem;
+            color: #333;
+            line-height: 1.65;
+            margin-bottom: 12px;
+        }
+        .input-main i { color: #b8860b; margin-right: 8px; }
+        .input-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 10px;
+            margin-top: 12px;
+        }
+        .input-item {
+            display: flex;
+            align-items: flex-start;
+            gap: 10px;
+            background: #f8f9fa;
+            border-radius: 8px;
+            padding: 10px 14px;
+            font-size: 0.88rem;
+            color: #333;
+            line-height: 1.5;
+        }
+        .input-item i { color: #b8860b; margin-top: 2px; flex-shrink: 0; font-size: 0.8rem; }
+
+        /* ETAPAS */
+        .etapas { display: flex; flex-direction: column; gap: 12px; margin-bottom: 40px; }
+        .etapa {
+            background: white;
+            border-radius: 12px;
+            border: 1px solid #e8eef8;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.04);
+            padding: 17px 22px;
+            display: flex;
+            gap: 16px;
+            align-items: flex-start;
+        }
+        .etapa-num {
+            background: #b8860b;
+            color: white;
+            font-weight: 800;
+            font-size: 0.78rem;
+            min-width: 32px;
+            height: 32px;
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+            margin-top: 1px;
+        }
+        .etapa-body h4 { margin: 0 0 4px; font-size: 0.97rem; color: var(--dark); }
+        .etapa-body p  { margin: 0; font-size: 0.87rem; color: var(--gray); line-height: 1.55; }
+
+        /* DESTAQUE MÓDULO 13 */
+        .destaque-box {
+            background: linear-gradient(135deg, #1a1a00, #3d3000);
+            border-radius: 14px;
+            padding: 26px 30px;
+            margin-bottom: 40px;
+            color: white;
+        }
+        .destaque-box h4 {
+            margin: 0 0 12px;
+            color: #ffe082;
+            font-size: 0.82rem;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+        .destaque-box p {
+            margin: 0;
+            color: rgba(255,255,255,0.8);
+            font-size: 0.93rem;
+            line-height: 1.7;
+        }
+        .destaque-box strong { color: #ffe082; }
+
+        /* PROMPT COMPLETO */
+        .prompt-block {
+            background: var(--code-bg);
+            border-radius: 14px;
+            padding: 30px 28px 26px;
+            margin-bottom: 40px;
+            position: relative;
+            font-family: 'Courier New', monospace;
+            font-size: 0.88rem;
+            line-height: 1.8;
+            color: #abb2bf;
+        }
+        .prompt-block::before {
+            content: 'PROMPT COMPLETO';
+            position: absolute;
+            top: 0; left: 0;
+            background: #333;
+            color: #888;
+            font-size: 0.65rem;
+            font-family: 'Segoe UI', sans-serif;
+            font-weight: 700;
+            letter-spacing: 1px;
+            padding: 4px 14px;
+            border-radius: 14px 0 8px 0;
+        }
+        .prompt-block p  { margin: 14px 0 0; }
+        .prompt-block .var   { color: #e06c75; }
+        .prompt-block .label { color: #61afef; font-weight: bold; }
+        .prompt-block .step  { color: #e5c07b; font-weight: bold; }
+
+        /* DICA */
+        .tip-box {
+            background: #fffde7;
+            border-left: 4px solid #b8860b;
+            border-radius: 12px;
+            padding: 22px 26px;
+            margin-bottom: 40px;
+            font-size: 0.93rem;
+            color: #333;
+            line-height: 1.7;
+        }
+        .tip-box strong { color: #7d5c00; }
+
+        .btn-back {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            color: var(--primary);
+            text-decoration: none;
+            font-weight: bold;
+            font-size: 0.95rem;
+        }
+        .btn-back:hover { text-decoration: underline; }
+
+        @media (max-width: 600px) {
+            .input-grid { grid-template-columns: 1fr; }
+            .exemplos { grid-template-columns: 1fr; }
+        }
+    </style>
+</head>
+<body>
+    <nav>
+        <a href="index.html" class="logo">Vidal Silva</a>
+        <a href="banco-prompts.html" style="text-decoration: none; color: var(--gray);">← Banco de Prompts</a>
+    </nav>
+
+    <div class="hero">
+        <div class="hero-tag"><i class="fas fa-calendar-check"></i> &nbsp;Planejamento & Gestão Estratégica</div>
+        <h1>Clarificador de Objetivos Vagos</h1>
+        <p class="hero-sub">Transforme objetivos ambíguos, mal definidos ou genéricos em planos estruturados, acionáveis e orientados a resultado — com diagnóstico, OKRs, cronograma e os 3 primeiros passos para hoje.</p>
+        <div class="hero-badges">
+            <span class="badge"><i class="fas fa-search"></i> Diagnóstico de Ambiguidade</span>
+            <span class="badge"><i class="fas fa-tasks"></i> 14 Módulos</span>
+            <span class="badge"><i class="fas fa-bolt"></i> 3 Primeiros Passos Imediatos</span>
+        </div>
+    </div>
+
+    <div class="container">
+
+        <div class="intro">
+            <p>A maioria dos projetos não trava na execução — trava na definição. "Quero crescer profissionalmente", "preciso melhorar minha presença digital" ou "quero aumentar as vendas" são pontos de partida, não objetivos. Este prompt transforma qualquer intenção vaga em um plano preciso e executável.</p>
+            <p>O diferencial deste prompt está no módulo 13: além de todo o planejamento, ele entrega as <strong>3 primeiras ações práticas para executar hoje</strong> — eliminando o gap entre clareza e movimento.</p>
+        </div>
+
+        <p class="section-label"><i class="fas fa-exchange-alt"></i> &nbsp;Exemplos do que esse prompt transforma</p>
+        <div class="exemplos">
+            <div class="exemplo-card">
+                <div class="exemplo-label antes">Antes</div>
+                <div class="exemplo-antes">"Quero melhorar minha presença no LinkedIn"</div>
+                <div class="exemplo-label depois">Depois</div>
+                <div class="exemplo-depois">"Publicar 3 artigos/semana por 90 dias, atingir 500 conexões qualificadas no setor B2B e gerar 2 oportunidades de negócio via inbound até 30/09"</div>
+            </div>
+            <div class="exemplo-card">
+                <div class="exemplo-label antes">Antes</div>
+                <div class="exemplo-antes">"Preciso aumentar as vendas do time"</div>
+                <div class="exemplo-label depois">Depois</div>
+                <div class="exemplo-depois">"Aumentar a taxa de conversão de proposta para fechamento de 22% para 35% em 60 dias, implementando roleplay semanal e revisão de objeções com o time"</div>
+            </div>
+            <div class="exemplo-card">
+                <div class="exemplo-label antes">Antes</div>
+                <div class="exemplo-antes">"Quero aprender sobre IA"</div>
+                <div class="exemplo-label depois">Depois</div>
+                <div class="exemplo-depois">"Concluir 2 cursos de prompt engineering em 45 dias, criar 10 fluxos de automação aplicados ao trabalho e publicar 1 case de uso por semana no LinkedIn"</div>
+            </div>
+            <div class="exemplo-card">
+                <div class="exemplo-label antes">Antes</div>
+                <div class="exemplo-antes">"Quero organizar melhor meu tempo"</div>
+                <div class="exemplo-label depois">Depois</div>
+                <div class="exemplo-depois">"Implementar time blocking diário em 3 semanas, reduzir reuniões não planejadas em 50% e liberar 2h/dia para trabalho de foco profundo até o fim do mês"</div>
+            </div>
+        </div>
+
+        <p class="section-label"><i class="fas fa-fill-drip"></i> &nbsp;O que preencher antes de rodar</p>
+        <div class="inputs-card">
+            <h3>Pode ser vago — esse é o ponto de partida:</h3>
+            <div class="input-main">
+                <i class="fas fa-question-circle"></i>
+                <strong>Objetivo ambíguo:</strong> escreva exatamente como está na sua cabeça, sem tentar clarear antes. O diagnóstico do módulo 1 é mais poderoso quanto mais "cru" for o input.
+            </div>
+            <div class="input-grid">
+                <div class="input-item"><i class="fas fa-chevron-right"></i> Área / segmento</div>
+                <div class="input-item"><i class="fas fa-chevron-right"></i> Recursos disponíveis</div>
+                <div class="input-item"><i class="fas fa-chevron-right"></i> Tempo disponível</div>
+                <div class="input-item"><i class="fas fa-chevron-right"></i> Nível de experiência</div>
+                <div class="input-item"><i class="fas fa-chevron-right"></i> Restrições ou limitações</div>
+                <div class="input-item"><i class="fas fa-chevron-right"></i> Prazo desejado (se houver)</div>
+            </div>
+        </div>
+
+        <p class="section-label"><i class="fas fa-list-ol"></i> &nbsp;O que o prompt entrega — 14 módulos</p>
+        <div class="etapas">
+            <div class="etapa">
+                <div class="etapa-num">01</div>
+                <div class="etapa-body">
+                    <h4>Análise Estratégica do Objetivo</h4>
+                    <p>Ambiguidades, lacunas, interpretações possíveis, direções estratégicas diferentes e avaliação de complexidade e risco.</p>
+                </div>
+            </div>
+            <div class="etapa">
+                <div class="etapa-num">02</div>
+                <div class="etapa-body">
+                    <h4>Reformulação Profissional do Objetivo</h4>
+                    <p>Objetivo reescrito em formato SMART, OKR ou outcome-based — com pelo menos 2 versões possíveis caso existam caminhos diferentes.</p>
+                </div>
+            </div>
+            <div class="etapa">
+                <div class="etapa-num">03</div>
+                <div class="etapa-body">
+                    <h4>Definição do Resultado Final</h4>
+                    <p>O que precisa existir no final, como validar que foi concluído, padrão mínimo aceitável e o que seria um resultado excelente.</p>
+                </div>
+            </div>
+            <div class="etapa">
+                <div class="etapa-num">04</div>
+                <div class="etapa-body">
+                    <h4>Estrutura Estratégica de Execução</h4>
+                    <p>Fases principais, marcos críticos, dependências entre etapas e a lógica da sequência escolhida.</p>
+                </div>
+            </div>
+            <div class="etapa">
+                <div class="etapa-num">05</div>
+                <div class="etapa-body">
+                    <h4>Plano de Ação Detalhado</h4>
+                    <p>Tarefas específicas, claras e executáveis para cada fase — sem generalizações, com nível de esforço indicado.</p>
+                </div>
+            </div>
+            <div class="etapa">
+                <div class="etapa-num">06</div>
+                <div class="etapa-body">
+                    <h4>Priorização Inteligente</h4>
+                    <p>Impacto x esforço e Eisenhower — o que fazer primeiro, o que postergar e o que ignorar.</p>
+                </div>
+            </div>
+            <div class="etapa">
+                <div class="etapa-num">07</div>
+                <div class="etapa-body">
+                    <h4>Cronograma Estratégico e Realista</h4>
+                    <p>Linha do tempo com divisão semanal, blocos de execução, ritmo sustentável e margens para imprevistos.</p>
+                </div>
+            </div>
+            <div class="etapa">
+                <div class="etapa-num">08</div>
+                <div class="etapa-body">
+                    <h4>Recursos Necessários</h4>
+                    <p>Ferramentas, conhecimentos, pessoas e apoios externos — com alternativas mais simples quando possível.</p>
+                </div>
+            </div>
+            <div class="etapa">
+                <div class="etapa-num">09</div>
+                <div class="etapa-body">
+                    <h4>Riscos, Gargalos e Obstáculos</h4>
+                    <p>Pontos de travamento antecipados com estratégias de prevenção e planos de contingência.</p>
+                </div>
+            </div>
+            <div class="etapa">
+                <div class="etapa-num">10</div>
+                <div class="etapa-body">
+                    <h4>Monitoramento e KPIs</h4>
+                    <p>Indicadores de progresso, checkpoints semanais e sinais de alerta para identificar desvio de rota.</p>
+                </div>
+            </div>
+            <div class="etapa">
+                <div class="etapa-num">11</div>
+                <div class="etapa-body">
+                    <h4>Execução Consistente</h4>
+                    <p>Técnicas para manter constância, evitar procrastinação e sustentar foco no longo prazo.</p>
+                </div>
+            </div>
+            <div class="etapa">
+                <div class="etapa-num">12</div>
+                <div class="etapa-body">
+                    <h4>Ajuste Contínuo</h4>
+                    <p>Como adaptar o plano diante de mudanças, revisar prioridades e otimizar a execução ao longo do tempo.</p>
+                </div>
+            </div>
+            <div class="etapa">
+                <div class="etapa-num">13</div>
+                <div class="etapa-body">
+                    <h4>Primeiros Passos Imediatos</h4>
+                    <p>As 3 primeiras ações práticas para executar hoje — o caminho mais rápido da ambiguidade para o movimento.</p>
+                </div>
+            </div>
+            <div class="etapa">
+                <div class="etapa-num">14</div>
+                <div class="etapa-body">
+                    <h4>Entrega Final Estruturada</h4>
+                    <p>Tudo organizado de forma clara, escaneável e sem superficialidade — com foco total em execução.</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="destaque-box">
+            <h4><i class="fas fa-bolt"></i> &nbsp;O diferencial: Módulo 13 — Primeiros Passos Imediatos</h4>
+            <p>Todo plano tem o risco de ficar bonito no papel e nunca sair do lugar. Por isso este prompt encerra com as <strong>3 primeiras ações concretas para executar hoje</strong> — não amanhã, não "em breve". O objetivo é eliminar o gap entre clareza e movimento, que é onde a maioria dos planos morre.</p>
+        </div>
+
+        <p class="section-label"><i class="fas fa-code"></i> &nbsp;Prompt completo</p>
+        <div class="prompt-block">
+            <p><span class="label">Claude,</span> a partir deste momento você será meu Especialista Sênior em Estratégia e Execução, com foco em transformar objetivos vagos, mal definidos ou ambíguos em planos estruturados, acionáveis e orientados a resultado.</p>
+            <p>
+                <span class="label">Objetivo que quero alcançar (ainda vago):</span><br>
+                <span class="var">[inserir objetivo ambíguo]</span>
+            </p>
+            <p>
+                <span class="label">Contexto atual:</span><br>
+                Área/segmento: <span class="var">[inserir]</span><br>
+                Recursos disponíveis: <span class="var">[inserir]</span><br>
+                Tempo disponível: <span class="var">[inserir]</span><br>
+                Nível de experiência: <span class="var">[inserir]</span><br>
+                Restrições ou limitações: <span class="var">[inserir]</span><br>
+                Prazo desejado (se houver): <span class="var">[inserir]</span>
+            </p>
+            <p><span class="label">Siga este processo estruturado:</span></p>
+            <p>
+                <span class="step">1. Análise Estratégica do Objetivo</span> — ambiguidades, lacunas, direções possíveis e nível de complexidade.<br><br>
+                <span class="step">2. Reformulação Profissional</span> — SMART, OKR ou outcome-based, com ao menos 2 versões refinadas.<br><br>
+                <span class="step">3. Resultado Final</span> — o que precisa existir, como validar, padrão mínimo e resultado excelente.<br><br>
+                <span class="step">4. Estrutura Estratégica</span> — fases, marcos críticos e dependências com lógica da sequência.<br><br>
+                <span class="step">5. Plano de Ação Detalhado</span> — tarefas específicas por fase com nível de esforço indicado.<br><br>
+                <span class="step">6. Priorização</span> — impacto x esforço e Eisenhower: o que fazer primeiro, postergar ou ignorar.<br><br>
+                <span class="step">7. Cronograma Realista</span> — divisão semanal, blocos de execução e margens para imprevistos.<br><br>
+                <span class="step">8. Recursos Necessários</span> — ferramentas, conhecimentos, pessoas e alternativas simples.<br><br>
+                <span class="step">9. Riscos e Gargalos</span> — pontos de travamento com prevenção e planos de contingência.<br><br>
+                <span class="step">10. KPIs e Monitoramento</span> — indicadores, checkpoints e sinais de alerta.<br><br>
+                <span class="step">11. Execução Consistente</span> — constância, antiprocrastinação e foco no longo prazo.<br><br>
+                <span class="step">12. Ajuste Contínuo</span> — como adaptar e otimizar o plano ao longo do tempo.<br><br>
+                <span class="step">13. Primeiros Passos Imediatos (OBRIGATÓRIO)</span> — as 3 primeiras ações práticas para executar hoje.<br><br>
+                <span class="step">14. Entrega Final</span> — clara, estruturada, escaneável e sem superficialidade.
+            </p>
+            <p style="color: #5c6370; font-style: italic;">// Se faltar alguma informação, faça suposições estratégicas e deixe isso explícito.</p>
+        </div>
+
+        <div class="tip-box">
+            <strong>Como usar melhor este prompt:</strong> escreva o objetivo exatamente como está na cabeça — sem polir, sem elaborar. "Quero crescer na carreira" é um input válido. Quanto mais vago e honesto o ponto de partida, mais valioso é o diagnóstico do módulo 1. Se você já souber o que quer com precisão, use o <a href="prompt-refinador-planejamento.html" style="color: #7d5c00;">Refinador de Planejamentos</a> em vez deste.
+        </div>
+
+        <a href="prompts.html" class="btn-back"><i class="fas fa-arrow-left"></i> Voltar para o Banco de Prompts</a>
+    </div>
+</body>
+</html>
