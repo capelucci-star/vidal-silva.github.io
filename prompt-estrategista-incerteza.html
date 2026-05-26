@@ -1,0 +1,500 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Estrategista sob Incerteza | Vidal Silva</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        :root { --primary: #4285F4; --dark: #202124; --gray: #5f6368; --light: #f8f9fa; --code-bg: #282c34; }
+        body { font-family: 'Segoe UI', Arial, sans-serif; margin: 0; background: var(--light); color: var(--dark); line-height: 1.6; }
+        nav { display: flex; justify-content: space-between; padding: 20px 10%; background: white; align-items: center; box-shadow: 0 2px 4px rgba(0,0,0,0.05); }
+        .logo { font-weight: bold; font-size: 1.2rem; color: var(--primary); text-decoration: none; }
+
+        .hero {
+            background: linear-gradient(135deg, #0d0d1f 0%, #1a1535 55%, #2d1f5e 100%);
+            padding: 70px 20px 55px;
+            text-align: center;
+            color: white;
+            position: relative;
+            overflow: hidden;
+        }
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: -80px; right: -60px;
+            width: 380px; height: 380px;
+            background: radial-gradient(circle, rgba(103,58,183,0.2) 0%, transparent 70%);
+            border-radius: 50%;
+        }
+        .hero::after {
+            content: '';
+            position: absolute;
+            bottom: -60px; left: -40px;
+            width: 280px; height: 280px;
+            background: radial-gradient(circle, rgba(66,133,244,0.1) 0%, transparent 70%);
+            border-radius: 50%;
+        }
+        .hero-tag {
+            display: inline-block;
+            background: rgba(103,58,183,0.25);
+            border: 1px solid rgba(103,58,183,0.5);
+            color: #ce93d8;
+            padding: 5px 16px;
+            border-radius: 20px;
+            font-size: 0.78rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 20px;
+        }
+        .hero h1 {
+            font-size: 2rem;
+            font-weight: 800;
+            margin: 0 0 12px;
+            line-height: 1.25;
+            max-width: 680px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+        .hero-sub {
+            color: rgba(255,255,255,0.6);
+            font-size: 0.97rem;
+            max-width: 520px;
+            margin: 0 auto;
+        }
+        .hero-badges {
+            margin-top: 24px;
+            display: flex;
+            justify-content: center;
+            gap: 12px;
+            flex-wrap: wrap;
+        }
+        .badge {
+            background: rgba(255,255,255,0.08);
+            border: 1px solid rgba(255,255,255,0.18);
+            color: rgba(255,255,255,0.75);
+            padding: 5px 14px;
+            border-radius: 20px;
+            font-size: 0.78rem;
+            font-weight: 600;
+        }
+        .badge i { margin-right: 5px; }
+
+        .container { max-width: 820px; margin: 0 auto; padding: 55px 20px 80px; }
+
+        .intro {
+            background: white;
+            border-radius: 14px;
+            border: 1px solid #e8eef8;
+            box-shadow: 0 4px 18px rgba(0,0,0,0.05);
+            padding: 28px 32px;
+            margin-bottom: 40px;
+            font-size: 1.02rem;
+            color: #333;
+            line-height: 1.75;
+        }
+        .intro p { margin: 0 0 10px; }
+        .intro p:last-child { margin: 0; color: var(--gray); }
+
+        .section-label {
+            font-size: 0.78rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            color: #6a1b9a;
+            font-weight: 700;
+            margin: 0 0 16px;
+        }
+
+        /* CENÁRIOS */
+        .cenarios {
+            display: grid;
+            grid-template-columns: 1fr 1fr 1fr;
+            gap: 12px;
+            margin-bottom: 40px;
+        }
+        .cenario-card {
+            background: white;
+            border-radius: 12px;
+            border: 1px solid #e8eef8;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.04);
+            padding: 18px 18px;
+            text-align: center;
+        }
+        .cenario-icon {
+            width: 44px; height: 44px;
+            border-radius: 50%;
+            display: flex; align-items: center; justify-content: center;
+            font-size: 1rem;
+            margin: 0 auto 10px;
+        }
+        .cenario-icon.conservador { background: #e8f5e9; color: #2e7d32; }
+        .cenario-icon.equilibrado { background: #fff3e0; color: #e65100; }
+        .cenario-icon.agressivo   { background: #fce4ec; color: #c62828; }
+        .cenario-card h4 { margin: 0 0 6px; font-size: 0.92rem; color: var(--dark); }
+        .cenario-card p  { margin: 0; font-size: 0.8rem; color: var(--gray); line-height: 1.5; }
+
+        /* INPUTS */
+        .inputs-card {
+            background: white;
+            border-radius: 14px;
+            border: 1px solid #e8eef8;
+            box-shadow: 0 3px 14px rgba(0,0,0,0.05);
+            padding: 26px 30px;
+            margin-bottom: 40px;
+        }
+        .inputs-card h3 { margin: 0 0 16px; font-size: 0.95rem; color: var(--dark); }
+        .input-main {
+            background: #f3e5f5;
+            border: 1px solid #e1bee7;
+            border-radius: 10px;
+            padding: 16px 18px;
+            font-size: 0.92rem;
+            color: #333;
+            line-height: 1.65;
+            margin-bottom: 12px;
+        }
+        .input-main i { color: #6a1b9a; margin-right: 8px; }
+        .input-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 10px;
+            margin-top: 12px;
+        }
+        .input-item {
+            display: flex;
+            align-items: flex-start;
+            gap: 10px;
+            background: #f8f9fa;
+            border-radius: 8px;
+            padding: 10px 14px;
+            font-size: 0.88rem;
+            color: #333;
+            line-height: 1.5;
+        }
+        .input-item i { color: #6a1b9a; margin-top: 2px; flex-shrink: 0; font-size: 0.8rem; }
+        .input-item.full { grid-column: 1 / -1; }
+
+        /* ETAPAS */
+        .etapas { display: flex; flex-direction: column; gap: 12px; margin-bottom: 40px; }
+        .etapa {
+            background: white;
+            border-radius: 12px;
+            border: 1px solid #e8eef8;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.04);
+            padding: 17px 22px;
+            display: flex;
+            gap: 16px;
+            align-items: flex-start;
+        }
+        .etapa-num {
+            background: #6a1b9a;
+            color: white;
+            font-weight: 800;
+            font-size: 0.78rem;
+            min-width: 32px;
+            height: 32px;
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+            margin-top: 1px;
+        }
+        .etapa-body h4 { margin: 0 0 4px; font-size: 0.97rem; color: var(--dark); }
+        .etapa-body p  { margin: 0; font-size: 0.87rem; color: var(--gray); line-height: 1.55; }
+
+        /* DESTAQUE */
+        .destaque-box {
+            background: linear-gradient(135deg, #0d0d1f, #2d1f5e);
+            border-radius: 14px;
+            padding: 26px 30px;
+            margin-bottom: 40px;
+            color: white;
+        }
+        .destaque-box h4 {
+            margin: 0 0 12px;
+            color: #ce93d8;
+            font-size: 0.82rem;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+        .destaque-box p {
+            margin: 0;
+            color: rgba(255,255,255,0.8);
+            font-size: 0.93rem;
+            line-height: 1.7;
+        }
+        .destaque-box strong { color: #ce93d8; }
+
+        /* PROMPT COMPLETO */
+        .prompt-block {
+            background: var(--code-bg);
+            border-radius: 14px;
+            padding: 30px 28px 26px;
+            margin-bottom: 40px;
+            position: relative;
+            font-family: 'Courier New', monospace;
+            font-size: 0.88rem;
+            line-height: 1.8;
+            color: #abb2bf;
+        }
+        .prompt-block::before {
+            content: 'PROMPT COMPLETO';
+            position: absolute;
+            top: 0; left: 0;
+            background: #333;
+            color: #888;
+            font-size: 0.65rem;
+            font-family: 'Segoe UI', sans-serif;
+            font-weight: 700;
+            letter-spacing: 1px;
+            padding: 4px 14px;
+            border-radius: 14px 0 8px 0;
+        }
+        .prompt-block p  { margin: 14px 0 0; }
+        .prompt-block .var   { color: #e06c75; }
+        .prompt-block .label { color: #61afef; font-weight: bold; }
+        .prompt-block .step  { color: #e5c07b; font-weight: bold; }
+        .prompt-block .comment { color: #5c6370; font-style: italic; }
+
+        /* DICA */
+        .tip-box {
+            background: #f3e5f5;
+            border-left: 4px solid #6a1b9a;
+            border-radius: 12px;
+            padding: 22px 26px;
+            margin-bottom: 40px;
+            font-size: 0.93rem;
+            color: #333;
+            line-height: 1.7;
+        }
+        .tip-box strong { color: #4a148c; }
+
+        .btn-back {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            color: var(--primary);
+            text-decoration: none;
+            font-weight: bold;
+            font-size: 0.95rem;
+        }
+        .btn-back:hover { text-decoration: underline; }
+
+        @media (max-width: 600px) {
+            .input-grid { grid-template-columns: 1fr; }
+            .cenarios { grid-template-columns: 1fr; }
+        }
+    </style>
+</head>
+<body>
+    <nav>
+        <a href="index.html" class="logo">Vidal Silva</a>
+        <a href="banco-prompts.html" style="text-decoration: none; color: var(--gray);">← Banco de Prompts</a>
+    </nav>
+
+    <div class="hero">
+        <div class="hero-tag"><i class="fas fa-calendar-check"></i> &nbsp;Planejamento & Gestão Estratégica</div>
+        <h1>Estrategista sob Incerteza</h1>
+        <p class="hero-sub">Estruture planos de execução robustos mesmo sem ter todos os dados — com mapeamento de cenários, execução modular, coleta inteligente de informação e 3 primeiros passos para hoje.</p>
+        <div class="hero-badges">
+            <span class="badge"><i class="fas fa-random"></i> 3 Cenários Estratégicos</span>
+            <span class="badge"><i class="fas fa-tasks"></i> 14 Módulos</span>
+            <span class="badge"><i class="fas fa-puzzle-piece"></i> Execução Modular</span>
+        </div>
+    </div>
+
+    <div class="container">
+
+        <div class="intro">
+            <p>A maioria dos frameworks de planejamento parte de um pressuposto falso: que você tem informações suficientes para planejar. Na realidade de mercado — especialmente em B2B, parcerias e expansão de canal — você quase nunca tem. Este prompt foi construído para esse cenário.</p>
+            <p>Ele não espera que você tenha tudo. Ele constrói um plano que funciona com o que existe agora, aprende enquanto executa e se adapta conforme novas informações chegam.</p>
+        </div>
+
+        <p class="section-label"><i class="fas fa-map"></i> &nbsp;Os 3 cenários que o prompt mapeia</p>
+        <div class="cenarios">
+            <div class="cenario-card">
+                <div class="cenario-icon conservador"><i class="fas fa-shield-alt"></i></div>
+                <h4>Conservador</h4>
+                <p>Baixo risco, menor exposição, ideal quando o custo do erro é alto</p>
+            </div>
+            <div class="cenario-card">
+                <div class="cenario-icon equilibrado"><i class="fas fa-balance-scale"></i></div>
+                <h4>Equilibrado</h4>
+                <p>Risco moderado, combina execução com aprendizado contínuo</p>
+            </div>
+            <div class="cenario-card">
+                <div class="cenario-icon agressivo"><i class="fas fa-rocket"></i></div>
+                <h4>Agressivo</h4>
+                <p>Alto risco e alto retorno, ideal quando a janela de oportunidade é curta</p>
+            </div>
+        </div>
+
+        <p class="section-label"><i class="fas fa-fill-drip"></i> &nbsp;O que preencher antes de rodar</p>
+        <div class="inputs-card">
+            <h3>Preencha com o que você tem — mesmo que seja pouco:</h3>
+            <div class="input-main">
+                <i class="fas fa-question-circle"></i>
+                <strong>Objetivo ou situação:</strong> descreva o que precisa executar, mesmo sem ter todos os dados. A falta de informação faz parte do input — não é um problema, é o ponto de partida.
+            </div>
+            <div class="input-grid">
+                <div class="input-item full"><i class="fas fa-check-circle"></i> O que você já sabe sobre o cenário</div>
+                <div class="input-item full"><i class="fas fa-question-circle"></i> O que você ainda não sabe (liste as lacunas)</div>
+                <div class="input-item"><i class="fas fa-chevron-right"></i> Recursos disponíveis</div>
+                <div class="input-item"><i class="fas fa-chevron-right"></i> Tempo disponível</div>
+                <div class="input-item"><i class="fas fa-chevron-right"></i> Restrições</div>
+                <div class="input-item"><i class="fas fa-chevron-right"></i> Nível de urgência</div>
+            </div>
+        </div>
+
+        <p class="section-label"><i class="fas fa-list-ol"></i> &nbsp;O que o prompt entrega — 14 módulos</p>
+        <div class="etapas">
+            <div class="etapa">
+                <div class="etapa-num">01</div>
+                <div class="etapa-body">
+                    <h4>Diagnóstico da Incerteza</h4>
+                    <p>O que está definido vs indefinido, lacunas críticas, nível de incerteza e quais decisões já podem ser tomadas mesmo sem dados completos.</p>
+                </div>
+            </div>
+            <div class="etapa">
+                <div class="etapa-num">02</div>
+                <div class="etapa-body">
+                    <h4>Mapeamento de Cenários Possíveis</h4>
+                    <p>Três cenários estratégicos — conservador, equilibrado e agressivo — com lógica, quando cada um faz sentido, vantagens e riscos.</p>
+                </div>
+            </div>
+            <div class="etapa">
+                <div class="etapa-num">03</div>
+                <div class="etapa-body">
+                    <h4>Estratégia Base com Informações Incompletas</h4>
+                    <p>Uma estratégia inicial que funciona agora, permite adaptação rápida e prioriza aprendizado — baseada em pensamento probabilístico e execução incremental.</p>
+                </div>
+            </div>
+            <div class="etapa">
+                <div class="etapa-num">04</div>
+                <div class="etapa-body">
+                    <h4>Plano de Execução Modular</h4>
+                    <p>Etapas que começam imediatamente, etapas que dependem de mais informação e etapas que rodam em paralelo — reduzindo travamento estrutural.</p>
+                </div>
+            </div>
+            <div class="etapa">
+                <div class="etapa-num">05</div>
+                <div class="etapa-body">
+                    <h4>Plano de Ação Prático</h4>
+                    <p>Ações específicas por etapa que não dependem de "ter tudo pronto" — misturando execução e coleta de informação durante o processo.</p>
+                </div>
+            </div>
+            <div class="etapa">
+                <div class="etapa-num">06</div>
+                <div class="etapa-body">
+                    <h4>Coleta Inteligente de Informação</h4>
+                    <p>O que descobrir primeiro, como descobrir e quais dados têm maior impacto na decisão — evitando paralisia por análise excessiva.</p>
+                </div>
+            </div>
+            <div class="etapa">
+                <div class="etapa-num">07</div>
+                <div class="etapa-body">
+                    <h4>Priorização sob Incerteza</h4>
+                    <p>Ações classificadas por impacto potencial, facilidade de execução e capacidade de gerar aprendizado rápido.</p>
+                </div>
+            </div>
+            <div class="etapa">
+                <div class="etapa-num">08</div>
+                <div class="etapa-body">
+                    <h4>Cronograma Adaptativo</h4>
+                    <p>Linha do tempo que funciona com variáveis desconhecidas, com revisões frequentes e checkpoints para ajuste de rota.</p>
+                </div>
+            </div>
+            <div class="etapa">
+                <div class="etapa-num">09</div>
+                <div class="etapa-body">
+                    <h4>Riscos e Mitigação</h4>
+                    <p>O que pode dar errado por falta de informação, os pontos mais frágeis do plano e alternativas seguras para cada cenário crítico.</p>
+                </div>
+            </div>
+            <div class="etapa">
+                <div class="etapa-num">10</div>
+                <div class="etapa-body">
+                    <h4>Monitoramento e Aprendizado</h4>
+                    <p>Indicadores simples de progresso, sinais de que está no caminho certo e ciclos curtos de feedback baseados na execução real.</p>
+                </div>
+            </div>
+            <div class="etapa">
+                <div class="etapa-num">11</div>
+                <div class="etapa-body">
+                    <h4>Mentalidade para Cenários Incertos</h4>
+                    <p>Como agir sem paralisar, tomar decisões com dados incompletos e manter velocidade sem abrir mão da responsabilidade.</p>
+                </div>
+            </div>
+            <div class="etapa">
+                <div class="etapa-num">12</div>
+                <div class="etapa-body">
+                    <h4>Ajuste Contínuo</h4>
+                    <p>Como revisar conforme novas informações chegam, abandonar caminhos ruins rapidamente e reforçar o que está funcionando.</p>
+                </div>
+            </div>
+            <div class="etapa">
+                <div class="etapa-num">13</div>
+                <div class="etapa-body">
+                    <h4>Primeiros Passos Imediatos</h4>
+                    <p>As 3 primeiras ações práticas para executar hoje — mesmo com pouca informação — e a forma mais rápida de sair da inércia.</p>
+                </div>
+            </div>
+            <div class="etapa">
+                <div class="etapa-num">14</div>
+                <div class="etapa-body">
+                    <h4>Entrega Final Estruturada</h4>
+                    <p>Tudo organizado de forma clara, prática e sem depender de perfeição ou dados completos — focado em execução real.</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="destaque-box">
+            <h4><i class="fas fa-puzzle-piece"></i> &nbsp;O que torna esse prompt único no banco</h4>
+            <p>Todos os outros prompts de planejamento partem do pressuposto de que você tem clareza suficiente para montar um plano. Este não. Ele foi construído para o cenário oposto — quando você precisa <strong>executar antes de ter certeza</strong>. O módulo 4 (execução modular) é especialmente poderoso: separa o que pode começar hoje do que depende de mais dado, eliminando o travamento de "não posso avançar enquanto não souber X".</p>
+        </div>
+
+        <p class="section-label"><i class="fas fa-code"></i> &nbsp;Prompt completo</p>
+        <div class="prompt-block">
+            <p><span class="label">Claude,</span> a partir deste momento você será meu Especialista Sênior em Estratégia sob Incerteza, com foco em estruturar planos de execução eficientes mesmo quando há falta de informações, cenários incompletos ou alto nível de ambiguidade.</p>
+            <p>
+                <span class="label">Objetivo ou situação:</span><br>
+                <span class="var">[inserir objetivo, cenário ou problema]</span>
+            </p>
+            <p>
+                <span class="label">Contexto disponível até agora (mesmo que incompleto):</span><br>
+                O que já sei: <span class="var">[inserir]</span><br>
+                O que ainda não sei: <span class="var">[inserir]</span><br>
+                Recursos disponíveis: <span class="var">[inserir]</span><br>
+                Tempo disponível: <span class="var">[inserir]</span><br>
+                Restrições: <span class="var">[inserir]</span><br>
+                Nível de urgência: <span class="var">[inserir]</span>
+            </p>
+            <p><span class="label">Construa um plano estratégico robusto, mesmo com incertezas, seguindo este processo:</span></p>
+            <p>
+                <span class="step">1. Diagnóstico da Incerteza</span> — definido vs indefinido, lacunas críticas e decisões que já podem ser tomadas.<br><br>
+                <span class="step">2. Mapeamento de Cenários</span> — conservador, equilibrado e agressivo, com lógica e riscos de cada um.<br><br>
+                <span class="step">3. Estratégia Base</span> — funciona com dados incompletos, permite adaptação e prioriza aprendizado.<br><br>
+                <span class="step">4. Execução Modular</span> — o que começa agora, o que depende de mais dado, o que roda em paralelo.<br><br>
+                <span class="step">5. Plano de Ação Prático</span> — ações que não dependem de "ter tudo pronto", misturando execução e aprendizado.<br><br>
+                <span class="step">6. Coleta Inteligente de Informação</span> — o que descobrir primeiro e como — sem cair em análise excessiva.<br><br>
+                <span class="step">7. Priorização sob Incerteza</span> — impacto potencial, facilidade e capacidade de gerar aprendizado rápido.<br><br>
+                <span class="step">8. Cronograma Adaptativo</span> — funciona com variáveis desconhecidas, com revisões frequentes e checkpoints.<br><br>
+                <span class="step">9. Riscos e Mitigação</span> — onde o plano é mais frágil e alternativas seguras para cada cenário crítico.<br><br>
+                <span class="step">10. Monitoramento e Aprendizado</span> — indicadores simples e ciclos curtos de feedback.<br><br>
+                <span class="step">11. Mentalidade para Incerteza</span> — como agir sem paralisar e tomar decisões com dados incompletos.<br><br>
+                <span class="step">12. Ajuste Contínuo</span> — como revisar conforme novas informações chegam e abandonar caminhos ruins rápido.<br><br>
+                <span class="step">13. Primeiros Passos Imediatos (OBRIGATÓRIO)</span> — as 3 primeiras ações para executar hoje, mesmo com pouca informação.<br><br>
+                <span class="step">14. Entrega Final</span> — clara, estruturada e focada em execução real sem depender de perfeição.
+            </p>
+        </div>
+
+        <div class="tip-box">
+            <strong>Como usar melhor este prompt:</strong> preencha o campo "O que ainda não sei" com honestidade — liste as lacunas reais, mesmo que pareçam óbvias. Esse campo é o insumo mais valioso para o módulo 6 (coleta inteligente de informação). Se você souber tudo que precisa saber, use o <a href="banco-prompts.html" style="color: #4a148c;">Clarificador de Objetivos</a> ou o <a href="banco-prompts.html" style="color: #4a148c;">Refinador de Planejamentos</a> em vez deste.
+        </div>
+
+        <a href="banco-prompts.html" class="btn-back"><i class="fas fa-arrow-left"></i> Voltar para o Banco de Prompts</a>
+    </div>
+</body>
+</html>
