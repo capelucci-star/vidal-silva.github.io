@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Arquitetura da Decisão | Vidal Silva</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        :root { --primary: #4285F4; --dark: #202124; --gray: #5f6368; --light: #f8f9fa; }
+        body { font-family: 'Segoe UI', Arial, sans-serif; margin: 0; background: var(--light); color: var(--dark); line-height: 1.7; }
+        nav { display: flex; justify-content: space-between; padding: 20px 10%; background: white; align-items: center; box-shadow: 0 2px 4px rgba(0,0,0,0.05); position: sticky; top: 0; z-index: 100; }
+        .logo { font-weight: bold; font-size: 1.2rem; color: var(--primary); text-decoration: none; }
+        .nav-links a { text-decoration: none; color: var(--gray); font-weight: 500; margin-left: 20px; }
+
+        .article-hero { background: white; padding: 60px 10% 40px; border-bottom: 1px solid #eee; }
+        .article-hero .tag { background: #e8f0fe; color: var(--primary); padding: 5px 14px; border-radius: 20px; font-size: 0.75rem; font-weight: bold; text-transform: uppercase; display: inline-block; margin-bottom: 20px; }
+        .article-hero h1 { font-size: 2.2rem; line-height: 1.2; margin: 0 0 20px 0; max-width: 800px; color: var(--dark); }
+        .article-hero .subtitle { font-size: 1.1rem; color: var(--gray); max-width: 750px; margin-bottom: 30px; line-height: 1.6; }
+        .article-meta { color: var(--gray); font-size: 0.9rem; }
+        .article-meta span { margin-right: 15px; }
+        .article-meta i { margin-right: 5px; }
+
+        .article-body { max-width: 720px; margin: 50px auto; padding: 0 20px 60px; }
+        .article-body p { margin-bottom: 20px; font-size: 1rem; color: #333; line-height: 1.75; }
+        .article-body strong { color: var(--dark); }
+
+        .destaque {
+            background: #e8f0fe;
+            border-radius: 12px;
+            padding: 25px 30px;
+            margin: 35px 0;
+            font-size: 1.08rem;
+            color: var(--dark);
+            font-style: italic;
+            border-left: 4px solid var(--primary);
+            line-height: 1.7;
+        }
+
+        /* PERGUNTA CARDS */
+        .pergunta-card {
+            background: white;
+            border-radius: 12px;
+            padding: 26px 30px;
+            margin-bottom: 22px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+            border-left: 4px solid var(--primary);
+        }
+        .pergunta-num {
+            font-size: 0.72rem;
+            font-weight: 700;
+            color: var(--primary);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 5px;
+        }
+        .pergunta-card h2 {
+            font-size: 1.15rem;
+            margin: 0 0 12px;
+            color: var(--dark);
+            line-height: 1.35;
+        }
+        .pergunta-card p {
+            margin: 0;
+            font-size: 0.97rem;
+            color: #444;
+            line-height: 1.75;
+        }
+
+        /* CONCLUSÃO */
+        .conclusao {
+            background: var(--dark);
+            color: white;
+            border-radius: 12px;
+            padding: 35px;
+            margin-top: 40px;
+        }
+        .conclusao h2 { margin: 0 0 15px; font-size: 1.3rem; }
+        .conclusao p { margin: 0 0 12px; color: rgba(255,255,255,0.82); line-height: 1.75; font-size: 0.97rem; }
+        .conclusao p:last-child { margin: 0; }
+        .conclusao strong { color: #8ab4f8; }
+
+        .btn-back { display: inline-flex; align-items: center; gap: 8px; margin-top: 40px; text-decoration: none; color: var(--primary); font-weight: bold; font-size: 0.95rem; }
+        .btn-back:hover { text-decoration: underline; }
+
+        footer { background: white; padding: 40px 10%; text-align: center; border-top: 1px solid #eee; margin-top: 40px; color: var(--gray); font-size: 0.9rem; }
+    </style>
+</head>
+<body>
+
+<nav>
+    <a href="index.html" class="logo">Vidal Silva</a>
+    <div class="nav-links"><a href="insights.html">← Voltar aos artigos</a></div>
+</nav>
+
+<div class="article-hero">
+    <span class="tag">Vendas Consultivas</span>
+    <h1>Arquitetura da Decisão: As 7 Perguntas que Salvam uma Venda B2B antes da Proposta</h1>
+    <p class="subtitle">No mercado B2B, a maioria das vendas não é perdida para o concorrente ou pelo preço. A venda se perde porque ninguém ajudou o cliente a organizar a própria decisão.</p>
+    <div class="article-meta">
+        <span><i class="fas fa-user"></i> Vidal Silva</span>
+        <span><i class="fas fa-clock"></i> 6 min de leitura</span>
+        <span><i class="fas fa-sitemap"></i> Decisão & Processo</span>
+    </div>
+</div>
+
+<div class="article-body">
+
+    <p>Você certamente já viveu este cenário: a reunião de diagnóstico foi excelente, o cliente demonstrou total alinhamento, a proposta comercial foi desenhada sob medida e enviada. O clima era de fechamento iminente. Dias depois, vem o balde de água fria em forma de frase polida: <strong>"Gostamos muito, mas vamos alinhar internamente e retomamos mais para frente".</strong></p>
+
+    <div class="destaque">
+        "Vendas complexas não são processos lineares ou puramente lógicos — são pequenos sistemas políticos. O vendedor de alta performance não é um apresentador de soluções; ele é um arquiteto da decisão."
+    </div>
+
+    <p>Dentro de uma empresa, uma escolha envolve o usuário que precisa, o financeiro que corta, a TI que veta, o jurídico que segura e, acima de tudo, o medo humano de errar e expor a própria reputação. Para tirar as negociações do "teatro corporativo" e trazê-las para a realidade, você precisa dominar a jornada do cliente respondendo a sete perguntas fundamentais — antes mesmo de colocar o preço na mesa.</p>
+
+    <h3 style="margin: 40px 0 20px; font-size: 1.2rem; color: var(--dark);">O Checklist da Venda Consultiva</h3>
+
+    <!-- PERGUNTA 1 -->
+    <div class="pergunta-card">
+        <div class="pergunta-num">Pergunta 01</div>
+        <h2>O que está sendo decidido, de verdade?</h2>
+        <p>Raramente a decisão do cliente é apenas comprar o seu produto ou serviço. Na maioria das vezes, o que está em jogo na mesa da diretoria é a redução de um risco operacional, o ganho de controle sobre um processo fragmentado ou a aceleração de um resultado cobrado pelos investidores. Se você entender mal o que está sendo julgado, construirá a proposta para o problema errado.</p>
+    </div>
+
+    <!-- PERGUNTA 2 -->
+    <div class="pergunta-card">
+        <div class="pergunta-num">Pergunta 02</div>
+        <h2>Por que isso merece prioridade agora?</h2>
+        <p>Um cliente sem senso de urgência vai elogiar a sua apresentação, agradecer o seu tempo e engavetar o projeto. O papel do consultor não é fabricar pânico, mas tornar visível o custo invisível de continuar operando exatamente como está hoje. O que a demora atual está corroendo? Margem, receita, produtividade ou o tempo da liderança?</p>
+    </div>
+
+    <!-- PERGUNTA 3 -->
+    <div class="pergunta-card">
+        <div class="pergunta-num">Pergunta 03</div>
+        <h2>Quem realmente participa dessa decisão?</h2>
+        <p>Tratar todas as pontas do cliente da mesma forma é a receita ideal para o fracasso. É preciso mapear o ecossistema: quem patrocina a ideia? Quem tem o poder do veto? Quem vai ganhar trabalho extra com a mudança e pode sabotar o processo no privado? Identificar os influenciadores e decisores protege o seu projeto quando você não estiver na sala de reunião.</p>
+    </div>
+
+    <!-- PERGUNTA 4 -->
+    <div class="pergunta-card">
+        <div class="pergunta-num">Pergunta 04</div>
+        <h2>Quando essa decisão ainda faz sentido?</h2>
+        <p>Toda oportunidade de negócio possui uma janela de tempo. Se o processo se arrastar demais, a prioridade muda, o orçamento é redirecionado ou a diretoria é reestruturada. Entender o timing do cliente e os marcos que ele precisa cumprir é crucial para manter a tração da venda.</p>
+    </div>
+
+    <!-- PERGUNTA 5 -->
+    <div class="pergunta-card">
+        <div class="pergunta-num">Pergunta 05</div>
+        <h2>Onde o impacto financeiro e operacional aparece?</h2>
+        <p>Para a proposta sair do campo das "ideias bonitas" e virar um projeto prioritário, o impacto precisa ser localizado e quantificado. Vai mexer no CAC, reduzir o churn, otimizar a produtividade da equipe ou eliminar o retrabalho da operação? Se o cliente não conseguir apontar onde a melhoria vai aparecer, a TI e o Financeiro barrarão a contratação.</p>
+    </div>
+
+    <!-- PERGUNTA 6 -->
+    <div class="pergunta-card">
+        <div class="pergunta-num">Pergunta 06</div>
+        <h2>Como a escolha será comparada, validada e implantada?</h2>
+        <p>Este ponto separa a venda simpática da venda séria. Você precisa saber quais critérios o cliente usará para balizar a escolha: será preço, payback, simplicidade de integração ou segurança de dados? Além disso, desenhar o cenário pós-assinatura acalma o medo da implantação — que costuma travar muitos negócios mesmo depois do "sim".</p>
+    </div>
+
+    <!-- PERGUNTA 7 -->
+    <div class="pergunta-card">
+        <div class="pergunta-num">Pergunta 07</div>
+        <h2>Quanto custa agir contra o preço de adiar?</h2>
+        <p>O erro mais comum em propostas B2B é focar apenas no valor do investimento e esquecer de calcular o preço da indecisão. Quando você demonstra matematicamente quanto o cliente perde a cada mês que passa sem resolver o problema, a conversa muda de patamar. O investimento na sua solução passa a parecer barato perto do custo de continuar errando.</p>
+    </div>
+
+    <div class="conclusao">
+        <h2>Mude o Foco da Proposta para a Clareza</h2>
+        <p>Quando o vendedor traz essas sete perguntas para a mesa, ele deixa de ser visto como alguém que quer empurrar um contrato e passa a ser percebido como um parceiro estratégico que está protegendo a qualidade da decisão da empresa.</p>
+        <p>Empresas são feitas de pessoas, e pessoas decidem com base em planilhas, mas também em segurança e reputação. <strong>O profissional que vende proposta disputa preço; o profissional que vende clareza domina o mercado B2B.</strong></p>
+        <p>A partir de hoje, ao notar um negócio travado com o clássico "vamos alinhar internamente", pergunte-se: qual dessas sete bases o seu processo deixou de arquitetar?</p>
+    </div>
+
+    <a href="insights.html" class="btn-back"><i class="fas fa-arrow-left"></i> Voltar para Insights & Artigos</a>
+
+</div>
+
+<footer>
+    <p>&copy; 2026 Vidal Silva | Channel BDM @ AnyDesk</p>
+</footer>
+
+</body>
+</html>
