@@ -1,0 +1,522 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gestor de Demandas Dinâmicas | Vidal Silva</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        :root { --primary: #4285F4; --dark: #202124; --gray: #5f6368; --light: #f8f9fa; --code-bg: #282c34; --accent: #00897b; }
+        body { font-family: 'Segoe UI', Arial, sans-serif; margin: 0; background: var(--light); color: var(--dark); line-height: 1.6; }
+        nav { display: flex; justify-content: space-between; padding: 20px 10%; background: white; align-items: center; box-shadow: 0 2px 4px rgba(0,0,0,0.05); }
+        .logo { font-weight: bold; font-size: 1.2rem; color: var(--primary); text-decoration: none; }
+
+        .hero {
+            background: linear-gradient(135deg, #002921 0%, #004d40 55%, #00695c 100%);
+            padding: 70px 20px 55px;
+            text-align: center;
+            color: white;
+            position: relative;
+            overflow: hidden;
+        }
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: -80px; right: -60px;
+            width: 380px; height: 380px;
+            background: radial-gradient(circle, rgba(0,188,212,0.15) 0%, transparent 70%);
+            border-radius: 50%;
+        }
+        .hero::after {
+            content: '';
+            position: absolute;
+            bottom: -60px; left: -40px;
+            width: 280px; height: 280px;
+            background: radial-gradient(circle, rgba(255,255,255,0.04) 0%, transparent 70%);
+            border-radius: 50%;
+        }
+        .hero-tag {
+            display: inline-block;
+            background: rgba(0,188,212,0.2);
+            border: 1px solid rgba(0,188,212,0.45);
+            color: #80deea;
+            padding: 5px 16px;
+            border-radius: 20px;
+            font-size: 0.78rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 20px;
+        }
+        .hero h1 {
+            font-size: 2rem;
+            font-weight: 800;
+            margin: 0 0 12px;
+            line-height: 1.25;
+            max-width: 680px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+        .hero-sub {
+            color: rgba(255,255,255,0.6);
+            font-size: 0.97rem;
+            max-width: 520px;
+            margin: 0 auto;
+        }
+        .hero-badges {
+            margin-top: 24px;
+            display: flex;
+            justify-content: center;
+            gap: 12px;
+            flex-wrap: wrap;
+        }
+        .badge {
+            background: rgba(255,255,255,0.08);
+            border: 1px solid rgba(255,255,255,0.18);
+            color: rgba(255,255,255,0.75);
+            padding: 5px 14px;
+            border-radius: 20px;
+            font-size: 0.78rem;
+            font-weight: 600;
+        }
+        .badge i { margin-right: 5px; }
+
+        .container { max-width: 820px; margin: 0 auto; padding: 55px 20px 80px; }
+
+        .intro {
+            background: white;
+            border-radius: 14px;
+            border: 1px solid #e8eef8;
+            box-shadow: 0 4px 18px rgba(0,0,0,0.05);
+            padding: 28px 32px;
+            margin-bottom: 40px;
+            font-size: 1.02rem;
+            color: #333;
+            line-height: 1.75;
+        }
+        .intro p { margin: 0 0 10px; }
+        .intro p:last-child { margin: 0; color: var(--gray); }
+
+        .section-label {
+            font-size: 0.78rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            color: var(--accent);
+            font-weight: 700;
+            margin: 0 0 16px;
+        }
+
+        /* DIFERENCIAL vs outros */
+        .diff-table {
+            background: white;
+            border-radius: 14px;
+            border: 1px solid #e8eef8;
+            box-shadow: 0 3px 14px rgba(0,0,0,0.05);
+            overflow: hidden;
+            margin-bottom: 40px;
+        }
+        .diff-table table { width: 100%; border-collapse: collapse; }
+        .diff-table th {
+            background: var(--accent);
+            color: white;
+            padding: 12px 18px;
+            text-align: left;
+            font-size: 0.82rem;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+        .diff-table td {
+            padding: 12px 18px;
+            border-bottom: 1px solid #f0f0f0;
+            font-size: 0.88rem;
+            color: #444;
+        }
+        .diff-table tr:last-child td { border-bottom: none; }
+        .diff-table td:first-child { color: var(--dark); font-weight: 600; }
+
+        /* PROTOCOLO DE DECISÃO */
+        .protocolo-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 12px;
+            margin-bottom: 40px;
+        }
+        .prot-card {
+            background: white;
+            border-radius: 12px;
+            border: 1px solid #e8eef8;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.04);
+            padding: 18px 20px;
+            border-top: 4px solid;
+        }
+        .prot-card.executar  { border-color: #2e7d32; }
+        .prot-card.adiar     { border-color: #f9a825; }
+        .prot-card.delegar   { border-color: #1565c0; }
+        .prot-card.ignorar   { border-color: #c62828; }
+        .prot-card h4 {
+            margin: 0 0 8px;
+            font-size: 0.92rem;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        .prot-card.executar h4 { color: #2e7d32; }
+        .prot-card.adiar h4    { color: #e65100; }
+        .prot-card.delegar h4  { color: #1565c0; }
+        .prot-card.ignorar h4  { color: #c62828; }
+        .prot-card p { margin: 0; font-size: 0.83rem; color: var(--gray); line-height: 1.55; }
+
+        /* INPUTS */
+        .inputs-card {
+            background: white;
+            border-radius: 14px;
+            border: 1px solid #e8eef8;
+            box-shadow: 0 3px 14px rgba(0,0,0,0.05);
+            padding: 26px 30px;
+            margin-bottom: 40px;
+        }
+        .inputs-card h3 { margin: 0 0 16px; font-size: 0.95rem; color: var(--dark); }
+        .input-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 10px;
+        }
+        .input-item {
+            display: flex;
+            align-items: flex-start;
+            gap: 10px;
+            background: #f8f9fa;
+            border-radius: 8px;
+            padding: 10px 14px;
+            font-size: 0.88rem;
+            color: #333;
+            line-height: 1.5;
+        }
+        .input-item i { color: var(--accent); margin-top: 2px; flex-shrink: 0; font-size: 0.8rem; }
+        .input-item.full { grid-column: 1 / -1; }
+
+        /* ETAPAS */
+        .etapas { display: flex; flex-direction: column; gap: 12px; margin-bottom: 40px; }
+        .etapa {
+            background: white;
+            border-radius: 12px;
+            border: 1px solid #e8eef8;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.04);
+            padding: 17px 22px;
+            display: flex;
+            gap: 16px;
+            align-items: flex-start;
+        }
+        .etapa-num {
+            background: var(--accent);
+            color: white;
+            font-weight: 800;
+            font-size: 0.78rem;
+            min-width: 32px;
+            height: 32px;
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+            margin-top: 1px;
+        }
+        .etapa-body h4 { margin: 0 0 4px; font-size: 0.97rem; color: var(--dark); }
+        .etapa-body p  { margin: 0; font-size: 0.87rem; color: var(--gray); line-height: 1.55; }
+
+        /* PROMPT */
+        .prompt-block {
+            background: var(--code-bg);
+            border-radius: 14px;
+            padding: 30px 28px 26px;
+            margin-bottom: 40px;
+            position: relative;
+            font-family: 'Courier New', monospace;
+            font-size: 0.88rem;
+            line-height: 1.8;
+            color: #abb2bf;
+        }
+        .prompt-block::before {
+            content: 'PROMPT COMPLETO';
+            position: absolute;
+            top: 0; left: 0;
+            background: #333;
+            color: #888;
+            font-size: 0.65rem;
+            font-family: 'Segoe UI', sans-serif;
+            font-weight: 700;
+            letter-spacing: 1px;
+            padding: 4px 14px;
+            border-radius: 14px 0 8px 0;
+        }
+        .prompt-block p  { margin: 14px 0 0; }
+        .prompt-block .var   { color: #e06c75; }
+        .prompt-block .label { color: #61afef; font-weight: bold; }
+        .prompt-block .step  { color: #e5c07b; font-weight: bold; }
+        .prompt-block .comment { color: #5c6370; font-style: italic; }
+
+        /* DICA */
+        .tip-box {
+            background: #e0f2f1;
+            border-left: 4px solid var(--accent);
+            border-radius: 12px;
+            padding: 22px 26px;
+            margin-bottom: 40px;
+            font-size: 0.93rem;
+            color: #333;
+            line-height: 1.7;
+        }
+        .tip-box strong { color: #00695c; }
+
+        .btn-back {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            color: var(--primary);
+            text-decoration: none;
+            font-weight: bold;
+            font-size: 0.95rem;
+        }
+        .btn-back:hover { text-decoration: underline; }
+
+        @media (max-width: 600px) {
+            .input-grid { grid-template-columns: 1fr; }
+            .protocolo-grid { grid-template-columns: 1fr; }
+        }
+    </style>
+</head>
+<body>
+    <nav>
+        <a href="index.html" class="logo">Vidal Silva</a>
+        <a href="banco-prompts.html" style="text-decoration: none; color: var(--gray);">← Banco de Prompts</a>
+    </nav>
+
+    <div class="hero">
+        <div class="hero-tag"><i class="fas fa-clock"></i> &nbsp;Produtividade & Gestão do Tempo</div>
+        <h1>Gestor de Demandas Dinâmicas em Tempo Real</h1>
+        <p class="hero-sub">Para dias imprevisíveis onde novas demandas surgem constantemente — com sistema de classificação em tempo real, protocolo de decisão rápida e reset estratégico ao longo do dia.</p>
+        <div class="hero-badges">
+            <span class="badge"><i class="fas fa-bolt"></i> Decisão em Tempo Real</span>
+            <span class="badge"><i class="fas fa-tasks"></i> 14 Módulos</span>
+            <span class="badge"><i class="fas fa-sync-alt"></i> Reset Estratégico</span>
+        </div>
+    </div>
+
+    <div class="container">
+
+        <div class="intro">
+            <p>Este é o único prompt do banco construído para o dia que não segue o plano — aquele dia onde você começa com uma agenda definida e às 10h já está com 5 novas demandas, 3 pessoas te esperando e a reunião mais importante do dia ameaçada de cair.</p>
+            <p>A diferença central: enquanto os outros prompts de produtividade planejam o dia antes de começar, este cria um <strong>sistema de operação em tempo real</strong> — com protocolo para classificar e decidir o que fazer com cada nova demanda que surgir ao longo do dia.</p>
+        </div>
+
+        <p class="section-label"><i class="fas fa-exchange-alt"></i> &nbsp;Como este prompt se diferencia dos outros do banco</p>
+        <div class="diff-table">
+            <table>
+                <thead>
+                    <tr>
+                        <th>Prompt</th>
+                        <th>Quando usar</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Gestor de Demandas</td>
+                        <td>Volume alto de tarefas simultâneas para organizar</td>
+                    </tr>
+                    <tr>
+                        <td>Sobrecarga de Prioridades</td>
+                        <td>Tudo parece urgente — caos de priorização</td>
+                    </tr>
+                    <tr>
+                        <td>Planejador de Execução</td>
+                        <td>Objetivo definido, precisa de cronograma realista</td>
+                    </tr>
+                    <tr>
+                        <td>Estrategista de Execução</td>
+                        <td>Projeto ou meta que precisa de plano acionável</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Este prompt ↓</strong></td>
+                        <td><strong>Dia imprevisível — novas demandas chegando em tempo real</strong></td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <p class="section-label"><i class="fas fa-traffic-light"></i> &nbsp;O protocolo de decisão rápida (Módulo 4)</p>
+        <div class="protocolo-grid">
+            <div class="prot-card executar">
+                <h4><i class="fas fa-play-circle"></i> Executar agora</h4>
+                <p>Alto impacto + baixo tempo + não pode ser delegado + bloqueia outra pessoa se não for feito.</p>
+            </div>
+            <div class="prot-card adiar">
+                <h4><i class="fas fa-clock"></i> Adiar</h4>
+                <p>Importante mas não urgente + não bloqueia ninguém agora + pode ser agendado para mais tarde.</p>
+            </div>
+            <div class="prot-card delegar">
+                <h4><i class="fas fa-user-check"></i> Delegar</h4>
+                <p>Outra pessoa pode fazer com a mesma qualidade + não exige sua presença + não é estratégico.</p>
+            </div>
+            <div class="prot-card ignorar">
+                <h4><i class="fas fa-times-circle"></i> Ignorar</h4>
+                <p>Baixo impacto + urgência percebida por quem pediu, não real + não muda nenhum resultado relevante.</p>
+            </div>
+        </div>
+
+        <p class="section-label"><i class="fas fa-fill-drip"></i> &nbsp;O que preencher antes de rodar</p>
+        <div class="inputs-card">
+            <h3>Descreva o seu tipo de dia típico:</h3>
+            <div class="input-grid">
+                <div class="input-item full"><i class="fas fa-briefcase"></i> Tipo de trabalho / rotina</div>
+                <div class="input-item"><i class="fas fa-chevron-right"></i> Demandas previstas para hoje</div>
+                <div class="input-item"><i class="fas fa-chevron-right"></i> Demandas que costumam surgir inesperadamente</div>
+                <div class="input-item"><i class="fas fa-chevron-right"></i> Tempo disponível total no dia</div>
+                <div class="input-item"><i class="fas fa-chevron-right"></i> Horários com maior energia / foco</div>
+                <div class="input-item"><i class="fas fa-chevron-right"></i> Principais distrações e interrupções</div>
+                <div class="input-item full"><i class="fas fa-chevron-right"></i> Nível de urgência médio das tarefas</div>
+            </div>
+        </div>
+
+        <p class="section-label"><i class="fas fa-list-ol"></i> &nbsp;O que o prompt entrega — 14 módulos</p>
+        <div class="etapas">
+            <div class="etapa">
+                <div class="etapa-num">01</div>
+                <div class="etapa-body">
+                    <h4>Diagnóstico da Dinâmica de Trabalho</h4>
+                    <p>Padrões de interrupção, nível de caos operacional, gargalos de execução e conflitos entre planejado e emergencial.</p>
+                </div>
+            </div>
+            <div class="etapa">
+                <div class="etapa-num">02</div>
+                <div class="etapa-body">
+                    <h4>Estrutura Base do Dia — Planejamento Flexível</h4>
+                    <p>Time blocking dinâmico com blocos de foco profundo, execução rápida e espaços reservados para imprevistos (buffers ativos).</p>
+                </div>
+            </div>
+            <div class="etapa">
+                <div class="etapa-num">03</div>
+                <div class="etapa-body">
+                    <h4>Sistema de Classificação em Tempo Real</h4>
+                    <p>Modelo prático para classificar qualquer nova demanda ao longo do dia — urgência, impacto, tempo e dependência — em segundos.</p>
+                </div>
+            </div>
+            <div class="etapa">
+                <div class="etapa-num">04</div>
+                <div class="etapa-body">
+                    <h4>Protocolo de Decisão Rápida</h4>
+                    <p>Fluxo claro com critérios objetivos para decidir: executar agora, adiar, delegar ou ignorar — sem hesitação.</p>
+                </div>
+            </div>
+            <div class="etapa">
+                <div class="etapa-num">05</div>
+                <div class="etapa-body">
+                    <h4>Reorganização Contínua do Dia</h4>
+                    <p>Como ajustar prioridades sem perder produtividade, evitar que tarefas importantes sejam empurradas e fazer resets estratégicos ao longo do dia.</p>
+                </div>
+            </div>
+            <div class="etapa">
+                <div class="etapa-num">06</div>
+                <div class="etapa-body">
+                    <h4>Priorização Inteligente em Cenários de Caos</h4>
+                    <p>Eisenhower, Pareto e impacto vs esforço aplicados em tempo real — como proteger tarefas estratégicas sob pressão externa.</p>
+                </div>
+            </div>
+            <div class="etapa">
+                <div class="etapa-num">07</div>
+                <div class="etapa-body">
+                    <h4>Execução por Tipo de Tarefa</h4>
+                    <p>Rápidas, profundas, operacionais e estratégicas — com o melhor momento do dia para cada categoria.</p>
+                </div>
+            </div>
+            <div class="etapa">
+                <div class="etapa-num">08</div>
+                <div class="etapa-body">
+                    <h4>Gestão de Interrupções</h4>
+                    <p>Estratégias para reduzir interrupções, retomar o foco rapidamente e evitar perda de contexto entre tarefas.</p>
+                </div>
+            </div>
+            <div class="etapa">
+                <div class="etapa-num">09</div>
+                <div class="etapa-body">
+                    <h4>Buffers e Proteção de Agenda</h4>
+                    <p>Quanto tempo reservar para imprevistos, onde posicionar e como evitar que sejam consumidos de forma improdutiva.</p>
+                </div>
+            </div>
+            <div class="etapa">
+                <div class="etapa-num">10</div>
+                <div class="etapa-body">
+                    <h4>Métricas de Produtividade em Tempo Real</h4>
+                    <p>Indicadores simples para acompanhar o dia — tarefas concluídas, adiadas, tempo real vs planejado e taxa de interrupção.</p>
+                </div>
+            </div>
+            <div class="etapa">
+                <div class="etapa-num">11</div>
+                <div class="etapa-body">
+                    <h4>Antiprocrastinação em Cenários Dinâmicos</h4>
+                    <p>Entrada rápida em tarefas, microações, gatilhos de execução e como agir mesmo sem motivação ou clareza total.</p>
+                </div>
+            </div>
+            <div class="etapa">
+                <div class="etapa-num">12</div>
+                <div class="etapa-body">
+                    <h4>Revisão no Final do Dia</h4>
+                    <p>Como revisar o que foi feito, reorganizar o dia seguinte e aprender com o que não funcionou — com perguntas de autoavaliação.</p>
+                </div>
+            </div>
+            <div class="etapa">
+                <div class="etapa-num">13</div>
+                <div class="etapa-body">
+                    <h4>Primeiros Passos Imediatos</h4>
+                    <p>As 3 ações práticas para aplicar hoje e ajustes rápidos que já melhoram a organização imediatamente.</p>
+                </div>
+            </div>
+            <div class="etapa">
+                <div class="etapa-num">14</div>
+                <div class="etapa-body">
+                    <h4>Entrega Final Aplicável</h4>
+                    <p>Tudo organizado de forma clara, estruturada e sem teoria excessiva — focado em execução real no dia a dia.</p>
+                </div>
+            </div>
+        </div>
+
+        <p class="section-label"><i class="fas fa-code"></i> &nbsp;Prompt completo</p>
+        <div class="prompt-block">
+            <p><span class="label">Claude,</span> a partir deste momento você será meu Especialista em Gestão de Demandas Dinâmicas e Produtividade em Tempo Real, com foco em organizar, priorizar e adaptar tarefas ao longo de um dia imprevisível, onde novas demandas surgem constantemente.</p>
+            <p>
+                <span class="label">Meu cenário atual:</span><br>
+                Tipo de trabalho/rotina: <span class="var">[inserir]</span><br>
+                Demandas previstas para hoje: <span class="var">[inserir]</span><br>
+                Demandas que costumam surgir inesperadamente: <span class="var">[inserir]</span><br>
+                Tempo disponível total no dia: <span class="var">[inserir]</span><br>
+                Horários com maior energia/foco: <span class="var">[inserir]</span><br>
+                Principais distrações/interrupções: <span class="var">[inserir]</span><br>
+                Nível de urgência médio das tarefas: <span class="var">[inserir]</span>
+            </p>
+            <p><span class="label">Construa um Sistema Estratégico de Organização e Execução em Tempo Real com os módulos abaixo:</span></p>
+            <p>
+                <span class="step">1. Diagnóstico da Dinâmica</span> — padrões de interrupção, nível de caos e conflitos entre planejado e emergencial.<br><br>
+                <span class="step">2. Estrutura Base Flexível</span> — time blocking dinâmico com buffers ativos para imprevistos.<br><br>
+                <span class="step">3. Classificação em Tempo Real</span> — sistema prático para avaliar qualquer nova demanda em segundos.<br><br>
+                <span class="step">4. Protocolo de Decisão Rápida</span> — executar, adiar, delegar ou ignorar, com critérios objetivos para cada.<br><br>
+                <span class="step">5. Reorganização Contínua</span> — como ajustar o dia sem perder produtividade e fazer resets estratégicos.<br><br>
+                <span class="step">6. Priorização sob Caos</span> — Eisenhower, Pareto e impacto vs esforço aplicados em tempo real.<br><br>
+                <span class="step">7. Execução por Tipo de Tarefa</span> — rápidas, profundas, operacionais e estratégicas no momento certo.<br><br>
+                <span class="step">8. Gestão de Interrupções</span> — como reduzir, retomar foco e evitar perda de contexto.<br><br>
+                <span class="step">9. Buffers e Proteção de Agenda</span> — quanto reservar, onde posicionar e como proteger.<br><br>
+                <span class="step">10. Métricas em Tempo Real</span> — tarefas concluídas, adiadas, tempo real vs planejado e taxa de interrupção.<br><br>
+                <span class="step">11. Antiprocrastinação Dinâmica</span> — microações, gatilhos de execução e entrada rápida em tarefas.<br><br>
+                <span class="step">12. Revisão do Dia</span> — o que foi feito, o que não funcionou e como reorganizar o dia seguinte.<br><br>
+                <span class="step">13. Primeiros Passos Imediatos (OBRIGATÓRIO)</span> — 3 ações para aplicar hoje com ajustes rápidos de impacto imediato.<br><br>
+                <span class="step">14. Entrega Final</span> — clara, aplicável no dia a dia e focada em execução real.
+            </p>
+            <p><span class="comment">// Se faltar alguma informação, faça suposições inteligentes e deixe isso explícito.</span></p>
+        </div>
+
+        <div class="tip-box">
+            <strong>Como usar melhor este prompt:</strong> rode este prompt uma vez para montar o seu sistema personalizado — depois use o <strong>Módulo 3 (classificação)</strong> e o <strong>Módulo 4 (protocolo de decisão)</strong> como referência rápida ao longo de qualquer dia caótico. Você não precisa reler o prompt inteiro toda vez; esses dois módulos viram o seu manual de operação diário.
+        </div>
+
+        <a href="banco-prompts.html" class="btn-back"><i class="fas fa-arrow-left"></i> Voltar para o Banco de Prompts</a>
+    </div>
+</body>
+</html>
