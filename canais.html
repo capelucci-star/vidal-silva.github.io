@@ -1165,18 +1165,23 @@ function taskDueBadge(t) {
 
 function taskItemHtml(t, channelId) {
   const isDone = t.status === 'done';
+  const ncBadge = t.isNextContact ? `<span style="background:#e8f0fe;color:var(--primary);font-size:.7rem;padding:1px 7px;border-radius:99px;font-weight:600"><i class="fas fa-calendar-alt" style="font-size:.65rem"></i> Próximo Contato</span>` : '';
+  const editBtn = t.isNextContact && !isDone
+    ? `<button class="btn btn-secondary btn-sm" onclick="editChannel('${channelId}')" title="Editar"><i class="fas fa-edit"></i></button>`
+    : '';
   return `<div class="task-item ${isDone ? 'done' : ''}">
     <div class="task-check ${isDone ? 'checked' : ''}" onclick="${isDone ? '' : `openCloseTask('${channelId}','${t.id}')`}" title="${isDone ? 'Concluída' : 'Marcar como concluída'}">
       ${isDone ? '<i class="fas fa-check" style="font-size:.75rem"></i>' : ''}
     </div>
     <div class="task-body">
       <div class="task-title ${isDone ? 'done-text' : ''}">${t.title}</div>
-      <div class="task-meta">${taskDueBadge(t)}</div>
+      <div class="task-meta">${taskDueBadge(t)} ${ncBadge}</div>
       ${t.notes ? `<div class="task-notes">${t.notes}</div>` : ''}
       ${t.closeNotes ? `<div class="task-closed-note"><i class="fas fa-check-circle"></i> ${t.closeNotes}</div>` : ''}
     </div>
     <div class="task-actions">
       ${!isDone ? `<button class="btn btn-success btn-sm" onclick="openCloseTask('${channelId}','${t.id}')" title="Concluir"><i class="fas fa-check"></i></button>` : ''}
+      ${editBtn}
       <button class="btn btn-danger btn-sm" onclick="deleteTask('${channelId}','${t.id}')" title="Remover"><i class="fas fa-trash"></i></button>
     </div>
   </div>`;
@@ -1259,12 +1264,34 @@ function saveChannel(e) {
     changedChannel = { id: uid(), createdAt: new Date().toISOString(), interactions: [], tasks: [], ...payload };
     data.channels.push(changedChannel);
   }
-  saveLocalData();
-  if (changedChannel) syncChannelToFirestore(changedChannel);
+  if (changedChannel) {
+    ensureNextContactTask(changedChannel);
+    saveLocalData();
+    syncChannelToFirestore(changedChannel);
+  }
   closeModal('channel-modal');
   toast(id ? 'Canal atualizado!' : 'Canal adicionado!');
   renderChannelList();
   renderDashboard();
+}
+
+function ensureNextContactTask(c) {
+  if (!c.tasks) c.tasks = [];
+  const existingIdx = c.tasks.findIndex(t => t.isNextContact && t.status === 'open');
+  if (c.nextDate || c.nextNotes) {
+    const taskData = {
+      title: c.nextNotes || 'Próximo contato',
+      dueDate: c.nextDate || '',
+      isNextContact: true,
+    };
+    if (existingIdx >= 0) {
+      c.tasks[existingIdx] = { ...c.tasks[existingIdx], ...taskData };
+    } else {
+      c.tasks.push({ id: uid(), notes: '', status: 'open', createdAt: new Date().toISOString(), ...taskData });
+    }
+  } else if (existingIdx >= 0) {
+    c.tasks.splice(existingIdx, 1);
+  }
 }
 
 function deleteChannel(id) {
@@ -1354,6 +1381,18 @@ function confirmCloseTask() {
   t.status = 'done';
   t.closedAt = new Date().toISOString();
   t.closeNotes = closeNotes;
+  // Se era o Próximo Contato, registra no Histórico e limpa o campo
+  if (t.isNextContact) {
+    if (!c.interactions) c.interactions = [];
+    c.interactions.push({
+      id: uid(),
+      date: today(),
+      type: 'other',
+      notes: `${t.title}${closeNotes ? ' — ' + closeNotes : ''}`,
+    });
+    c.nextDate = '';
+    c.nextNotes = '';
+  }
   saveLocalData();
   syncChannelToFirestore(c);
   closeModal('close-task-modal');
@@ -1364,6 +1403,8 @@ function confirmCloseTask() {
 function deleteTask(channelId, taskId) {
   const c = data.channels.find(ch => ch.id === channelId);
   if (!c) return;
+  const t = (c.tasks || []).find(t => t.id === taskId);
+  if (t?.isNextContact) { c.nextDate = ''; c.nextNotes = ''; }
   c.tasks = (c.tasks || []).filter(t => t.id !== taskId);
   saveLocalData();
   syncChannelToFirestore(c);
