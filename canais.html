@@ -250,6 +250,24 @@
     .toast { position:fixed; bottom:28px; left:50%; transform:translateX(-50%) translateY(80px); background:#202124; color:white; padding:12px 22px; border-radius:10px; font-size:.88rem; z-index:1000; transition:transform .3s; box-shadow:0 4px 16px rgba(0,0,0,.2); }
     .toast.show { transform:translateX(-50%) translateY(0); }
 
+    /* CALENDAR */
+    .cal-wrap { background:white; border-radius:12px; box-shadow:0 1px 4px rgba(0,0,0,.07); overflow:hidden; }
+    .cal-days-header { display:grid; grid-template-columns:repeat(7,1fr); border-bottom:1px solid var(--border); }
+    .cal-days-header div { text-align:center; padding:10px 4px; font-size:.75rem; font-weight:700; text-transform:uppercase; color:var(--gray); letter-spacing:.05em; }
+    .cal-grid { display:grid; grid-template-columns:repeat(7,1fr); }
+    .cal-cell { min-height:110px; border-right:1px solid #f1f3f4; border-bottom:1px solid #f1f3f4; padding:6px 6px 4px; position:relative; }
+    .cal-cell:nth-child(7n) { border-right:none; }
+    .cal-cell.other-month { background:#fafafa; }
+    .cal-cell.today { background:#e8f0fe; }
+    .cal-day-num { font-size:.82rem; font-weight:600; color:var(--gray); margin-bottom:4px; display:inline-flex; align-items:center; justify-content:center; width:24px; height:24px; border-radius:50%; }
+    .cal-cell.today .cal-day-num { background:var(--primary); color:white; }
+    .cal-cell.other-month .cal-day-num { color:#ccc; }
+    .cal-event { font-size:.72rem; padding:2px 6px; border-radius:4px; margin-bottom:2px; cursor:pointer; white-space:nowrap; overflow:hidden; text-overflow:ellipsis; font-weight:500; }
+    .cal-event.contact { background:#e8f0fe; color:var(--primary); }
+    .cal-event.task { background:#fef7e0; color:#c87000; }
+    .cal-event.overdue-task { background:#fce8e6; color:var(--danger); }
+    .cal-more { font-size:.7rem; color:var(--gray); padding:2px 4px; }
+
     /* LOADING */
     .loading-overlay { position:fixed; inset:0; background:rgba(255,255,255,.85); z-index:8000; display:flex; flex-direction:column; align-items:center; justify-content:center; gap:12px; }
     .loading-spinner { width:40px; height:40px; border:3px solid var(--border); border-top-color:var(--primary); border-radius:50%; animation:spin .7s linear infinite; }
@@ -296,7 +314,7 @@
   <aside class="sidebar">
     <div class="sidebar-item active" onclick="showSection('dashboard')"><i class="fas fa-chart-pie"></i> Dashboard</div>
     <div class="sidebar-item" onclick="showSection('channels')"><i class="fas fa-building"></i> Canais</div>
-    <div class="sidebar-item" onclick="showSection('agenda')"><i class="fas fa-calendar-alt"></i> Agenda</div>
+    <div class="sidebar-item" onclick="showSection('agenda')"><i class="fas fa-calendar-alt"></i> Tarefas</div>
   </aside>
 
   <main class="main">
@@ -360,12 +378,23 @@
       </div>
     </section>
 
-    <!-- AGENDA -->
+    <!-- AGENDA / CALENDAR -->
     <section id="sec-agenda" class="section-hidden">
       <div class="page-header">
-        <div><h2>Agenda</h2><p>Todos os contatos agendados</p></div>
+        <div><h2>Tarefas</h2><p>Calendário de contatos e atividades</p></div>
+        <div style="display:flex;gap:10px;align-items:center">
+          <button class="btn btn-secondary btn-sm" onclick="calNav(-1)"><i class="fas fa-chevron-left"></i></button>
+          <span id="cal-title" style="font-weight:700;font-size:1rem;min-width:150px;text-align:center"></span>
+          <button class="btn btn-secondary btn-sm" onclick="calNav(1)"><i class="fas fa-chevron-right"></i></button>
+          <button class="btn btn-secondary btn-sm" onclick="calToday()">Hoje</button>
+        </div>
       </div>
-      <div id="agenda-list"></div>
+      <div class="cal-wrap">
+        <div class="cal-days-header">
+          <div>Dom</div><div>Seg</div><div>Ter</div><div>Qua</div><div>Qui</div><div>Sex</div><div>Sáb</div>
+        </div>
+        <div class="cal-grid" id="cal-grid"></div>
+      </div>
     </section>
 
   </main>
@@ -410,6 +439,14 @@
           <div class="form-group">
             <label>Link no CRM</label>
             <input type="url" id="f-crm" placeholder="https://crm.google.com/...">
+          </div>
+          <div class="form-group">
+            <label>Fonte do Canal</label>
+            <input type="text" id="f-fonte" placeholder="Ex: Indicação, LinkedIn, Evento...">
+          </div>
+          <div class="form-group">
+            <label>Distribuidor Atual</label>
+            <input type="text" id="f-distribuidor" placeholder="Ex: Nome do distribuidor">
           </div>
 
           <div class="section-divider">Contatos</div>
@@ -897,26 +934,61 @@ function renderChannelList() {
   }).join('') || `<tr><td colspan="7"><div class="empty-state"><i class="fas fa-search"></i><p>Nenhum canal encontrado</p></div></td></tr>`;
 }
 
-// ══ AGENDA ══
+// ══ CALENDAR (TAREFAS) ══
+let calYear = null, calMonth = null;
+const CAL_MONTHS = ['Janeiro','Fevereiro','Março','Abril','Maio','Junho','Julho','Agosto','Setembro','Outubro','Novembro','Dezembro'];
+
 function renderAgenda() {
-  const items = data.channels.filter(c => c.nextDate).sort((a, b) => a.nextDate.localeCompare(b.nextDate));
-  if (!items.length) { document.getElementById('agenda-list').innerHTML = '<div class="empty-state" style="padding:60px"><i class="fas fa-calendar"></i><p>Nenhum contato agendado</p></div>'; return; }
-  const overdue = items.filter(c => c.nextDate < today());
-  const upcoming = items.filter(c => c.nextDate >= today());
-  let html = '';
-  if (overdue.length) html += `<div class="dash-card" style="margin-bottom:16px;border-left:4px solid var(--danger)"><h3 style="color:var(--danger)"><i class="fas fa-exclamation-circle"></i> Atrasados (${overdue.length})</h3>${overdue.map(agendaItem).join('')}</div>`;
-  if (upcoming.length) html += `<div class="dash-card" style="margin-bottom:16px"><h3><i class="fas fa-calendar-check" style="color:var(--success)"></i> Próximos (${upcoming.length})</h3>${upcoming.map(agendaItem).join('')}</div>`;
-  document.getElementById('agenda-list').innerHTML = html;
+  const now = new Date();
+  if (calYear === null) { calYear = now.getFullYear(); calMonth = now.getMonth(); }
+  renderCalendar();
 }
-function agendaItem(c) {
-  const days = daysUntil(c.nextDate);
-  const cls = days < 0 ? 'overdue' : days === 0 ? 'today' : '';
-  const label = days < 0 ? `${Math.abs(days)}d atrasado` : days === 0 ? 'Hoje' : `Em ${days}d`;
-  return `<div class="upcoming-item" onclick="openDetail('${c.id}')" style="cursor:pointer;margin-bottom:8px">
-    <span class="upcoming-date ${cls}">${label}</span>
-    <div class="upcoming-info" style="flex:1"><strong>${c.name}</strong><span>${fmtDate(c.nextDate)} · ${c.nextNotes || 'Sem pauta definida'}</span></div>
-    <span>${engBadge(c.engagement)}</span>
-  </div>`;
+
+function calNav(dir) { calMonth += dir; if (calMonth > 11) { calMonth = 0; calYear++; } else if (calMonth < 0) { calMonth = 11; calYear--; } renderCalendar(); }
+function calToday() { const n = new Date(); calYear = n.getFullYear(); calMonth = n.getMonth(); renderCalendar(); }
+
+function renderCalendar() {
+  document.getElementById('cal-title').textContent = `${CAL_MONTHS[calMonth]} ${calYear}`;
+  const todayStr = today();
+  const firstDay = new Date(calYear, calMonth, 1).getDay();
+  const daysInMonth = new Date(calYear, calMonth + 1, 0).getDate();
+  const daysInPrev = new Date(calYear, calMonth, 0).getDate();
+
+  // Build event map: dateStr → [{type, label, channelId}]
+  const events = {};
+  const addEvent = (dateStr, ev) => { if (!events[dateStr]) events[dateStr] = []; events[dateStr].push(ev); };
+
+  data.channels.forEach(c => {
+    if (c.nextDate) addEvent(c.nextDate, { type: 'contact', label: c.name, channelId: c.id });
+    (c.tasks || []).filter(t => t.status === 'open' && t.dueDate).forEach(t => {
+      addEvent(t.dueDate, { type: t.dueDate < todayStr ? 'overdue-task' : 'task', label: t.title, channelId: c.id });
+    });
+  });
+
+  let cells = '';
+  // Prev month days
+  for (let d = firstDay - 1; d >= 0; d--) {
+    cells += `<div class="cal-cell other-month"><span class="cal-day-num">${daysInPrev - d}</span></div>`;
+  }
+  // Current month days
+  for (let d = 1; d <= daysInMonth; d++) {
+    const dateStr = `${calYear}-${String(calMonth+1).padStart(2,'0')}-${String(d).padStart(2,'0')}`;
+    const isToday = dateStr === todayStr;
+    const dayEvents = events[dateStr] || [];
+    const shown = dayEvents.slice(0, 3);
+    const extra = dayEvents.length - shown.length;
+    const evHtml = shown.map(e =>
+      `<div class="cal-event ${e.type}" onclick="event.stopPropagation();openDetail('${e.channelId}')" title="${e.label}">${e.label}</div>`
+    ).join('') + (extra > 0 ? `<div class="cal-more">+${extra} mais</div>` : '');
+    cells += `<div class="cal-cell${isToday ? ' today' : ''}"><span class="cal-day-num">${d}</span>${evHtml}</div>`;
+  }
+  // Next month days to fill grid
+  const total = firstDay + daysInMonth;
+  const remaining = total % 7 === 0 ? 0 : 7 - (total % 7);
+  for (let d = 1; d <= remaining; d++) {
+    cells += `<div class="cal-cell other-month"><span class="cal-day-num">${d}</span></div>`;
+  }
+  document.getElementById('cal-grid').innerHTML = cells;
 }
 
 // ══ DETAIL PANEL ══
@@ -954,6 +1026,8 @@ function openDetail(id, tab) {
     <div class="info-item"><label>Rede Social</label><span>${c.social ? `<a href="${c.social}" target="_blank">Acessar</a>` : '—'}</span></div>
     <div class="info-item"><label>CRM</label><span>${c.crm ? `<a href="${c.crm}" target="_blank">Acessar</a>` : '—'}</span></div>
     <div class="info-item"><label>Engajamento</label><span>${engBadge(c.engagement)}</span></div>
+    ${c.fonte ? `<div class="info-item"><label>Fonte do Canal</label><span>${c.fonte}</span></div>` : ''}
+    ${c.distribuidor ? `<div class="info-item"><label>Distribuidor Atual</label><span>${c.distribuidor}</span></div>` : ''}
   `;
 
   const contacts = (c.contacts || []).filter(ct => ct.name);
@@ -1077,6 +1151,8 @@ function editChannel(id) {
   document.getElementById('f-crm').value = c.crm || '';
   document.getElementById('f-next-date').value = c.nextDate || '';
   document.getElementById('f-next-notes').value = c.nextNotes || '';
+  document.getElementById('f-fonte').value = c.fonte || '';
+  document.getElementById('f-distribuidor').value = c.distribuidor || '';
   const contacts = c.contacts || [];
   [1, 2, 3].forEach(n => {
     const ct = contacts[n - 1] || {};
@@ -1105,6 +1181,8 @@ function saveChannel(e) {
     contacts,
     nextDate: document.getElementById('f-next-date').value,
     nextNotes: document.getElementById('f-next-notes').value.trim(),
+    fonte: document.getElementById('f-fonte').value.trim(),
+    distribuidor: document.getElementById('f-distribuidor').value.trim(),
   };
   let changedChannel;
   if (id) {
@@ -1253,6 +1331,8 @@ function exportExcel() {
       'Último Contato': lastDate ? fmtDate(lastDate) : '',
       'Próximo Contato': c.nextDate ? fmtDate(c.nextDate) : '',
       'Pauta Próximo Contato': c.nextNotes || '',
+      'Fonte do Canal': c.fonte || '',
+      'Distribuidor Atual': c.distribuidor || '',
       'Total de Interações': (c.interactions || []).length,
       'Tarefas Abertas': (c.tasks || []).filter(t => t.status === 'open').length,
     };
