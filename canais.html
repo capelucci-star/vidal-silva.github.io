@@ -888,17 +888,40 @@ function renderDashboard() {
         </div>`;
       }).join('');
 
-  const activities = channels.flatMap(c => (c.interactions || []).map(i => ({ ...i, channelName: c.name, channelId: c.id })))
-    .sort((a, b) => b.date.localeCompare(a.date)).slice(0, 8);
-  const dotColor = { call: 'green', email: '', meeting: '', message: 'yellow', other: '' };
-  document.getElementById('recent-activity').innerHTML = activities.length === 0
-    ? '<div class="empty-state" style="padding:16px"><i class="fas fa-history" style="font-size:1.5rem;margin-bottom:8px;display:block"></i><p>Nenhuma interação registrada</p></div>'
-    : activities.map(a => {
-        const days = Math.round((new Date() - new Date(a.date + 'T12:00:00')) / 86400000);
+  const activities = [];
+  channels.forEach(c => {
+    // Interações registradas
+    (c.interactions || []).forEach(i => activities.push({
+      sortKey: i.date,
+      channelName: c.name, channelId: c.id,
+      dot: { call:'green', email:'', meeting:'', message:'yellow', other:'' }[i.type] || '',
+      label: `${TYPE_LABELS[i.type] || i.type} · ${i.notes || '—'}`,
+    }));
+    // Tarefas concluídas
+    (c.tasks || []).filter(t => t.status === 'done' && t.closedAt).forEach(t => activities.push({
+      sortKey: t.closedAt.slice(0, 10),
+      channelName: c.name, channelId: c.id,
+      dot: 'green',
+      label: `Tarefa concluída · ${t.title}`,
+    }));
+    // Canal criado
+    if (c.createdAt) activities.push({
+      sortKey: c.createdAt.slice(0, 10),
+      channelName: c.name, channelId: c.id,
+      dot: '',
+      label: 'Canal adicionado',
+    });
+  });
+  activities.sort((a, b) => b.sortKey.localeCompare(a.sortKey));
+  const recent = activities.slice(0, 10);
+  document.getElementById('recent-activity').innerHTML = recent.length === 0
+    ? '<div class="empty-state" style="padding:16px"><i class="fas fa-history" style="font-size:1.5rem;margin-bottom:8px;display:block"></i><p>Nenhuma atividade registrada</p></div>'
+    : recent.map(a => {
+        const days = Math.round((new Date() - new Date(a.sortKey + 'T12:00:00')) / 86400000);
         const timeLabel = days === 0 ? 'Hoje' : days === 1 ? 'Ontem' : `${days}d atrás`;
         return `<div class="activity-item" onclick="openDetail('${a.channelId}')" style="cursor:pointer">
-          <span class="activity-dot ${dotColor[a.type] || ''}"></span>
-          <div class="activity-text"><strong>${a.channelName}</strong><p>${TYPE_LABELS[a.type]} · ${a.notes || '—'}</p></div>
+          <span class="activity-dot ${a.dot}"></span>
+          <div class="activity-text"><strong>${a.channelName}</strong><p>${a.label}</p></div>
           <span class="activity-time">${timeLabel}</span>
         </div>`;
       }).join('');
